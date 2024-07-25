@@ -985,10 +985,11 @@
     }
     //ARMAR ESTRUCTURA DE HTML
     const modalExperiment = {
-        control: function(){
-            const container = document.querySelector('.bcp_grupo_legal_venta')
-            document.querySelector('.bcp_detalle_lista').innerHTML = buildlist(dataModalSOS.coberturas)
-            document.querySelector('.banner_promo').innerHTML = dataModalSOS.promo
+        init:function(data){
+            this.container = document.querySelector(data.container)
+        },
+        buttons:function(data){
+            const {functions} = data
             const btnPrimary = new HTMLElement('button').addClass(['btn-primary-comprar']).setText('Lo quiero').getElement()
             const btnSecundary = new HTMLElement('button').addClass(['bcp_boton_blanco','bcp_boton_blanco_a']).setText('No, gracias').getElement()
             const sectionButton = new HTMLElement('div')
@@ -996,13 +997,30 @@
                 .appendChild(btnPrimary)
                 .appendChild(btnSecundary)
                 .getElement()
-            container.appendChild(sectionButton)
+            btnPrimary.onclick = ()=>{functions.primary()}
+            btnSecundary.onclick = ()=>{functions.secundary()}
+            return sectionButton
+        },
+        control: function(data){
+            const containerBody = document.querySelector('.bcp_grupo_legal_venta')
+            document.querySelector('.bcp_detalle_lista').innerHTML = buildlist(dataModalSOS.coberturas)
+            document.querySelector('.banner_promo').innerHTML = dataModalSOS.promo
+            containerBody.appendChild(this.buttons(data.buttons))
         },
         piloto: function (){
             
         }
     }
-    modalExperiment.control();
+    const openURL = ()=>{window.open("https://www.viabcp.com/seguros/salud/sos-salud","_blank");}
+    modalExperiment.init({container:'.bcp_modal_cuerpo'})
+    modalExperiment.control({
+        buttons:{
+            functions:{
+                primary:openURL,
+                secundary:cerrarModalBack
+            }
+        }
+    });
     
     /*btnNoGracias.onclick = () =>{
         document.querySelector('.bcp_formulario.bcp_modal_venta').classList.remove('mostrar')
