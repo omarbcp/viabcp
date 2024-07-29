@@ -35,7 +35,7 @@
     .bcp_contenedor_modal_one_click .bcp_modal_venta .bcp_descripcion {
         font-family: 'Flexo';
         color: #FFFFFF;
-        width: 198px;
+        width: 182px;
         font-size: 20px;
         line-height: 22px;
     }
@@ -331,7 +331,7 @@
     }
 
     .bcp_contenedor_modal_one_click .bcp_modal_venta.mostrar {
-        height:444px;
+        height:auto;
         width: 326px;
     }
 
@@ -366,7 +366,7 @@
     }
 
     .bcp_contenedor_modal_one_click .bcp_modal_venta .bcp_detalle_lista {
-        margin-bottom: 32px;
+        margin-bottom: 12px;
     }
     .bcp_contenedor_modal_one_click .bcp_modal_venta .bcp_grupo_botones {
         display: flex;
@@ -405,7 +405,7 @@
         transition: box-shadow .2s linear, color .2s linear, background-color .2s linear;
         vertical-align: middle;
         font-family: flexo-demi;
-        margin-right: 32px
+        margin-right: 0;
     }
 
     .btn-primary-comprar:hover {
@@ -443,11 +443,11 @@
         background: #fff;
         border-radius: 8px;
     }
-    .img_logo img{
-        width: 154px;
-        position: relative;
-        top: -20px;
-        right: 25px;
+    .img_logo {
+        width: 136px;
+        position: absolute;
+        top: 7px;
+        right: -16px;
     }
     .mdl-cintillo{
         position: relative;
@@ -551,7 +551,8 @@
         }
 
         .bcp_contenedor_modal_one_click .bcp_modal_venta.mostrar {
-            bottom: 210px;
+            bottom: 0;
+            position: relative;
             animation: keyframes_modal_venta_one_click 1s;
         }
         .bcp_contenedor_modal_one_click .bcp_modal_venta .bcp_titulo {
@@ -710,7 +711,7 @@
         }
 
         .bcp_contenedor_modal_one_click .bcp_modal_venta.mostrar {
-            bottom: 210px;
+            bottom: 10px;
             animation: keyframes_modal_venta_one_click 1s;
             right: 10px;
         }
@@ -807,6 +808,7 @@
         font-family: 'Flexo';
         font-size: 12px;
         margin-bottom: 16px;
+        text-align: center;
     }
     .banner_promo strong{
         font-family: 'Flexo-Demi';
@@ -816,6 +818,36 @@
         color: #ff7800;
         cursor: pointer;
         font-family: 'Flexo-Demi';
+    }
+    /* STEP THANK PAGE */
+    .step2 {
+        display: none;
+    }
+    .step2.mostrar {
+        display: flex;
+        justify-content: center;
+    }
+    .step2 > div {
+        text-align: center;
+    }
+    .thpg_title {
+        font-family: Flexo;
+        font-size: 20px;
+        font-weight: 600;
+        line-height: 28px;
+        text-align: center;
+        color: #002A8D;
+    }
+    .thpg_content {
+        font-family: Flexo;
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 20px;
+        text-align: center;
+        color: #202E44;
+    }
+    .thpg_content > span {
+        font-family: ;
     }
 </style>
 
@@ -835,29 +867,10 @@
             <div class="bcp_paso mostrar">
                 <div class="bcp_modal_cuerpo_modal_detallado">
                     <div class="mdl-cintillo">
-                        <img src="https://www.viabcp.com/wcm/connect/c9c6efba-602b-48da-865f-fd87fe000375/Cintillo.svg?MOD=AJPERES&attachment=true&id=1710340444880" alt="cintillo">
+                        <img src="/wcm/connect/c9c6efba-602b-48da-865f-fd87fe000375/Cintillo.svg?MOD=AJPERES&attachment=true&id=1710340444880" alt="cintillo">
                     </div>
-                    <div class="bcp_grupo_emotivo">
-                        <div class="bcp_grupo">
-                            <p class="bcp_descripcion">
-                                <span>Seguro S.O.S.</span><br> Salud y gana<br> 1 vale de <span>S/ 500</span>
-                            </p>
-                        </div>
-                        <div class="bcp_grupo img_logo">
-                            <img src="https://www.viabcp.com/wcm/connect/9b4f3362-3694-46d8-bbe3-2fc765f77e7d/SOS_SALUD.png?MOD=AJPERES&attachment=false&id=1719612287777"
-                                alt="">
-                        </div>
-                    </div>
-                    <div class="bcp_grupo_legal_venta">
-                        <p class="bcp_desc_subtxt">Solo por <span>S/ 49.90</span> al mes (Inc. IGV)</p>
-                        <p class="bcp_listado_titulo">Te cubrimos:</p>
-                        <div class="bcp_detalle_lista"></div>
-                        <div class="banner_promo"></div>
-                        <!--<div class="bcp_grupo_botones bcp_grupo_confirmar">
-                            <button class="btn-primary-comprar" id="btn_lo_quiero_spt">Lo quiero</button>
-                            <button class="bcp_boton_blanco bcp_boton_blanco_a" id="btn_no_gracias">No, gracias</button>
-                        </div>-->
-                    </div>
+                    <div class="bcp_grupo_emotivo" id="modalHeader"></div>
+                    <div class="bcp_grupo_legal_venta" id="modalBody"></div>
                 </div>
             </div>
             <!-- paso confirmación -->
@@ -867,13 +880,22 @@
 
 <script>
     class HTMLElement {
-        constructor(tagName) {
+        constructor(tagName='div') {
             this.element = document.createElement(tagName);
         }
-        addClass(classNameList) {
-            classNameList.forEach((className)=>{
-                this.element.classList.add(className);
+        addElements(listElement){
+            listElement.forEach((e)=>{
+                this.element.appendChild(e)
             })
+        }
+        addClass(data) {
+            if(typeof data == 'string'){
+                this.element.classList.add(data);
+            } else {
+                data.forEach((className)=>{
+                    this.element.classList.add(className);
+                })
+            }
             return this;
         }
         setAttribute(attribute, value) {
@@ -912,14 +934,56 @@
             return this.element;
         }
     }
-    const iconoCheck = '<img src="https://www.viabcp.com/wcm/connect/a050ebdd-380f-4539-bfbd-58f5571a61fb/color%F0%9F%8E%A8%3F.svg?MOD=AJPERES&attachment=true&id=1721857067922" alt="check_blue">';
+    const iconoCheck = '<img src="/wcm/connect/a050ebdd-380f-4539-bfbd-58f5571a61fb/color%F0%9F%8E%A8%3F.svg?MOD=AJPERES&attachment=true&id=1721857067922" alt="check_blue">';
     const dataModalSOS = {
-        coberturas: [
-            '<p>Hasta <strong>S/ 30,000</strong> en clínicas para emergencias médicas y accidentales.</p>',
-            '<p><strong>Atención ambulatoria</strong> por emergencia accidental o médico-quirúrgica.</p>',
-            '<p>Reembolso de hasta <strong>S/ 5,000</strong> en provincias donde no hayan clínicas afiliadas.</p>'
-        ],
-        promo: 'Adquiriendo este seguro participas del <strong>sorteo de 1 vales de S/ 500</strong>. Revisa las bases del sorteo  <a id="btn-tyc">aquí</a>'
+        control:{
+            header:{
+                content: 'Gana <span>1 vale de S/100</span> con el <span>Seguro S.O.S. Salud</span>',
+                spot:'/wcm/connect/194e60c2-87c1-484d-aa26-f9c28a24ca96/SPOT_SOS.svg?MOD=AJPERES&attachment=true&id=1722019060418'
+            },
+            body:{
+                lineList:'Solo por <span>S/ 49.90</span> al mes (Inc. IGV)',
+                labelList:'Te cubrimos:',
+                coberturas: [
+                    '<p>Hasta <strong>S/ 30,000</strong> en clínicas para emergencias médicas y accidentales.</p>',
+                    '<p><strong>Atención ambulatoria</strong> por emergencia accidental o médico-quirúrgica.</p>',
+                    '<p>Reembolso de hasta <strong>S/ 5,000</strong> en provincias donde no hayan clínicas afiliadas.</p>'
+                ],
+                promo: 'Adquiriendo este seguro participas del <strong>sorteo.</strong> Revisa las bases del sorteo <a id="btn-tyc">aquí</a>'
+            },
+            buttons:{
+                primary: {
+                    label:'Lo quiero',
+                    functions:openURL
+                },
+                secundary: {
+                    label:'No, gracias',
+                    functions:cerrarModalBack
+                }
+            }   
+        },
+        piloto:{
+            header:{
+                content: '<span>Seguro S.O.S. Salud:</span> Asegúrate y gana<br><span>1 vale de S/100</span>',
+                spot:'/wcm/connect/194e60c2-87c1-484d-aa26-f9c28a24ca96/SPOT_SOS.svg?MOD=AJPERES&attachment=true&id=1722019060418'
+            },
+            body:{
+                lineList:'Solo por <span>S/ 49.90</span> al mes (Inc. IGV)',
+                coberturas: '<strong>Te cubrimos hasta S/ 30,000</strong> en clínicas para emergencias médicas y accidentales.',
+                legal: 'Al enviar la información autorizas al BCP el tratamiento de tus datos personales. Conoce más <a id="tyc">aquí</a>. Al comprar el seguro participas del sorteo, revisa las bases <a id="tyc">aquí.</a>'
+            },
+            buttons:{
+                primary: {
+                    label:'Llámenme',
+                    functions:sendForm
+                },
+                secundary: {
+                    label:'No, gracias',
+                    functions:cerrarModalBack
+                }
+            }   
+        }
+        
     }
     let channel = "ViaBCP";
     let category = "Obten tu Seguro Salud SOS-V25";
@@ -934,10 +998,7 @@
         taggeoAdobeSeguros('Click','TyC PromoLaptop')
     }*/
     const btnCerrarModalOpt = document.querySelector('.btn_cerrar_modal');
-    const btnLoQuieroSPT = document.querySelector('#btn_lo_quiero_spt');
     const btnRegresar = document.querySelector('#btn_regresar');
-    const btnNoGracias = document.querySelector('#btn_no_gracias');
-    const btnCerrarModalIframe = document.querySelector('.btn_cerrar_modal_gracias');
     // FUNCIONES
     const buildlist = (data)=>{
         let items = '<ul>'
@@ -950,8 +1011,7 @@
         items += '</ul>'
         return items
     }
-    const generarInputs = () => {
-        let inputHTML = `
+    const generarInputs = `
         <form-input id="input_dni" name="input_dni" datatype="tel"
             minlength="8" maxlength="8" constraint="soloNumeros" label="DNI"
             msgerror="Ingresa tu número de documento">
@@ -961,96 +1021,93 @@
             msgerror="Ingresa tu número de celular">
         </form-input>
         <div id="input_declaracion" class="input_declaracion">Al enviarnos esta información autorizas al BCP el tratamiento de tus datos personales. Conoce más <a id="tycDP">aquí</a>. Al adquirir este seguro participas del sorteo, revisa las bases <a id="tycCJ">aquí</a></div>
-        <div class="hidden-captcha"><form-captcha id="frmSVDCaptcha" datacallback="frmSVDCaptchaCallback"></form-captcha></div>`;
-        document.querySelector('.plan_sor_formulario_inputs').innerHTML = inputHTML;
-
-        document.querySelector('#input_declaracion #tycDP').addEventListener('click',()=>{
-            taggeoSVDModal({label:'Terminos y condiciones'});
-            window.open(urltyc.link1,'_blank');
-        })
-        document.querySelector('#input_declaracion #tycCJ').addEventListener('click',()=>{
-            taggeoSVDModal({label:'Terminos y condiciones Cyber Julio'});
-            window.open(urltyc.link2,'_blank');
-        })
-        frmInitSVDPlanesCaptcha = frmSVDComunicacion.querySelector('#frmSVDCaptcha');
+        <div class="hidden-captcha"><form-captcha id="frmSOSCaptcha" datacallback="frmSOSCaptchaCallback"></form-captcha></div>`;
+    const step = {
+        init:function(steps){
+            this.step1 = document,querySelector(steps[0]) 
+            this.step2 = document,querySelector(steps[1])
+        },
+        next:function(){
+            this.step1.classList.remove('mostrar')
+            this.step2.classList.add('mostrar')
+        }
     }
-    const cerrarModalBack = () =>{
+    function cerrarModalBack(){
         setTimeout(() => {
             document.querySelector('.bcp_contenedor_modal_one_click').style.display="none"
         }, 300);
-    }
-    
-    const cerrarModalOneClickOtp = () =>{
-        document.querySelector('.bcp_formulario.bcp_modal_venta').classList.remove('mostrar')
     }
     //ARMAR ESTRUCTURA DE HTML
     const modalExperiment = {
         init:function(data){
             this.container = document.querySelector(data.container)
+            this.response = {}
+        },
+        addElements:function(label,elements){
+            const container = document.querySelector(label)
+            if(container){
+                elements.forEach((e)=>{
+                    container.appendChild(e)
+                })
+            }
         },
         buttons:function(data){
-            const {functions} = data
-            const btnPrimary = new HTMLElement('button').addClass(['btn-primary-comprar']).setText('Lo quiero').getElement()
-            const btnSecundary = new HTMLElement('button').addClass(['bcp_boton_blanco','bcp_boton_blanco_a']).setText('No, gracias').getElement()
-            const sectionButton = new HTMLElement('div')
-                .addClass(['bcp_grupo_botones','bcp_grupo_confirmar'])
-                .appendChild(btnPrimary)
-                .appendChild(btnSecundary)
-                .getElement()
-            btnPrimary.onclick = ()=>{functions.primary()}
-            btnSecundary.onclick = ()=>{functions.secundary()}
-            return sectionButton
+            const {primary,secundary} = data
+            const btnPrimary = new HTMLElement('button').addClass(['btn-primary-comprar']).setText(primary.label).getElement()
+            const btnSecundary = new HTMLElement('button').addClass(['bcp_boton_blanco','bcp_boton_blanco_a']).setText(secundary.label).getElement()
+            const sectionButton = new HTMLElement('div').addClass(['bcp_grupo_botones','bcp_grupo_confirmar'])
+            sectionButton.addElements([btnPrimary,btnSecundary])
+            btnPrimary.onclick = ()=>{primary.functions()}
+            btnSecundary.onclick = ()=>{secundary.functions()}
+            return sectionButton.getElement()
         },
         control: function(data){
-            const containerBody = document.querySelector('.bcp_grupo_legal_venta')
-            document.querySelector('.bcp_detalle_lista').innerHTML = buildlist(dataModalSOS.coberturas)
-            document.querySelector('.banner_promo').innerHTML = dataModalSOS.promo
-            containerBody.appendChild(this.buttons(data.buttons))
+            const {header,body,buttons} = data
+            const contentBody = [], contentHead = []
+            contentBody[0] = new HTMLElement('p').addClass('bcp_desc_subtxt').setHTML(body.lineFirst).getElement()
+            contentBody[1] = new HTMLElement('p').addClass('bcp_listado_titulo').setText(body.labelList).getElement()
+            contentBody[2] = new HTMLElement('div').addClass(['bcp_detalle_lista']).setHTML(buildlist(body.coberturas)).getElement()
+            contentBody[3] = new HTMLElement('div').addClass('banner_promo').setHTML(body.promo).getElement()
+            contentBody[4] = this.buttons(buttons)
+            contentHead[0] = new HTMLElement('div').addClass(['bcp_descripcion']).setHTML(header.content).getElement()
+            contentHead[1] = new HTMLElement('img').addClass(['img_logo']).setAttribute('src',header.spot).getElement()
+            this.addElements('#modalHeader',contentHead)
+            this.addElements('.bcp_grupo_legal_venta',contentBody)
         },
-        piloto: function (){
-            
+        piloto: function (data){
+            console.log(data)
+            const {header,body,buttons} = data
+            const contentBody = [], contentHead = []
+            contentBody[0] = new HTMLElement('p').addClass('bcp_desc_subtxt').setHTML(body.lineList).getElement()
+            contentBody[1] = new HTMLElement('p').addClass('bcp_beneficio').setHTML(body.coberturas).getElement()
+            contentBody[2] = new HTMLElement('div').addClass('plan_sor_formulario_inputs').setHTML(generarInputs).getElement()
+            contentBody[4] = this.buttons(buttons)
+            contentHead[0] = new HTMLElement('div').addClass(['bcp_descripcion']).setHTML(header.content).getElement()
+            contentHead[1] = new HTMLElement('img').addClass(['img_logo']).setAttribute('src',header.spot).getElement()
+            this.addElements('#modalHeader',contentHead)
+            this.addElements('.bcp_grupo_legal_venta',contentBody)
+            //CREAR STEP THANKPAGE
+            const imgClose = '<img src="/wcm/connect/c2dd6ca8-a84d-421a-9f77-f34e8133cd25/c_ic_close_orange.svg?MOD=AJPERES&attachment=true&id=1722145479416" alt="">'
+            const imgSpot = '<img src="/wcm/myconnect/82a836f8-cb4c-494e-9a94-2cfaee078567/spot_circle_m_spc_mobile_success_hand_d_l.svg?MOD=AJPERES&attachment=true&id=1722142373600" alt="">'
+            const contentThankPage = []
+            contentThankPage[0] = new HTMLElement().addClass(['thpg_spot']).setHTML(imgSpot).getElement()
+            contentThankPage[1] = new HTMLElement().addClass(['thpg_title']).setHTML('¡Gracias por tu interés en nuestro seguro!').getElement()
+            contentThankPage[2] = new HTMLElement()
+                .addClass(['thpg_content'])
+                .setHTML('Nos comunicaremos contigo para brindarte más información acerca delSeguro S.O.S. Salud.')
+                .getElement()
+            contentThankPage[3] = new HTMLElement('button').addClass(['thpg_close']).setText('Entendido').getElement()
+            const stepThankPage = new HTMLElement().addClass('step2').addElements(contentThankPage)
+            this.addElements('.bcp_modal_cuerpo',[stepThankPage])
+            step.init(['.bcp_paso','.step2'])
         }
     }
-    const openURL = ()=>{window.open("https://www.viabcp.com/seguros/salud/sos-salud","_blank");}
-    modalExperiment.init({container:'.bcp_modal_cuerpo'})
-    modalExperiment.control({
-        buttons:{
-            functions:{
-                primary:openURL,
-                secundary:cerrarModalBack
-            }
-        }
-    });
-    
-    /*btnNoGracias.onclick = () =>{
-        document.querySelector('.bcp_formulario.bcp_modal_venta').classList.remove('mostrar')
-        cerrarModalBack();
-        taggeoSVDModal('Click','No gracias')
+    function openURL(){
+        window.open("https://www.viabcp.com/seguros/salud/sos-salud","_blank")
     }
-    
-    btnLoQuieroSPT.onclick = () =>{
-        window.open("https://www.viabcp.com/seguros/salud/sos-salud","_blank");
-        taggeoSVDModal('Click','Lo quiero')
+    function sendForm(){
+        step.next()
     }
-
-    btnCerrarModalIframe.onclick = () => {
-        document.querySelector('.bcp_iframe_container_container_spt').classList.remove('mostrar');
-        taggeoBotonCerrarModalEmbebidoSPT();
-        cerrarModalBack();
-    }
-
-    btnRegresar.onclick = () => {
-        document.querySelector('.bcp_iframe_container_container_spt').classList.remove('mostrar');
-        
-    }
-
-    btnCerrarModalOpt.onclick = function(){
-        cerrarModalOneClickOtp();
-        cerrarModalBack();
-    }
-*/
-    let countSPT = 0;
-    
     //VARIABLES NUEVO TAGGEO - ADOBE
     const versionModal = "V20";
     const productModal = "Seguros-SPT";
@@ -1061,10 +1118,6 @@
     const experimentoModalOneClickGoogle = "Home - Modal a la carga V20";
     const actionModalOneClickGoogle = "Modal Cross Sell SPT"
 
-    //taggeoImpresionSPT();
-    function taggeoImpresionSPT(){
-        taggeoSVDModal('','','trackFormView')
-    }
     //Botón No Gracias
     function taggeoBotonNoGraciasSPT(){
         digitalData.push({
@@ -1125,5 +1178,9 @@
         })
         }
     }
-
+    //BEGIN EXPERIMENTO
+    modalExperiment.init({container:'.bcp_modal_cuerpo'})
+    const tipoExperiment = 'piloto'
+    modalExperiment[tipoExperiment](dataModalSOS[tipoExperiment])
+    //taggeoSVDModal('','','trackFormView')
 </script>
