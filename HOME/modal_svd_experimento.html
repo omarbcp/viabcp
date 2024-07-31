@@ -809,6 +809,9 @@
         top: -7px !important;
         right: 6px !important;
     }
+    .input_declaracion {
+        margin-bottom: 16px;
+    }
 </style>
 
 <div id="bcp_modal_one_click" class="bcp_contenedor_modal_one_click ">
@@ -879,9 +882,7 @@
                                 </li>
                             </ul>
                         </div>
-                        <div class="banner_promo">
-                            Adquiriendo este seguro participas del <strong>sorteo de S/10,000.</strong> Revisa las bases del sorteo <a id="btn-tyc">aquí</a>
-                        </div>
+                        <div id="input_declaracion" class="input_declaracion">Al enviarnos esta información autorizas al BCP el tratamiento de tus datos personales. Conoce más <a id="tycDP">aquí</a>. Al adquirir este seguro participas del sorteo, revisa las bases <a id="tycCJ">aquí</a></div>
                         <div class="bcp_grupo_botones bcp_grupo_confirmar">
                             <button class="btn-primary-comprar" id="btn_lo_quiero_spt">Lo quiero</button>
                             <button class="bcp_boton_blanco bcp_boton_blanco_a" id="btn_no_gracias">No, gracias</button>
@@ -916,12 +917,12 @@
 
 <script>
     let channel = "ViaBCP";
-    let category = "Obten tu Seguro Vida Devolucion-V25";
+    let category = "Obten tu Seguro Vida Devolucion-V26";
     let group = "ViaBCP";
     let label = "";
     let nameV = "Obten tu Seguro Vida Devolucion";
     let producto = "Seguros-SDVT"
-    let version = 'V25'
+    let version = 'V26'
 
     const btnCerrarModalOpt = document.querySelector('.btn_cerrar_modal');
     const btnLoQuieroSPT = document.querySelector('#btn_lo_quiero_spt');
@@ -929,12 +930,26 @@
     const btnNoGracias = document.querySelector('#btn_no_gracias');
     const btnCerrarModalIframe = document.querySelector('.btn_cerrar_modal_gracias');
     const tycPromoLaptop = document.querySelector('#btn-tyc');
-
-    tycPromoLaptop.onclick = () =>{
-        window.open('https://www.viabcp.com/wcm/connect/3392a686-75d8-4f52-845d-8357c626352c/T%26C+Promoci%C3%B3n+Vales+500+soles+-+Seguros+-+Campa%C3%B1a+Cross+Julio+Rev.21.06+%2B+SVD.pdf?MOD=AJPERES&attachment=false&id=1719608625344','_blank')
-        taggeoSVDModal('Click','TyC PromoCamiseta')
+    // Terminos y condiciones
+    
+    const addLinkTyC = ()=> {
+        const dataTyC = [
+            {
+                idLink : 'tycDP',
+                link:'https://www.viabcp.com/wcm/connect/fd365edf-7f13-44ef-8007-310f16d78895/Protecci%C3%B3n+de+Datos+Personales.pdf?MOD=AJPERES&attachment=false&id=1708105189312'},
+            {
+                idLink : 'tycCJ',
+                link:'https://www.viabcp.com/wcm/connect/a2d2ec7f-6035-4428-9933-7bef4bc9951b/T%26C+Promoci%C3%B3n+Vales+500+soles+-+Seguros+-+Campa%C3%B1a+Cross+Julio+Rev.21.06.pdf?MOD=AJPERES&attachment=false&id=1719509128937 '
+            }
+        ]
+        dataTyC.forEach(element => {
+            const link = document.getElementById(element.idLink)
+            if(link){
+                link.onclick = ()=>{ window.open(element.link,'_blank') }
+            }
+        });
     }
-
+    
     const cerrarModalBack = () =>{
         setTimeout(() => {
             document.querySelector('.bcp_contenedor_modal_one_click').style.display="none"
@@ -1007,7 +1022,7 @@
         }, 2000);
         console.log('end iframe')
     }
-
+    addLinkTyC()
     taggeoImpresionSPT();
     function taggeoImpresionSPT(){
         taggeoSVDModal('','','trackFormView')
