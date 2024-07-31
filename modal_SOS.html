@@ -822,10 +822,13 @@
     /* STEP THANK PAGE */
     .step2 {
         display: none;
+        padding: 74px 16px;
     }
     .step2.mostrar {
         display: flex;
         justify-content: center;
+        flex-direction: column;
+        align-items: center;
     }
     .step2 > div {
         text-align: center;
@@ -845,9 +848,37 @@
         line-height: 20px;
         text-align: center;
         color: #202E44;
+        margin-top: 24px;
     }
     .thpg_content > span {
-        font-family: ;
+        font-family: Flexo-Demi;
+    }
+    .thpg_close {
+        width: 130px;
+        height: 40px;
+        padding: 8px 16px 8px 16px;
+        border-radius: 20px;
+        background: #FF7800;
+        font-family: Flexo;
+        font-size: 16px;
+        font-weight: 600;
+        line-height: 19.2px;
+        text-align: center;
+        color:#fff;
+        margin-top: 24px;
+    }
+    /* FORMULARIO */
+    .plan_sor_formulario_inputs {
+        margin:16px 0 12px 0;
+    }
+    .title_form {
+        font-family: Flexo;
+        font-size: 16px;
+        font-weight: 550;
+        line-height: 24px;
+        text-align: left;
+        margin-bottom: 16px;
+        color: #202E44;
     }
 </style>
 
@@ -881,12 +912,13 @@
 <script>
     class HTMLElement {
         constructor(tagName='div') {
-            this.element = document.createElement(tagName);
+            this.element = document.createElement(tagName)
         }
-        addElements(listElement){
+        addChild(listElement){
             listElement.forEach((e)=>{
                 this.element.appendChild(e)
             })
+            return this;
         }
         addClass(data) {
             if(typeof data == 'string'){
@@ -935,6 +967,16 @@
         }
     }
     const iconoCheck = '<img src="/wcm/connect/a050ebdd-380f-4539-bfbd-58f5571a61fb/color%F0%9F%8E%A8%3F.svg?MOD=AJPERES&attachment=true&id=1721857067922" alt="check_blue">';
+    //TAGGEO ADOBE - PARAMETROS POR DEFAULT
+    const taggeoExperiment = {
+        channel : "ViaBCP",
+        group : "ViaBCP",
+        label : "Lo quiero",
+        name : "Obten tu Seguro Salud SOS",
+        producto : "Seguros",
+        version : 'V25',
+        type:'trackAction'
+    }
     const dataModalSOS = {
         control:{
             header:{
@@ -958,7 +1000,7 @@
                 },
                 secundary: {
                     label:'No, gracias',
-                    functions:cerrarModalBack
+                    functions:cerrarModal
                 }
             }   
         },
@@ -979,27 +1021,37 @@
                 },
                 secundary: {
                     label:'No, gracias',
-                    functions:cerrarModalBack
+                    functions:cerrarModal
                 }
             }   
         }
         
     }
-    let channel = "ViaBCP";
-    let category = "Obten tu Seguro Salud SOS-V25";
-    let group = "ViaBCP";
-    let label = "";
-    let nameV = "Obten tu Seguro Salud SOS";
-    let producto = "Seguros"
-    let version = 'V25'
-    /*const tycPromoLaptop = document.querySelector('#btn-tyc');
-    tycPromoLaptop.onclick = () =>{
-        window.open('https://www.viabcp.com/wcm/connect/a2d2ec7f-6035-4428-9933-7bef4bc9951b/T%26C+Promoci%C3%B3n+Vales+500+soles+-+Seguros+-+Campa%C3%B1a+Cross+Julio+Rev.21.06.pdf?MOD=AJPERES&attachment=false&id=1719509128937','_blank')
-        taggeoAdobeSeguros('Click','TyC PromoLaptop')
-    }*/
-    const btnCerrarModalOpt = document.querySelector('.btn_cerrar_modal');
-    const btnRegresar = document.querySelector('#btn_regresar');
-    // FUNCIONES
+    // ELEMENTOS GLOBALES
+    const btnCerrarModal = document.querySelector('.btn_cerrar_modal')
+    let frmSVDComunicacion,frmInitSVDPlanes,frmInitSVDPlanesCaptcha;
+    // FUNCIONES DECLARATIVAS GLOBALES
+    const openURLCustom = (data)=>{
+        const {url,target='_blank'} = data
+        //taggeoSVDModal(taggeo)
+        window.open(url,target)
+    }
+    const validateInput=(id,campo)=>{
+        const input = document.getElementById(id)
+        const bool = frmInitSVDPlanes.Validar[campo](input)
+        return bool
+    }
+    const validateInputs = () =>{
+        let boolDNI = validateInput('input_dni','CampoNumerico');
+        let boolTLF = validateInput('input_celular','CampoNumerico');
+
+        if (!boolDNI || !boolTLF ) {
+            console.log('validacion false')
+            return false
+        } else {
+            return true;
+        }
+    }
     const buildlist = (data)=>{
         let items = '<ul>'
         data.forEach(element => {
@@ -1011,7 +1063,7 @@
         items += '</ul>'
         return items
     }
-    const generarInputs = `
+    const generarInputs = `<div class="title_form">Completa tus datos y te contactaremos</div>
         <form-input id="input_dni" name="input_dni" datatype="tel"
             minlength="8" maxlength="8" constraint="soloNumeros" label="DNI"
             msgerror="Ingresa tu número de documento">
@@ -1024,19 +1076,16 @@
         <div class="hidden-captcha"><form-captcha id="frmSOSCaptcha" datacallback="frmSOSCaptchaCallback"></form-captcha></div>`;
     const step = {
         init:function(steps){
-            this.step1 = document,querySelector(steps[0]) 
-            this.step2 = document,querySelector(steps[1])
+            this.step1 = document.querySelector(steps[0]) 
+            this.step2 = document.querySelector(steps[1])
         },
         next:function(){
             this.step1.classList.remove('mostrar')
             this.step2.classList.add('mostrar')
+            btnCerrarModal.classList.remove('fill_color')
         }
     }
-    function cerrarModalBack(){
-        setTimeout(() => {
-            document.querySelector('.bcp_contenedor_modal_one_click').style.display="none"
-        }, 300);
-    }
+    
     //ARMAR ESTRUCTURA DE HTML
     const modalExperiment = {
         init:function(data){
@@ -1055,132 +1104,209 @@
             const {primary,secundary} = data
             const btnPrimary = new HTMLElement('button').addClass(['btn-primary-comprar']).setText(primary.label).getElement()
             const btnSecundary = new HTMLElement('button').addClass(['bcp_boton_blanco','bcp_boton_blanco_a']).setText(secundary.label).getElement()
-            const sectionButton = new HTMLElement('div').addClass(['bcp_grupo_botones','bcp_grupo_confirmar'])
-            sectionButton.addElements([btnPrimary,btnSecundary])
-            btnPrimary.onclick = ()=>{primary.functions()}
-            btnSecundary.onclick = ()=>{secundary.functions()}
-            return sectionButton.getElement()
+            const sectionButton = new HTMLElement('div',).addClass(['bcp_grupo_botones','bcp_grupo_confirmar']).addChild([btnPrimary,btnSecundary]).getElement()
+            
+            btnPrimary.onclick = ()=>{
+                primary.functions()
+            }
+            btnSecundary.onclick = (e)=>{
+                const activo = event.currentTarget.innerText
+                secundary.functions(activo)
+            }
+            return sectionButton
         },
         control: function(data){
-            const {header,body,buttons} = data
-            const contentBody = [], contentHead = []
-            contentBody[0] = new HTMLElement('p').addClass('bcp_desc_subtxt').setHTML(body.lineFirst).getElement()
-            contentBody[1] = new HTMLElement('p').addClass('bcp_listado_titulo').setText(body.labelList).getElement()
-            contentBody[2] = new HTMLElement('div').addClass(['bcp_detalle_lista']).setHTML(buildlist(body.coberturas)).getElement()
-            contentBody[3] = new HTMLElement('div').addClass('banner_promo').setHTML(body.promo).getElement()
-            contentBody[4] = this.buttons(buttons)
-            contentHead[0] = new HTMLElement('div').addClass(['bcp_descripcion']).setHTML(header.content).getElement()
-            contentHead[1] = new HTMLElement('img').addClass(['img_logo']).setAttribute('src',header.spot).getElement()
-            this.addElements('#modalHeader',contentHead)
-            this.addElements('.bcp_grupo_legal_venta',contentBody)
+            try {
+                const {header,body,buttons} = data
+                const contentBody = [], contentHead = []
+                contentBody[0] = new HTMLElement('p').addClass('bcp_desc_subtxt').setHTML(body.lineList).getElement()
+                contentBody[1] = new HTMLElement('p').addClass('bcp_listado_titulo').setText(body.labelList).getElement()
+                contentBody[2] = new HTMLElement('div').addClass(['bcp_detalle_lista']).setHTML(buildlist(body.coberturas)).getElement()
+                contentBody[3] = new HTMLElement('div').addClass('banner_promo').setHTML(body.promo).getElement()
+                contentBody[4] = this.buttons(buttons)
+                contentHead[0] = new HTMLElement('div').addClass(['bcp_descripcion']).setHTML(header.content).getElement()
+                contentHead[1] = new HTMLElement('img').addClass(['img_logo']).setAttribute('src',header.spot).getElement()
+                this.addElements('#modalHeader',contentHead)
+                this.addElements('.bcp_grupo_legal_venta',contentBody)
+                taggeoSOSModal({type:'trackFormView'})
+            } catch (error) {
+                console.log(error)
+            }
         },
         piloto: function (data){
-            console.log(data)
-            const {header,body,buttons} = data
-            const contentBody = [], contentHead = []
-            contentBody[0] = new HTMLElement('p').addClass('bcp_desc_subtxt').setHTML(body.lineList).getElement()
-            contentBody[1] = new HTMLElement('p').addClass('bcp_beneficio').setHTML(body.coberturas).getElement()
-            contentBody[2] = new HTMLElement('div').addClass('plan_sor_formulario_inputs').setHTML(generarInputs).getElement()
-            contentBody[4] = this.buttons(buttons)
-            contentHead[0] = new HTMLElement('div').addClass(['bcp_descripcion']).setHTML(header.content).getElement()
-            contentHead[1] = new HTMLElement('img').addClass(['img_logo']).setAttribute('src',header.spot).getElement()
-            this.addElements('#modalHeader',contentHead)
-            this.addElements('.bcp_grupo_legal_venta',contentBody)
-            //CREAR STEP THANKPAGE
-            const imgClose = '<img src="/wcm/connect/c2dd6ca8-a84d-421a-9f77-f34e8133cd25/c_ic_close_orange.svg?MOD=AJPERES&attachment=true&id=1722145479416" alt="">'
-            const imgSpot = '<img src="/wcm/myconnect/82a836f8-cb4c-494e-9a94-2cfaee078567/spot_circle_m_spc_mobile_success_hand_d_l.svg?MOD=AJPERES&attachment=true&id=1722142373600" alt="">'
-            const contentThankPage = []
-            contentThankPage[0] = new HTMLElement().addClass(['thpg_spot']).setHTML(imgSpot).getElement()
-            contentThankPage[1] = new HTMLElement().addClass(['thpg_title']).setHTML('¡Gracias por tu interés en nuestro seguro!').getElement()
-            contentThankPage[2] = new HTMLElement()
-                .addClass(['thpg_content'])
-                .setHTML('Nos comunicaremos contigo para brindarte más información acerca delSeguro S.O.S. Salud.')
-                .getElement()
-            contentThankPage[3] = new HTMLElement('button').addClass(['thpg_close']).setText('Entendido').getElement()
-            const stepThankPage = new HTMLElement().addClass('step2').addElements(contentThankPage)
-            this.addElements('.bcp_modal_cuerpo',[stepThankPage])
-            step.init(['.bcp_paso','.step2'])
-        }
-    }
-    function openURL(){
-        window.open("https://www.viabcp.com/seguros/salud/sos-salud","_blank")
-    }
-    function sendForm(){
-        step.next()
-    }
-    //VARIABLES NUEVO TAGGEO - ADOBE
-    const versionModal = "V20";
-    const productModal = "Seguros-SPT";
-    const channelModal = "ViaBCP";
-    const grupoModal = "Modal One Click"
-    const tituloModalSPT = "Obten tu Seguro de Proteccion de Tarjetas Plus";
-    //VARIABLES TAGGEO GOOGLE
-    const experimentoModalOneClickGoogle = "Home - Modal a la carga V20";
-    const actionModalOneClickGoogle = "Modal Cross Sell SPT"
+            try {
+                const {header,body,buttons} = data
+                const urltyc = {
+                    link1:'https://www.viabcp.com/wcm/connect/fd365edf-7f13-44ef-8007-310f16d78895/Protecci%C3%B3n+de+Datos+Personales.pdf?MOD=AJPERES&attachment=false&id=1708105189312',
+                    link2:'https://www.viabcp.com/wcm/connect/a2d2ec7f-6035-4428-9933-7bef4bc9951b/T%26C+Promoci%C3%B3n+Vales+500+soles+-+Seguros+-+Campa%C3%B1a+Cross+Julio+Rev.21.06.pdf?MOD=AJPERES&attachment=false&id=1719509128937 '
+                }
+                const contentBody = [], contentHead = []
+                contentBody[0] = new HTMLElement('p').addClass('bcp_desc_subtxt').setHTML(body.lineList).getElement()
+                contentBody[1] = new HTMLElement('p').addClass('bcp_beneficio').setHTML(body.coberturas).getElement()
+                contentBody[2] = new HTMLElement('div').addClass('plan_sor_formulario_inputs').setHTML(generarInputs).getElement()
+                contentBody[4] = this.buttons(buttons)
+                contentHead[0] = new HTMLElement('div').addClass(['bcp_descripcion']).setHTML(header.content).getElement()
+                contentHead[1] = new HTMLElement('img').addClass(['img_logo']).setAttribute('src',header.spot).getElement()
+                this.addElements('#modalHeader',contentHead)
+                this.addElements('.bcp_grupo_legal_venta',contentBody)
+                //CREAR STEP THANKPAGE
+                const imgClose = '<img src="/wcm/connect/c2dd6ca8-a84d-421a-9f77-f34e8133cd25/c_ic_close_orange.svg?MOD=AJPERES&attachment=true&id=1722145479416" alt="">'
+                const imgSpot = '<img src="/wcm/connect/82a836f8-cb4c-494e-9a94-2cfaee078567/spot_circle_m_spc_mobile_success_hand_d_l.svg?MOD=AJPERES&attachment=true&id=1722142373600" alt="">'
+                const contentThankPage = []
+                contentThankPage[0] = new HTMLElement().addClass(['thpg_spot']).setHTML(imgSpot).getElement()
+                contentThankPage[1] = new HTMLElement().addClass(['thpg_title']).setHTML('¡Gracias por tu interés en nuestro seguro!').getElement()
+                contentThankPage[2] = new HTMLElement()
+                    .addClass(['thpg_content'])
+                    .setHTML('Nos comunicaremos contigo para brindarte más información acerca del<br><span>Seguro S.O.S. Salud.</span>')
+                    .getElement()
+                contentThankPage[3] = new HTMLElement('button').addClass(['thpg_close']).setText('Entendido').getElement()
+                const stepThankPage = new HTMLElement().addChild(contentThankPage).addClass('step2').getElement()
+                //ADD FUNCTIONS
+                contentThankPage[3].onclick = ()=>{cerrarModal('Entendido')}
+                document.querySelector('#input_declaracion #tycDP').addEventListener('click',()=>{
+                    window.open(urltyc.link1,'_blank');
+                })
+                document.querySelector('#input_declaracion #tycCJ').addEventListener('click',()=>{
+                    window.open(urltyc.link2,'_blank');
+                })
+                this.addElements('.bcp_modal_cuerpo',[stepThankPage])
+                step.init(['.bcp_paso','.step2'])
+                taggeoExperiment.version = 'V26'
+                //PARAMETROS PARA ENVIO DE FORM
+                frmSVDComunicacion = document.getElementById('modalBody'); //frmMocSegurosHome
+                frmInitSVDPlanes = new Formulario(frmSVDComunicacion);//formContentMOCSegurosHome
+                frmInitSVDPlanesCaptcha = frmSVDComunicacion.querySelector('#frmSOSCaptcha');
+                taggeoSOSModal({type:'trackFormView'})
 
-    //Botón No Gracias
-    function taggeoBotonNoGraciasSPT(){
-        digitalData.push({
-            "action":{
-                "group":grupoModal,
-                "category":tituloModalSPT + "-" + versionModal,
-                "name":"Click",
-                "label":"No gracias"
-            },
-            "metadata":{
-                "key":"Producto",
-                "value":productModal
-            },
-            "event":"trackAction"
-        })
-    }
-    //Botón Lo Quiero
-    function taggeoBotonLoQuieroSPT(){
-        digitalData.push({
-            "action":{
-                "group":grupoModal,
-                "category":tituloModalSPT + "-" + versionModal,
-                "name":"Click",
-                "label":"Lo quiero"
-            },
-            "metadata":{
-                "key":"Producto",
-                "value":productModal
-            },
-            "event":"trackAction"
-        })
-    }
-
-    function taggeoSVDModal(name,label,type='trackAction'){
-        if(type=='trackAction'){
-            digitalData.push({
-                "action":{
-                    "group":group,
-                    "category":category,
-                    "name":name,
-                    "label":label
-                },
-                "metadata":{
-                    "key":"Producto",
-                    "value":producto
-                },
-                "event":"trackAction"
-            })
-        }else{
-            digitalData.push({
-            "form":{
-                "channel":channel,
-                "version":version,
-                "name":nameV,
-                "product":producto
-            },
-            "event":type
-        })
+            } catch (error) {
+                console.log(error)
+            }
         }
     }
     //BEGIN EXPERIMENTO
     modalExperiment.init({container:'.bcp_modal_cuerpo'})
-    const tipoExperiment = 'piloto'
+    const abtest = ['control','piloto']
+    const tipoExperiment = abtest[1]
     modalExperiment[tipoExperiment](dataModalSOS[tipoExperiment])
-    //taggeoSVDModal('','','trackFormView')
+    // EVENTOS BOTONES
+    btnCerrarModal.onclick = ()=>{cerrarModal('Cerrar')}
+    
+    //FUNCIONES GENERALES
+    function openURL(){
+        taggeoSOSModal({label:'Lo quiero',name:'Click'})
+        window.open("https://www.viabcp.com/seguros/salud/sos-salud","_blank")
+    }
+    function sendForm(){
+        if(!validateInputs()) return
+        const indexCaptcha = frmInitSVDPlanesCaptcha.getAttribute('index')
+        grecaptcha.execute(indexCaptcha)
+        taggeoSOSModal({label:'Lo quiero',name:'Click'})
+    }
+    function cerrarModal(source){
+        document.querySelector('.bcp_contenedor_modal_one_click').style.display="none"
+        if(tipoExperiment == abtest[0]){
+            taggeoSOSModal({label:source,name:'Click'})
+        } else {
+            const step2 = document.querySelector('.step2')
+            if(step2.classList.contains('mostrar')){
+                taggeoSOSModal({label:source,name:'Click'})
+            } else {
+                if(source == dataModalSOS[tipoExperiment].buttons.secundary.label){
+                    taggeoSOSModal({label:source,name:'Click'})
+                }
+            }
+        }
+    }
+     // TAGGEO ADOBE
+    function taggeoSOSModal(taggeoCustom){
+        const taggeoDefault = taggeoExperiment
+        const category = taggeoDefault.name+"-"+taggeoDefault.version
+        const taggeFinal = {...taggeoDefault, ...taggeoCustom}
+        console.log(taggeFinal)
+        const {channel,group,label,name,producto,version,type} = taggeFinal
+
+        if(type=='trackAction') {
+            digitalData.push({
+                action:{group:group,category:category,name:name,label:label},
+                metadata:{key:"Producto",value:producto},
+                event:"trackAction"
+            })
+        } else {
+            digitalData.push({
+                form:{channel:channel,version:version,name:name,product:producto},
+                event:type
+            })
+        }
+    }
+    //ENVIO DE SOLICITUD
+    function frmSOSCaptchaCallback(strTokenCaptcha) {
+        const url_sendmail ="https://preprodportal.viabcp.com/apis/form/send/message;";
+        //const url_sendmail = "https://www.viabcp.com/apis/form/send/message;";
+        let inputDNI= frmSVDComunicacion.querySelector('#input_dni');
+        let inputTLF = frmSVDComunicacion.querySelector('#input_celular');
+
+        let dniHash = fnsha256(inputDNI.value.trim());
+        let indexCaptcha = frmInitSVDPlanesCaptcha.getAttribute('index');
+        let boolDNI = frmInitSVDPlanes.Validar.CampoNumerico(inputDNI);
+        let boolTLF = frmInitSVDPlanes.Validar.CampoNumerico(inputTLF);
+        let nroDocumento = inputDNI.value.trim();
+        let telefono = inputTLF.value.trim();
+
+        if (!boolDNI || !boolTLF ) { grecaptcha.reset(indexCaptcha) ;return; };
+    
+        const jsonRequest = {
+            leadId: getLeadID(),
+            producto: "MODAL ONE CLICK - HOME",
+            tipoFormulario: "MODALONECLICK",
+            tipoProducto: "MODAL ONE CLICK - HOME",
+            captchaToken: strTokenCaptcha,
+            data: {
+                tdocumento: "DNI",
+                ndocumento: nroDocumento,
+                fechaNEO: "-",
+                ndocumentohash: dniHash,
+                aceptopromocion: "si",
+                productopromocion:  'Seguro Salud SOS' ,
+                abreviaturaproducto: "SSOS" ,
+                descripcionpromocion:'-' ,
+                email: "sinemail@sinmail.com",
+                flujoventa: "VIABCP",
+                promocioncancelada: telefono,
+                canal: 'VIABCP',
+                tipoplan: '-' 
+            }
+            ,
+            metadata: {
+                origen: document.location.href,
+                agente: navigator.userAgent,
+            },
+        }
+    
+        const requestOptions = {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "g-recaptcha-response": strTokenCaptcha,
+            },
+            body: JSON.stringify(jsonRequest),
+            redirect: "follow",
+        }
+    
+        fetch(url_sendmail, requestOptions)
+        .then((response) => {
+            if (response.status == 200) {
+                console.log('**Solicitud Registrada**')
+                taggeoSOSModal({type:'trackFormSubmit'})
+                step.next()
+            } else {
+                console.warn("No se registro", response.status);
+            }
+            grecaptcha.reset(indexCaptcha);
+        })
+        .catch((error) => {
+            console.error("error", error);
+            grecaptcha.reset(indexCaptcha);
+        });
+    }
+    
 </script>
