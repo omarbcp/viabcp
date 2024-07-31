@@ -881,10 +881,10 @@
         }
     }
 
-    const tycPromoLaptop = document.querySelector('#btn-tyc');
-    tycPromoLaptop.onclick = () =>{
-        window.open('https://www.viabcp.com/wcm/connect/a2d2ec7f-6035-4428-9933-7bef4bc9951b/T%26C+Promoci%C3%B3n+Vales+500+soles+-+Seguros+-+Campa%C3%B1a+Cross+Julio+Rev.21.06.pdf?MOD=AJPERES&attachment=false&id=1719509128937','_blank')
-        taggeoAdobeSeguros('Click','TyC PromoLaptop')
+    const tycPromo = document.querySelector('#btn-tyc');
+    tycPromo.onclick = () =>{
+        window.open('https://www.viabcp.com/wcm/connect/e91f410b-b1a8-44ea-be61-efa526a86afe/tyc-campains-august2024.pdf?MOD=AJPERES&attachment=true&id=1722443278724','_blank')
+        taggeoAdobeSeguros('Click','TyC Promo')
     }
     
     const taggeoAdobeSeguros = (eventName, labelName='') => {
@@ -923,7 +923,7 @@
     }
     const actionModalSOAT = (type) =>{
         let url = 'https://soat.pacifico.com.pe/bcp/?utm_source=viabcp&utm_medium=organic&utm_campaign=2023-10_BBSS_SOAT_AON_TRA_VIABCP-MODAL-SOAT&utm_content=TRA_TODOS_N-A_GEN_REGULAR_NONE_-_MOD_NULL_SOAT-VIABCP-MODAL-HOME_GTM-CONTROL&from=viabcp_-_organic_-_2023-10_BBSS_SOAT_AON_TRA_VIABCP-MODAL-SOAT_-_TRA_TODOS_N-A_GEN_REGULAR_NONE_-_MOD_NULL_SOAT-VIABCP-MODAL-HOME_GTM-CONTROL'
-        const UTM = '&utm_source=viabcp&utm_medium=organic&utm_campaign=2023-10_BBSS_SOAT_AON_TRA_VIABCP-MODAL-SOAT&utm_content=TRA_TODOS_N-A_GEN_REGULAR_NONE_-_MOD_NULL_SOAT-VIABCP-MODAL-HOME_GTM-PILOTO&from=viabcp_-_organic_-_2023-10_BBSS_SOAT_AON_TRA_VIABCP-MODAL-SOAT_-_TRA_TODOS_N-A_GEN_REGULAR_NONE_-_MOD_NULL_SOAT-VIABCP-MODAL-HOME_GTM-PILOTO'
+        const UTM = '&utm_source=viabcp&utm_medium=organic&utm_campaign=2024-06_BBSS_SOAT_AON_TRA_VIABCP-HOME-MODAL_PILOTO-BBDD&utm_content=TRA_TODOS_N-A_GEN_REGULAR_NONE_-_MOD_NULL_SOAT-VIABCP-HOME-PILOTO-BBDD&from=viabcp_-_organic_-_2024-06_BBSS_SOAT_AON_TRA_VIABCP-HOME-MODAL_PILOTO-BBDD_-_TRA_TODOS_N-A_GEN_REGULAR_NONE_-_MOD_NULL_SOAT-VIABCP-HOME-PILOTO-BBDD'
         if(type == 1){
             const placa = document.querySelector('#input_placa').value
             if(placa){

@@ -1,4 +1,4 @@
-<!--Modal Home SOAT - Flujo Alternativo Control-->
+<!--Modal FP SOAT - Campaña AGOSTO -->
 <style>
     .bcp_contenedor_modal_one_click_soat {
     position: fixed;
@@ -42,12 +42,12 @@
     font-style: normal;
     font-weight: 400;
     color: #002a8d;
-    font-size: 18px;
-    max-width: 198px;
-    line-height: 24px;
+    font-size: 20px;
+    max-width: 164px;
+    line-height: 22px;
     position: relative;
     z-index: 3;
-    padding-right: 27px;
+    padding-right: 0;
 }
 .bcp_contenedor_modal_one_click_soat .bcp_modal_venta .bcp_subtitulo {
     font-family: "Flexo";
@@ -141,18 +141,20 @@
     align-items: center;
 }
 .bcp_contenedor_modal_one_click_soat .bcp_modal_venta .bcp_grupo_emotivo_soat {
-    background: #80dafc;
+    background:  #B9F3FE;
     height: auto;
     border-radius: 8px 8px 0px 0px;
     display: flex;
     padding: 32px 20px 15px 20px;
     justify-content: space-between;
     align-items: center;
+    height: 126px;
 }
 .bcp_grupo_legal_venta_soat {
-    padding: 16px 20px;
+    padding: 16px;
     position: relative;
-    background-color: #ffffff;
+    border-radius: 0px 0px 8px 8px;
+    background-color: #fff;
 }
 .bcp_grupo_emotivo_soat .bcp_grupo svg {
     right: -16px;
@@ -273,9 +275,9 @@
 }
 .bcp_contenedor_modal_one_click_soat .bcp_modal_venta img {
     position: relative;
-    width: 157px;
-    top:0;
-    right:0;
+    width: 154px;
+    top: -11px;
+    right: 10px;
 }
 .bcp_campos_formulario {
     margin-bottom: 11px;
@@ -669,11 +671,11 @@
 .img_soat_hero {
    position: absolute;
    right: 0px;
-   top: 11px;
-   width: 157px;
+   top:23px;
+   width: 141px;
    z-index: 0;
 }
-.contenedor_input {position: relative;margin-bottom: 30px;}
+.contenedor_input {position: relative;margin-bottom: 16px;}
 .resaltado {font-family: 'Flexo-Demi';}
 .bcp_grupo_emotivo_soat > div:first-child {width: calc(100% - 85px);}
 .bcp_grupo_legal_venta_soat p a,
@@ -751,13 +753,19 @@
         top: -7px !important;
         right: 5px !important;
     }
-    .banner_promo{
+    .banner_promo {
         padding: 8px 14px;
         background-color: #ebf4ff;
         color: #002a8d;
         font-family: 'Flexo';
         font-size: 12px;
         margin-bottom: 16px;
+        border-radius: 8px;
+        text-align: center;
+    }
+    .banner_promo strong{
+        font-family: 'Flexo-Demi';
+        font-weight: 100;
     }
     .banner_promo a{
         color: #ff7800;
@@ -771,7 +779,7 @@
         <div class="bcp_modal_cabecera">
             <button class="btn_cerrar_modal_soat">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd" clip-rule="evenodd" d="m5.21 5.388.083-.094a1 1 0 0 1 1.32-.083l.094.083L12 10.587l5.293-5.293a1 1 0 1 1 1.414 1.414l-5.292 5.294 5.292 5.294a1 1 0 0 1 .083 1.32l-.083.095a1 1 0 0 1-1.32.083l-.094-.083L12 13.418 6.707 18.71a1 1 0 1 1-1.414-1.415l5.292-5.294-5.292-5.294a1 1 0 0 1-.083-1.32l.083-.094-.083.094z" fill="#FFFFFF"/>
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="m5.21 5.388.083-.094a1 1 0 0 1 1.32-.083l.094.083L12 10.587l5.293-5.293a1 1 0 1 1 1.414 1.414l-5.292 5.294 5.292 5.294a1 1 0 0 1 .083 1.32l-.083.095a1 1 0 0 1-1.32.083l-.094-.083L12 13.418 6.707 18.71a1 1 0 1 1-1.414-1.415l5.292-5.294-5.292-5.294a1 1 0 0 1-.083-1.32l.083-.094-.083.094z" fill="#70A9FF"/>
                 </svg>
             </button>
         </div>
@@ -783,7 +791,7 @@
                 <div class="bcp_modal_cuerpo_modal_detallado">
                     <div class="bcp_grupo_emotivo_soat wrapper">
                         <div><p class="bcp_titulo"></p></div>
-                        <div class="img_soat_hero"><img src="https://www.viabcp.com/wcm/connect/23e229c7-75a0-4c91-a89f-e7195e038371/SOAT.png?MOD=AJPERES&attachment=true&id=1719608440974"></div>
+                        <div class="img_soat_hero"><img src="/wcm/connect/7dffcd6e-bc65-48d2-b5e9-3b928693898e/spot_soat.svg?MOD=AJPERES&attachment=true&id=1721921666260"></div>
                     </div>
                     <div class="bcp_grupo_legal_venta_soat">
                         <p class="bcp_details_modal" id="details_modal"></p>
@@ -795,7 +803,7 @@
                            <label for="input_placa">Ingresa tu número de placa</label>
                         </div>
                         <div class="banner_promo">
-                            Adquiriendo este seguro participas del <strong>sorteo de 1 vale de S/ 500</strong>. Revisa las bases del sorteo <a id="btn-tyc">aquí</a>
+                            Adquiriendo este seguro participas del <strong>sorteo.</strong> Revisa las bases <a id="btn-tyc">aquí</a>
                         </div>
                         <div class="bcp_grupo_botones bcp_grupo_confirmar">
                             <button class="btn-primary-comprar" id="btn_lo_quiero_soat">Cotiza aquí</button>
@@ -835,11 +843,11 @@
     const dataModal = {
         intermediate:{
             type : 1,
-            title:'Compra tu<br><span class="resaltado">SOAT</span> y gana<br><span class="resaltado">1 vale de S/500</span>',
+            title:'Compra tu <span class="resaltado">SOAT</span><br> y gana <span class="resaltado">1 vale de S/100</span> en gasolina',
             details:'Desde <span class="resaltado">'+priceSOAT+' al año</span> (Inc. IGV)',
             benefits:[
                 {icon:wrapIcon.check, content:'20% dscto. en llantas y aros.'},
-                {icon:wrapIcon.check, content:'Programa de dsctos. en más de 50 establecimientos afiliados.'},
+                {icon:wrapIcon.check, content:'Programa de dsctos. en más de <br>50 establecimientos afiliados.'},
                 {icon:wrapIcon.check, content:'Planes de renovación automática o recompra directa.'}
             ],
             tyc:'',
@@ -853,7 +861,7 @@
         },
         derivative:{
             type: 2,
-            title:'Gana 1 <span class="resaltado">camiseta de Perú</span> con tu <span class="resaltado">SOAT Virtual</span>',
+            title:'Compra tu <span class="resaltado">SOAT</span><br> y gana <span class="resaltado">1 vale de S/100</span> en gasolina>',
             title:'Obten tu SOAT Digital y viaja tranquilo',
 
             
@@ -863,7 +871,7 @@
                 {icon:wrapIcon.deriv2, content:'Programa de dsctos. en más de 50 establecimientos afiliados.'},
                 {icon:wrapIcon.deriv3, content:'Planes de renovación automática o recompra directa.'}
             ],
-            tyc:'',
+            tyc:'Revisa las bases del sorteo <a href="https://www.viabcp.com/wcm/connect/ac742720-52d4-45b3-8b38-85e69cf346c5/Campa%C3%B1a+navide%C3%B1a+Seguros+BCP+27.11.pdf?MOD=AJPERES&attachment=true&id=1701267846926" class="">aquí</a>',
             taggeo: {
                 versionModal:'V20'
             },
@@ -873,10 +881,10 @@
         }
     }
 
-    const tycPromoLaptop = document.querySelector('#btn-tyc');
-    tycPromoLaptop.onclick = () =>{
-        window.open('https://www.viabcp.com/wcm/connect/a2d2ec7f-6035-4428-9933-7bef4bc9951b/T%26C+Promoci%C3%B3n+Vales+500+soles+-+Seguros+-+Campa%C3%B1a+Cross+Julio+Rev.21.06.pdf?MOD=AJPERES&attachment=false&id=1719509128937','_blank')
-        taggeoAdobeSeguros('Click','TyC PromoCamiseta')
+    const tycPromo = document.querySelector('#btn-tyc');
+    tycPromo.onclick = () =>{
+        window.open('https://www.viabcp.com/wcm/connect/e91f410b-b1a8-44ea-be61-efa526a86afe/tyc-campains-august2024.pdf?MOD=AJPERES&attachment=true&id=1722443278724','_blank')
+        taggeoAdobeSeguros('Click','TyC Promo')
     }
     
     const taggeoAdobeSeguros = (eventName, labelName='') => {
@@ -914,8 +922,8 @@
         }, 300);
     }
     const actionModalSOAT = (type) =>{
-        let url = 'https://soat.pacifico.com.pe/bcp/?utm_source=viabcp&utm_medium=organic&utm_campaign=2024-07_BBSS_SOAT_AON_TRA_VIABCP-FICHA-PROD-MODAL_PILOTO-WORDING&utm_content=TRA_TODOS_N-A_GEN_REGULAR_NONE_-_MOD_NULL_SOAT-VIABCP-FICHA-MODAL-CONTROL&from=viabcp_-_organic_-_2024-07_BBSS_SOAT_AON_TRA_VIABCP-FICHA-PROD-MODAL_PILOTO-WORDING_-_TRA_TODOS_N-A_GEN_REGULAR_NONE_-_MOD_NULL_SOAT-VIABCP-FICHA-MODAL-CONTROL'
-        const UTM = '&utm_campaign=2024-07_BBSS_SOAT_AON_TRA_VIABCP-FICHA-PROD-MODAL_PILOTO-WORDING&utm_content=TRA_TODOS_N-A_GEN_REGULAR_NONE_-_MOD_NULL_SOAT-VIABCP-FICHA-MODAL-CONTROL&from=viabcp_-_organic_-_2024-07_BBSS_SOAT_AON_TRA_VIABCP-FICHA-PROD-MODAL_PILOTO-WORDING_-_TRA_TODOS_N-A_GEN_REGULAR_NONE_-_MOD_NULL_SOAT-VIABCP-FICHA-MODAL-CONTROL'
+        let url = 'https://soat.pacifico.com.pe/bcp/?utm_source=viabcp&utm_medium=organic&utm_campaign=2023-10_BBSS_SOAT_AON_TRA_VIABCP-MODAL-SOAT&utm_content=TRA_TODOS_N-A_GEN_REGULAR_NONE_-_MOD_NULL_SOAT-VIABCP-MODAL-HOME_GTM-CONTROL&from=viabcp_-_organic_-_2023-10_BBSS_SOAT_AON_TRA_VIABCP-MODAL-SOAT_-_TRA_TODOS_N-A_GEN_REGULAR_NONE_-_MOD_NULL_SOAT-VIABCP-MODAL-HOME_GTM-CONTROL'
+        const UTM = '&utm_source=viabcp&utm_medium=organic&utm_campaign=2024-07_BBSS_SOAT_AON_TRA_VIABCP-FICHA-PROD-MODAL&utm_content=TRA_TODOS_N-A_GEN_REGULAR_NONE_-_MOD_NULL_SOAT-VIABCP-FICHA-MODAL&from=viabcp_-_organic_-_2024-07_BBSS_SOAT_AON_TRA_VIABCP-FICHA-PROD-MODAL_-_TRA_TODOS_N-A_GEN_REGULAR_NONE_-_MOD_NULL_SOAT-VIABCP-FICHA-MODAL'
         if(type == 1){
             const placa = document.querySelector('#input_placa').value
             if(placa){
@@ -1010,4 +1018,5 @@
         else constructModal(dataModal.derivative)*/
         constructModal(dataModal.intermediate)
     })()
+    
 </script>
