@@ -1,6 +1,5 @@
-<!-- SOS SALUD MODAL -->
+<!-- SOS SALUD MODAL EXPERIMENTO DERIVATIVO VS FORM DNI -->
 <style>
-    *{margin:0;padding:0;border:0 none;}
     .bcp_contenedor_modal_one_click {
         position: fixed;
         width: 100%;
@@ -800,6 +799,16 @@
         }
 
     }
+    .bcp_beneficio {
+        font-family: Flexo;
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 20px;
+        text-align: left;
+    }
+    .bcp_beneficio > span {
+        font-family: Flexo-Demi;
+    }
     .banner_promo{
         border-radius: 8px;
         padding: 8px 4px;
@@ -872,13 +881,22 @@
         margin:16px 0 12px 0;
     }
     .title_form {
-        font-family: Flexo;
+        font-family: Flexo-Demi;
         font-size: 16px;
-        font-weight: 550;
+        font-weight: 400;
         line-height: 24px;
         text-align: left;
         margin-bottom: 16px;
         color: #202E44;
+    }
+    .input_declaracion {
+        font-family: Flexo;
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 20px;
+        text-align: left;
+        color:#606C7F;
+
     }
 </style>
 
@@ -910,6 +928,7 @@
 </div>
 
 <script>
+    //CLASES
     class HTMLElement {
         constructor(tagName='div') {
             this.element = document.createElement(tagName)
@@ -966,7 +985,6 @@
             return this.element;
         }
     }
-    const iconoCheck = '<img src="/wcm/connect/a050ebdd-380f-4539-bfbd-58f5571a61fb/color%F0%9F%8E%A8%3F.svg?MOD=AJPERES&attachment=true&id=1721857067922" alt="check_blue">';
     //TAGGEO ADOBE - PARAMETROS POR DEFAULT
     const taggeoExperiment = {
         channel : "ViaBCP",
@@ -977,6 +995,7 @@
         version : 'V25',
         type:'trackAction'
     }
+    //DATA PARA EL MODAL
     const dataModalSOS = {
         control:{
             header:{
@@ -1011,7 +1030,7 @@
             },
             body:{
                 lineList:'Solo por <span>S/ 49.90</span> al mes (Inc. IGV)',
-                coberturas: '<strong>Te cubrimos hasta S/ 30,000</strong> en clínicas para emergencias médicas y accidentales.',
+                coberturas: '<span>Te cubrimos hasta S/ 30,000</span> en clínicas para emergencias médicas y accidentales.',
                 legal: 'Al enviar la información autorizas al BCP el tratamiento de tus datos personales. Conoce más <a id="tyc">aquí</a>. Al comprar el seguro participas del sorteo, revisa las bases <a id="tyc">aquí.</a>'
             },
             buttons:{
@@ -1053,6 +1072,7 @@
         }
     }
     const buildlist = (data)=>{
+        const iconoCheck = '<img src="/wcm/connect/a050ebdd-380f-4539-bfbd-58f5571a61fb/color%F0%9F%8E%A8%3F.svg?MOD=AJPERES&attachment=true&id=1721857067922" alt="check_blue">';
         let items = '<ul>'
         data.forEach(element => {
             items += '<li style="display:flex;">'
@@ -1085,7 +1105,6 @@
             btnCerrarModal.classList.remove('fill_color')
         }
     }
-    
     //ARMAR ESTRUCTURA DE HTML
     const modalExperiment = {
         init:function(data){
@@ -1128,6 +1147,10 @@
                 contentHead[1] = new HTMLElement('img').addClass(['img_logo']).setAttribute('src',header.spot).getElement()
                 this.addElements('#modalHeader',contentHead)
                 this.addElements('.bcp_grupo_legal_venta',contentBody)
+                const linkTyC = document.getElementById('btn-tyc')
+                linkTyC.onclick = ()=>{
+                    window.open('https://www.viabcp.com/wcm/connect/ca1b78e1-8bf1-4daa-91e9-0872ba9a90e3/T%C3%A9rminos+y+Condiciones_Campa%C3%B1aAgosto_Salud_SOS.pdf?MOD=AJPERES&attachment=true&id=1722456123129','_blank')
+                }
                 taggeoSOSModal({type:'trackFormView'})
             } catch (error) {
                 console.log(error)
@@ -1190,7 +1213,6 @@
     modalExperiment[tipoExperiment](dataModalSOS[tipoExperiment])
     // EVENTOS BOTONES
     btnCerrarModal.onclick = ()=>{cerrarModal('Cerrar')}
-    
     //FUNCIONES GENERALES
     function openURL(){
         taggeoSOSModal({label:'Lo quiero',name:'Click'})
@@ -1240,8 +1262,8 @@
     }
     //ENVIO DE SOLICITUD
     function frmSOSCaptchaCallback(strTokenCaptcha) {
-        const url_sendmail ="https://preprodportal.viabcp.com/apis/form/send/message;";
-        //const url_sendmail = "https://www.viabcp.com/apis/form/send/message;";
+        //const url_sendmail ="https://preprodportal.viabcp.com/apis/form/send/message;";
+        const url_sendmail = "https://www.viabcp.com/apis/form/send/message;";
         let inputDNI= frmSVDComunicacion.querySelector('#input_dni');
         let inputTLF = frmSVDComunicacion.querySelector('#input_celular');
 
@@ -1268,7 +1290,7 @@
                 aceptopromocion: "si",
                 productopromocion:  'Seguro Salud SOS' ,
                 abreviaturaproducto: "SSOS" ,
-                descripcionpromocion:'-' ,
+                descripcionpromocion:'HOME',
                 email: "sinemail@sinmail.com",
                 flujoventa: "VIABCP",
                 promocioncancelada: telefono,
