@@ -875,6 +875,7 @@
         text-align: center;
         color:#fff;
         margin-top: 24px;
+        border: 0 none;
     }
     /* FORMULARIO */
     .plan_sor_formulario_inputs {
@@ -1105,6 +1106,21 @@
             btnCerrarModal.classList.remove('fill_color')
         }
     }
+    //VALIDA reCAPTCHA
+    const renderizarCaptchaModalOneClickSOS = () => {
+        //console.log('captcha', formContentMOCSegurosHome.Captcha.getAttribute('index'));
+        if (!frmInitSVDPlanes.Captcha.getAttribute('index')) {
+            try {
+                frmInitSVDPlanes.RenderIndividualCaptcha.SetRederCaptcha(frmInitSVDPlanesCaptcha);
+            } catch (error) {
+                console.log(error)
+            }
+            setTimeout(() => {
+                // btnObtenerModalOneClickSPT.removeAttribute('disabled');
+                console.log('captcha-forcerender', frmInitSVDPlanes.Captcha.getAttribute('index'));
+            }, 500);
+        }
+    }
     //ARMAR ESTRUCTURA DE HTML
     const modalExperiment = {
         init:function(data){
@@ -1124,14 +1140,9 @@
             const btnPrimary = new HTMLElement('button').addClass(['btn-primary-comprar']).setText(primary.label).getElement()
             const btnSecundary = new HTMLElement('button').addClass(['bcp_boton_blanco','bcp_boton_blanco_a']).setText(secundary.label).getElement()
             const sectionButton = new HTMLElement('div',).addClass(['bcp_grupo_botones','bcp_grupo_confirmar']).addChild([btnPrimary,btnSecundary]).getElement()
-            
-            btnPrimary.onclick = ()=>{
-                primary.functions()
-            }
-            btnSecundary.onclick = (e)=>{
-                const activo = event.currentTarget.innerText
-                secundary.functions(activo)
-            }
+            //CLICK
+            btnPrimary.onclick = ()=>{primary.functions()}
+            btnSecundary.onclick = ()=>{secundary.functions('No gracias')}
             return sectionButton
         },
         control: function(data){
@@ -1161,7 +1172,7 @@
                 const {header,body,buttons} = data
                 const urltyc = {
                     link1:'https://www.viabcp.com/wcm/connect/fd365edf-7f13-44ef-8007-310f16d78895/Protecci%C3%B3n+de+Datos+Personales.pdf?MOD=AJPERES&attachment=false&id=1708105189312',
-                    link2:'https://www.viabcp.com/wcm/connect/a2d2ec7f-6035-4428-9933-7bef4bc9951b/T%26C+Promoci%C3%B3n+Vales+500+soles+-+Seguros+-+Campa%C3%B1a+Cross+Julio+Rev.21.06.pdf?MOD=AJPERES&attachment=false&id=1719509128937 '
+                    link2:'https://www.viabcp.com/wcm/connect/ca1b78e1-8bf1-4daa-91e9-0872ba9a90e3/T%C3%A9rminos+y+Condiciones_Campa%C3%B1aAgosto_Salud_SOS.pdf?MOD=AJPERES&attachment=true&id=1722456123129 '
                 }
                 const contentBody = [], contentHead = []
                 contentBody[0] = new HTMLElement('p').addClass('bcp_desc_subtxt').setHTML(body.lineList).getElement()
@@ -1199,6 +1210,7 @@
                 frmSVDComunicacion = document.getElementById('modalBody'); //frmMocSegurosHome
                 frmInitSVDPlanes = new Formulario(frmSVDComunicacion);//formContentMOCSegurosHome
                 frmInitSVDPlanesCaptcha = frmSVDComunicacion.querySelector('#frmSOSCaptcha');
+                renderizarCaptchaModalOneClickSOS()
                 taggeoSOSModal({type:'trackFormView'})
 
             } catch (error) {
@@ -1206,10 +1218,18 @@
             }
         }
     }
+    
     //BEGIN EXPERIMENTO
     modalExperiment.init({container:'.bcp_modal_cuerpo'})
     const abtest = ['control','piloto']
-    const tipoExperiment = abtest[1]
+    const porcent = ()=> {
+        if(Math.random() > 0.5){
+            return 1
+        } else {
+            return 0
+        }
+    }
+    const tipoExperiment = abtest[porcent()]
     modalExperiment[tipoExperiment](dataModalSOS[tipoExperiment])
     // EVENTOS BOTONES
     btnCerrarModal.onclick = ()=>{cerrarModal('Cerrar')}
@@ -1226,17 +1246,13 @@
     }
     function cerrarModal(source){
         document.querySelector('.bcp_contenedor_modal_one_click').style.display="none"
-        if(tipoExperiment == abtest[0]){
+        if(tipoExperiment == abtest[0]){//CONTROL
             taggeoSOSModal({label:source,name:'Click'})
-        } else {
-            const step2 = document.querySelector('.step2')
-            if(step2.classList.contains('mostrar')){
+        } else {//PILOTO
+            const stepCurrent = document.querySelector('.bcp_paso')
+            if(stepCurrent.classList.contains('mostrar')){
                 taggeoSOSModal({label:source,name:'Click'})
-            } else {
-                if(source == dataModalSOS[tipoExperiment].buttons.secundary.label){
-                    taggeoSOSModal({label:source,name:'Click'})
-                }
-            }
+            } 
         }
     }
      // TAGGEO ADOBE

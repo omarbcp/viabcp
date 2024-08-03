@@ -1,0 +1,724 @@
+<style>
+    .banner_imagen .banner_textos a{
+        display: none;
+    }
+    .modal-container {
+        background: #FFFFFF;
+        width: 326px;
+    }
+    
+    .modal-header {
+        position: relative;
+        padding: 24px 16px 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        border-radius: 8px 8px 0 0;
+        height: 116px;
+    }
+    
+    .modal-header.spt {
+        background-image: linear-gradient(to right, #2662f1 40%, #6fcff0 100%);
+    }
+    
+    .modal-header.sor {
+        background-image: linear-gradient(to right, #7b52c5 0%, #b59ce2 100%);
+    }
+    
+    .modal-header.srv {
+        background-image: linear-gradient(to right, #9fd5fb 50%, #58a8e8 100%);
+    }
+    
+    
+    
+    .modal-header-title {
+        width: 225px;
+    }
+    
+    .mdl-tile {
+        font-size: 18px;
+        line-height: 22px;
+        text-align: left;
+        color: #fff;
+        margin: 0px;
+    }
+    .mdl-tile b{
+        font-weight: 100;
+        font-family: 'Flexo-Demi';
+    }
+    .mdl-subtitle {
+        font-family: Flexo;
+        font-size: 14px;
+        line-height: 1.14;
+        text-align: left;
+        color: #fff;
+    }
+    
+    .modal-body {
+        padding: 16px 16px 24px 16px;
+    }
+    
+    .modal-body-message {
+        padding: 8px 16px;
+        border-radius: 8px;
+        background-color: #ebf4ff;
+        font-family: Flexo;
+        font-size: 12px;
+        line-height: 1.5;
+        text-align: center;
+        color: #002a8d;
+    }
+    
+    .modal-body-message a {
+        font-family: Flexo-Demi;
+        line-height: normal;
+        color: #ff7800;
+        cursor: pointer;
+    }
+    
+    .modal-body-button {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+    }
+    
+    .modal-body-button {
+        margin-top: 16px;
+    }
+    
+    .btn_text_orange {
+        color: #ff7800;
+        background: none;
+        border: 0 none;
+        margin-left: 24px;
+        font-family: Flexo-Demi;
+        font-size: 16px;
+    }
+    
+    .btn_bton_naranja {
+        height: 40px;
+        align-self: stretch;
+        flex-grow: 0;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 16px;
+        border-radius: 20px;
+        background-color: #ff7800;
+        color: #fff;
+        font-family: Flexo-Demi;
+        font-size: 16px;
+    }
+    
+    .modal-body-listado {
+        overflow: hidden;
+    }
+    
+    .modal-body-list-item {
+        display: flex;
+        justify-content: flex-start;
+        align-items: flex-start;
+        margin-bottom: 8px;
+    }
+    
+    .modal-body-list-item>div:nth-child(1) {
+        margin-right: 10px;
+    }
+    
+    .modal-body-list-item>div:nth-child(2) {
+        font-family: Flexo;
+        font-size: 16px;
+        line-height: 1.5;
+        text-align: left;
+        color: #202e44;
+    }
+    
+    .modal-body-section {
+        margin-bottom: 16px;
+        font-size: 16px;
+        line-height: 1.25;
+        text-align: left;
+        color: #202e44;
+    }
+    
+    .modal-body-title-list {
+        margin-bottom: 12px;
+        font-family: Flexo-Demi;
+        font-size: 16px;
+        line-height: 1.5;
+        text-align: left;
+        color: #202e44;
+    }
+    
+    .mdl-cintillo {
+        display: none;
+        position: absolute;
+        top: -6px;
+        left: -5px;
+        width: 92px;
+        height: 33px;
+    }
+    
+    .modal-body-button .bcp_boton_naranja {
+        width: 130px;
+    }
+    
+    .btn_text_orange {
+        margin-right: 24px;
+    }
+    
+    .mdl-btn-close {
+        position: absolute;
+        right: 8px;
+        top: 8px;
+        cursor: pointer;
+        z-index: 1;
+    }
+    
+    .modal-header-img {
+        position: relative;
+    }
+    
+    .modal-header-img img {
+        width: auto;
+        position: absolute;
+    }
+    
+    /*IFRAME*/
+    .bcp_iframe_container_container {
+        display: flex;
+        justify-content: center;
+        align-items: flex-end;
+    }
+    
+    .btn_cerrar_modal_gracias {
+        position: relative;
+        height: 0px;
+        background-color: transparent;
+        border: none;
+        width: 100%;
+        text-align: right;
+        top: 26px;
+        right: 5px;
+    }
+    
+    .btn_cerrar_modal_gracias svg {
+        position: relative;
+        top: 3px;
+        right: -2px;
+        opacity: 0;
+    }
+    
+    .bcp_boton_otp_secundary {
+        box-shadow: none !important;
+        border: none !important;
+        height: 24px;
+        width: 90px;
+        position: relative;
+        visibility: visible;
+        background-color: transparent;
+        outline: none;
+        font-size: 13px;
+        opacity: 0;
+    }
+    
+    .container_object {
+        background-color: #fff;
+    }
+    
+    @keyframes keyframes_modal_venta_one_click_cerrar {
+        0% {bottom: 24px;}
+        100% {bottom: -100%;}
+    }
+    
+    @keyframes keyframes_modal_venta_one_click {
+        0% {bottom: -100%;}
+        80% {bottom: 48px;}
+        100% {bottom: 24px;}
+    }
+    
+    /* VISTA DESKTOP */
+    /* @media (min-width:992px) {
+        .bcp_boton_otp_secundary {
+            top: -50px;
+            right: -31px;
+        }
+    
+        .container_object {
+            border-radius: 8px;
+            box-shadow: 0px 8px 16px rgba(0, 67, 206, 0.1);
+        }
+    
+        .bcp_contenedor_modal_one_click {
+            z-index: 100;
+        }
+    
+        .modal-container {
+            position: fixed;
+            bottom: -100%;
+            right: 10px;
+            z-index: 99;
+            border-radius: 8px;
+            box-shadow: 0px 8px 16px rgba(0, 67, 206, 0.1);
+        }
+    
+        .bcp_iframe_container_container {
+            z-index: 100;
+            right: 10px;
+            bottom: -100%;
+            position: fixed;
+        }
+    
+        .modal-container.mostrar,
+        .bcp_iframe_container_container.mostrar {
+            animation: keyframes_modal_venta_one_click 1s;
+            bottom: 24px;
+        }
+    
+        .bcp_ifrm_container {
+            height: 559px;
+        }
+    } */
+    /*CUSTOM SPT*/
+    .modal-header.spt .modal-header-img img {
+        width: 110px;
+        top: 0;
+        right: -15px;
+    }
+    /*CUSTOM SOR*/
+    .modal-header.sor .modal-header-img img {
+        width: 100px;
+        top: -5px;
+        right: -16px;
+    }
+    /*CUSTOM SRV*/
+    .modal-header.srv .mdl-tile,
+    .modal-header.srv .mdl-subtitle {
+        color: #002a8d;
+    }
+    
+    .modal-header.srv .modal-header-img img {
+        width: 130px;
+        top: -9px;
+        right: -16px;
+    }
+    
+    /* VISTA TABLET - MOVIL */
+    @media (max-width:99999999999999px) {
+        .bcp_boton_otp_secundary {
+            top: -75px;
+            right: -31px;
+        }
+    
+        .container_object {
+            border-radius: 8px 8px 0 0;
+            padding-bottom: 24px;
+        }
+    
+        .bcp_contenedor_modal_one_click.abrir {
+            position: fixed;
+            padding: 0;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            transition: background .4s linear;
+            width: 100%;
+            height: 100%;
+            background: rgb(32 46 68 / 85%);
+            top: 0px;
+            left: 0px;
+            z-index: 100;
+            align-items: center;
+            z-index: 100;
+        }
+    
+        .modal-container {
+            display: none;
+            border-radius: 8px;
+        }
+    
+        .modal-container.mostrar,
+        .bcp_iframe_container_container.mostrar {
+            display: block;
+        }
+    
+        .bcp_iframe_container_container {
+            display: none;
+            height: 535px;
+        }
+    
+        .modal-header-img img {
+            top: 0;
+        }
+    
+    }
+    
+    #iFrameOTPSPT {
+        border: none;
+        border-radius: 8px;
+    }
+</style>
+<div class="bcp_contenedor_modal_one_click">
+    <div class="modal-container">
+        <div class="modal-header">
+            <div class="mdl-btn-close">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" clip-rule="evenodd"
+                        d="m5.21 5.388.083-.094a1 1 0 0 1 1.32-.083l.094.083L12 10.587l5.293-5.293a1 1 0 1 1 1.414 1.415l-5.292 5.293 5.292 5.295a1 1 0 0 1 .083 1.32l-.083.094a1 1 0 0 1-1.32.083l-.094-.083L12 13.418 6.707 18.71a1 1 0 1 1-1.414-1.414l5.292-5.295-5.292-5.294a1 1 0 0 1-.083-1.32l.083-.094-.083.094z"
+                        fill="#fff" />
+                </svg>
+            </div>
+            <div class="mdl-cintillo">
+                <img src="https://www.viabcp.com/wcm/connect/c9c6efba-602b-48da-865f-fd87fe000375/Cintillo.svg?MOD=AJPERES&attachment=true&id=1710340444880"
+                    alt="cintillo">
+            </div>
+            <div class="modal-header-title">
+                <div class="mdl-tile"></div>
+                <div class="mdl-subtitle"></div>
+            </div>
+            <div class="modal-header-img">
+                <img src="https://www.viabcp.com/wcm/connect/8b576503-3521-4502-bdef-8467c41835ec/MicrosoftTeams-image+%287%29.png?MOD=AJPERES&attachment=true&id=1710364206670"
+                    alt="mochila">
+            </div>
+        </div>
+        <div class="modal-body">
+            <div class="modal-body-section"></div>
+            <div class="modal-body-title-list">Te cubrimos:</div>
+            <div class="modal-body-listado" id="list-section"></div>
+            <div class="modal-body-message"></div>
+            <div class="modal-body-button">
+                <button class="btn_text_orange" id="modal-btn-secunday">No, gracias</button>
+                <button class="bcp_boton_naranja" id="modal-btn-primary">Lo quiero</button>
+            </div>
+        </div>
+    </div>
+    <div class="bcp_iframe_container_container">
+        <div class="bcp_ifrm_container">
+            <button class="btn_cerrar_modal_gracias fill_color">
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" clip-rule="evenodd"
+                        d="M0.209705 0.387101L0.292893 0.292893C0.653377 -0.0675907 1.22061 -0.0953203 1.6129 0.209705L1.70711 0.292893L7 5.585L12.2929 0.292893C12.6834 -0.0976311 13.3166 -0.0976311 13.7071 0.292893C14.0976 0.683418 14.0976 1.31658 13.7071 1.70711L8.415 7L13.7071 12.2929C14.0676 12.6534 14.0953 13.2206 13.7903 13.6129L13.7071 13.7071C13.3466 14.0676 12.7794 14.0953 12.3871 13.7903L12.2929 13.7071L7 8.415L1.70711 13.7071C1.31658 14.0976 0.683418 14.0976 0.292893 13.7071C-0.0976311 13.3166 -0.0976311 12.6834 0.292893 12.2929L5.585 7L0.292893 1.70711C-0.0675907 1.34662 -0.0953203 0.779392 0.209705 0.387101L0.292893 0.292893L0.209705 0.387101Z"
+                        fill="#FF7800" />
+                </svg>
+            </button>
+            <div id="container_object_spt"></div>
+            <button class="bcp_boton_otp_secundary" id="btn_regresar">Regresar</button>
+        </div>
+    </div>
+</div>
+<script>
+    const utilModal = {
+        insertHTML: function (data) {
+            const { element, content } = data;
+            const obj = document.querySelector(element);
+            if(obj){
+                if (content.length > 0) { 
+                    obj.innerHTML = content 
+                } else {
+                    obj.style.display = 'none'
+                }
+            }
+        },
+        createElement: function (data) {
+            const { content, tag = 'div' } = data;
+            const li = document.createElement(tag);
+            li.innerHTML = content;
+            return li
+        },
+        appendElement: function (data) {
+            const { content, tag = 'div' } = data;
+            const e = document.createElement(tag);
+            e.classList.add('modal-body-list-item');
+            content.forEach(item => { e.appendChild(item) })
+            return e
+        },
+        imgHTML: function (data) {
+            const { element, content } = data;
+            const obj = document.querySelector(element);
+            if (obj) { obj.src = content }
+        }
+    }
+    const iconoCheck = `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path fill-rule="evenodd" clip-rule="evenodd" d="m8.671 16.539-3.94-4.221a1 1 0 1 0-1.462 1.364l4.667 5a1 1 0 0 0 1.458.005l11.333-12a1 1 0 0 0-1.454-1.374L8.671 16.54z" fill="#0A47F0"/>
+    </svg>`
+    const tycBTS = 'https://www.viabcp.com/wcm/connect/a2d2ec7f-6035-4428-9933-7bef4bc9951b/T%26C+Promoci%C3%B3n+Vales+500+soles+-+Seguros+-+Campa%C3%B1a+Cross+Julio+Rev.21.06.pdf?MOD=AJPERES&attachment=false&id=1719509128937'
+    //TAGGEO ADOBE
+    let variables_taggeo = {};
+    const taggeoAdobeSeguros = (data) => {
+        const { label, name = "click", event = "trackAction" } = data
+    
+        if (event !== "trackAction") {
+            digitalData.push({
+                "form": { "channel": variables_taggeo.channel, "version": variables_taggeo.version, "name": variables_taggeo.titulo, "product": variables_taggeo.product },
+                "event": event
+            })
+        }
+        else {
+            digitalData.push({
+                "action": { "group": variables_taggeo.grupo, "category": variables_taggeo.titulo, "name": name, "label": label },
+                "metadata": { "key": "Producto", "value": variables_taggeo.product },
+                "event": "trackAction"
+            })
+        }
+    }
+    const modalContainer = document.querySelector('.bcp_contenedor_modal_one_click');
+    const modalCurrent = document.querySelector('.modal-container');
+    const modaliframe = document.querySelector('.bcp_iframe_container_container');
+    const Step = {
+        init: function (data) {
+            const { step1, step2 } = data
+            this.step1 = document.querySelector(step1)
+            this.step2 = document.querySelector(step2)
+        },
+        next: function () {
+            this.step1.classList.remove('mostrar');
+            this.step2.classList.add('mostrar');
+        },
+        back: function () {
+            this.step2.classList.remove('mostrar');
+            this.step1.classList.add('mostrar');
+        },
+        all: function () {
+            this.step1.classList.remove('mostrar');
+            this.step2.classList.remove('mostrar');
+            setTimeout(() => { modalContainer.style.display = 'none' }, 500);
+        }
+    }
+    const cerrarModalOneClick = (iframe) => {
+        if (iframe) {
+            Step.all()
+        } else {
+            modalCurrent.classList.remove('mostrar');
+            setTimeout(() => { 
+                modalContainer.classList.remove('abrir')
+                modalContainer.style.display = 'none' 
+            }, 500)
+        }
+    }
+    const openModalOneClick = () => {
+        modalContainer.removeAttribute("style")
+        modalCurrent.classList.add('mostrar')
+    }
+    const openUrl = (url) => { window.open(url, '_blank') }
+    
+    const renderIframeSPT = (url, width) => {
+        if(document.querySelector('.container_object')){
+            document.querySelector('.container_object').remove()
+        }
+        const objectFrame = document.createElement('iframe')
+        objectFrame.id = "iFrameOTPSPT";
+        objectFrame.type = "text/html";
+        objectFrame.src = url
+        objectFrame.width = width;
+        objectFrame.height = "535px";
+        objectFrame.classList.add('container_object');
+    
+        document.getElementById('container_object_spt').append(objectFrame);
+    }
+    const actionModalShow = () => {
+        const buttonsBannerFix = document.querySelectorAll('.bcp_boton_solicitalo_inferior a')
+        const buttonBanner = document.querySelector('.bcp_banner-sin-carousel a')
+        const action = (button) => {
+            button.setAttribute('target', '_self')
+            button.querySelector('div').removeAttribute('tipo_enlace')
+            button.querySelector('div').removeAttribute('enlace')
+            button.addEventListener('click', (e) => {
+                e.preventDefault()
+                if (!modalCurrent.classList.contains("mostrar")) { openModalOneClick() }
+            })
+        }
+        if (buttonsBannerFix) {
+            buttonsBannerFix.forEach(btnScroll => {
+                action(btnScroll)
+            })
+        }
+        if (buttonBanner) {
+            action(buttonBanner)
+        }
+    }
+    let tempClass='';
+    const buildModal = (dataModal) => {
+        modalContainer.classList.add('abrir')
+        modalContainer.removeAttribute("style")
+        if(tempClass!=''){
+            document.querySelector('.modal-header').classList.remove(tempClass)
+        }
+        //ACTIVANDO CINTILLO
+        const cintillo = document.querySelector('.mdl-cintillo')
+        if(cintillo){if(dataModal.cintillo){cintillo.style.display = 'block'}}
+        //ESTILO HEADER
+        document.querySelector('.modal-header').classList.add(dataModal.tipo)
+        //INSERT DATA
+        utilModal.insertHTML({ element: '.mdl-tile', content: dataModal.title })
+        utilModal.insertHTML({ element: '.mdl-subtitle', content: dataModal.subtitle })
+        utilModal.insertHTML({ element: '.modal-body-message', content: dataModal.message })
+        utilModal.insertHTML({ element: '.modal-body-section', content: dataModal.section })
+        utilModal.imgHTML({ element: '.modal-header-img img', content: dataModal.img })
+        tempClass = dataModal.tipo;
+        //INSERT LIST
+        const list = document.querySelector('#list-section');
+        list.innerHTML="";
+        dataModal.list.forEach(item => {
+            const li = utilModal.appendElement({
+                content: [
+                    utilModal.createElement({ content: iconoCheck }),
+                    utilModal.createElement({ content: item })
+                ]
+            });
+            list.appendChild(li);
+        });
+        if (dataModal.iframe.status) {
+            Step.init({ step1: '.modal-container', step2: '.bcp_iframe_container_container' })
+            renderIframeSPT(dataModal.iframe.url, dataModal.iframe.width)
+        }
+        //BUTTONS
+        const btnNoGracias = document.querySelector('#modal-btn-secunday');
+        const btnLoQuieroSPT = document.querySelector('#modal-btn-primary');
+        const btnClose = document.querySelector('.mdl-btn-close');
+        const btnCloseIframe = document.querySelector('.btn_cerrar_modal_gracias');
+        const btnRegresar = document.querySelector('#btn_regresar');
+        //const btnTyC = document.getElementById('btn-tyc')
+    
+        btnLoQuieroSPT.addEventListener('click', () => {
+            taggeoAdobeSeguros({ label: 'Lo quiero' })
+            if (dataModal.iframe.status) {
+                Step.next()
+            } else {
+                setTimeout(() => { openUrl(dataModal.iframe.url) }, 500);
+            }
+        });
+        btnNoGracias.addEventListener('click', () => {
+            cerrarModalOneClick(dataModal.iframe.status)
+            taggeoAdobeSeguros({ label: 'No gracias' })
+        });
+        btnClose.addEventListener('click', () => {
+            cerrarModalOneClick(dataModal.iframe.status)
+            taggeoAdobeSeguros({ label: 'Cerrar' })
+        });
+        btnCloseIframe.addEventListener('click', () => {
+            cerrarModalOneClick(dataModal.iframe.status)
+            taggeoAdobeSeguros({ label: 'Cerrar 2' })
+        });
+        btnRegresar.addEventListener('click', () => {
+            Step.back()
+            taggeoAdobeSeguros({ label: 'Regresar' })
+        });
+       /*  btnTyC.addEventListener('click', () => {
+            openUrl(tycBTS)
+            taggeoAdobeSeguros({ label: 'TyC PromoLaptop' })
+        }); */
+    
+        if (dataModal.tipo == 'spt') {
+            actionModalShow()
+        }
+        modalCurrent.classList.add('mostrar');
+        taggeoAdobeSeguros({ label: '', name: '', event: 'trackFormView' })
+    }
+    //  if(dataModal){
+    //     variables_taggeo = dataModal.taggeo
+    //     buildModal()
+    //  } else {
+    //     taggeoAdobeSeguros({label:'Falta DataModal',name:'Error'})
+    //     console.error('No se encontró dataModal')
+    //  }
+    
+    function btnSolicitarSPT() {
+        variables_taggeo = dataModalSPT.taggeo
+        buildModal(dataModalSPT)
+    }
+    
+    function btnSolicitarSRV() {
+        variables_taggeo = dataModalSRV.taggeo
+        buildModal(dataModalSRV)
+    }
+    
+    function btnSolicitarSOR() {
+        variables_taggeo = dataModalSOR.taggeo
+        buildModal(dataModalSOR)
+    }
+    
+    // DATA SOR
+    const dataModalSOR = {
+        title: 'Protégete del<br>cáncer con <span class="resaltado">Seguro<br> Onco Respaldo</span>',
+        subtitle: '',
+        section: 'Por solo <b>S/ 12.99 al mes</b> <label>(Inc. IGV)</label>',
+        message: '',
+        list: [
+            'Indemnización con hasta S/ 30 mil.',
+            '6 teleconsultas y orientación telefónica con médico general.',
+            'Asesorías 24/7.'
+        ],
+        tipo: 'sor',
+        img: '/wcm/connect/62146dae-925a-4423-aa1c-deaac295cbb5/onco.svg?MOD=AJPERES&attachment=true&id=1722630064310',
+        taggeo: {
+            titulo: "Obten tu Seguro Onco Respaldo Digital",
+            grupo: "Modal One Click",
+            product: "Seguros-SOR",
+            channel: "ViaBCP",
+            version: "V20"
+        },
+        iframe: {
+            status: true,
+            url: 'https://www.segurosbcp.viabcp.com/#/marketplace/seguro-onco-respaldo/oneclick',
+            width: '360px'
+        },
+        cintillo:false
+    }
+    // DATA SPT
+    const dataModalSPT = {
+        title: 'Protege todas tus<br>cuentas con tus <b>Seguro<br>Protección de Tarjetas</b>',
+        subtitle: '',
+        section: 'Solo por <b>S/ 12.99 al mes</b> (Inc. IGV)',
+        message: '',
+        list: [
+            'Hasta S/ 15 mil en fraudes por internet y otros.',
+            'Robo por retiros de cajeros y agentes.',
+            'Transferencias no reconocidas.'
+        ],
+        tipo: 'spt',
+        img: '/wcm/connect/66745204-44b0-4dc6-8ef1-ef8c99cd2cd7/spt.svg?MOD=AJPERES&attachment=true&id=1722630000977',
+        taggeo: {
+            titulo: "Obten tu Seguro de Proteccion de Tarjetas Plus",
+            grupo: "Modal One Click",
+            product: "Seguros-SPT",
+            channel: "ViaBCP",
+            version: "V20"
+        },
+        iframe: {
+            status: true,
+            url: 'https://www.segurosbcp.viabcp.com/#/marketplace/seguro-proteccion-tarjetas-plus/oneclick',
+            width: '346px'
+        },
+        cintillo:false
+    }
+    // DATA SRV
+    const dataModalSRV = {
+        title: 'Protege a tu familia<br>con tu <strong>Seguro<br>Respaldo Vida</strong>',
+        subtitle: '',
+        section: 'Por solo <b>S/ 12.99 al mes</b>',
+        message: '',
+        list: [
+            'S/ 20 mil en caso de fallecimiento.',
+            'S/ 50 diarios desde el segundo día de hospitalización.',
+            'S/ 8 mil si te diagnostican cáncer.',
+            'Chequeo preventivo anual gratis.'
+        ],
+        tipo: 'srv',
+        img: '/wcm/connect/75d63007-5c99-4acd-b25f-0c7626bcd945/srv.svg?MOD=AJPERES&attachment=true&id=1722630093384',
+        taggeo: {
+            titulo: "Obten tu Seguro Respaldo Vida",
+            grupo: "Modal One Click",
+            product: "Seguros-SRV",
+            channel: "ViaBCP",
+            version: "V20"
+        },
+        iframe: {
+            status: true,
+            url: 'https://www.segurosbcp.viabcp.com/#/marketplace/seguro-respaldo-vida/oneclick',
+            width: '316px'
+        },
+        cintillo:false
+    }
+    </script>

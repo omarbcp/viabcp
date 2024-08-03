@@ -1,0 +1,870 @@
+<style>
+    .bannerAnimation {
+        width: 33.6%;
+        height: auto;
+        bottom:0;
+        right: 6%;
+        position: absolute;
+    }
+    .bcp_banner-sin-carousel .container-fluid.Fondo-Imagen .banner_subtitle.color_texto_claro {
+        margin-top: 16px;
+    }
+    .wrapCards{
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        width:100%;
+    }
+    .seguro_card{
+        width: 370px;
+        height: 500px;
+        margin: 32px 15px;
+        padding: 24px;
+        border-radius: 8px;
+        box-shadow: 0 1px 8px 0 rgba(82, 112, 148, 0.2), 0 3px 3px -2px rgba(82, 112, 148, 0.12), 0 3px 4px 0 rgba(82, 112, 148, 0.14);
+        background-color: #fff;
+        display: flex;
+        flex-direction:column;
+        justify-content:space-between;
+        position: relative;
+    }
+    .seguro_card .seguro_card_content span {
+        display: block;
+        width: 100%;
+    }
+    .seguro_card .seguro_card_price a {
+        background-color: #ff7800;
+        color: #fff;
+        font-size: 16px;
+        font-weight: 400;
+        border-radius: 20px;
+        text-align: center;
+        border: none;
+        cursor: pointer;
+        transition: box-shadow linear 200ms,color linear 200ms,background-color linear 200ms;
+        vertical-align: middle;
+        text-decoration: none;
+        padding: 10px 21px;
+        font-family: Flexo-Demi;
+        line-height: 100%;
+    }
+    .scc_title {
+        font-family: Flexo-Demi;
+        font-size: 20px;
+        line-height: 1.4;
+        color: #002a8d;
+        margin-bottom: 16px;
+    }
+    .scc_detail_item {
+        display: flex;
+        align-items:flex-start;
+        margin-bottom: 16px;
+    }
+    .scc_detail_item_icon {
+        width: 20px;
+        height: 20px;
+        margin-right: 10px;
+    }
+    .scc_detail_item_text {
+        font-family: 'Flexo';
+        font-size: 14px;
+    }
+    .seguro_card_price {
+        display: flex;
+        justify-content:space-between;
+        width: 100%;
+        border-top: solid 1px #e5e7eb;
+        padding-top: 15px;
+        align-items:flex-end;
+    }
+    .scp_price_month {
+        font-family: Flexo;
+        font-size: 24px;
+        font-weight: bold;
+    }
+    .scc_detail {
+        margin-bottom: 16px;
+    }
+    .scc_subtitle {
+        font-family: Flexo-Demi;
+        margin-bottom: 4px;
+        color: #606c7f;
+    }
+    .scp_price_txt {
+        color: #606c7f;
+    }
+    .scc_more {
+        color: #ff7800;
+        margin-left: 30px;
+        margin-right: 5px;
+        cursor: pointer;
+    }
+    .scc_more:hover,scc_more:active  {
+        color: #ff7800;
+    }
+    .seguro_card_icono {
+        width: 65px;
+        margin-bottom: 16px;
+    }
+    .ls_title_home {
+        font-family: Flexo-Demi;
+        font-size: 32px;
+        text-align: center;
+        color: #002a8d;
+        line-height: 48px;
+        margin-top: 32px;
+    }
+    .ls_text1_home {
+        font-family: Flexo;
+        font-size: 16px;
+        text-align: center;
+    }
+    .ls_button_portal {
+        max-width: 190px;
+        height: 40px;
+        margin: 24px auto 32px auto;
+        padding: 12px 16px;
+        border-radius: 20px;
+        background-color: #ff7800;
+        font-family: Flexo-Demi;
+        font-size: 16px;
+        color:#fff;
+        display: block;
+        text-align: center;
+        line-height: 100%;
+        cursor: pointer;
+    }
+    .ls_button_portal:hover {
+        color:#fff;
+    }
+    .scc_more_detail {
+        display: flex;
+        align-items:center;
+    }
+    /*.bcp_banner-sin-carousel .container-fluid.Fondo-Imagen .banner_subtitle.color_texto_claro {
+        background-image: url('/wcm/connect/d0538833-9701-48fb-b969-8106a5c2191f/group-12.png?MOD=AJPERES&attachment=true&id=1684294017490');
+        background-position: 0 0;
+        background-size: 323px 35px;
+        background-repeat: no-repeat;
+        padding-top: 16px;
+        margin-top: 0;
+    }*/
+    .ls_text1_home a {
+        font-family: Flexo;
+        color:#ff7800;
+    }
+    .ls_text1_home a:hover {
+        text-decoration: none;
+        color:#ff7800;
+    }
+    .label-sorteo {
+        position: absolute;
+        right: -5px;
+        top:16px;
+    }
+    .ls_detail_promotion {
+        font-family: 'Flexo';
+        font-size: 16px;
+        line-height: 1.5;
+        text-align: center;
+        color: #202e44;
+        max-width: 662px;
+        margin: 10px auto 0 auto;
+    }
+    .ls_detail_promotion a {
+        font-family: 'Flexo-Demi';
+        color: #ff7800;
+    }
+    .box-green {
+        padding: 5px;
+        display: inline-block;
+        background-color: #6ac90f;
+        color:#fff;
+        border-radius: 5px 5px 0 5px;
+        font-size: 11px;
+        width: 71px;
+        text-align: center;
+    }
+    .container-txt-banner {
+        text-align: left;
+        color: #fff;
+        max-width: 579px;
+        width: 100%;
+    }
+    .bn-text-secundary {
+        font-family: 'Flexo-Demi';
+        font-size: 24px;
+        line-height: 1.33;
+        margin-bottom: 12px;
+    }
+    .bn-text-primary {
+        font-family: 'Flexo-Demi';
+        font-size: 40px;
+        line-height: 1.2;
+        margin-bottom: 32px;
+    }
+    .bn-text-date{
+        font-family: 'Flexo';
+        font-size: 16px;
+        line-height: 1.5;
+        width: 100%;
+        max-width: 470px;
+    }
+    .flex-text {
+       padding-top: 64px;
+    }
+    .resaltado {
+        font-family: 'Flexo-Demi';
+    }
+    @media (max-width: 991px){
+        /*.bcp_banner-sin-carousel .container-fluid.Fondo-Imagen .banner_subtitle.color_texto_claro {
+            background-image: url('/wcm/connect/9309c885-80ba-4f22-a5f6-848a6827d511/group-13.png?MOD=AJPERES&attachment=true&id=1683565884709');
+            background-size: 168px 20px;
+            height: 20px;
+        }*/
+        .seguro_card { 
+            width: calc(50% - 32px);
+            height: 480px;
+            margin: 0 16px 24px 16px;
+            padding: 16px;
+            box-sizing: border-box;
+            min-width: 334px;
+        }
+    }
+    @media (max-width: 748px){
+        .bn-text-secundary {
+            font-size: 20px;
+        }
+        .bn-text-primary {
+            font-size: 24px;
+        }
+        .bn-text-date {
+            font-size: 14px;
+        }
+        .flex-text {
+            padding-top: 24px;
+            padding-left: 24px;
+        }
+        .ls_detail_promotion {
+            margin: 29px auto 32px auto;
+            max-width: 100%;
+            width: calc(100% - 50px);
+        }
+        .bn-text-secundary{
+            margin-bottom: 8px;
+        }
+        .bn-text-primary{
+            margin-bottom: 16px;
+        }
+        .container-txt-banner{
+            width: 54.7%;
+        }
+    }
+  
+    @media(max-width:390px){
+        .bannerAnimation {
+            width: 167px;
+            height: 141px;
+            top:67px;
+            right: 16px;
+            position: absolute;
+        }
+        .bcp_banner-sin-carousel .banner_title {
+            font-size: 24px;
+            line-height: 32px;
+        }
+        .bcp_banner-sin-carousel .Fondo-Imagen .banner_subtitle {
+            font-size: 14px;
+            line-height: 20px;
+        }
+        /*.bcp_banner-sin-carousel .container-fluid.Fondo-Imagen {
+            height: 208px;
+        }
+        .bcp_banner-sin-carousel .container-fluid.Fondo-Imagen .banner_subtitle.color_texto_claro {
+            background-image: url('/wcm/connect/9309c885-80ba-4f22-a5f6-848a6827d511/group-13.png?MOD=AJPERES&attachment=true&id=1683565884709');
+            background-size: 168px 20px;
+        }*/
+        .seguro_card { 
+            width: calc(100% - 32px);
+            height: 480px;
+            margin: 0 16px 24px 16px;
+            padding: 16px;
+            
+        }
+        .ls_title_home {
+            font-size: 24px;
+            width: calc(100% - 32px);
+            margin:16px;
+            line-height: 32px;
+        }
+        .wrapCards {
+            padding-top: 5px;
+        }
+        .ls_text1_home {
+            width: calc(100% - 32px);
+            margin-left:16px;
+            margin-right: 16px;
+        }
+    }
+  
+  </style>
+  <div class="container">
+    <div class="ls_title_home">Obtén el seguro perfecto para ti y participa</div>
+    <div class="ls_detail_promotion"></div>
+    <div class="wrapCards"></div>
+    <div class="ls_title_home" >¿Ya cuentas con un seguro?</div>
+    <div class="ls_text1_home" >Si necesitas reportar un incidente o cancelar tu seguro, ingresa a:</div>
+    <a href="https://www.segurosbcp.viabcp.com/?&amp;_ga=2.87318360.1798537598.1675357552-1651888815.1675357552#/mis-seguros?pcid=viabcp:home:gestiona-tus-seguros-online:masivo:menu-productos-seguros" target="_blank" title="" class="ls_button_portal">Mi portal de seguros</a>
+    <div  class="ls_text1_home">¿Tienes otras dudas? Consulta en el <a href="https://www.viabcp.com/ayuda-bcp" target="_blank" title="">Centro de ayuda.</a></div>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.11.0/lottie.min.js" integrity="sha512-XCthc/WzPfa+oa49Z3TI6MUK/zlqd67KwyRL9/R19z6uMqBNuv8iEnJ8FWHUFAjC6srr8w3FMZA91Tfn60T/9Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script>
+    // const link_bases_navidad = document.getElementById('tyc')
+    const animationBanner=()=>{
+        const wrapAnimation = document.createElement("div");
+        const bannerPrimary = document.querySelector('.bcp_banner-sin-carousel .banner_imagen  > .container > .container');
+  
+        wrapAnimation.classList.add('bannerAnimation');
+        bannerPrimary.appendChild(wrapAnimation);
+        bannerPrimary.style.position = 'relative';
+  
+        let animation = lottie.loadAnimation({
+            container: document.querySelector('.bannerAnimation'),
+            path: '/wcm/connect/409f716e-6620-4450-beaf-a628ce274cbe/illustration_1.json?MOD=AJPERES&attachment=true&id=1682709819350',
+            render: 'svg',
+            loop: false,
+            autoplay: false,
+            name: 'bannerPrincipal'
+        });
+        animation.goToAndStop(30, true)
+        //animation.setSpeed(0.5);//Velocidad de animación
+    }
+    
+    const dataCards = [
+        {
+            subtitulo:'SOAT',
+            titulo:'Gana 1 vale de S/ 100 en gasolina.<br>Además obtén:',
+            precio:['Desde','S/ 38.50 al año'],
+            detalles:[
+                'Programa de descuentos en más de 50 establecimientos afiliados.',
+                '20% de descuento en llantas y aros.',
+                'Planes de renovación automática o recompra directa.'
+            ],
+            icono:'https://www.viabcp.com/wcm/connect/af534155-b4af-4b05-9a83-29ece2ecc4e3/spc_+soat_hand_d_l.png?MOD=AJPERES&attachment=false&id=1716822386124',
+            buy:'onclick="btnSolicitarSOAT()"',
+            more:'https://www.viabcp.com/seguros/vehicular/soat',
+            seguro:'SOAT',
+            label:true
+        },
+        {
+            subtitulo:'Seguro Vida Devolución',
+            titulo:'Gana S/ 10,000 y protege a tu familia. Conoce los beneficios:',
+            precio:['Desde','S/ 48.00 al mes'],
+            detalles:[
+                'Recupera hasta el 120% de lo pagado',
+                'Tu familia protegida hasta con S/ 150,000 en caso de fallecimiento',
+                'Médico a domicilio, consulta online, delivery de medicamentos y más'
+            ],
+            icono:'https://www.viabcp.com/wcm/connect/96bba10f-7658-402a-bbaf-d86225cc261b/spc_bills_dollars_d_l.png?MOD=AJPERES&attachment=false&id=1716822709488',
+            buy:'onclick="btnSolicitarSVD()"',
+            more:'https://www.viabcp.com/seguros/complementarios/seguro-devolucion-total',
+            seguro:'SVD',
+            label:true
+        },
+        {
+            subtitulo:'Seguro S.O.S. Salud',
+            titulo:'Protégete de inmediato y gana 1 vale de S/ 100. ',
+            precio:['A solo','S/ 49.90 al mes'],
+            detalles:[
+                'Hasta S/ 30,000 en clínicas para emergencias mêdicas y accidentales.',
+                'Atención ambulatoria por emergencia accidental o médico-quirúrgica.',
+                'Reembolso de hasta S/ 5,000 en provincias donde no hayan clínicas afiliadas.'
+            ],
+            icono:'/wcm/connect/3a6624ce-a8a2-42c3-af7e-8d647dab5b02/sossalud.svg?MOD=AJPERES&attachment=true&id=1719961965724',
+            buy:'onclick="btnSolicitarSOSSALUD()"',
+            more:'https://www.viabcp.com/seguros/salud/sos-salud',
+            seguro:'SOSSALUD',
+            label:true
+        },
+        {
+            subtitulo:'Seguro Protección de Tarjeta Plus',
+            titulo:'Refuerza la protección de tus tarjetas BCP',
+            precio:['A solo','S/ 12.99 al mes'],
+            detalles:[
+                'Hasta S/15 mil en fraudes o compras no reconocidas por internet.',
+                'Hasta S/5 mil por robo de retiros en cajeros o agentes.',
+                'Hasta S/5 mil en transferencias no reconocidas en canales digitales.'
+            ],
+            icono:'https://www.viabcp.com/wcm/connect/0082ae29-8631-418f-8973-23e760858be1/spc_+card_hand_d_l.png?MOD=AJPERES&attachment=false&id=1716822883814',
+            buy:'onclick="btnSolicitarSPT()"',
+            more:'https://www.viabcp.com/seguros/financieros/proteccion-de-tarjetas',
+            seguro:'SPT',
+            label:false
+        },
+        {
+            subtitulo:'Seguro Vida Ahorro',
+            titulo:'Recupera el 120% de lo pagado y obtén estos beneficios:',
+            precio:['Desde','S/ 50.00 al mes'],
+            detalles:[
+                'Recupera el 120% de lo pagado al finalizar el plazo de 7 años.',
+                'S/ 20,000 en caso de fallecimiento para tus familiares.',
+                'Médico a domicilio, delivery de medicamentos y más.'
+            ],
+            icono:'https://www.viabcp.com/wcm/connect/1265f0c2-06e6-434f-bec7-6fa675945af4/spc_+empathy_hand_d_l-1.png?MOD=AJPERES&attachment=false&id=1716822808835',
+            buy:'onclick="btnSolicitarSVA()"',
+            more:'https://www.viabcp.com/seguros/salud/vida-ahorro',
+            seguro:'SVA',
+            label:false
+        },
+        {
+            subtitulo:'Seguro Onco Respaldo Digital',
+            titulo:'Protégete contra el cáncer',
+            precio:['A solo','S/ 12.99 al mes'],
+            detalles:[
+                'S/30 mil por el primer diagnóstico de cáncer',
+                '6 teleconsultas y orientación telefónica con médico general',
+                'Asesorías cuando lo necesites 24/7'
+            ],
+            icono:'https://www.viabcp.com/wcm/connect/e20356bc-aec9-4b0f-b1d0-c6a9b79d8489/spc_onco_hand_d_l.png?MOD=AJPERES&attachment=false&id=1716822355372',
+            buy:'onclick="btnSolicitarSOR()"',
+            more:'https://www.viabcp.com/seguros/salud/onco-respaldo-digital',
+            seguro:'SOR',
+            label:false
+        },
+        {
+            subtitulo:'Seguro de Viajes',
+            titulo:'Viaja seguro y sin preocupaciones',
+            precio:['Desde','$ 7.50 al día'],
+            detalles:[
+                'Hasta $15 mil en asistencia médica.',
+                'Hasta $ 1,200 en pérdida de equipaje.',
+                'Hasta $ 800 en estadía por enfermedad o '
+            ],
+            icono:'/wcm/connect/a968bf61-6624-47df-a109-25a42db0c9c7/spot-circle-e-spc-email-hand-a-d-l.png?MOD=AJPERES&CACHEID=ROOTWORKSPACE-a968bf61-6624-47df-a109-25a42db0c9c7-ou.mbZY&cache=none',
+            buy:'onclick="btnSolicitarVIAJES()"',
+            more:'https://www.viabcp.com/seguros/complementarios/seguro-viajes',
+            seguro:'VIAJES',
+            label:false
+        },
+        {
+            subtitulo:'Seguro Respaldo Vida',
+            titulo:'Brinda tranquilidad a tu familia',
+            precio:['A solo','S/ 12.99 al mes'],
+            detalles:[
+                'Hasta S/15 mil en fraudes o compras no reconocidas por internet.',
+                'Hasta S/5 mil por robo de retiros en cajeros o agentes.',
+                'S/8 mil si te diagnostican Cáncer por primera vez'
+            ],
+            icono:'https://www.viabcp.com/wcm/connect/c5a3a1c0-08a3-4b92-8fcc-49d013825a8c/spc_+empathy_hand_d_l.png?MOD=AJPERES&attachment=false&id=1716822417040',
+            buy:'onclick="btnSolicitarSRV()"',
+            more:'https://www.viabcp.com/seguros/salud/seguro-respaldo',
+            seguro:'SRV',
+            label:false
+        },
+        {
+            subtitulo:'Seguro Vehicular',
+            titulo:'Protección 100% para tu vehículo en caso de robo total',
+            precio:['Desde','S/ 57 al mes'],
+            detalles:[
+                'Hasta el 100% de tu vehículo en caso de robo total.',
+                'Hasta US$ 150,000 en daños ocasionados a otros vehículos y objetos.',
+                'Auxilio mecánico ilimitado y gratis ante cualquier problema mecánico o eléctrico.'
+            ],
+            icono:'/wcm/connect/827c357e-26ff-45a9-a3a2-6242efa40e3a/seguro_vehicular.svg?MOD=AJPERES&attachment=true&id=1720025159794',
+            buy:'onclick="btnSolicitarVEHICULAR()"',
+            more:'https://www.viabcp.com/seguros/vehicular/seguro-vehicular',
+            seguro:'VEHICULAR',
+            label:false
+        }
+    ];
+  
+    const iconCheck = `<svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M15.343 4.557a1.25 1.25 0 0 1 1.897 1.622l-.083.098-9.083 9.583a1.25 1.25 0 0 1-1.741.071l-.09-.09-3.417-3.75a1.25 1.25 0 0 1 1.757-1.773l.091.09 2.51 2.755 8.159-8.606z" fill="#3D77FF" fill-rule="evenodd"/></svg>`;
+    const wrapCards = document.querySelector('.wrapCards');
+    const labelPromo = '/wcm/connect/d5e54796-cc31-4ed8-9282-df19b7f4c19f/cintillo_promo.svg?MOD=AJPERES&CACHEID=ROOTWORKSPACE-d5e54796-cc31-4ed8-9282-df19b7f4c19f-oK7COOz&cache=none'
+    const insertPromo = (promo)=>{ return promo ? `<div class="label-sorteo"><img src="${labelPromo}"></div>`:''}
+    dataCards.forEach((element)=>{
+        const htmlCard = document.createElement("div");
+        htmlCard.classList.add('seguro_card');
+        htmlCard.setAttribute("data",element.seguro);
+        const detailCards = (lista)=>{
+            let htmldetails = '';
+            lista.forEach((e)=>{
+                htmldetails += `<div class="scc_detail_item"><div class="scc_detail_item_icon">${iconCheck}</div><div class="scc_detail_item_text">${e}</div></div>`
+            });
+            return htmldetails;
+        } 
+        htmlCard.innerHTML =
+            `${insertPromo(element.label)}<div>
+                <img class="seguro_card_icono" src="${element.icono}" alt="">
+                <div class="seguro_card_content">
+                    <span class="scc_subtitle">${element.subtitulo}</span>
+                    <span class="scc_title">${element.titulo}</span>
+                    <div class="scc_detail">${detailCards(element.detalles)}</div>
+                    <div class="scc_more_detail">
+                        <a attrib="${element.seguro}" class="scc_more">Ver más</a>
+                        <svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M4 11.002h13.584l-3.295-3.295a.999.999 0 1 1 1.414-1.414l5 5a.999.999 0 0 1 0 1.414l-4.996 5a.997.997 0 0 1-1.414 0 1 1 0 0 1-.001-1.414l3.289-3.291H4a1 1 0 1 1 0-2" fill="#FF7800" fill-rule="evenodd"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+            <div class="seguro_card_price">
+                <div class="scp_price">
+                    <div class="scp_price_txt">${element.precio[0]}</div>
+                    <div class="scp_price_month">${element.precio[1]}</div>
+                </div>
+                <a ${element.buy} class="scp_btn">Comprar</a>
+            </div>`;
+        wrapCards.appendChild(htmlCard);
+    })
+    const insertTextBanner = ()=>{
+        const container = document.querySelector('.banner_textos')
+        
+        if(container){
+            const parent = container.parentElement
+            const text = `<div class="bn-text-primary">Prepárate para alentar con tu Seguro Digital*</div>
+            <div class="bn-text-date">Adquiere uno o más Seguros y participa hasta el 30 de Noviembre por 1 de las 20 camisetas de Perú</div>`
+  
+            container.removeAttribute('class')
+            container.classList.add('container-txt-banner')
+            parent.classList.add('flex-text')
+            container.innerHTML = text
+        }
+    }
+    //VARIABLES NUEVO TAGGEO - ADOBE
+    const versionDataSeguro = "V20";
+    const productDataSeguro = {
+        SPT:"Seguros-SPT",
+        SOAT:"Seguros-SOAT",
+        VIDA:"Seguros-VIDA",
+        SOR:"Seguros-SOR",
+        SRV:"Seguros-SRV",
+        SVA:"Seguros-SVA",
+        SVD:"Seguros-SVD",
+        VIAJES:"Seguros-VIAJES",
+        SOSSALUD:"Seguros-SOSSALUD",
+        SV:"Seguros-VEHICULAR"
+    };
+    const channelDataSeguro = "ViaBCP";
+    const grupoDataSeguro = {
+        SPT:"Seguros - SPT",
+        SOAT:"Seguros - SOAT",
+        VIDA:"Seguros - VIDA",
+        SOR:"Seguros - SOR",
+        SRV:"Seguros - SRV",
+        SVA:"Seguros - SVA",
+        SVD:"Seguros - SVD",
+        VIAJES:"Seguros-VIAJES",
+        SOSSALUD:"Seguros - SOSSALUD",
+        SV:"Seguros - VEHICULAR"
+    }
+    // link_bases_navidad.addEventListener('click',()=>{
+    //     window.open('https://www.viabcp.com/wcm/connect/ac742720-52d4-45b3-8b38-85e69cf346c5/Campa%C3%B1a+navide%C3%B1a+Seguros+BCP+27.11.pdf?MOD=AJPERES&attachment=true&id=1701267846926','_self')
+    // })
+    function taggeoTrackAction(product,group,title,version){
+        digitalData.push({
+            "action": {"group":group,"category": title + "-" + version,"name": "Click","label": "Comprar"},
+            "metadata": {"key": "Producto","value": product},
+            "event": "trackAction"
+        })
+    }
+    //Botones Ver mas - Deprecado
+    /*function btnVerMasSPT(){     
+        window.open("https://www.viabcp.com/seguros/financieros/proteccion-de-tarjetas", "_blank");
+    }
+    function btnVerMasSOR(){
+        window.open("https://www.viabcp.com/seguros/salud/onco-respaldo-digital", "_blank");
+    }
+    function btnVerMasSRV(){
+        window.open("https://www.viabcp.com/seguros/salud/seguro-respaldo", "_blank");
+    }
+    function btnVerMasSVA(){
+        window.open("https://www.viabcp.com/seguros/salud/vida-ahorro", "_blank");
+    }
+    function btnVerMasSOAT(){
+        window.open("https://www.viabcp.com/seguros/vehicular/soat", "_blank");
+    }
+    function btnVerMasVIAJES(){
+        window.open("https://www.viabcp.com/seguros/complementarios/seguro-viajes","_blank")
+    }
+    function btnVerMasSVD(){
+        window.open('https://www.viabcp.com/seguros/complementarios/seguro-devolucion-total','_blank')
+    }*/
+
+    function getCookieValue(name) 
+    {
+      const regex = new RegExp(`(^| )${name}=([^;]+)`)
+      const match = document.cookie.match(regex)
+      if (match) {
+        return match[2]
+      }
+   }
+
+   if(getCookieValue('politica_privacidad_personalizacion')!= 'true'){
+        function btnSolicitarSPT(){
+            window.open("https://www.viabcp.com/seguros/financieros/proteccion-de-tarjetas", "_blank");
+        }
+        function btnSolicitarSRV(){
+            window.open("https://www.viabcp.com/seguros/salud/seguro-respaldo", "_blank");
+        }
+        function btnSolicitarSOR(){
+            window.open("https://www.viabcp.com/seguros/salud/onco-respaldo-digital", "_blank");
+        }
+        function btnSolicitarSOAT() {
+            window.open("https://soat.pacifico.com.pe/bcp/?utm_source=viabcp&utm_medium=organic&utm_campaign=2024-05_BBSS_SOAT_AON_TRA_VIABCP-LANDING-SEGUROS&utm_content=TRA_TODOS_N-A_GEN_REGULAR_NONE_-_CARD_NULL_SOAT-VIABCP-LANDING-SEGUROS&from=viabcp_-_organic_-_2024-05_BBSS_SOAT_AON_TRA_VIABCP-LANDING-SEGUROS_-_TRA_TODOS_N-A_GEN_REGULAR_NONE_-_CARD_NULL_SOAT-VIABCP-LANDING-SEGUROS","_blank");
+        }
+    }
+    // SEGURO SOAT
+    /*function btnSolicitarSOAT() {
+        window.open("https://web.pacifico.com.pe/seguros/soat/compraonline/bcp?from=viabcp_null_10_2022_aon_soat_soat_conversiones_banners_todos_soat-viabcp-marketplace-oct22_null&amp;utm_source=viabcp&amp;utm_medium=null&amp;utm_campaign=PBS_soat_AONPlataformas_aon_soat_2022_10_ECO&amp;pcid=viabcp:home:soat-desde-s42:masivo:que-hacemos-hoy5&amp;_ga=2.115182275.578410647.1683949165-1116877244.1683949164","_blank");
+        taggeoTrackAction(
+            productDataSeguro.SOAT,
+            grupoDataSeguro.SOAT,
+            document.querySelector('.seguro_card[data="SOAT"] .scc_title').innerText,
+            versionDataSeguro
+        )
+    }*/
+    // SEGURO DE VIAJES
+    function btnSolicitarVIAJES(){
+        const parametro = `?pcid=viabcp:seguros:seguro-de-viajes:masivo:cards`
+        window.open("https://seguro-viaje.pacifico.com.pe/bcp"+parametro,"_blank");
+        taggeoTrackAction(
+            productDataSeguro.VIAJES,
+            grupoDataSeguro.VIAJES,
+            document.querySelector('.seguro_card[data="VIAJES"] .scc_title').innerText,
+            versionDataSeguro
+        )
+    }
+    function btnSolicitarSVD(){
+        window.open("https://ventasonline.pacifico.com.pe/seguro-vida-devolucion/bcp/principal?utm_source=own&utm_medium=organic&utm_campaign=2023-10_BBSS_VIDA_AON_CON_TEADS_PILOTO&utm_content=CON_TODOS_N-A_BBDD_MODAL-SEGUROS-BCP_NONE_-_IMG_NULL_MODAL-VDT-SEGUROS-BCP_AON-OCTUBRE&from=own_-_organic_-_2023-10_BBSS_VIDA_AON_CON_TEADS_PILOTO_-_CON_TODOS_N-A_BBDD_MODAL-SEGUROS-BCP_NONE_-_IMG_NULL_MODAL-VDT-SEGUROS-BCP_AON-OCTUBRE","_blank");
+        taggeoTrackAction(
+            productDataSeguro.SVD,
+            grupoDataSeguro.SVD,
+            document.querySelector('.seguro_card[data="SVD"] .scc_title').innerText,
+            versionDataSeguro
+        )
+    }
+    if(typeof btnSolicitarSVA != 'function') {
+        function btnSolicitarSVA(){
+            const url = 'https://ventasonline.pacifico.com.pe/seguro-vida-devolucion/promocionesbcp/principal?utm_source=&utm_medium=push&utm_campaign=2023-11_BBSS_SVA_AON_CON_TEST-SVA&utm_content=CON_TODOS_N-A_BBDD_FICHAPRODUCTO_-'
+            window.open(url,'_blank')
+        }
+    }
+    function btnSolicitarVEHICULAR(){
+        const urlVehicular = 'https://ventasonline.pacifico.com.pe/seguro-vehicular/bcp/principal?utm_source=viabcp&utm_medium=organic&utm_campaign=2024-07_BBSS_AUTOS_AON_TRA_VIABCP-LANDING-SEGUROS&utm_content=TRA_TODOS_N-A_GEN_REGULAR_NONE_-MOD_NULL_AUTOS-VIABCP-LANDING-SEGUROS-CARD&from=viabcp-organic-2024-07_BBSS_AUTOS_AON_TRA_VIABCP-LANDING-SEGUROS-TRA_TODOS_N-A_GEN_REGULAR_NONE-_MOD_NULL_AUTOS-VIABCP-LANDING-SEGUROS-CARD'
+        window.open(urlVehicular,"_blank");
+        taggeoTrackAction(
+            productDataSeguro.SV,
+            grupoDataSeguro.SV,
+            document.querySelector('.seguro_card[data="VEHICULAR"] .scc_title').innerText,
+            versionDataSeguro
+        )
+    }
+    function btnSolicitarSOSSALUD(){
+        const url = 'https://www.viabcp.com/seguros/salud/sos-salud'
+        window.open(url,"_blank");
+        taggeoTrackAction(
+            productDataSeguro.SOSSALUD,
+            grupoDataSeguro.SOSSALUD,
+            document.querySelector('.seguro_card[data="SOSSALUD"] .scc_title').innerText,
+            versionDataSeguro
+        )
+    }
+    document.addEventListener("DOMContentLoaded",()=>{
+        //insertTextBanner()
+        const btnSeguros = document.querySelector('.ls_button_portal')
+        btnSeguros.onclick = ()=>{
+            digitalData.push({
+                "action":{"group":'Seguros BCP',"category":'¿Ya cuentas con un seguro?',"name":"Click","label":"Mi portal de seguros"},
+                "metadata":{"key":"Producto","value":'Seguros BCP'},
+                "event":"trackAction"
+            })
+        }
+        //Botones Ver mas
+        const buttonsMore = document.querySelectorAll('.scc_more')
+        buttonsMore.forEach((e)=>{
+            e.onclick = (event)=>{
+                const dataSearch = event.currentTarget.getAttribute('attrib')
+                const dataFind = dataCards.find(c => c.seguro == dataSearch)
+                window.open(dataFind.more,'_blank')
+            }
+        })
+    })
+  </script>
+  <!-- BEGIN - WHATSSAP-->
+  <style>
+    .whatsapp_btn{
+      position:fixed;
+      width:60px;
+      height:60px;
+      bottom:40px;
+      right:40px;
+      background-color:#25d366;
+      color:#FFF !important;
+      border-radius:50px;
+      text-align:center;
+        font-size:30px;
+      box-shadow: 2px 2px 3px #999;
+        z-index:100;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+  }
+  .whatsapp_btn > img {
+        width: 40px;
+        height: 40px;
+    }
+  
+  .my_whatsapp_btn{
+      margin-top:16px;
+  }
+    
+    
+      .exp-barra {
+          width: 100%;
+          display: flex;
+          justify-content: end;
+      }
+  
+      .exp-boton {
+          display: block;
+          background-color: transparent;
+          border: none;
+          padding: 0;
+          position: relative;
+      }
+  
+      .exp-cartel {
+          position: absolute;
+          top: 50%;
+          right: 90%;
+          transform: translateY(-50%);
+          width: max-content;
+          max-width: 300px;
+          padding: 8px 16px;
+          font-size: 14px;
+          font-weight: normal;
+          text-align: left;
+          pointer-events: none;
+          opacity: 0;
+          transition: all .3s ease-out;
+          background: #ECFCF2;
+          border-radius: 24px;
+          font-family: 'Flexo';
+          font-style: normal;
+          font-weight: 500;
+          font-size: 14px;
+          line-height: 17px;
+          color: #202E44;
+          filter: drop-shadow(0px 3px 4px rgba(82, 112, 148, 0.14)) drop-shadow(0px 3px 3px rgba(82, 112, 148, 0.12)) drop-shadow(0px 1px 8px rgba(82, 112, 148, 0.2));
+      }
+      .exp-cartel b {
+        font-weight: bold;
+        font-weight: 600;
+      }
+  
+      .exp-cartel::after {
+          content: "";
+          border: 7px solid transparent;
+          border-left: 12px solid #ECFCF2;
+          width: 0;
+          height: 0;
+          padding: 0;
+          position: absolute;
+          left: 100%;
+          top: 50%;
+          transform: translateY(-50%);
+          margin-left: -1px;
+      }
+  
+      .whatsapp_btn:hover .exp-cartel {
+          display: block;
+          opacity: 1;
+          right: 110%;
+      }
+  
+      @media screen and (max-width: 992px) {
+  
+          .whatsapp_btn .exp-cartel {
+              display: block;
+              /* opacity: 1;
+              right: 110%; */
+              /* transition-delay: 1s; */
+              animation: aparece .3s linear 1s;
+              animation-fill-mode: forwards;
+          }
+      }
+  
+      @keyframes aparece {
+          from {
+              opacity: 0;
+              right: 90%;
+          }
+  
+          to {
+              opacity: 1;
+              right: 110%;
+          }
+      }
+    
+  </style>
+  
+  
+  <a class="whatsapp_btn" target="_blank" style="display: none;">
+    <div class="exp-cartel">
+       <b>¿Deseas adquirir un seguro?</b> Escríbenos &#128153;</span>
+    </div>
+    <img src="/wcm/myconnect/c07ca1f4-3677-4ef5-bdfa-893221ce5121/MicrosoftTeams-image+%286%29.png?MOD=AJPERES&amp;CACHEID=ROOTWORKSPACE-c07ca1f4-3677-4ef5-bdfa-893221ce5121-p2i-Ege" alt="" />
+  </a>
+  
+  <script>
+    const dataWhatsapp = {
+        telefono: "+51945879874",
+        mensaje: "Hola,%20quiero%20m%C3%A1s%20informaci%C3%B3n%20sobre%20los%20seguros"
+    }
+    const expWspBtn = document.querySelector(".whatsapp_btn")
+    const expWspPopUp = document.getElementById("box-dialog")
+    const expInitUrl = location.href
+  
+    const obtenerDiaHoraActual=()=> {
+        let d = new Date()
+        let data = {day:d.getDay(), hour:d.getHours()};
+        return data
+    }
+    const verificarRangoHoras = (horaInicio, horaFin)=> {
+        let result = false
+        const current = obtenerDiaHoraActual();
+        const {day,hour} = current
+        const hourBoolean = hour >= horaInicio && hour <= horaFin
+        const dayboolean = day >= 1 && day <= 5
+        if(hourBoolean&&dayboolean){result = true}
+        return result
+    }
+
+    const rangoHorario = {
+        inicio: 14,
+        fin: 16
+    }
+    const ocultarChatFlotante = ()=>{
+        const chatFlotante = document.querySelector('.bcp_footer_ayuda_flotante');
+        if(chatFlotante){chatFlotante.style.display = 'none'};
+        console.log('ocultar chat');
+    }
+    
+    function activeWhattssap(estado) {
+        if(estado){
+            const link = `https://wa.me/${dataWhatsapp.telefono}?text=${dataWhatsapp.mensaje}`
+            expWspBtn.setAttribute("href", link);
+            expWspBtn.removeAttribute("style");
+        } else {
+            document.getElementById("box-dialog").innerHTML = "&#128151 Escríbenos de 10:00 a.m. a 5:00 p.m. para ayudarte";
+            expWspBtn.removeAttribute("style");
+        }
+    }
+    document.addEventListener("DOMContentLoaded",()=>{
+        /*if (verificarRangoHoras(rangoHorario.inicio, rangoHorario.fin)) {
+            ocultarChatFlotante()
+            activeWhattssap(true)
+        }*/
+    })
+  </script>
