@@ -1,0 +1,1166 @@
+<!-- MODALES OC SEGUROS V22 -->
+<link rel="stylesheet" type="text/css"
+    href="/wcm/connect/resources/userstories/css/formulario.css?subtype=css&v=[Property field=" lastmodifieddate"
+    type="content" context="selected" name="resources/userstories/css/formulario.css" format="kmmss" ]">
+<style>
+    .item_vacio {
+        width: 30px;
+    }
+
+    .hidden-captcha {
+        display: none;
+    }
+
+    .contenedor_moc_home_principal {
+        position: fixed;
+        right: 24px;
+        z-index: 9999;
+    }
+
+    .contenedor_moc_home.abrir {
+        animation: keyframe_moc_abrir .5s;
+        bottom: 24px;
+    }
+
+    .contenedor_moc_home.cerrar {
+        animation: keyframe_moc_cerrar .5s;
+        /* transition: bottom .5s ease; */
+    }
+
+    .contenedor_moc_home {
+        /* height: 579px; */
+        width: 326px;
+        box-shadow: 0px 8px 16px rgba(0, 67, 206, 0.1);
+        border-radius: 10px 10px 8px 8px;
+        background-color: #FFFFFF;
+        position: fixed;
+        right: 24px;
+        bottom: -100%;
+    }
+
+    .contenedor_moc_header_home {
+        height: 133px;
+        border-radius: 8px 8px 0px 0px;
+        padding: 16px;
+    }
+
+    .contenedor_moc_close_header {
+        position: relative;
+        height: 0px;
+        text-align: right;
+        z-index: 1;
+    }
+
+    .contenedor_moc_close_header img {
+        cursor: pointer;
+        margin: 8px 8px 0px 0px;
+    }
+
+    .contenedor_moc_close_header img.paso_2 {
+        filter: brightness(0) saturate(100%) invert(45%) sepia(83%) saturate(1215%) hue-rotate(360deg) brightness(101%) contrast(106%);
+    }
+
+    .contenedor_moc_header_modal {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .contenedor_moc_header_home h2,
+    .contenedor_moc_header_home p {
+        margin: 0px;
+        color: #FFFFFF;
+    }
+
+    .contenedor_moc_header_home h2 {
+        font-size: 20px;
+        line-height: 24px;
+        font-family: 'Flexo';
+        margin-bottom: 8px;
+        max-width: 158px;
+    }
+
+    .contenedor_moc_header_home p {
+        font-size: 14px;
+        line-height: 18px;
+        font-family: 'Flexo';
+        width: 208px;
+    }
+
+    .contenedor_moc_image_header img {
+        position: relative;
+        right: 5px;
+        top: 0px;
+    }
+
+    .contenedor_moc_body_home {
+        padding: 16px;
+    }
+
+    .contenedor_moc_coberturas p {
+        margin: 0px;
+    }
+
+    .contenedor_moc_coberturas ul {
+        list-style: none;
+        padding: 0px;
+        margin-bottom: 19px;
+    }
+
+    .contenedor_moc_coberturas ul li {
+        display: flex;
+        align-items: flex-start;
+
+    }
+
+    .contenedor_moc_coberturas ul li img {
+        height: 20px;
+        margin-right: 10px;
+        position: relative;
+        top: 2px;
+    }
+
+    .contenedor_moc_coberturas ul li p {
+        max-width: 260px;
+    }
+
+    .contenedor_moc_coberturas p:nth-child(1) {
+        color: #202e44;
+        font-size: 16px;
+        line-height: 24px;
+        font-family: 'Flexo-Demi';
+        margin-bottom: 12px;
+    }
+
+    .contenedor_moc_coberturas ul p {
+        color: #202e44;
+        font-size: 16px;
+        line-height: 24px;
+        font-family: 'Flexo';
+        margin-bottom: 8px;
+    }
+
+    .contenedor_moc_coberturas li:last-child p {
+        margin-bottom: 2px;
+    }
+
+    .contenedor_moc_legales p {
+        margin: 0px;
+        font-size: 12px;
+        line-height: 18px;
+        color: #868f9e;
+        font-family: 'Flexo';
+    }
+
+    .contenedor_moc_legales p a {
+        color: #ff7800;
+        cursor: pointer;
+        font-family: 'Flexo-Demi';
+        text-decoration: none;
+    }
+
+    .contenedor_moc_button {
+        margin-top: 16px;
+        display: flex;
+        justify-content: space-between;
+        height: 40px;
+        align-items: center;
+    }
+
+    .contenedor_moc_button button {
+        outline: none;
+        border: none;
+        cursor: pointer;
+        font-family: 'Flexo';
+    }
+
+    .contenedor_moc_button .btn_no_gracias {
+        color: #ff7800;
+        font-size: 16px;
+        background-color: transparent !important;
+        width: 130px;
+        height: 40px;
+    }
+
+    .contenedor_moc_button .btn_no_gracias:hover {
+        background-color: transparent !important;
+        border: none;
+        box-shadow: none;
+    }
+
+    .contenedor_moc_button .btn_comprar {
+        background-color: transparent;
+        border-color: #ff7800;
+        background-color: #ff7800;
+        color: #FFFFFF;
+        font-size: 16px;
+        width: 128px;
+        height: 40px;
+        cursor: pointer;
+        border-radius: 20px;
+    }
+
+    .contenedor_moc_input {
+        margin-bottom: 8px;
+    }
+
+    .contenedor_moc_input .bcp_input_microcomponent {
+        margin-bottom: 0px !important;
+    }
+
+    .contenedor_moc_checkbox form-check.horizontal .bcp_checkbox_microcomponent{
+        align-items: flex-start !important;
+    }
+    .contenedor_moc_checkbox form-check.horizontal{
+        margin-bottom: 0px;
+    }
+
+    .contenedor_moc_checkbox form-check.horizontal .bcp_check_titulo_group{
+        display:none;
+    }
+
+    @keyframes keyframe_moc_cerrar {
+        0% {
+            bottom: 16px
+        }
+
+        100% {
+            bottom: -100%;
+        }
+    }
+
+    @keyframes keyframe_moc_abrir {
+        0% {
+            bottom: -100%;
+        }
+
+        80% {
+            bottom: 48px;
+        }
+
+        100% {
+            bottom: 24px;
+        }
+    }
+
+    @media(max-width:990px) {
+        .contenedor_moc_home_principal {
+            background-color: rgb(32 46 68 / 85%);
+            position: fixed;
+            top: 0px;
+            left: 0px;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+        }
+
+        .contenedor_moc_home {
+            margin: auto;
+            bottom: -100%;
+            right: initial;
+            border-radius: 10px 10px 0px 0px;
+        }
+
+        .contenedor_moc_home.abrir {
+            bottom: -4px;
+            animation: keyframe_moc_abrir 1s
+        }
+
+        @keyframes keyframe_moc_cerrar {
+            0% {
+                bottom: 16px
+            }
+
+            100% {
+                bottom: -100%;
+            }
+        }
+
+        @keyframes keyframe_moc_abrir {
+            0% {
+                bottom: -100%;
+            }
+
+            80% {
+                bottom: 16px;
+            }
+
+            100% {
+                bottom: -4px;
+            }
+        }
+    }
+
+    .contenedor_moc_home_card.ocultar {
+        display: none;
+    }
+
+    .contenedor_moc_confirm_img {
+        padding-top: 40px;
+        padding-bottom: 16px;
+    }
+
+    .contenedor_moc_confirm_img img{
+        width: 88px;
+    }
+
+    .contenedor_moc_confirm_title h3 {
+        margin: auto;
+        font-size: 20px;
+        line-height: 28px;
+        color: #002a8d;
+        font-family: 'Flexo-Demi';
+        width: 287px;
+        margin-bottom: 16px;
+
+    }
+
+    .contenedor_moc_confirm_title p {
+        margin: auto;
+        font-size: 14px;
+        width: 287px;
+        line-height: 20px;
+        color: #202e44;
+        font-family: 'Flexo';
+        margin-bottom: 16px;
+    }
+
+    .contenedor_moc_confirm_cancelar {
+        width: 266px;
+        height: 86px;
+        margin: auto;
+        text-align: center;
+        margin-top: 59px;
+    }
+
+    .contenedor_moc_confirm_cancelar h3 {
+        margin: 0px;
+        font-family: 'Flexo-Demi';
+        line-height: 18px;
+        font-size: 12px;
+        color: #202e44;
+    }
+
+    .contenedor_moc_confirm_cancelar p {
+        margin: 0px;
+        font-family: 'Flexo';
+        font-size: 12px;
+        line-height: 18px;
+        color: #202e44;
+    }
+
+    .contenedor_moc_confirm_cancelar p a {
+        color: #ff7800;
+        font-family: 'Flexo-Demi';
+        cursor: pointer;
+    }
+
+    .contenedor_moc_confirm_link {
+        margin-bottom: 32px;
+        text-align: center;
+    }
+
+    .contenedor_moc_confirm_link a {
+        cursor: pointer;
+        color: #ff7800;
+        font-size: 16px;
+        font-family: 'Flexo-Demi';
+    }
+
+    .contenedor_moc_home_confirmacion {
+        text-align: center;
+        height: 585px;
+    }
+
+    .btn_entendido {
+        margin: auto;
+        margin-bottom: 24px;
+        width: 128px;
+    }
+    .contenedor_moc_plan_anual{
+        background-color: #ebf4ff;
+        width: 294px;
+        color: #002a8d;
+        padding: 16px;
+        margin: auto;
+        margin-bottom: 24px;
+        border-radius: 8px;
+    }
+    .contenedor_moc_plan_anual p{
+        max-width: 204px;
+        font-size: 12px;
+        text-align: center;
+        line-height: 18px;
+        margin: auto;
+    }
+    .contenedor_moc_confirm_action{
+        margin-top: 32px;
+    }
+</style>
+<style id="styles-spt-modal">
+    .spt_modal .contenedor_moc_header_home.bg-spt {
+        background:linear-gradient(90deg, rgba(38,98,241,1) 0%, rgba(111,207,240,1) 100%);
+    }
+    .spt_modal .contenedor_moc_image_header img{
+        top: 16px;
+        right: 33px;
+        width: 128px;
+    }
+    .spt_modal .contenedor_moc_header_home h2{
+        max-width: 166px;
+    }
+    .spt_modal .contenedor_moc_header_home p{
+        font-weight: inherit;
+        font-size: 16px;
+        line-height: 24px;
+    }
+</style>
+<style id="styles-sor-modal">
+    .sor_modal .contenedor_moc_header_home.bg-sor {
+        background:linear-gradient(90deg, rgba(123,82,197,1) 0%, rgba(181,156,226,1) 100%);
+    }
+    .sor_modal .contenedor_moc_image_header img {
+        position: relative;
+        right: 12px;
+        top: -5px;
+    }
+
+    .sor_modal .contenedor_moc_header_home h2 {
+        max-width: 202px;
+        margin-bottom: 8px;
+    }
+
+    .sor_modal .contenedor_moc_header_home {
+        padding: 16px;
+        height: 112px;
+    }
+
+    .sor_modal .contenedor_moc_button {
+        margin-top: 16px;
+    }
+    .sor_modal .contenedor_moc_checkbox{
+        margin-bottom: 12px;
+    }
+</style>
+<!-- SRV MODAL ANUAL -->
+<!-- <style id="styles-srv-modal">
+    .srv_modal .contenedor_moc_header_home.bg-srv {
+        background:linear-gradient(90deg, rgba(159,213,251,1) 34%, rgba(109,181,238,1) 100%);
+    }
+    .srv_modal .contenedor_moc_image_header img {
+        position: relative;
+        right: 10px;
+        top: 27px;
+    }
+
+    .srv_modal .contenedor_moc_header_home h2 {
+        max-width: 206px;
+        margin-bottom: 8px;
+        color: #002a8d;
+    }
+    .srv_modal .contenedor_moc_header_home p {
+        color: #002a8d;
+        font-weight: inherit;
+    }
+    .srv_modal .contenedor_moc_header_home {
+        padding: 16px;
+        height: 108px;
+    }
+
+    .srv_modal .contenedor_moc_button {
+        margin-top: 36px;
+    }
+</style> -->
+
+<!-- SRV MODAL MENSUAL -->
+<style id="styles-srv-modal">
+    .srv_modal .contenedor_moc_header_home.bg-srv {
+        background:linear-gradient(90deg, rgba(159,213,251,1) 34%, rgba(109,181,238,1) 100%);
+    }
+    .srv_modal .contenedor_moc_image_header img {
+        position: relative;
+        right: 17px;
+        top: 27px;
+    }
+
+    .srv_modal .contenedor_moc_header_home h2 {
+        max-width: 206px;
+        margin-bottom: 8px;
+        color: #002a8d;
+    }
+    .srv_modal .contenedor_moc_header_home p {
+        color: #002a8d;
+        font-weight: inherit;
+    }
+    .srv_modal .contenedor_moc_header_home {
+        padding: 16px;
+        height: 108px;
+    }
+
+    .srv_modal .contenedor_moc_button {
+        margin-top: 36px;
+    }
+</style>
+
+<style id="styles-sva-modal">
+    .sva_modal .contenedor_moc_header_home.bg-sva {
+        background:linear-gradient(90deg, rgba(31,145,131,1) 0%, rgba(120,217,204,1) 100%);
+    }
+    .sva_modal .contenedor_moc_header_home {
+        padding: 16px;
+        height: 112px;
+    }
+
+    .sva_modal .contenedor_moc_header_home h2 {
+        margin-bottom: 8px;
+        max-width: 205px;
+    }
+
+    .sva_modal .contenedor_moc_image_header img {
+        top: -8px;
+        right:16px;
+    }
+
+    .sva_modal .contenedor_moc_coberturas li:last-child p {
+        height: initial;
+    }
+
+    .sva_modal .contenedor_moc_legales p {
+        font-size: 11px;
+        line-height: 16px;
+    }
+
+    .sva_modal .contenedor_moc_button {
+        margin-top: 16px;
+    }
+
+    .sva_modal .b-cuota-text {
+        margin: 0px;
+        margin-top: 8px;
+        margin-bottom: 16px;
+        color: #202e44;
+        font-size: 14px;
+        line-height: 20px;
+    }
+
+    .sva_modal .b-cuota-text a {
+        color: #ff7800;
+        cursor: pointer;
+    }
+
+    .modal_container_cuotas_cont {
+        width: 500px;
+        background-color: #FFFFFF;
+        border-radius: 8px;
+        max-width: 500px;
+    }
+
+    .container_cuotas_cerrar {
+        text-align: right;
+    }
+
+    .container_cuotas_cerrar img {
+        cursor: pointer;
+        filter: brightness(0) saturate(100%) invert(45%) sepia(83%) saturate(1215%) hue-rotate(360deg) brightness(101%) contrast(106%);
+        margin: 15px 15px 0px 0px;
+    }
+
+    .modal_container_cuotas {
+        position: fixed;
+        z-index: 9999;
+        background-color: rgb(32 46 68 / 60%);
+        display: flex;
+        overflow: auto;
+        box-shadow: 0 0 7px 0 rgba(82, 112, 148, .2), 0 2px 2px 0 rgba(82, 112, 148, .12), 0 2px 2px 0 rgba(82, 112, 148, .14);
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        align-items: center;
+        justify-content: center;
+    }
+    .sva_modal  .bcp_checkbox_microcomponent span{
+        font-size: 12px;
+        line-height: 18px;
+    }
+    .sva_modal .contenedor_moc_checkbox{
+        margin-bottom: 12px;
+    }
+</style>
+<!-- spt_moc , srv_moc , sor_moc , sva_moc -->
+<div id="frmMocSegurosHome" class="contenedor_moc_home_principal" style="display: none;">
+    <div class="contenedor_moc_home">
+        <div class="contenedor_moc_close_header">
+            <img src="https://www.viabcp.com/wcm/connect/008b9858-e5a7-4790-8dd3-6a8826a66a83/c-ic-close-r.png?MOD=AJPERES&attachment=false&id=1683126979143"
+                alt="">
+        </div>
+        <div class="contenedor_moc_home_compra contenedor_moc_home_card">
+            <div class="contenedor_moc_header_home">
+                <div class="contenedor_moc_header_modal">
+                    <div class="contenedor_moc_title_header">
+                        <h2></h2>
+                        <p></p>
+                        <!-- <h2>Obtén tu Seguro de Protección de Tarjetas Plus</h2> -->
+                        <!-- <p>Por S/12.99 al mes</p> -->
+                    </div>
+                    <div class="contenedor_moc_image_header">
+                        <img src="" alt="">
+                    </div>
+                </div>
+            </div>
+            <div class="contenedor_moc_body_home">
+                <div class="contenedor_moc_coberturas">
+                    <p>Te cubrimos:</p>
+                    <ul class="contenedor_moc_list_coberturas">
+                    </ul>
+                </div>
+                <div class="contenedor_moc_actions">
+                    <div class="contenedor_moc_input">
+                        <form-input id="frmMocSegurosHome_input_doc" name="frmMocSegurosHome_input_doc" datatype="tel"
+                            minlength="8" maxlength="8" constraint="soloNumeros" label="Ingresa tu DNI"
+                            msgerror="Ingresa Nº documento válido.">
+                        </form-input>
+                    </div>
+                    <div class="contenedor_moc_checkbox">
+                    </div>
+                    <div class="contenedor_moc_legales">
+                        <p>
+                            <!-- El click en "Comprar" confirma la solicitud, el envío de la póliza vía electrónica, la aceptación de los <a target="_blank" href="">Términos y condiciones</a> y el débito en la cuenta de ahorros vigente con mayor saldo. Límite de edad: 18 a 65 años. Periodo de carencia de 30 días. -->
+                        </p>
+                    </div>
+                    <div class="contenedor_moc_button">
+                        <button class="bcp_boton_blanco btn_no_gracias">
+                            No, gracias
+                        </button>
+                        <button class="bcp_boton_naranja  btn_comprar">
+                            Comprar
+                        </button>
+                    </div>
+                    <div class="hidden-captcha">
+                        <form-captcha id="frmMocSegurosHomeCaptcha" datacallback="frmMocSegurosHomeCaptchaSendData">
+                        </form-captcha>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="contenedor_moc_home_confirmacion contenedor_moc_home_card ocultar">
+            <div class="contenedor_moc_confirm_img">
+                <img src="https://www.viabcp.com/wcm/connect/58f644ae-5f12-4aeb-9ae7-f282959ced60/spot-circle-m-spc-mobile-success-hand-d-l.png?MOD=AJPERES&attachment=false&id=1683211517310"
+                    alt="">
+            </div>
+            <div class="contenedor_moc_confirm_title">
+                <h3>¡Gracias! Estamos procesando tu solicitud</h3>
+                <p></p>
+            </div>
+            <div class="contenedor_moc_plan_anual" style="display: none;">
+                <p>Recuerda que se hará un débito por <b>S/142.89</b> a tu cuenta de ahorros.</p>
+            </div>
+            <div class="contenedor_moc_confirm_action">
+                <button class="bcp_boton_naranja btn_entendido">
+                    Entendido
+                </button>
+            </div>
+            <div class="contenedor_moc_confirm_cancelar">
+                <h3>¿Quieres cancelar este seguro?</h3>
+                <p>
+                    Ingresa tus datos <a class="cancelar_solicitud">aquí</a> y procederemos con
+                    la baja de tu seguro a la brevedad.
+                </p>
+            </div>
+            <div class="contenedor_moc_confirm_link">
+            </div>
+        </div>
+    </div>
+    <div class="modal_container_cuotas" style="display: none;">
+        <div class="modal_container_cuotas_cont">
+            <div class="container_cuotas_cerrar">
+                <img src="https://www.viabcp.com/wcm/connect/008b9858-e5a7-4790-8dd3-6a8826a66a83/c-ic-close-r.png?MOD=AJPERES&attachment=false&id=1683126979143"
+                    alt="">
+            </div>
+            <div class="container_cuotas_body">
+                <img src="https://www.viabcp.com/wcm/connect/f1917af6-f445-43a5-9159-d12cc8b4e80d/Nuevo+Cuadro+edad.svg?MOD=AJPERES&CACHEID=ROOTWORKSPACE-f1917af6-f445-43a5-9159-d12cc8b4e80d-ofMSz38"
+                    alt="">
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="/wcm/connect/resources/userstories/js/formulario.js?subtype=javascript"></script>
+
+<script>
+    let icon_check = 'https://www.viabcp.com/wcm/connect/0016321b-2394-4c18-adc7-5851814915da/ic_check.png?MOD=AJPERES&attachment=false&id=1692803728523';
+
+    let count = 0;
+    const frmMocSegurosHome = document.querySelector('#frmMocSegurosHome');
+    const formContentMOCSegurosHome = new Formulario(frmMocSegurosHome);
+    const frmMocSegurosHomeCaptcha = frmMocSegurosHome.querySelector('#frmMocSegurosHomeCaptcha')
+
+    //VARIABLES NUEVO TAGGEO
+    const variables_taggeo = {
+        tituloModal: '',
+        grupoModal: '',
+        productModal: '',
+        channelModal: '',
+        versionModal: '',
+        producto: ''
+    }
+
+    //REQUEST API SOLICITUDES
+    const dataJsonRequest = {
+        aceptopromocion: '-',
+        productopromocion: '',
+        abreviaturaproducto: '',
+        descripcionpromocion: "Sin promoción",
+        email: 'sinemail@sinmail.com',
+        flujoventa: 'VIABCP',
+        promocioncancelada: "-",
+        canal: "",
+        tipoplan: "-"
+    }
+    //DATA DE MODALES
+    //PLAN ANUAL
+    const dataModalSPT = {
+        name_modal:'Obten tu Seguro de Proteccion de Tarjetas Plus',
+        title_modal: 'Obtén tu Seguro de <b>Proteccion de Tarjetas Plus</b>',
+        subtitle_modal: 'Por <b>S/ 12.99</b> al mes ',
+        spot_hero: 'https://www.viabcp.com/wcm/connect/da610388-d30b-4e61-8abf-5e47c2a5a432/PERSONAJES_SEGUROS-08+1.png?MOD=AJPERES&attachment=false',
+        coberturas: [
+            { icon: icon_check, texto: 'Hasta S/ 15 mil en fraude por internet y otros.' },
+            { icon: icon_check, texto: 'Robo por retiros de cajeros y agentes.' },
+            { icon: icon_check, texto: 'Transferencias no reconocidas.' }
+        ],
+        
+        texto_terminos: 'El click en “Comprar” confirma la solicitud, el envío de la póliza vía electrónica, la aceptación de los <a class="tyc_link">Términos y condiciones</a> y el débito en la cuenta de ahorros vigente con mayor saldo. Límite de edad: 18 años a más. La prima incluye IGV.',
+        bg_header: 'bg-spt',
+        dataRequest: {
+            productopromocion: 'Protección de Tarjeta',
+            abreviaturaproducto: 'SPT'
+        },
+        url_terminos: 'https://www.viabcp.com/wcm/connect/54bb8ed7-e3c9-43fa-8342-b01b4e38ff19/TYC_VIABCP_SPT.pdf?MOD=AJPERES&attachment=false&id=1668183042294',
+        texto_gracias: 'En los próximos días te confirmaremos la activación de tu <b>Seguro de Protección de Tarjetas Plus</b> a través de tu correo.',
+        tipoplan:'MENSUAL'
+    }
+
+    // PLAN ANUAL SRV
+    // const dataModalSRV = {
+    //     name_modal:'Obtén tu Seguro Respaldo Vida aquí',
+    //     title_modal: 'Seguro <b>Respaldo Vida</b> por <b>S/ 0.40 al día</b>',
+    //     subtitle_modal: 'Plan anual por <b>S/ 142.89</b>',
+    //     spot_hero: 'https://www.viabcp.com/wcm/connect/99d31e23-479a-4179-85a3-f6ffa02d3869/group-10+1.png?MOD=AJPERES&attachment=false',
+    //     coberturas: [
+    //         { icon: icon_check, texto: 'S/ 20 mil en caso de fallecimiento.' },
+    //         { icon: icon_check, texto: 'S/ 50 diarios desde el segundo día si eres hospitalizado.' },
+    //         { icon: icon_check, texto: 'S/ 8 mil si te diagnostican cáncer.' },
+    //         { icon: icon_check, texto: 'Chequeo preventivo anual gratis.' },
+    //     ],
+        
+    //     texto_terminos: 'El click en “Comprar” confirma la solicitud, el envío de la póliza vía electrónica, la aceptación de los <a class="tyc_link">Términos y condiciones</a> y el débito en la cuenta de ahorros vigente con mayor saldo. Límite de edad: 18 a 65 años. La prima no incluye IGV por inafectación.',
+    //     bg_header: 'bg-srv',
+    //     dataRequest: {
+    //         productopromocion: 'Seguro Respaldo',
+    //         abreviaturaproducto: 'SRV'
+    //     },
+    //     url_terminos: 'https://www.viabcp.com/wcm/connect/e4df0f6e-4f8e-403a-b88d-cae21152ffa1/TERMINOS%2BY%2BCONDICIONES%2BSRV_ANUAL_v20230823.pdf?MOD=AJPERES&attachment=true&id=1692973558546',
+    //     texto_gracias: 'En los próximos días te confirmaremos la activación de tu <b>Seguro Respaldo Vida</b> a través de tu correo.',
+    //     tipoplan:'ANUAL'
+    // }
+
+    // PLAN MENSUAL SRV
+    const dataModalSRV = {
+        title_modal: 'Obtén tu <b>Seguro Respaldo Vida</b> aquí',
+        subtitle_modal: 'Por S/12.99 al mes',
+        spot_hero: 'https://www.viabcp.com/wcm/connect/6485cd42-4f7a-4bf5-88d3-ff838ea79553/group-10.png?MOD=AJPERES&attachment=false&id=1684957322273',
+        coberturas: [
+            { icon: icon_check, texto: 'Te cubre S/ 20,000 en caso fallezcas.' },
+            { icon: icon_check, texto: 'S/ 50 diarios desde el segundo día si eres hospitalizado.' },
+            { icon: icon_check, texto: 'S/ 8,000 si te diagnostican cáncer.' }
+        ],
+        texto_terminos: 'El click en “Comprar” confirma la solicitud, el envío de la póliza vía electrónica, la aceptación de los <a class="tyc_link">Términos y condiciones</a> y el débito en la cuenta de ahorros vigente con mayor saldo. Límite de edad: 18 a 65 años.',
+        bg_header: 'bg-srv',
+        dataRequest: {
+            productopromocion: 'Seguro Respaldo',
+            abreviaturaproducto: 'SRV'
+        },
+        url_terminos: 'https://www.viabcp.com/wcm/connect/a46fa07b-e0ec-427a-a64b-a38e48115f0c/TYC_VIABCP_SRV.pdf?MOD=AJPERES&attachment=false&id=1668186570527',
+        texto_gracias: 'En los próximos días te confirmaremos la activación de tu <b>Seguro Respaldo Vida</b> a través de tu correo.',
+        tipoplan:'MENSUAL'
+    }
+
+    const dataModalSOR = {
+        name_modal:'Obtén tu Seguro Onco Respaldo Digital',
+        title_modal: 'Seguro <b>Onco Respaldo Digital</b>',
+        subtitle_modal: 'Por <b>S/ 12.99</b> al mes',
+        spot_hero: 'https://www.viabcp.com/wcm/connect/44821db6-65d5-49e6-a24b-56dda2d38abd/SOR.png?MOD=AJPERES&attachment=false&id=1692820186304',
+        coberturas: [
+            { icon: icon_check, texto: 'Indemnización con hasta S/ 30 mil.' },
+            { icon: icon_check, texto: '6 teleconsultas y orientación telefónica con médico general.' },
+            { icon: icon_check, texto: 'Asesorías 24/7.' }
+        ],
+        
+        texto_terminos: 'El click en “Comprar” confirma la solicitud, el envío de la póliza vía electrónica, la aceptación de los <a class="tyc_link">Términos y condiciones</a> y el débito en la cuenta de ahorros vigente con mayor saldo. Límite de edad: 18 a 65 años. Periodo de carencia de 30 días. <b>Este seguro es válido únicamente para asegurados que no hayan tenido cáncer previamente</b>. La prima incluye IGV.',
+        bg_header: 'bg-sor',
+        dataRequest: {
+            productopromocion: 'Seguro Onco Respaldo Digital',
+            abreviaturaproducto: 'SOR'
+        },
+        url_terminos: 'https://www.viabcp.com/wcm/connect/944bf580-b46b-457a-a60f-71b23a4a2900/TERMINOS%2BY%2BCONDICIONES%2BSOR_MAR_2023+V20231704.pdf?MOD=AJPERES&attachment=true&id=1681933396896',
+        texto_gracias: 'En los próximos días te confirmaremos la activación de tu <b>Seguro Onco Respaldo Digital</b> a través de tu correo.',
+        tipoplan:'MENSUAL'
+    }
+
+    const dataModalSVA = {
+        name_modal:'Obtén tu Seguro Vida Ahorro aquí',
+        title_modal: 'Obtén tu Seguro <b>Vida Ahorro</b> aquí',
+        subtitle_modal: 'Desde <b>S/ 50</b> al mes',
+        spot_hero: 'https://www.viabcp.com/wcm/connect/c7a9ea36-6385-497c-8126-1d84891562f7/SVA.png?MOD=AJPERES&attachment=false&id=1692820207162',
+        coberturas: [
+            { icon: icon_check, texto: 'Recuperar el 120% de los pagado al finalizar el plazo de 7 años.' },
+            { icon: icon_check, texto: 'S/ 20 mil en caso de fallecimiento.' },
+            { icon: icon_check, texto: 'Servicios adicionales: Médico a domicilio, delivery de medicinas.' },
+            { icon: '', texto: '<b class="b-cuota-text">Conoce tu cuota <a class="link_tabla_cuotas">aquí</a></b>' }
+        ],
+        texto_terminos: 'El click en "Comprar" confirma la solicitud, el envío de la póliza vía electrónica, la aceptación de los <a class="tyc_link">Términos y condiciones</a> y el débito en la cuenta de ahorros vigente con mayor saldo. Límite de edad: 18 años a más.',
+        bg_header: 'bg-sva',
+        dataRequest: {
+            productopromocion: 'Seguro Vida Ahorro',
+            abreviaturaproducto: 'SVA'
+        },
+        url_terminos: 'https://www.viabcp.com/wcm/connect/0bbe0076-dbd3-46d6-b2ff-5a8bb524d810/Terminos+y+Condiciones+Seguro+Vida+Ahorro+v2.pdf?MOD=AJPERES&attachment=true&id=1678806215170',
+        texto_gracias: 'En los próximos días te confirmaremos la activación de tu <b>Seguro Vida Ahorro</b> a través de tu correo.',
+        tipoplan:'MENSUAL'
+    }
+    
+    //Función para ocultar modal
+    const frmMocSegurosHomeCerrar = () => {
+        frmMocSegurosHome.querySelector('.contenedor_moc_home').classList.remove('abrir');
+        frmMocSegurosHome.querySelector('.contenedor_moc_home').classList.add('cerrar');
+        setTimeout(() => {
+            frmMocSegurosHome.style.display = "none";
+        }, 200);
+    }
+
+    const frmMocSegurosHomeAbrir = (producto) => {
+        console.log('producto selecionado', producto)
+        frmMocSegurosHomeCerrar();
+        setTimeout(() => {
+            cambioPantallaModal(2);
+            frmMocSegurosHome.removeAttribute('style');
+            frmMocSegurosHome.querySelector('.contenedor_moc_home').classList.remove('cerrar');
+            frmMocSegurosHome.querySelector('.contenedor_moc_home').classList.add('abrir');
+            cargarDataModalSegunTipoSeguro(producto);
+        }, 200);
+    }
+    //Función carga data de taggeos
+    const cargarDataTaggeoModal = (data) => {
+        variables_taggeo.tituloModal = cleanLabel(data.name_modal),
+        variables_taggeo.grupoModal = 'Modal One Click',
+        variables_taggeo.productModal = 'Seguros-' + data.dataRequest.abreviaturaproducto,
+        variables_taggeo.channelModal = 'VIABCP',
+        variables_taggeo.versionModal = 'V22';
+        variables_taggeo.producto = data.dataRequest.abreviaturaproducto
+        dataJsonRequest.abreviaturaproducto = data.dataRequest.abreviaturaproducto;
+        dataJsonRequest.productopromocion = data.dataRequest.productopromocion;
+
+        console.log(variables_taggeo, 'data_modal');
+
+    }
+    //Función para agregar acción a los botones del modal
+    const cargarActionButtonsModal = (dataModalSPT, divContentModal, clase) => {
+        //Función para abrir Terminos y Condiciones
+        divContentModal.querySelector('.tyc_link').addEventListener('click', () => {
+            taggeoAdobeMOCSeguros('Click', 'Términos y Condiciones');
+            window.open(dataModalSPT.url_terminos, '_blank');
+        });
+        //Función para cerrar Modal - Botón Cerrar(X)
+        divContentModal.querySelector('.contenedor_moc_close_header img').addEventListener('click', () => {
+            if (divContentModal.querySelector('.contenedor_moc_close_header img').classList.contains('paso_2')) {
+                taggeoAdobeMOCSeguros('Click', 'Cerrar Modal Paso 2');
+            } else {
+                taggeoAdobeMOCSeguros('Click', 'Cerrar Modal Paso 1')
+            }
+            frmMocSegurosHomeCerrar();
+        });
+        //Función Botón Comprar
+        divContentModal.querySelector('.btn_comprar').addEventListener('click', () => {
+            let inputDNI = divContentModal.querySelector('.contenedor_moc_input #frmMocSegurosHome_input_doc');
+            let dniHash = fnsha256(inputDNI.value.trim());
+            let indexCaptcha = frmMocSegurosHomeCaptcha.getAttribute('index');
+            let boolDNI = formContentMOCSegurosHome.Validar.CampoNumerico(inputDNI);
+            let chkDeclaracion = frmMocSegurosHome.querySelector('#declaracion');
+            let boolAceptaDeclaracion = true;
+            if(chkDeclaracion){
+                boolAceptaDeclaracion = false;
+                boolAceptaDeclaracion = chkDeclaracion.getAttribute('style') ? true : formContentMOCSegurosHome.Validar.CampoCheckButton(chkDeclaracion);
+                // if (!boolAceptaDeclaracion) {grecaptcha.reset(indexCaptcha)};
+            }
+            if (!boolDNI || !boolAceptaDeclaracion) { grecaptcha.reset(indexCaptcha); return };
+            grecaptcha.reset(indexCaptcha);
+            grecaptcha.execute(indexCaptcha);
+        });
+        //Función Botón No gracias
+        divContentModal.querySelector('.btn_no_gracias').addEventListener('click', () => {
+            taggeoAdobeMOCSeguros('Click', 'No gracias');
+            frmMocSegurosHomeCerrar();
+        });
+        //Función Botón Entendido
+        divContentModal.querySelector('.btn_entendido').addEventListener('click', () => {
+            taggeoAdobeMOCSeguros('Click', 'Entendido');
+            frmMocSegurosHomeCerrar();
+        });
+        //Función Cancelar solicitud
+        divContentModal.querySelector('.cancelar_solicitud').addEventListener('click', () => {
+            taggeoAdobeMOCSeguros('Click', 'Cancelar solicitud');
+            window.open('https://www.viabcp.com/cancelatusegurov2', '_blank');
+        })
+    }
+    //Función para cambiar de pantalla compra a confirmación
+    const cambioPantallaModal = (pantalla = 1) => {
+        if (pantalla == 1) {
+            frmMocSegurosHome.querySelector('.contenedor_moc_home_compra').classList.add('ocultar');
+            frmMocSegurosHome.querySelector('.contenedor_moc_home_confirmacion').classList.remove('ocultar');
+            frmMocSegurosHome.querySelector('.contenedor_moc_close_header img').classList.add('paso_2');
+        } else {
+            frmMocSegurosHome.querySelector('.contenedor_moc_home_compra').classList.remove('ocultar');
+            frmMocSegurosHome.querySelector('.contenedor_moc_home_confirmacion').classList.add('ocultar');
+            frmMocSegurosHome.querySelector('.contenedor_moc_close_header img').classList.remove('paso_2');
+            let inputDNI = frmMocSegurosHome.querySelector('.contenedor_moc_input #frmMocSegurosHome_input_doc');
+            inputDNI.value = "";
+            inputDNI.parentElement.classList.remove('focusin')
+        }
+    }
+    //Función Taggeo Seguros
+    const taggeoAdobeMOCSeguros = (eventName, labelName) => {
+        digitalData.push({
+            "action": {
+                "group": variables_taggeo.grupoModal,
+                "category": variables_taggeo.tituloModal + "-" + variables_taggeo.versionModal,
+                "name": eventName,
+                "label": labelName
+            },
+            "metadata": {
+                "key": "Producto",
+                "value": variables_taggeo.productModal
+            },
+            "event": "trackAction"
+        })
+        if (eventName == 'Impresión') {
+            digitalData.push({
+                "form": {
+                    "channel": variables_taggeo.channelModal,
+                    "version": variables_taggeo.versionModal,
+                    "name": variables_taggeo.tituloModal,
+                    "product": variables_taggeo.productModal
+                },
+                "event": "trackFormView"
+            })
+        }
+    }
+    //Función para agregar data al modal - Segun tipo de seguro
+    const frmMocSegurosHomeConstruirModal = (data, clase) => {
+        cargarDataTaggeoModal(data);
+        taggeoAdobeMOCSeguros('Impresión', ' Modal One Click ' + variables_taggeo.productModal);
+
+        let contenedor_checkbox = '';
+
+        let frmMocSegurosHomeI = document.querySelector('#frmMocSegurosHome');
+        frmMocSegurosHomeI.removeAttribute('class');
+        frmMocSegurosHomeI.classList.add('contenedor_moc_home_principal');
+        frmMocSegurosHomeI.classList.add(clase);
+        frmMocSegurosHomeI = document.querySelector('#frmMocSegurosHome.' + clase);
+
+        //Setear titulo,texto,imagen,bgheader,legal,checkbox
+        frmMocSegurosHomeI.querySelector('.contenedor_moc_title_header h2').innerHTML = data.title_modal;
+        frmMocSegurosHomeI.querySelector('.contenedor_moc_title_header p').innerHTML = data.subtitle_modal;
+        frmMocSegurosHomeI.querySelector('.contenedor_moc_legales p').innerHTML = data.texto_terminos;
+        frmMocSegurosHomeI.querySelector('.contenedor_moc_image_header img').src = data.spot_hero;
+        frmMocSegurosHomeI.querySelector('.contenedor_moc_header_home').classList.add(data.bg_header);
+        frmMocSegurosHomeI.querySelector('.contenedor_moc_confirm_title p').innerHTML = data.texto_gracias;
+        // (data.tipoplan == 'ANUAL') ? 
+        //                 frmMocSegurosHome.querySelector('.contenedor_moc_plan_anual').removeAttribute('style') :
+        //                 frmMocSegurosHome.querySelector('.contenedor_moc_plan_anual').style.display ="none";
+
+        dataJsonRequest.tipoplan = data.tipoplan;
+        console.log(frmMocSegurosHomeI)
+        //Agregar lista coberturas
+        let listaCoberturaHTML = "";
+        data.coberturas.forEach((item, index) => {
+            listaCoberturaHTML +=
+                '<li>' +
+                (item.icon == '' ? '<div class="item_vacio"></div>' : '    <img src=' + item.icon + ' alt="">') +
+                '    <p>' + item.texto + '</p>' +
+                '</li>';
+        })
+        frmMocSegurosHomeI.querySelector('.contenedor_moc_list_coberturas').innerHTML = listaCoberturaHTML;
+        console.log('frmMocSegurosHome', frmMocSegurosHomeI);
+        if (count == 0) {
+            cargarActionButtonsModal(data, frmMocSegurosHomeI, clase);
+            count = 1;
+        }
+
+        if (data.dataRequest.abreviaturaproducto == 'SVA') {
+            let tablaCuotas = document.querySelector('.modal_container_cuotas');
+            frmMocSegurosHomeI.querySelector('.link_tabla_cuotas').addEventListener('click', () => {
+                tablaCuotas.removeAttribute('style');
+            })
+
+            tablaCuotas.querySelector('.container_cuotas_cerrar img').addEventListener('click', () => {
+                tablaCuotas.style.display = "none";
+            })
+            contenedor_checkbox = `
+            <form-check id="declaracion" label="" displaydirection="horizontal"
+                datajson='[{"titulogrupo":""},[{"opcion":"Declaro <b>NO tener</b> obligaciones tributarias fuera de Perú"}]]'
+                msgerror="Debes seleccionar esta opción.">
+            </form-check>`;
+            
+        } else if (data.dataRequest.abreviaturaproducto == 'SOR') {
+            contenedor_checkbox = `
+        <form-check id="declaracion" label="" displaydirection="horizontal"
+            datajson='[{"titulogrupo":""},[{"opcion":"Declaro <b>NO haber tenido</b> cáncer antes"}]]'
+            msgerror="Debes seleccionar esta opción.">
+         </form-check>`;
+        }
+        else {
+            contenedor_checkbox = '';
+        }
+        frmMocSegurosHomeI.querySelector('.contenedor_moc_checkbox').innerHTML = contenedor_checkbox;
+        let checkbox = frmMocSegurosHome.querySelector('#declaracion0')
+        if(checkbox){
+            checkbox.onclick = () =>{
+                console.log('first')
+                if(checkbox.checked){
+                    taggeoAdobeMOCSeguros('Click', 'Declaracion - Si');
+                }else{
+                    taggeoAdobeMOCSeguros('Click', 'Declaracion - No');
+                }
+            }
+        }
+    }
+
+    const renderizarCaptchaModalOneClickSPT = () => {
+        console.log('captcha', formContentMOCSegurosHome.Captcha.getAttribute('index'));
+        if (!formContentMOCSegurosHome.Captcha.getAttribute('index')) {
+            try {
+                formContentMOCSegurosHome.RenderIndividualCaptcha.SetRederCaptcha(frmMocSegurosHomeCaptcha);
+
+            } catch (error) {
+
+            }
+            setTimeout(() => {
+                // btnObtenerModalOneClickSPT.removeAttribute('disabled');
+                console.log('captcha-forcerender', formContentMOCSegurosHome.Captcha.getAttribute('index'));
+            }, 500);
+        }
+    }
+
+    const seguros = {
+        'spt':dataModalSPT,
+        'sor':dataModalSOR,
+        'srv':dataModalSRV,
+        'sva':dataModalSVA,
+    }
+
+    const cargarDataModalSegunTipoSeguro = (seguro) => {
+        const value = seguro.toLowerCase();
+        frmMocSegurosHomeConstruirModal(seguros[value],seguro+'_modal');
+        renderizarCaptchaModalOneClickSPT();
+    }
+
+    const setDataCookieStorage = () => {
+        let dataCookie = document.cookie.split("; ").find((row)=>row.includes('cookie_seguros'));
+        if(dataCookie?.includes('vedi')){
+            dataJsonRequest.canal = "POST LOGIN VEDI";
+        } else if(dataCookie?.includes('loans')){
+            dataJsonRequest.canal = "POST LOGIN LOANS";
+        } else if(dataCookie?.includes('cards')){
+            dataJsonRequest.canal = "POST LOGIN CARDS";
+        }else{
+            dataJsonRequest.canal = "POST LOGIN VEDI";
+        }
+    }
+    //setDataCookieStorage();
+
+    function frmMocSegurosHomeCaptchaSendData(strTokenCaptcha) {
+        //const url_sendmail = "https://preprodportal.viabcp.com/apis/form/send/message;";
+        const url_sendmail = "https://www.viabcp.com/apis/form/send/message;";
+        let inputDNI = frmMocSegurosHome.querySelector('.contenedor_moc_input #frmMocSegurosHome_input_doc');
+        let dniHash = fnsha256(inputDNI.value.trim());
+        let indexCaptcha = frmMocSegurosHomeCaptcha.getAttribute('index');
+        let boolDNI = formContentMOCSegurosHome.Validar.CampoNumerico(inputDNI);
+        let nroDocumento = inputDNI.value.trim();
+        let chkDeclaracion = frmMocSegurosHome.querySelector('#declaracion');
+        let boolAceptaDeclaracion = true;
+        if(chkDeclaracion){
+            boolAceptaDeclaracion = false;
+            boolAceptaDeclaracion = chkDeclaracion.getAttribute('style') ? true : formContentMOCSegurosHome.Validar.CampoCheckButton(chkDeclaracion);
+            // if (!boolAceptaDeclaracion) {grecaptcha.reset(indexCaptcha)};
+        }
+        if (!boolDNI || !boolAceptaDeclaracion) { grecaptcha.reset(indexCaptcha); return };
+        
+        const jsonRequest = {
+            "leadId": getLeadID(),
+            "producto": 'MODAL ONE CLICK - HOME',
+            "tipoFormulario": "MODALONECLICK",
+            "tipoProducto": 'MODAL ONE CLICK - HOME',
+            "captchaToken": strTokenCaptcha,
+            "data": {
+                tipodocumento: "DNI",
+                documento: nroDocumento,
+                tdocumento: 'DNI',
+                ndocumento: nroDocumento,
+                fechaNEO: '-',
+                ndocumentohash: dniHash,
+                aceptopromocion: '-',
+                productopromocion: "CARD LOGOUT SPT",
+                abreviaturaproducto: dataJsonRequest.abreviaturaproducto,
+                descripcionpromocion: "Modal One Click",
+                email: 'sinemail@sinmail.com',
+                flujoventa: 'VIABCP',
+                promocioncancelada: "-",
+                canal: "HBK",
+                tipoplan: dataJsonRequest.tipoplan
+            },
+            metadata: {
+                "origen": document.location.href,
+                "agente": navigator.userAgent
+            }
+        };
+
+        const requestOptions = {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json",
+                "g-recaptcha-response": strTokenCaptcha
+            },
+            body: JSON.stringify(jsonRequest),
+            redirect: 'follow'
+        };
+        fetch(url_sendmail, requestOptions)
+            .then((response) => {
+                console.log('*****API STATUS: ' + response.status);
+                if (response.status == 200) {
+                    console.log('registro correctamente');
+                    taggeoAdobeMOCSeguros('Click', 'Comprar ' + dataJsonRequest.abreviaturaproducto);
+                    cambioPantallaModal();
+                    digitalData.push({
+                        "form": {
+                            "channel": "VIABCP",
+                            "version": variables_taggeo.versionModal,
+                            "name": variables_taggeo.tituloModal,
+                            "product": "Seguros-" + dataJsonRequest.abreviaturaproducto
+                        },
+                        "event": "trackFormSubmit"
+                    })
+                } else {
+                    console.warn('No se registro', response.status);
+                }
+                grecaptcha.reset(indexCaptcha);
+            })
+            .catch((error) => {
+                console.error('error', error);
+                grecaptcha.reset(indexCaptcha);
+            });
+    }
+    frmMocSegurosHomeAbrir('spt');
+
+</script>

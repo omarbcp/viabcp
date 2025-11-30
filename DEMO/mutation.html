@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="frmLead">
+        <div class="hidden-captcha">
+            <form-captcha id="goodPayersCaptcha" datacallback="goodPayersCaptchaCallback"></form-captcha>
+        </div>
+    </div>
+    <script>
+        function waitForElm(selector) {
+            return new Promise(resolve => {
+                if (document.querySelector(selector).getAttribute('index')) {
+                    return resolve(document.querySelector(selector));
+                }
+                const observer = new MutationObserver(mutations => {
+                    if (document.querySelector(selector).getAttribute('index')) {
+                        observer.disconnect();
+                        resolve(document.querySelector(selector));
+                    }
+                    mutations.forEach((mutation) => {
+                        switch (mutation.type) {
+                        case "childList":
+                           console.log('childList')
+                            break;
+                        case "attributes":
+                            console.log('attributes')
+                            break;
+                        }
+                    });
+                });
+                observer.observe(document.body, {
+                    childList: true,
+                    subtree: true,
+                    attributes: true
+                });
+            });
+        }
+        waitForElm('#goodPayersCaptcha').then((e)=>{
+            console.log(e)
+        })
+
+        setTimeout(()=>{
+            document.getElementById('goodPayersCaptcha').setAttribute('index','2')
+        }, 5000)
+    </script>
+</body>
+</html>

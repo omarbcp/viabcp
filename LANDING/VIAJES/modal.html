@@ -1,0 +1,771 @@
+<!-- MODAL DERIVATE E-COMMERCE -->
+<script>
+
+    let scriptCaptcha = document.createElement('script');
+    scriptCaptcha.src = 'https://www.google.com/recaptcha/api.js?onload=onloadCallbackrecaptcha&render=explicit';
+    scriptCaptcha.async = true;
+    document.body.append(scriptCaptcha);
+</script>
+<style>
+    .item_vacio{width:30px}
+    .hidden-captcha{display:none}
+    .contenedor_moc_home{height: auto;}
+    .contenedor_moc_home.abrir{animation:keyframe_moc_abrir .5s;bottom:24px}
+    .contenedor_moc_home.cerrar{animation:keyframe_moc_cerrar .5s}
+    .contenedor_moc_home{width:327px;box-shadow:0 8px 16px rgba(0,67,206,0.1);background-color:#FFF;border-radius:8px}
+    .contenedor_moc_header_home{height:auto;border-radius:8px 8px 0 0;padding:16px;position:relative;}
+    .contenedor_moc_close_header{position:relative;height:0;text-align:right;z-index:1}
+    .contenedor_moc_close_header img{cursor:pointer;margin:8px 8px 0 0}
+    .contenedor_moc_close_header img.paso_2{filter:brightness(0) saturate(100%) invert(45%) sepia(83%) saturate(1215%) hue-rotate(360deg) brightness(101%) contrast(106%)}
+    .contenedor_moc_header_modal{display:flex;justify-content:space-between}
+    .contenedor_moc_header_home h2,.contenedor_moc_header_home p{margin:0;}
+    .contenedor_moc_header_home h2{font-size:20px;line-height:24px;font-family:'Flexo';margin-bottom:8px;max-width:158px;color:#002a8d;}
+    .contenedor_moc_header_home p{font-size:16px;line-height:24px;font-family:'Flexo'; color:#202e44}
+    .contenedor_moc_image_header img{position:relative;right:5px;top:0}
+    .contenedor_moc_body_home{padding:16px 16px 24px 16px; border-radius:0 0 8px 8px;overflow-y: auto;max-height: 511px;}
+    .contenedor_moc_coberturas p{margin:0}
+    .contenedor_moc_coberturas ul{list-style:none;padding:0;margin-bottom:19px}
+    .contenedor_moc_coberturas ul li{display:flex;align-items:flex-start}
+    .contenedor_moc_coberturas ul li img{height:20px;margin-right:10px;position:relative;top:2px}
+    .contenedor_moc_coberturas p:nth-child(1){color:#202e44;font-size:16px;line-height:24px;font-family:'Flexo-Demi';margin-bottom:12px}
+    .contenedor_moc_coberturas ul p{color:#202e44;font-size:16px;line-height:24px;font-family:'Flexo';margin-bottom:8px}
+    .contenedor_moc_coberturas li:last-child p{margin-bottom:2px}
+    .contenedor_moc_legales p{margin:0;font-size:12px;line-height:18px;color:#868f9e;font-family:'Flexo'}
+    .contenedor_moc_legales p a{color:#ff7800;cursor:pointer;font-family:'Flexo-Demi';text-decoration:none}
+    .contenedor_moc_button{margin-top:16px;display:flex;justify-content:flex-end;height:40px;align-items:center}
+    .contenedor_moc_button button{outline:none;border:none;cursor:pointer;font-family:'Flexo'}
+    .contenedor_moc_button .btn_no_gracias{color:#ff7800;font-size:16px;background-color:transparent!important;width:130px;height:40px;font-family: Flexo-Demi;}
+    .contenedor_moc_button .btn_no_gracias:hover{background-color:transparent!important;border:none;box-shadow:none}
+    .contenedor_moc_button .btn_comprar{background-color:transparent;border-color:#ff7800;background-color:#ff7800;color:#FFF;font-size:16px;width:128px;height:40px;cursor:pointer;border-radius:20px}
+    .contenedor_moc_input{margin:0 0 18px 0}
+    .contenedor_moc_input .bcp_input_microcomponent{margin-bottom:0!important}
+    .contenedor_moc_input input[type="text"]{width:100%;height:48px;padding: 14px 150px 10px 16px;border-radius: 8px;border: solid 1px #4d5b70;}
+    .contenedor_moc_input .mt_input {margin-bottom:39px;}
+    .contenedor_moc_checkbox {display: flex; align-items: flex-start; justify-content: space-between; margin:18px 0 24px 0;}
+    .contenedor_moc_checkbox input[type="checkbox"]{margin-right: 8px;}
+    .title_step2{font-family: Flexo-Demi;font-size: 16px;line-height: 1.5;text-align: left;color: #202e44;margin-bottom: 17px;}
+    .btn_text_orange {color:#ff7800; background: none; border:0 none; margin-left: 56px;}
+    @media(min-width:765px) {
+        .contenedor_moc_home.abrir{right:5px; bottom:5px;animation:keyframe_moc_abrir 1s;position: fixed; z-index: 99;}
+    }
+    @media(max-width:764px){
+        .contenedor_moc_home_principal{background-color: rgb(0 0 0 / 50%);position: fixed;top: 0px;left: 0px;width: 100%;height: 100%;display: flex;align-items: center;justify-content: center;z-index: 9999;}
+        .contenedor_moc_home{width:327px;}
+        .viajes_modal .contenedor_moc_image_header img{right: 21px !important;}
+    }
+    @keyframes keyframe_moc_cerrar {0%{bottom:16px}100%{bottom:-100%}}
+    @keyframes keyframe_moc_abrir {0%{bottom:-100%}80%{bottom:48px}100%{bottom:24px}}
+    @keyframes keyframe_moc_cerrar {0%{bottom:16px}100%{bottom:-100%}}
+    @keyframes keyframe_moc_abrir {0%{bottom:-100%}80%{bottom:16px}100%{bottom:-4px}}
+    .contenedor_moc_home_card.ocultar{display:none}
+    .contenedor_moc_confirm_img{padding-top:24px;padding-bottom:16px}
+    .contenedor_moc_confirm_img img{width:72px}
+    .contenedor_moc_confirm_title h3{margin:auto;font-size:20px;line-height:28px;color:#002a8d;font-family:'Flexo-Demi';width:287px;margin-bottom:16px}
+    .contenedor_moc_confirm_title p{margin:auto;font-size:14px;width:287px;line-height:20px;color:#202e44;font-family:'Flexo';margin-bottom:16px}
+    .contenedor_moc_confirm_cancelar {width: calc(100% - 48px);height: 86px;margin: auto;text-align: center;margin-top: 32px;border-radius: 8px;background-color: #ebf4ff;padding: 16px;margin-bottom: 42px;}
+    .contenedor_moc_confirm_cancelar h3{margin:0;font-family:'Flexo-Demi';line-height:18px;font-size:12px;color:#002a8d}
+    .contenedor_moc_confirm_cancelar p{margin:0;font-family:'Flexo';font-size:12px;line-height:18px;color:#002a8d}
+    .contenedor_moc_confirm_cancelar p a{color:#ff7800;font-family:'Flexo-Demi';cursor:pointer}
+    .contenedor_moc_confirm_link{margin-bottom:32px;display: flex; justify-content: center; align-items: center;}
+    .contenedor_moc_confirm_link a{cursor:pointer;color:#ff7800;font-size:16px;font-family:'Flexo-Demi'}
+    .contenedor_moc_home_confirmacion{text-align:center;}
+    .btn_entendido{margin:auto;margin-bottom:24px;width:128px}
+    .contenedor_moc_plan_anual{background-color:#ebf4ff;width:294px;color:#002a8d;padding:16px;margin:auto;margin-bottom:24px;border-radius:8px}
+    .contenedor_moc_plan_anual p{max-width:204px;font-size:12px;text-align:center;line-height:18px;margin:auto}
+    .contenedor_moc_confirm_action{margin-top:32px}
+    b {font-family: Flexo-Demi;font-weight: 500;}
+    .contenedor_moc_input input[type="text"].error_input {border:solid 1px #e30425}
+    .contenedor_moc_input input[type="checkbox"].error_input {border:solid 1px #e30425}
+    button.btn-cuota {
+        background: url('/wcm/connect/f778adf3-c992-479c-884e-712ae0c41432/drop_down_orange.svg?MOD=AJPERES&attachment=true&id=1694618420895') center right no-repeat;
+        width: 62px;
+        height: 24px;
+        border: 0 none;
+        cursor: pointer;
+        margin-left: 0;
+        text-align: right;
+        padding-right: 29px;
+        padding-left: 0;
+        font-family: Flexo-Demi;
+        font-size: 14px;
+        color: #ff7800;
+        line-height: 24px;
+    }
+    button.btn-beneficios.activo,
+    button.btn-cuota.activo {
+        background: url('/wcm/connect/3d364f0b-27ab-4e5b-acd0-7fe2801d4228/a_ic_angle_drop_up.svg?MOD=AJPERES&attachment=true&id=1694727038485') center right no-repeat;
+    }
+    button.btn-beneficios {
+        background: url('/wcm/connect/f778adf3-c992-479c-884e-712ae0c41432/drop_down_orange.svg?MOD=AJPERES&attachment=true&id=1694618420895') center right no-repeat;
+        width: auto;
+        height: 24px;
+        border: 0 none;
+        cursor: pointer;
+        margin-left: 0;
+        text-align: right;
+        padding-right: 32px;
+        padding-left: 0;
+        font-family: Flexo-Demi;
+        font-size: 16px;
+        text-align: left;
+        color: #202e44;
+        margin-bottom: 12px;
+    }
+    .view-content {padding: 0;background-color: white;display: none;overflow: hidden;}
+    .ocultar {display: none;}
+    .contenedor_moc_input input::placeholder {font-family: Flexo-Demi;font-size: 16px;color: #99a1ad;}
+    /*TABLA DEVOLUCION*/
+    .tabla_devolucion_sva{border-radius:8px 8px 0 0;text-align:center;margin:auto;width:100%}
+    .th1,.th2,.th3,.th4{text-align:center;margin:0}
+    .tabla_devolucion_sva tr th{font-size:12px;line-height:100%;font-weight:500;color:#fff;text-align:center;height:30px}
+    .tabla_devolucion_sva tr th:first-child{border-radius:8px 0 0}
+    .tabla_devolucion_sva tr th:not(:last-child){background-color:#002a8d;border-right:3px solid #fff}
+    .tabla_devolucion_sva tr th:last-child{border-radius:0 8px 0 0;background-color:#ff7800}
+    .tabla_devolucion_sva tr td{background-color:#eff0f2;font-size:12px;line-height:20px;color:#202e44;border-right:3px solid #fff;border-top:3px solid #fff;height:30px}
+    .terms_sva {font-size: 12px;line-height: normal; color:#868f9e; margin-top: 10px;margin-bottom: 10px;}
+    /*EFECTO PULSO*/
+    .pulse {animation: pulse-animation 2s infinite;}
+    .check_orange {
+        background-image: url("/wcm/connect/db3c5d94-1fa2-44ab-a060-3fb91d35037e/checkbox_checkbox+%281%29.svg?MOD=AJPERES&attachment=true&id=1708091613862");
+        background-position: center;
+        background-repeat: no-repeat;
+        width: 16px;
+        height: 16px;
+        appearance: none;
+        display: inline-block;
+        vertical-align: middle;
+        background-origin: border-box;
+        padding: 0;
+        user-select: none;
+        flex-shrink: 0;
+        cursor: pointer;
+    }
+    .check_orange:checked {
+        background-image: url("/wcm/connect/cf34a3f6-d5fe-45e0-8979-8a0f4bedcfcb/checkbox_checkbox.svg?MOD=AJPERES&attachment=true&id=1708091674139");
+    }
+    @keyframes pulse-animation {
+        0% {box-shadow: 0 0 0 0px rgba(0, 0, 0, 0.2);}
+        100% {box-shadow: 0 0 0 20px rgba(0, 0, 0, 0);}
+    }
+    .mdl-cintillo{
+        position: relative;
+        height: 0px;
+        z-index: 1;
+    }
+    .mdl-cintillo img{
+        width: 76px !important;
+        position: relative;
+        top: -6px !important;
+        right: 5px !important;
+    }
+    .cont_text_precio{
+        font-size: 16px;
+        line-height: 20px;
+        color: #202E44;
+        font-family: 'Flexo';
+        margin: 0px;
+        margin-bottom: 16px;
+        width: 232px;
+    }
+    .banner_promo {
+    border-radius: 8px;
+    padding: 8px;
+    background-color: #ebf4ff;
+    color: #002a8d;
+    font-family: 'Flexo';
+    font-size: 12px;
+    margin-bottom: 16px;
+    text-align: center;
+    }
+    .banner_promo strong{
+        font-family: 'Flexo-Demi';
+        font-weight: 100;
+    }
+    .banner_promo a{
+        color: #ff7800;
+        cursor: pointer;
+        font-family: 'Flexo-Demi';
+    }
+    .wrap_logo_respaldo {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 32px;
+    }
+</style>
+<style id="styles-viajes-modal">
+    .viajes_modal .contenedor_moc_header_home.bg-viaje{background: #7088FF;}
+    .viajes_modal .contenedor_moc_header_home.bg-cumple{background: #7088FF; overflow: hidden;}
+    .viajes_modal .contenedor_moc_header_home.bg-cole{background: #7088FF;}
+    .viajes_modal .contenedor_moc_header_home.bg-hoteles{background: #7088FF;}
+
+    .viajes_modal .contenedor_moc_header_home{padding:32px 16px 16px 16px;height: 124px;}
+    .viajes_modal .contenedor_moc_header_home h2{margin-bottom:8px;max-width:205px;color:#fff}
+    .viajes_modal .bg-viaje .contenedor_moc_image_header img{top:0px;right:5px;width: 111px;}
+    .viajes_modal .bg-cumple .contenedor_moc_image_header img{top:-15px;right:0;width: 135px;}
+    .viajes_modal .bg-cole .contenedor_moc_image_header img{top:-15px;right:15px;width: 135px;}
+    .viajes_modal .contenedor_moc_coberturas li:last-child p{height:initial}
+    .viajes_modal .contenedor_moc_legales p{font-size:12px;line-height:16px}
+    .viajes_modal .contenedor_moc_button{margin-top:16px}
+    .viajes_modal .b-cuota-text{margin:0;color:#202e44;font-size:14px;line-height:20px}
+    .viajes_modal .contenedor_moc_checkbox a {color:#ff7800;}
+    .modal_container_cuotas_cont{width:500px;background-color:#FFF;border-radius:8px;max-width:500px}
+    .container_cuotas_cerrar{text-align:right}
+    .container_cuotas_cerrar img{cursor:pointer;filter:brightness(0) saturate(100%) invert(45%) sepia(83%) saturate(1215%) hue-rotate(360deg) brightness(101%) contrast(106%);margin:15px 15px 0 0}
+    .modal_container_cuotas{position:fixed;z-index:9999;background-color:#520000;display:flex;overflow:auto;box-shadow:0 0 7px 0 rgba(82,112,148,.2),0 2px 2px 0 rgba(82,112,148,.12),0 2px 2px 0 rgba(82,112,148,.14);top:0;left:0;width:100%;height:100%;align-items:center;justify-content:center}
+    .viajes_modal .bcp_checkbox_microcomponent span{font-size:12px;line-height:18px}
+    .viajes_modal .contenedor_moc_checkbox{margin-bottom:12px}
+    .wrap-cuota {display: flex;align-items: center;justify-content: space-between; margin-top: 10px;position: relative;}
+    .viajes_modal .contenedor_moc_button {justify-content: space-between;}
+    .viajes_modal .contenedor_moc_title_header > div:nth-child(1) {font-size: 12px; line-height: 1.5;text-align: left;color: #fff;margin:12px 0 4px 0;display: none;}
+
+    .viajes_modal .contenedor_moc_title_header > div:nth-child(2) {font-size: 18px; line-height: 24px;text-align: left;color: #fff;width: 176px;}
+    .viajes_modal .bg-cumple .contenedor_moc_title_header > div:nth-child(2) {
+        font-size: 16px;
+        line-height: 24px;
+        text-align: left;
+        color: #fff;
+        width: 180px;
+    }
+</style>
+<div id="frmMocSegurosHome" class="contenedor_moc_home_principal">
+    <div class="contenedor_moc_home">
+        <div class="contenedor_moc_close_header">
+            <img src="/wcm/connect/feb67ad9-4bcd-4708-9b53-43c34af920af/close_blanco.svg?MOD=AJPERES&attachment=true&id=1707863427303" alt="">
+        </div>
+        <div class="contenedor_moc_home_compra contenedor_moc_home_card">
+            <div class="mdl-cintillo">
+                <img src="/wcm/connect/3251ee3d-b2a3-4c49-8403-f0d44c899d0e/cyber_nov_modal.svg?MOD=AJPERES&attachment=true&id=1730837236094" alt="cintillo">
+            </div>
+            <div class="contenedor_moc_header_home">
+                <div class="contenedor_moc_header_modal">
+                    <div class="contenedor_moc_title_header"><div></div><div></div><div></div></div>
+                    <div class="contenedor_moc_image_header"><img src="" alt=""></div>
+                </div>
+            </div>
+            <div class="contenedor_moc_body_home" id="step1">
+                <p class="cont_text_precio">Desde <b>$2.93 por día</b></p>
+                <div class="contenedor_moc_coberturas" id="containerCobertura">
+                    <p>Te cubrimos:</p>
+                    <ul class="contenedor_moc_list_coberturas">
+                    </ul>
+                </div>
+                <div class="banner_promo">
+                    Al comprar el seguro participas del sorteo, revisa las bases <a id="btn-tyc">aquí.</a>
+                </div>
+                <div class="contenedor_moc_actions">
+                    <div class="contenedor_moc_button">
+                        <button class="bcp_boton_blanco btn_no_gracias">No, gracias</button>
+                        <button class="bcp_boton_naranja  btn_loquiero" style="width: 138px;">Lo quiero</button>
+                    </div>
+                </div>
+                <div class="wrap_logo_respaldo">
+                    <img src="/wcm/connect/f69490ec-21e4-4455-8cfd-d3288e911b05/rspaldo_pacifico.svg?MOD=AJPERES&attachment=true&id=1730837372341" alt="pacifico">
+                </div>
+            </div>
+            <div class="contenedor_moc_body_home ocultar" id="step2">
+                <div class="title_step2">Déjanos tus datos y un asesor se comunicará contigo</div>
+                <div class="contenedor_moc_input">
+                    <form-input id="modal-dni" name="modal-dni" datatype="tel"
+                        minlength="8" maxlength="8" constraint="soloNumeros" label="Número de DNI"
+                        msgerror="Ingresa Nº documento válido." taggeo="DNI">
+                    </form-input>
+                </div>
+                <div class="contenedor_moc_input">
+                    <form-input id="modal-nombre" name="modal-nombre" datatype="text"
+                        minlength="3" maxlength="50" constraint="soloLetras" label="Nombre y Apellido"
+                        msgerror="Ingresa un nombre" taggeo="Nombre">
+                    </form-input>
+                </div>
+                <div class="contenedor_moc_input">
+                    <form-input id="modal-celular" name="modal-celular" datatype="tel"
+                        minlength="9" maxlength="9" constraint="soloTelefonos" label="Celular"
+                        msgerror="Ingresa tu número móvil" taggeo="Celular">
+                    </form-input>
+                </div>
+                <div class="contenedor_moc_checkbox">
+                    <input type="checkbox" name="tyc-viajes" id="tyc-viajes" class="check_orange">
+                    <div>Al dar clic en “Contáctenme ”, tus datos personales serán tratados conforme a nuestros <a class="tyc_link">Términos y condiciones.</a></div>
+                </div>
+                <div class="contenedor_moc_actions">
+                    <div class="contenedor_moc_button">
+                        <button class="btn_text_orange btn_volver">Volver</button>
+                        <button class="bcp_boton_naranja  btn_comprar">Contáctenme</button>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+
+        <div class="contenedor_moc_home_confirmacion contenedor_moc_home_card ocultar">
+            <div class="contenedor_moc_confirm_img">
+                <img src="/wcm/connect/82a836f8-cb4c-494e-9a94-2cfaee078567/spot_circle_m_spc_mobile_success_hand_d_l.svg?MOD=AJPERES&attachment=true&id=1707967497599" alt="" />
+            </div>
+            <div class="contenedor_moc_confirm_title">
+                <h3>¡Gracias por tu interés en nuestro Seguro de Viajes!</h3>
+                <p></p>
+            </div>
+            <div class="contenedor_moc_confirm_link"><button class="bcp_boton_naranja btn_entendido">Entendido</button></div>
+        </div>
+        <div class="hidden-captcha">
+            <form-captcha id="frmMocSegurosHomeCaptcha" datacallback="frmMocSegurosHomeCaptchaSendData"></form-captcha>
+        </div>
+    </div>
+</div>
+<script>
+        let icon_check = '/wcm/connect/0016321b-2394-4c18-adc7-5851814915da/ic_check.png?MOD=AJPERES&attachment=false&id=1692803728523';
+        let dataModalTravel = {step:'1'} 
+        let count = 0;
+        let customUrlUTM = '';
+        const frmMocSegurosHome = document.querySelector('#frmMocSegurosHome');
+        const formContentMOCSegurosHome = new Formulario(frmMocSegurosHome);
+        const frmMocSegurosHomeCaptcha = frmMocSegurosHome.querySelector('#frmMocSegurosHomeCaptcha')
+        const tycPromoLaptop = document.querySelector('#btn-tyc');
+        tycPromoLaptop.onclick = () =>{
+            window.open('https://www.viabcp.com/wcm/connect/ec847359-1738-4d13-89a7-54b1e0cc64ac/legales_viajes_noviembre.pdf?MOD=AJPERES&attachment=false&id=1730928536685','_blank')
+            taggeoAdobeSeguros('Click','TyC Cyber')
+        }
+        //VARIABLES NUEVO TAGGEO
+        const variables_taggeo = {
+            tituloModal: 'Obten tu Seguro Viajes',
+            grupoModal: 'ViaBCP',
+            productModal: 'Seguros-Viajes',
+            channelModal: 'ViaBCP',
+            versionModal: 'V25',
+            producto: ''
+        }
+        //REQUEST API SOLICITUDES
+        const dataJsonRequest = {
+            aceptopromocion: '-',
+            productopromocion: '',
+            abreviaturaproducto: '',
+            descripcionpromocion: "Sin promoción",
+            email: 'sinemail@sinmail.com',
+            flujoventa: 'VIABCP',
+            promocioncancelada: "-",
+            canal: "MODAL",
+            tipoplan: "-"
+        }
+        //DATA DE MODALES
+        //PLAN MENSUAL
+        let dataModalVIAJES = {
+            seguro:'VIAJES',
+            category_modal:'Obten tu Seguro Viajes-V25',
+            name_modal:'Obtén tu Seguro Viajes',
+            title_seguro:'Seguro de Viajes',
+            title_modal: 'Obtén tu <b>Seguro de Viajes</b> y gana un <br>taxi al aeropuerto',
+            subtitle_modal: '',
+            spot_hero: '/wcm/connect/6bcd307b-5712-4e8c-a703-81e9919c9ccb/spot_viajes_cyber.svg?MOD=AJPERES&attachment=true&id=1730837100519',
+            coberturas: [
+                { icon: icon_check, texto: 'Hasta por <b>$50,000</b> gastos médicos.' },
+                { icon: icon_check, texto: 'Imprevistos del viaje como la pérdida del equipaje hasta por <b>$1,500.</b>' },
+                { icon: icon_check, texto: 'Recibe hasta <b>$500</b> por cancelación o retraso de viaje.' }
+            ],
+            texto_terminos: 'El click en "Comprar" confirma la solicitud, el envío de la póliza vía electrónica, la aceptación de los <a class="tyc_link">Términos y condiciones</a> y el cargo en la cuenta de ahorros vigente con mayor saldo. Límite de edad: 18 años a más.',
+            bg_header: 'bg-viaje',
+            dataRequest: {
+                productopromocion: '',
+                abreviaturaproducto: 'VIAJES',
+                descripcionpromocion: ''
+            },
+            url_terminos: '/wcm/connect/cdfd4f34-c2e1-4ddf-a85c-0ba885be85c4/Protecci%C3%B3n+de+Datos+Personales.pdf?MOD=AJPERES&attachment=true&id=1708018928084',
+            texto_gracias: 'Nos comunicaremos contigo para brindarte más información acerca de este seguro.',
+            tipoplan:'',
+            extra:{}
+        }
+        
+        //Función Taggeo Seguros
+        const taggeoAdobeMOCSeguros = (eventName, labelName, category = variables_taggeo.tituloModal + "-" + variables_taggeo.versionModal) => {
+            if (eventName == 'Impresión') {
+                digitalData.push({
+                    "form": {
+                        "channel": variables_taggeo.channelModal,
+                        "version": variables_taggeo.versionModal,
+                        "name": variables_taggeo.tituloModal,
+                        "product": variables_taggeo.productModal
+                    },
+                    "event": "trackFormView"
+                })
+            }
+            else {
+                digitalData.push({
+                    "action": {
+                        "group": variables_taggeo.grupoModal,
+                        "category": category,
+                        "name": eventName,
+                        "label": labelName
+                    },
+                    "metadata": {
+                        "key": "Producto",
+                        "value": variables_taggeo.productModal
+                    },
+                    "event": "trackAction"
+                })
+            }
+        }
+        //Funcion para validar input
+        const taggeoInput=(url)=>{
+            try {
+                const lista = document.querySelectorAll(url)
+                if(lista){
+                    lista.forEach(element => {
+                        if(element.value.length > 0 ){
+                            const label = element.parentElement.getAttribute('taggeo')
+                            taggeoAdobeMOCSeguros('Completar',label)
+                        } 
+                    });
+                }
+            } catch (error) {
+                taggeoAdobeMOCSeguros('Error','Taggeo de input')
+                console.log(error)
+            }
+        }
+        const validarCheckBox = (id)=>{
+            const checkBoxTYC = document.getElementById(id)
+            const animation = 'pulse'
+
+            if(checkBoxTYC.checked){
+                checkBoxTYC.classList.remove(animation)
+                return true
+            } else {
+                checkBoxTYC.classList.add(animation)
+                setTimeout(()=>{checkBoxTYC.classList.remove(animation)},3000)
+                return false
+            }
+        }
+        //Función para ocultar modal
+        const frmMocSegurosHomeCerrar = () => {
+            frmMocSegurosHome.querySelector('.contenedor_moc_home').classList.remove('abrir');
+            frmMocSegurosHome.querySelector('.contenedor_moc_home').classList.add('cerrar');
+            setTimeout(() => {
+                frmMocSegurosHome.style.display = "none";
+            }, 200);
+        }
+    
+        const frmMocSegurosHomeAbrir = (producto) => {
+            //frmMocSegurosHomeCerrar();
+            setTimeout(() => {
+                cambioPantallaModal(2);
+                frmMocSegurosHome.removeAttribute('style');
+                frmMocSegurosHome.querySelector('.contenedor_moc_home').classList.remove('cerrar');
+                frmMocSegurosHome.querySelector('.contenedor_moc_home').classList.add('abrir');
+                cargarDataModalSegunTipoSeguro(producto);
+                dataModalTravel.step = '1'
+            }, 200);
+        }
+        //Función carga data de taggeos
+        const cargarDataTaggeoModal = (data) => {
+            variables_taggeo.tituloModal = 'Obten tu Seguro Viajes',
+            variables_taggeo.grupoModal = 'ViaBCP',
+            variables_taggeo.productModal = 'Seguros-Viajes',
+            variables_taggeo.channelModal = 'ViaBCP',
+            variables_taggeo.versionModal = 'V25';
+            variables_taggeo.producto = data.dataRequest.abreviaturaproducto
+            dataJsonRequest.abreviaturaproducto = data.dataRequest.abreviaturaproducto;
+            dataJsonRequest.productopromocion = data.dataRequest.productopromocion;
+            dataJsonRequest.tipoplan = data.dataRequest.tipoplan;
+            dataJsonRequest.descripcionpromocion = data.dataRequest.descripcionpromocion;
+        }
+        //Función para agregar acción a los botones del modal
+        const cargarActionButtonsModal = (dataModalSPT, divContentModal, clase) => {
+            const classHidden = 'ocultar'
+            const inputDNI = document.getElementById('modal-dni')
+            const inputNombre = document.getElementById('modal-nombre')
+            const inputCelular = document.getElementById('modal-celular')
+            //Función para abrir Terminos y Condiciones
+            divContentModal.querySelector('.tyc_link').addEventListener('click', () => {
+                taggeoAdobeMOCSeguros('Click', 'Términos y Condiciones');
+                window.open(dataModalSPT.url_terminos, '_blank');
+            });
+            //Función para cerrar Modal - Botón Cerrar(X)
+            divContentModal.querySelector('.contenedor_moc_close_header img').addEventListener('click', () => {
+                const step = 'Cerrar Modal Paso' +dataModalTravel.step
+                if(dataModalTravel.step == '2'){taggeoInput('.contenedor_moc_input input')}
+                taggeoAdobeMOCSeguros('Click', step);
+                frmMocSegurosHomeCerrar();
+            });
+            //Función Botón Comprar
+            divContentModal.querySelector('.btn_comprar').addEventListener('click', () => {
+                let indexCaptcha = frmMocSegurosHomeCaptcha.getAttribute('index');
+                validaDNI = formContentMOCSegurosHome.Validar.CampoNumerico(inputDNI)
+                validaNombre = formContentMOCSegurosHome.Validar.CampoTexto(inputNombre)
+                validaCelular = formContentMOCSegurosHome.Validar.CampoCelular(inputCelular)
+                if(validaDNI&&validaNombre&&validaCelular&&validarCheckBox('tyc-viajes')){
+                    grecaptcha.reset(indexCaptcha)
+                    grecaptcha.execute(indexCaptcha)
+                    console.log('enviando...')
+                }
+                console.log('btn_comprar')
+            });
+            //Boton Siguiente
+            divContentModal.querySelector('.btn_loquiero').addEventListener('click', () => {
+                taggeoAdobeMOCSeguros('Click', 'Lo quiero');
+                //document.getElementById('step2').classList.remove(classHidden)
+                //document.getElementById('step1').classList.add(classHidden)
+                //dataModalTravel.step = '2'
+                // let pagetitle = urlUTMTGAB()
+                // pagetitle = pagetitle.length === 0 ? 'home': pagetitle
+                // const parametros = '?pcid=viabcp:'+pagetitle+':seguro-de-viajes:masivo:modal'
+                // const url = 'https://seguro-viaje.pacifico.com.pe/bcp'+parametros
+                //let url = urlUTMByAction('modal');
+                window.open(customUrlUTM,'_blank')
+            });
+            //Boton Volver
+            divContentModal.querySelector('.btn_volver').addEventListener('click', () => {
+                taggeoAdobeMOCSeguros('Click', 'Volver');
+                document.getElementById('step1').classList.remove(classHidden)
+                document.getElementById('step2').classList.add(classHidden)
+                dataModalTravel.step = '1'
+            });
+            //Función Botón No gracias
+            divContentModal.querySelector('.btn_no_gracias').addEventListener('click', () => {
+                taggeoAdobeMOCSeguros('Click', 'No gracias');
+                frmMocSegurosHomeCerrar();
+            });
+            //Función Botón Entendido
+            divContentModal.querySelector('.btn_entendido').addEventListener('click', () => {
+                taggeoAdobeMOCSeguros('Click', 'Entendido');
+                frmMocSegurosHomeCerrar();
+            });
+        }
+        //Función para cambiar de pantalla compra a confirmación
+        const cambioPantallaModal = (pantalla = 1) => {
+            if (pantalla == 1) {
+                frmMocSegurosHome.querySelector('.contenedor_moc_home_compra').classList.add('ocultar');
+                frmMocSegurosHome.querySelector('.contenedor_moc_home_confirmacion').classList.remove('ocultar');
+                frmMocSegurosHome.querySelector('.contenedor_moc_close_header img').classList.add('paso_2');
+                dataModalTravel.step = '3'
+            } else {
+                frmMocSegurosHome.querySelector('.contenedor_moc_home_compra').classList.remove('ocultar');
+                frmMocSegurosHome.querySelector('.contenedor_moc_home_confirmacion').classList.add('ocultar');
+                frmMocSegurosHome.querySelector('.contenedor_moc_close_header img').classList.remove('paso_2');
+            }
+        }
+        //Función para agregar data al modal - Segun tipo de seguro
+        const frmMocSegurosHomeConstruirModal = (data, clase) => {
+            try {
+                cargarDataTaggeoModal(data);
+                //taggeoAdobeMOCSeguros('Boton', 'Lo quiero', data.category_modal)
+                taggeoAdobeMOCSeguros('Impresión','');
+                const producto = data.dataRequest.abreviaturaproducto
+                let contenedor_checkbox = '';
+        
+                let frmMocSegurosHomeI = document.querySelector('#frmMocSegurosHome');
+                frmMocSegurosHomeI.removeAttribute('class');
+                frmMocSegurosHomeI.classList.add('contenedor_moc_home_principal');
+                frmMocSegurosHomeI.classList.add(clase);
+                frmMocSegurosHomeI = document.querySelector('#frmMocSegurosHome.' + clase);
+                //Setear titulo,texto,imagen,bgheader,legal,checkbox
+                // frmMocSegurosHomeI.querySelector('.contenedor_moc_title_header > div:nth-child(1)').innerHTML = data.title_seguro;
+                frmMocSegurosHomeI.querySelector('.contenedor_moc_title_header > div:nth-child(2)').innerHTML = data.title_modal;
+                frmMocSegurosHomeI.querySelector('.contenedor_moc_title_header > div:nth-child(3)').innerHTML = data.subtitle_modal;
+                //frmMocSegurosHomeI.querySelector('.contenedor_moc_legales p').innerHTML = data.texto_terminos;
+                frmMocSegurosHomeI.querySelector('.contenedor_moc_image_header img').src = data.spot_hero;
+                frmMocSegurosHomeI.querySelector('.contenedor_moc_header_home').classList.add(data.bg_header);
+                frmMocSegurosHomeI.querySelector('.contenedor_moc_confirm_title p').innerHTML = data.texto_gracias;
+
+                dataJsonRequest.tipoplan = data.tipoplan;
+                console.log(frmMocSegurosHomeI)
+                //Agregar lista coberturas
+                let listaCoberturaHTML = "";
+                const tope = data.coberturas.length - 1
+                data.coberturas.forEach((item, index) => {
+                    listaCoberturaHTML +=
+                        '<li>' +
+                        (item.icon == '' ? '<div class="item_vacio"></div>' : '    <img src=' + item.icon + ' alt="">') +
+                        (index == tope && producto == 'SVA' ? '<div class="wrap-cuota">'+ item.texto +'</div>' : '<p>'+ item.texto +'</p>') +
+                        '</li>';
+                })
+                const containerList = '#containerCobertura .contenedor_moc_list_coberturas'
+                frmMocSegurosHomeI.querySelector(containerList).innerHTML = listaCoberturaHTML;
+                //console.log('frmMocSegurosHome', frmMocSegurosHomeI);
+                if (count == 0) {cargarActionButtonsModal(data, frmMocSegurosHomeI, clase);count = 1}
+                //frmMocSegurosHomeI.querySelector('.contenedor_moc_checkbox').innerHTML = contenedor_checkbox;
+                let checkbox = frmMocSegurosHome.querySelector('#tyc-viajes')
+                if(checkbox){
+                    checkbox.onclick = () =>{
+                        checkbox.checked ? taggeoAdobeMOCSeguros('Click', 'Declaracion - Si') : taggeoAdobeMOCSeguros('Click', 'Declaracion - No');
+                    }
+                }
+            } catch (error) {
+                console.log(error)
+            }
+        }
+        const renderizarCaptchaModalOneClickSPT = () => {
+            console.log('captcha', formContentMOCSegurosHome.Captcha.getAttribute('index'));
+            if (!formContentMOCSegurosHome.Captcha.getAttribute('index')) {
+                try {
+                    formContentMOCSegurosHome.RenderIndividualCaptcha.SetRederCaptcha(frmMocSegurosHomeCaptcha);
+                } catch (error) {
+                    console.log(error)
+                }
+                setTimeout(() => {
+                    // btnObtenerModalOneClickSPT.removeAttribute('disabled');
+                    console.log('captcha-forcerender', formContentMOCSegurosHome.Captcha.getAttribute('index'));
+                }, 500);
+            }
+        }
+    
+        const seguros = {'viajes':dataModalVIAJES}
+    
+        const cargarDataModalSegunTipoSeguro = (seguro) => {
+            const value = seguro.toLowerCase();
+            frmMocSegurosHomeConstruirModal(seguros[value],seguro+'_modal');
+            renderizarCaptchaModalOneClickSPT();
+        }
+        function frmMocSegurosHomeCaptchaSendData(strTokenCaptcha) {
+            try {
+                //const url_sendmail = "https://preprodportal.viabcp.com/apis/form/send/message;";
+                const url_sendmail = "https://www.viabcp.com/apis/form/send/message;";
+                const inputDNI = document.getElementById('modal-dni')
+                const inputNombre = document.getElementById('modal-nombre')
+                const inputCelular = document.getElementById('modal-celular')
+                const dniHash = fnsha256(inputDNI.value.trim())
+                const nDocumento = inputDNI.value.trim()
+                const nombre = inputNombre.value
+                const celular = inputCelular.value
+                const indexCaptcha = frmMocSegurosHomeCaptcha.getAttribute('index');
+                //Validacion
+                validaDNI = formContentMOCSegurosHome.Validar.CampoNumerico(inputDNI)
+                validaNombre = formContentMOCSegurosHome.Validar.CampoTexto(inputNombre)
+                validaCelular = formContentMOCSegurosHome.Validar.CampoCelular(inputCelular)
+
+                if (!validaDNI || !validaNombre || !validaCelular) { grecaptcha.reset(indexCaptcha); return };
+
+                const jsonRequest = {
+                    "leadId": getLeadID(),
+                    "producto": 'MODAL ONE CLICK - HOME',
+                    "tipoFormulario": "MODALONECLICK",
+                    "tipoProducto": 'MODAL ONE CLICK - HOME',
+                    "captchaToken": strTokenCaptcha,
+                    "data": {
+                        tdocumento: 'DNI',
+                        ndocumento: nDocumento,
+                        fechaNEO: '-',
+                        ndocumentohash: dniHash,
+                        aceptopromocion: '-',
+                        productopromocion: nombre,
+                        abreviaturaproducto: dataJsonRequest.abreviaturaproducto,
+                        descripcionpromocion: celular,
+                        email: 'sinemail@sinmail.com',
+                        flujoventa: 'VIABCP',
+                        promocioncancelada: "-",
+                        canal: "MODAL",
+                        tipoplan: dataJsonRequest.tipoplan
+                    },
+                    metadata: {
+                        "origen": document.location.href,
+                        "agente": navigator.userAgent
+                    }
+                };
+    
+                const requestOptions = {
+                    method: 'POST',
+                    headers: {
+                        "Content-Type": "application/json",
+                        "g-recaptcha-response": strTokenCaptcha
+                    },
+                    body: JSON.stringify(jsonRequest),
+                    redirect: 'follow'
+                };
+                fetch(url_sendmail, requestOptions)
+                    .then((response) => {
+                        console.log('*****API STATUS: ' + response.status);
+                        if (response.status == 200) {
+                            console.log('registro correctamente');
+                            taggeoAdobeMOCSeguros('Click', 'Contáctenme');
+                            cambioPantallaModal();
+                            digitalData.push({
+                                "form": {
+                                    "channel": variables_taggeo.channelModal,
+                                    "version": variables_taggeo.versionModal,
+                                    "name": variables_taggeo.tituloModal,
+                                    "product": "Seguros-Viajes"
+                                },
+                                "event": "trackFormSubmit"
+                            })
+                        } else {
+                            console.warn('No se registro', response.status);
+                        }
+                        grecaptcha.reset(indexCaptcha);
+                    })
+                    .catch((error) => {
+                        console.error('error', error);
+                        grecaptcha.reset(indexCaptcha);
+                    });
+            } catch (error) {
+                console.log(error)
+            }
+        }
+        
+        function searchParamVIAJE() {
+            const params = ['utm_source','utm_medium','utm_campaign','utm_content','from'];
+            const urlParams = new URLSearchParams(window.location.search);
+            const audencia = [
+                {
+                    title_modal: '<b>Asegura tu viaje<br> familiar</b> y gana un<br> taxi al aeropuerto',
+                    name: 'COLEGIOS',
+                    clase:'bg-cole',
+                    hero:'/wcm/connect/1c50a54c-2bf7-4d3f-b009-ab699dec279f/viajes.svg?MOD=AJPERES&attachment=true&id=1731421958382'
+                },
+                {
+                    title_modal: '<b>Festeja tu cumpleaños<br> seguro</b> y gana un taxi<br> al aeropuerto',
+                    name: 'CUMPLE',
+                    clase:'bg-cumple',
+                    hero:'/wcm/connect/06ade76d-ecca-4053-863e-a275220b0539/cumple.svg?MOD=AJPERES&attachment=true&id=1731422018722'
+                },
+                {
+                    title_modal: 'Obtén tu <b>Seguro de Viajes</b> y gana un <br>taxi al aeropuerto',
+                    name: 'AGENCIA',
+                    clase:'bg-viaje',
+                    hero:'/wcm/connect/6bcd307b-5712-4e8c-a703-81e9919c9ccb/spot_viajes_cyber.svg?MOD=AJPERES&attachment=true&id=1730837100519'
+                },
+                {
+                    title_modal: 'Obtén tu <b>Seguro de Viajes</b> y gana un <br>taxi al aeropuerto',
+                    name: 'EMPRESA',
+                    clase:'bg-viaje',
+                    hero:'/wcm/connect/6bcd307b-5712-4e8c-a703-81e9919c9ccb/spot_viajes_cyber.svg?MOD=AJPERES&attachment=true&id=1730837100519'
+                },
+                {
+                    title_modal: 'Obtén tu <b>Seguro de Viajes</b> y gana un <br>taxi al aeropuerto',
+                    name: 'HOTELES',
+                    clase:'bg-viaje',
+                    hero:'/wcm/connect/6bcd307b-5712-4e8c-a703-81e9919c9ccb/spot_viajes_cyber.svg?MOD=AJPERES&attachment=true&id=1730837100519'
+                }
+            ]
+            let stringUTM = ''
+            //Accedemos a los valores
+            if (urlParams.has(params[0])&&urlParams.has(params[3])) {
+                stringUTM = 'utm_source='+urlParams.get(params[0])+'&utm_medium='+urlParams.get(params[1])+'&utm_campaign='+urlParams.get(params[2])+'&utm_content='+urlParams.get(params[3])+'&from='+urlParams.get(params[4])
+                const valSearch = urlParams.get(params[3])
+                audencia.forEach((item)=>{
+                    if(valSearch.includes(item.name)){
+                        dataModalVIAJES.bg_header = item.clase
+                        dataModalVIAJES.spot_hero = item.hero
+                        dataModalVIAJES.title_modal = item.title_modal
+                    }
+                })
+                customUrlUTM = 'https://seguro-viaje.pacifico.com.pe/bcp?'+stringUTM
+            } else {
+                customUrlUTM = 'https://seguro-viaje.pacifico.com.pe/bcp'
+                console.log('No se encontró el parámetro')
+            }
+            frmMocSegurosHomeAbrir('viajes')
+            changeActionBtnHero(customUrlUTM)
+        }
+        function changeActionBtnHero(urlUTM){
+            try {
+                const btnHero = document.querySelector(" .bcp_banner-sin-carousel.producto > div > div > div > div > div > div > a");
+                const btnBannerInferiorMovil = document.querySelector('.bcp_boton_solicitalo_inferior .vista_mobile a')
+                const btnBannerInferiorDesktop = document.querySelector('.bcp_boton_solicitalo_inferior .vista_desktop a')
+                const btnLink = [btnHero,btnBannerInferiorMovil,btnBannerInferiorDesktop]
+                btnLink.forEach((item)=>{
+                    item.removeAttribute('href');
+                    item.setAttribute('href',urlUTM);
+                })
+            } catch (error) {
+                console.log(error)
+            }
+        }
+        searchParamVIAJE()
+    </script>

@@ -1,0 +1,666 @@
+<style>
+    /* GENERIC */
+    .qi_contenedor_modal {
+        position: fixed;
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        z-index: 9999;
+    }
+    .qi_contenedor_modal .qi_modal_venta {
+        max-width: 345px;
+        position: fixed;
+        background: #FFFFFF;
+        box-shadow: 0px 8px 16px rgba(0, 67, 206, 0.1);
+        width: 100%;
+        z-index: 2;
+        border-radius: 8px;
+        font-family: 'Flexo';
+
+    }
+    .qi_contenedor_modal form-captcha {
+        display: none;
+    }
+    .qi_contenedor_modal .qi_modal_venta > button {
+        position: absolute;
+        right: 6px;
+        top: 12px;
+        background: transparent;
+        border: unset;
+        z-index: 2;
+        cursor: pointer;
+    }
+    
+    .qi_contenedor_modal .qi_modal_venta ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+
+    .qi_contenedor_modal .qi_modal_venta ul > li {
+        display: flex;
+        align-items: flex-start;
+    }
+    .qi_contenedor_modal .qi_modal_venta ul > li p {
+        color: #202e44;
+        font-size: 16px;
+        line-height: 24px;
+        font-family: 'Flexo';
+        margin:0 0 8px 0;
+    }
+    .qi_contenedor_modal .qi_modal_venta ul > li img {
+        width: 20px;
+        margin-right: 10px;
+        position: relative;
+        top: 2px;
+    }
+    .qi_grupo_botones{
+        display: flex;
+        flex-direction: row-reverse;
+    }
+
+    /* CUSTOM MODAL */
+    .qi_modal_venta b {
+        font-family: 'Flexo-Demi';
+        font-weight: 500;
+    }
+    .cont_text_precio {
+        font-size: 16px;
+        line-height: 20px;
+        color: #202E44;
+        font-family: 'Flexo';
+        margin: 0 0 16px 0;
+    }
+    .cont_text_precio span {
+        font-family: 'Flexo-Demi';
+    }
+    .contenedor_moc_header_home {
+        background-image: linear-gradient(108deg, #627BFA -2%, #4A5BCF 98%);
+        padding: 28px 16px 14px 16px;
+        height: 116px;
+        display: flex;
+        justify-content: space-between;
+        border-radius: 0 8px 0 0;
+    }
+    
+    .contenedor_moc_header_home > div:nth-child(1) {
+        font-size: 20px;
+        line-height: 26px;
+        text-align: left;
+        color: #fff;
+        width: 195px;
+    }
+    .contenedor_moc_header_home > div:nth-child(2) img {
+        top: -8px;
+        right: -16px;
+        width: 118px;
+        position: relative;
+    }
+    .contenedor_moc_body_home {
+        padding: 16px;
+        border-radius: 0 0 8px 8px;
+        overflow-y: auto;
+        max-height: 511px;
+    }
+    
+    .title_list {
+        color: #202e44;
+        font-size: 16px;
+        line-height: 24px;
+        font-family: 'Flexo-Demi';
+        margin-bottom: 12px;
+    }
+    .contenedor_moc_coberturas {
+        margin-bottom: 8px;
+    }
+    .contenedor_moc_button {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        margin-bottom: 16px;
+    }
+    .respaldo-pacifico-wo {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .respaldo-pacifico-wo p {
+        font-family: 'Flexo';
+        font-size: 12px;
+        font-weight: 400;
+        line-height: 16px;
+        color: #606C7F;
+        margin-right: 8px;
+    }
+    .contenedor_moc_button button {
+        outline: none;
+        border: none;
+        cursor: pointer;
+        font-family: 'Flexo';
+    }
+    .contenedor_moc_button .btn_no_gracias {
+        color: #ff7800;
+        font-size: 16px;
+        background-color: transparent!important;
+        width: 130px;
+        height: 40px;
+        font-family: Flexo-Demi;
+    }
+    .contenedor_moc_button .btn_no_gracias:hover {
+        background-color: transparent!important;
+        border: none;
+        box-shadow: none;
+    }
+    .qi_contenedor_modal .bcp_boton_naranja {
+        width: 130px;
+        background-color: #FF7800;
+        color: var(--white);
+    }
+    .qi_contenedor_modal .bcp_boton_naranja:focus, 
+    .qi_contenedor_modal .bcp_boton_naranja:hover {
+        background-color: #FF7800;
+        color: var(--white);
+    }
+    #piloto {
+        background: #fff url("/wcm/connect/0210ec95-e1d9-4ee7-9139-1d3944a3a635/Modal+SOS_1.jpg?MOD=AJPERES&attachment=true&id=1740426716002") no-repeat 0 0;
+        height: 494px;
+        width: 326px;
+        display: flex;
+        flex-direction: row;
+        justify-content: end;
+        border-radius: 10px;
+        overflow:hidden;
+    }
+    #piloto .step1 {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        width: 100%;
+    }
+    .section-first {
+        padding-bottom: 12px;
+        border-bottom: 1px solid #fff;
+        margin: 0 16px;
+        color:#fff;
+    }
+    .section-first > :nth-child(1) {
+        font-family: 'Flexo-Demi';
+        font-size: 20px;
+        line-height: 28px;
+        letter-spacing: 0px;
+        margin-bottom: 8px;
+    }
+    .section-first > :nth-child(2) {
+        font-family: 'Flexo';
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 20px;
+        letter-spacing: 0px;
+    }
+    .section-first > :nth-child(2) > span {
+        font-family: 'Flexo-Demi';
+    }
+    .section-second {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between; 
+        align-items: flex-start;
+        margin:18px 16px 16px 16px;
+        color:#FFFFFF;
+    }
+    .p_info {
+        display: flex;
+    }
+    .p_info > div {
+        margin-left: 8px;
+    }
+    .p_info > div > :nth-child(1) {
+        font-family: 'Flexo-Demi';
+        font-size: 14px;
+        line-height: 16.8px;
+    }
+    .p_info > div > :nth-child(2) {
+        font-family: 'Flexo';
+        font-size: 12px;
+        line-height: 18px;
+    }
+    .section-third {
+        font-family: Flexo;
+        font-size: 10px;
+        line-height: 12px;
+        text-align: left;
+        color:#FFF;
+        margin:0 16px 16px 16px;
+    }
+    .section-third > a,
+    .section-third > a:hover,
+    .section-third > a:link,
+    .section-third > a:active {
+        color:#ff7800;
+        cursor: pointer;
+    }
+    .bcp_cintillo_seguro{
+        position: relative;
+        height: 0px;
+        z-index: 12;
+    }
+
+    .bcp_cintillo_seguro img{
+        width: 92px;
+        position: relative;
+        right: 6px;
+        top: -10px;
+    }
+    .txt_small_gris_primary {
+        font-family: Flexo;
+        font-weight: 400;
+        font-size: 12px;
+        line-height: 14.4px;
+        letter-spacing: 0px; 
+        width: 100%;
+        margin-bottom: 16px;
+    }
+    .txt_small_gris_primary {
+       color:#606C7F;
+    }
+    .txt_small_gris_primary > a,
+    .txt_small_gris_primary > a:hover,
+    .txt_small_gris_primary > a:active {
+        color:#ff7800;
+        cursor: pointer;
+    } 
+    @media (max-width:991px) {
+        .qi_contenedor_modal {
+            padding: 0px 12px;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100%;
+            background: rgb(32 46 68 / 85%);
+            top: 0px;
+            left: 0px;
+        }
+        .qi_contenedor_modal .bcp_modal_venta.cerrar {
+            opacity: 1;
+                animation: fadeOut 1s ease-out forwards;
+            }
+
+        .qi_contenedor_modal .bcp_modal_venta.mostrar {
+            opacity: 0;
+            animation: fadeIn 1s ease-in forwards;
+        }
+    }
+    @media (min-width:992px) {
+        .qi_contenedor_modal {
+            padding: 0px 12px;
+            display: flex;
+            flex-direction: row;
+            justify-content: end;
+        }
+        .qi_contenedor_modal .qi_modal_venta.cerrar {
+            animation: slide-down 1s;
+        }
+        .qi_contenedor_modal .qi_modal_venta.mostrar {
+            bottom: 10px;
+            animation: slide-up 1s;
+            right: 10px;
+        }
+    }
+    /*EFECTOS*/
+    @keyframes slide-down {
+        0% {bottom: 16px;}
+        100% {bottom: -100%;}
+    }
+    @keyframes slide-up {
+        0% {bottom: -100%;}
+        80% {bottom: 60px;}
+        100% {bottom: 16px;}
+    }
+    @keyframes fadeIn {
+        from {opacity: 0;}
+        to {opacity: 1;}
+    }
+    @keyframes fadeOut {
+        from {opacity: 1;}
+        to {opacity: 0;}
+    }
+    @keyframes typing {
+        from { width: 0 }
+        to { width: 100% }
+    }
+    @keyframes blink-caret {
+        from, to { border-color: transparent }
+        50% { border-color: orange; }
+    }
+</style>
+<div id="modal-viajes" class="qi_contenedor_modal" style="display: none;">
+    <!-- Begin - Modal Venta de Seguro-->
+    <div class="qi_modal_venta">
+        <button class="btn_cerrar_modal fill_color" attrib-step="0">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" clip-rule="evenodd"
+                    d="M0.209705 0.387101L0.292893 0.292893C0.653377 -0.0675907 1.22061 -0.0953203 1.6129 0.209705L1.70711 0.292893L7 5.585L12.2929 0.292893C12.6834 -0.0976311 13.3166 -0.0976311 13.7071 0.292893C14.0976 0.683418 14.0976 1.31658 13.7071 1.70711L8.415 7L13.7071 12.2929C14.0676 12.6534 14.0953 13.2206 13.7903 13.6129L13.7071 13.7071C13.3466 14.0676 12.7794 14.0953 12.3871 13.7903L12.2929 13.7071L7 8.415L1.70711 13.7071C1.31658 14.0976 0.683418 14.0976 0.292893 13.7071C-0.0976311 13.3166 -0.0976311 12.6834 0.292893 12.2929L5.585 7L0.292893 1.70711C-0.0675907 1.34662 -0.0953203 0.779392 0.209705 0.387101L0.292893 0.292893L0.209705 0.387101Z"
+                    fill="#FFFFFF" />
+            </svg>
+        </button>
+        <div class="step1"></div>
+    </div>
+    <!-- End - Modal Venta de Seguro-->
+</div>
+<script>
+    //CLASES
+    class QIHTMLElement {
+        constructor(tagName='div') {
+            this.element = document.createElement(tagName)
+        }
+        addchildren(listElement){
+            listElement.forEach((e)=>{e && this.element.appendChild(e)})
+            return this;
+        }
+        addClass(data) {
+            if(typeof data == 'string'){
+                this.element.classList.add(data);
+            } else {
+                data.forEach((className)=>{this.element.classList.add(className)})
+            }
+            return this;
+        }
+        setAttribute(attributes) {
+            for (const [key, value] of Object.entries(attributes)) {this.element.setAttribute(key, value)}
+            return this;
+        }
+        setText(text) {
+            this.element.textContent = text;
+            return this;
+        }
+        setHTML(html) {
+            this.element.innerHTML = html;
+            return this;
+        }
+        appendChild(child) {
+            if (child instanceof QIHTMLElement) {
+                this.element.appendChild(child.element);
+            } else if (child instanceof Node) {
+                this.element.appendChild(child);
+            } else {
+                throw new Error("El hijo debe ser una instancia de QIHTMLElement o Node.");
+            }
+            return this;
+        }
+        appendTo(parent) {
+            if (parent instanceof QIHTMLElement) {
+                parent.element.appendChild(this.element);
+            } else if (parent instanceof Node) {
+                parent.appendChild(this.element);
+            } else {
+                throw new Error("El padre debe ser una instancia de QIHTMLElement o Node.");
+            }
+            return this;
+        }
+        getElement() {
+            return this.element;
+        }
+    }
+    const builHTML = (data) =>{
+        const tag = data.hasOwnProperty('tag') ? data.tag : 'div'
+        const node = new QIHTMLElement(tag)
+        data.hasOwnProperty('clase') && node.addClass(data.clase)
+        data.hasOwnProperty('content') && node.setHTML(data.content)
+        data.hasOwnProperty('attrib') && node.setAttribute(data.attrib)
+        return node.getElement()
+    }
+    const buildlist = (data)=>{
+        let container = new QIHTMLElement().addClass(data.clase)
+        let items = '<ul>'
+        const iconDefault = `<img src="/wcm/connect/a050ebdd-380f-4539-bfbd-58f5571a61fb/color%F0%9F%8E%A8%3F.svg?MOD=AJPERES&attachment=true&id=1739392831989" alt="check">`
+        data.content.forEach(element => {
+            const icon = element.hasOwnProperty('icon') ? element.icon : iconDefault
+            items += '<li>'
+            items += icon
+            items += '<p>'+element.item+'</p>'
+            items += '</li>'
+        })
+        items += '</ul>'
+        container.setHTML(items)
+        return container.getElement()
+    }
+    const builButtons = (data)=>{
+        const allButtons = []
+        data.content.forEach(button =>{
+            const parametro = button.hasOwnProperty('parametro') ? button.parametro : button.label
+            const newButton = new QIHTMLElement('button').addClass(button.clases).setText(button.label).getElement()
+            newButton.onclick = ()=>{button.functions(parametro)}
+            allButtons.push(newButton)
+        })
+        const sectionButton = new QIHTMLElement().addClass(data.clase).addchildren(allButtons).getElement()
+        return sectionButton
+    }
+    const builMaster = (data)=>{
+        const containerELement = []
+            data.forEach((element,index) =>{
+                if(element.hasOwnProperty('type')){
+                    containerELement.push(element.type(element))
+                } else {
+                    console.error("Body["+index+"] sin propiedad type")
+                }
+            })
+        return containerELement
+    }
+    //TAGGEOS
+    let taggeoGeneric = {
+        product_category:"Seguros",
+        channel : "ViaBCP",
+        group : "ViaBCP",
+        position:"",
+        subflow:"",
+        name: "Click",
+        creative:"",
+        category:"Modal-Viajes",
+        product:"Viajes",
+        message:'',
+        event:"trackAction",
+        version:'Seguros'
+    }
+    //DATA PARA EL MODAL
+    const dataModalViaje = {
+        generic:{
+            tyc:[
+                {node:'tycODV',link:'https://www.viabcp.com/wcm/connect/13ae3b82-f2e2-4f5d-a50a-c30226dc0b63/tyc_viajes_marzo.pdf?MOD=AJPERES&attachment=false&id=1741186444893'}
+            ]
+        },
+        control:{
+            header:[
+                {content:'¿Viajas pronto?<br>Gana un vale de<br> S/ 500 asegurándote',type:builHTML},
+                {content:'<img src="/wcm/connect/1199534d-2ca0-451f-a447-31a365e43b85/viajes_hand.png?MOD=AJPERES&attachment=false&id=1739378219339">',type:builHTML}
+            ],
+            body:{
+                step1:[
+                    {clase:'cont_text_precio',content:'Seguro de viajes desde <b>$2.93 por día</b>',type:builHTML},
+                    {clase:'title_list',content:'Te cubrimos:',type:builHTML},
+                    {clase:'contenedor_moc_coberturas', content:[
+                        {item:'<b>Hasta $50,000</b> en gastos médicos.'},
+                        {item:'<b>Hasta $1,500</b> por imprevistos del viaje como la pérdida del equipaje.'},
+                        {item:'<b>Hasta $500</b> por cancelación o retraso de viaje.'}
+                    ],type:buildlist},
+                    {clase:'txt_small_gris_primary',content:'Comprando el seguro participas del sorteo, revisa las bases <a id="tycODV">aquí</a>.',type:builHTML},
+                    {clase:['contenedor_moc_button'],
+                    content:[
+                        {
+                            clases:['bcp_boton_blanco','btn_no_gracias'],
+                            label:'No, gracias',
+                            functions:cerrarModal
+                        },
+                        {
+                            clases:'bcp_boton_naranja',
+                            label:'Lo quiero',
+                            functions:openURL
+                        }
+                        ],
+                        type:builButtons
+                    },
+                    {clase:'respaldo-pacifico-wo',content:'<p class="">Con el respaldo de</p><img src="/wcm/connect/2db31610-d5e9-4a05-9f64-83bc1fa4490f/Group+%281%29.png?MOD=AJPERES&attachment=false&id=1729805654191" alt="">',type:builHTML}
+
+                ],
+            },
+            taggeo:{
+                version:'Seguros-1402Control'
+            },       
+        },
+        piloto:{
+            header:[],
+            body:{
+                section1: [
+                    {clase:'p_title_primary',content:'¿Viajas pronto? Gana un vale de S/ 500 asegurándote',type:builHTML},
+                    {clase:'p_title_secundary',content:'Hasta con <span>$ 50,000</span> en cobertura médica.',type:builHTML}
+                ],
+                section2:[
+                    {clase:'p_info',content:'<img src="/wcm/connect/f4a45b4c-3598-4ecb-9c6f-0aa2b8adaa4e/Modal_Botiqui%CC%81n+1.svg?MOD=AJPERES&attachment=true&id=1740440415524"><div><div>Seguro de Viajes</div><div>Desde $ 2.93 por día</div></div>',type:builHTML},
+                    {clase:['p_button'],
+                    content:[
+                        {
+                            clases:'bcp_boton_naranja',
+                            label:'Lo quiero',
+                            functions:openURL
+                        }
+                        ],
+                        type:builButtons
+                    }
+                ]
+            },
+            taggeo:{
+                version:'Seguros-1402Test'
+            }    
+        }
+        
+    }
+    // ELEMENTOS GLOBALES
+    let tipoExperiment = 'piloto'
+    const containerModal = document.querySelector('.qi_contenedor_modal')
+    const modalVenta = document.querySelector('.qi_modal_venta')
+    const btnCerrarModal = document.querySelector('.btn_cerrar_modal')
+    const imgClose = btnCerrarModal.querySelector('svg path')
+    const colorFillClose = ['#FFFFFF','#FF7800']
+    // EVENTOS BOTONES
+    btnCerrarModal.onclick = ()=>{cerrarModal('Cerrar')}
+    //FUNCIONES GENERALES
+    function openURL(){
+        taggeoActionMulti({label:'Lo quiero'})
+        window.open("https://seguro-viaje.pacifico.com.pe/bcp","_blank")
+    }
+    function btnCloseAll(source){
+        document.querySelector('.qi_contenedor_modal').style.display="none"
+        taggeoActionMulti({label:source})
+    }
+    function cerrarModal(source){
+        let label = source
+        modalVenta.classList.remove('mostrar')
+        modalVenta.classList.add('cerrar')
+        setInterval(()=>{containerModal.style.display = 'none'},1500)
+        if(typeof step !== 'undefined'){
+            if(step.status()){
+                label = source == 'Cerrar' ? source +" "+step.position().toString() : source
+            }
+        }
+        taggeoActionMulti({label:label})
+    }
+    const insertNodeAll = (label,elements)=>{
+        const container = document.querySelector(label)
+        container && elements.forEach(e=>{container.appendChild(e)})
+    }
+    //BEGIN EXPERIMENTO
+    const modalExperiment = {
+        control: function(data){
+            taggeoGeneric.version = data.taggeo.version
+            const header = new QIHTMLElement().addClass('contenedor_moc_header_home').addchildren(builMaster(data.header)).getElement()
+            const body = new QIHTMLElement().addClass('contenedor_moc_body_home').addchildren(builMaster(data.body.step1)).getElement()
+            const cintillo = new QIHTMLElement().addClass('bcp_cintillo_seguro').setHTML('<img src="/wcm/connect/c9c6efba-602b-48da-865f-fd87fe000375/Cintillo.svg?MOD=AJPERES&attachment=true&id=1741120992109" alt="">').getElement()
+            insertNodeAll('.step1',[cintillo,header, body])
+            addActionLink(dataModalViaje.generic.tyc)
+            modalVenta.classList.add('mostrar')
+            taggeoActionMulti({name:'Modal',event:'trackFormView'})
+        },
+        piloto: function (data){
+            taggeoGeneric.version = data.taggeo.version
+            const sections = [
+                new QIHTMLElement().addClass('section-first').addchildren(builMaster(data.body.section1)).getElement(),
+                new QIHTMLElement().addClass('section-second').addchildren(builMaster(data.body.section2)).getElement(),
+                new QIHTMLElement().addClass('section-third').setHTML('Comprando el seguro participas del sorteo, revisa<br>las bases <a id="tycODV">aquí</a>.').getElement(),
+            ]
+            insertNodeAll('.step1',sections)
+            addActionLink(dataModalViaje.generic.tyc)
+            modalVenta.classList.add('mostrar')
+            taggeoActionMulti({name:'Modal',event:'trackFormView'})
+        }
+    }
+    function taggeoActionMulti (taggeoCustom){
+        const taggeoDataDefault = taggeoGeneric
+        const taggeo = {...taggeoDataDefault,...taggeoCustom}
+        //console.log(taggeo)
+        if(typeof digitalData !== 'undefined'){
+            let dataTaggeo = {
+                trackAction : {
+                    action: {group: taggeo.group,category: taggeo.category,name: taggeo.name,label: taggeo.label},
+                    metadata: {key: "Producto",value: taggeo.product},
+                    event: "trackAction"
+                },
+                trackPromotionView: {
+                    promotion:{name:taggeo.name,creative:taggeo.creative,position:taggeo.position},
+                    event:"trackPromotionView"
+                },
+                trackInsurancesRequests:{
+                    application:{product:taggeo.product,product_category:taggeo.product_category,subflow:taggeo.subflow},
+                    event:"trackInsurancesRequests"
+                },
+                trackElement: {
+                    element:{container:taggeo.container,type:taggeo.type,name:taggeo.name},
+                    event:"trackElement"
+                },
+                trackFormView:{
+                    form:{channel:taggeo.channel,name:taggeo.name,product:taggeo.product,version:taggeo.version},
+                    event:"trackFormView"
+                },
+                trackFormSubmit:{
+                    form:{channel:taggeo.channel,name:taggeo.name,product:taggeo.product,version:taggeo.version},
+                    event:"trackFormSubmit"
+                },
+                trackError:{
+                    error:{code:"VIABCP-HOME-VIAJES",message:taggeo.message},
+                    event:"trackError"
+                }
+            }
+            if(dataTaggeo[taggeo.event]){
+                digitalData.push(dataTaggeo[taggeo.event])
+            } else {
+                console.log('no se encontro evento de taggeo')
+            }
+        }
+    }
+    function launchModalABTest(){
+        try {
+            const abtest = ['control','piloto']
+            let porcent = () => Math.random() > 0.5 ? 1 : 0;
+            tipoExperiment = abtest[porcent()]
+            modalVenta.setAttribute('id',tipoExperiment)
+            modalExperiment[tipoExperiment](dataModalViaje[tipoExperiment])
+            containerModal.removeAttribute('style')
+        } catch (error) {
+            console.log(error)
+            taggeoActionMulti({message:'launchModalABTest',event:'trackError'})
+        }
+    }
+    function addActionLink(data){
+        data.forEach(element => {
+            const node = document.getElementById(element.node)
+            if(node){
+                node.onclick = ()=>{
+                    taggeoActionMulti({label:'Aqui',name:'Click'})
+                    window.open(element.link,"_blank")
+                }
+            }
+        })
+    }
+    //INICIALIZAR MODAL
+    launchModalABTest()
+</script>

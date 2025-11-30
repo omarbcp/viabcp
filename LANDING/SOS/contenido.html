@@ -1,4 +1,4 @@
-<!-- VERSION EXP BUTTON WORDING -->
+<!-- VERSION EXP BUTTON WORDING V2-->
 <style>
     main{
         outline: none;
@@ -121,8 +121,9 @@
         display: none;
     }
     .descripcion{
-        font-size: 14px;
-        line-height: 12px;
+        font-family: 'Flexo-Demi';
+        font-size: 16px;
+        line-height: 24px;
         color: #202E44;
         margin: 0px;
         margin-bottom: 24px;
@@ -227,8 +228,8 @@
     }
     .input_declaracion {
         font-family: Flexo;
-        font-size: 12px;
-        line-height: 1.5;
+        font-size: 14px;
+        line-height: 20px;
         text-align: left;
         color: #606c7f;
         margin-bottom: 24px;
@@ -242,20 +243,20 @@
     <div class="content_formulario_svd">
         <div class="pantalla_1">
             <div class="title">
-                <h3>Completa tus datos y te contactaremos</h3>
+                <h3>Completa tu DNI o CE y te contactaremos</h3>
             </div>
             <div class="title_mobile">
                 <p class="titulo_pequeno">Seguro S.O.S. Salud</p>
-                <p class="titulo_grande">Te cubrimos hasta S/ 30,000 en Emergencias Médicas y Accidentales</p>
+                <p class="titulo_grande">Protégete ante Emergencias Médicas y Accidentales y gana 1 vale de S/100</p>
                 <!-- <p class="titulo_mediano">Recupera <b>hasta el 120%</b> de lo aportado</p> -->
-                <p class="descripcion">Completa tus datos y te contactaremos</p>
+                <p class="descripcion">Completa tu DNI o CE y te contactaremos</p>
             </div>
-            <div class="inputs_components" id="frmSVDComunicacion">
-                <div class="plan_sor_formulario_inputs">
-                </div>
+            <div class="inputs_components  bcp_formulario" id="frmSVDComunicacion">
+                <div class="plan_sor_formulario_inputs"></div>
                 <div class="input_llamar">
                     <button class="bcp_boton_naranja">Llámenme</button>
                 </div>
+                
             </div>
         </div>
         <div class="pantalla_2">
@@ -283,10 +284,12 @@
         </div>
     </div>
 </div>
-<!-- <div class="exp_activity_sos_salud">
-    <input type="hidden" name="expButtonW" id="expButtonW" value="testA">
-</div> -->
+<!--<div class="exp_activity_sos_salud">
+    <input type="hidden" name="expButtonW" id="expButtonW" value="piloto">
+</div>-->
 [Component name="plantillas de presentacion (ux-frontend)/codigohtml-componentes-presentacionenlista/microcomponentes/microcomp.referenciaformulariowebcomponent"]
+
+
 <script>
     let dataTaggeoSOS = {
         channel : "Viabcp",
@@ -297,20 +300,11 @@
         producto : '',
         version : ''
     }
-    let dataTaggeoExpWB = {
-        channel : "Viabcp",
-        category : "Obten tu SOS Salud-Landing",
-        group : "VIABCP - Landing | SOS Salud",
-        label : "",
-        nameV : "",
-        producto : "SOS",
-        version : 'Seguros-ControlLlamenme'
-    }
     
     const urlListaClinicas = '/wcm/connect/7cf6f89b-c5aa-4293-a51d-793c9857e539/DOCUMENTOS+AUXILIARES+SOS+SALUD.pdf?MOD=AJPERES&attachment=true&id=1709736930833'
     const urltyc = {
-        link1:'https://www.viabcp.com/wcm/connect/fd365edf-7f13-44ef-8007-310f16d78895/Protecci%C3%B3n+de+Datos+Personales.pdf?MOD=AJPERES&attachment=false&id=1708105189312',
-        link2:'https://www.viabcp.com/wcm/connect/a2d2ec7f-6035-4428-9933-7bef4bc9951b/T%26C+Promoci%C3%B3n+Vales+500+soles+-+Seguros+-+Campa%C3%B1a+Cross+Julio+Rev.21.06.pdf?MOD=AJPERES&attachment=false&id=1719509128937 '
+        link1:'https://www.viabcp.com/transparencia/#protecciondedatos',
+        link2:'https://www.viabcp.com/wcm/connect/537fe5c8-3e25-4ac3-96b9-0c88aa1e63a3/tyc_Cyber_Nov.pdf?MOD=AJPERES&attachment=true&id=1730750108937'
     }
 
     const pantalla1 = document.querySelector('.pantalla_1')
@@ -318,72 +312,56 @@
     const formularioSVD = document.querySelector('.modal_svd_comunicacion')
     // document.querySelector('.bcp_nivel1').appendChild(formularioSVD)
     let frmSVDComunicacion,frmInitSVDPlanes,frmInitSVDPlanesCaptcha;
-    
+    const hideElement = (data)=>{
+        const {contenedor,items} = data
+        const elements = document.querySelectorAll(contenedor)
+        if(elements){
+            elements.forEach((e,i)=>{
+                if(i >= items){ e.remove()}
+            })
+            return true
+        } else {
+            return false
+        }
+    }
+    const cookieValues = (e)=>{
+      const valor = document.cookie.split("; ").find((row) => row.startsWith(e+"="))?.split("=")[1]
+      return valor
+    }
     //let dataTaggeo = {};
 
     //Posicion Banner  
     //let dataTaggeoExp = {testN:'',testLabel:''}
     //let isExpBSOSSalud = !!sessionStorage.getItem('exp_sos_wording');
-    let xpStorage = null    
-    waitForElm('.exp_activity_sos_salud').then((elm) => {
-        const buttonForm = document.querySelector('.input_llamar button')
-        let newWording = 'Llámenme'
-        xpStorage = document.querySelector('.exp_activity_sos_salud #expButtonW').value;
-        //xpStorage = sessionStorage.getItem('exp_sos_wording');
-        if(xpStorage == 'testA'){
-            newWording = 'Quiero asesoría'
-            dataTaggeoExpWB.version = 'Seguros-0624AsesoriaTestA'
-            taggeoSVDModal({label:'',name:'Landing-Pnd',type:'trackFormView',dataTaggeo:dataTaggeoExpWB});
-        } else if(xpStorage == 'testB'){
-            newWording = 'Solicitar información'
-            dataTaggeoExpWB.version = 'Seguros-0624AsesoriaTestB'
-            taggeoSVDModal({label:'',name:'Landing-Pnd',type:'trackFormView',dataTaggeo:dataTaggeoExpWB});
-        } else if(xpStorage == 'testC'){
-            newWording = 'Lo quiero ahora'
-            dataTaggeoExpWB.version = 'Seguros-0624AsesoriaTestC'
-            taggeoSVDModal({label:'',name:'Landing-Pnd',type:'trackFormView',dataTaggeo:dataTaggeoExpWB});
-        } else if(xpStorage == 'control'){
-            taggeoSVDModal({label:'',name:'Landing-Pnd',type:'trackFormView',dataTaggeo:dataTaggeoExpWB});
-        } 
-        buttonForm.innerText = newWording
-    });
+    let xpStorage = null  
+    let statusExperiment = false
 
-    const generarInputs = () => {
+    const generarInputs = (type) => {
+        const typeNumberDOC = {
+            control:'<form-input id="input_dni" name="input_dni" datatype="tel" minlength="8" maxlength="8" constraint="soloNumeros" label="DNI" msgerror="Ingresa tu número de documento"></form-input>',
+            piloto:'<form-cbodocumento id-inputs="inputDOC"></form-cbodocumento>'
+        }
+        const containerForm = document.querySelector('.plan_sor_formulario_inputs')
+        containerForm.innerHTML = ''
+        let inputDOC = typeNumberDOC[type]
         let inputHTML = `
-        <form-input id="input_dni" name="input_dni" datatype="tel"
-            minlength="8" maxlength="8" constraint="soloNumeros" label="DNI"
-            msgerror="Ingresa tu número de documento">
-        </form-input>
         <form-input id="input_celular" name="input_celular" datatype="tel"
             minlength="9" maxlength="9" constraint="soloNumeros" label="Celular"
             msgerror="Ingresa tu número de celular">
         </form-input>
-        <div id="input_declaracion" class="input_declaracion">Al enviarnos esta información autorizas al BCP el tratamiento de tus datos personales. Conoce más <a id="tycDP">aquí</a>. Al adquirir este seguro participas del sorteo, revisa las bases <a id="tycCJ">aquí</a></div>
+        <div id="input_declaracion" class="input_declaracion">
+            Declaro conocer que esta información será utilizada únicamente para los fines de este proceso, y será tratada según lo indicado en nuestra <a id="tycDP">Política de Privacidad</a>.
+        </div>
         <div class="hidden-captcha"><form-captcha id="frmSVDCaptcha" datacallback="frmSVDCaptchaCallback"></form-captcha></div>`;
-        document.querySelector('.plan_sor_formulario_inputs').innerHTML = inputHTML;
-        //frmSVDComunicacion.querySelector('#input_dni').addEventListener('change',(e)=>{validarCamposCardPlan(e);})
-        //frmSVDComunicacion.querySelector('#input_celular').addEventListener('change',(e)=>{validarCamposCardPlan(e);})
-
-        /*waitForElm('.exp_activity_sos_salud').then((elm) => {
-            if(xpStorage != 'testB'){
-                frmSVDComunicacion.querySelector('#input_name').addEventListener('change',(e)=>{validarCamposCardPlan(e);})
-            }else {
-                document.querySelector('#input_name').parentElement.remove()
-            }
-        })*/
-        // frmSVDComunicacion.querySelector('#input_name').addEventListener('change',(e)=>{validarCamposCardPlan(e);})
-        
-        //frmSVDComunicacion.querySelector('#input_declaracion0').addEventListener('change',(e)=>{validarCamposCardPlan(e);})
-        
-        document.querySelector('#input_declaracion #tycDP').addEventListener('click',()=>{
-            taggeoSVDModal({label:'Terminos y condiciones'});
-            window.open(urltyc.link1,'_blank');
-        })
-        document.querySelector('#input_declaracion #tycCJ').addEventListener('click',()=>{
-            taggeoSVDModal({label:'Terminos y condiciones Cyber Julio'});
-            window.open(urltyc.link2,'_blank');
-        })
-        frmInitSVDPlanesCaptcha = frmSVDComunicacion.querySelector('#frmSVDCaptcha');
+        /*if(xpStorage&&statusExperiment){
+            inputDOC = typeNumberDOC[xpStorage]
+        } */
+        inputHTML = inputDOC+inputHTML
+        containerForm.innerHTML = inputHTML
+        setInterval(()=>{
+            hideElement({contenedor:'.bcp_contenedor_cbo_input .bcp_cbo_scroll li',items:2})
+        },500)
+        document.querySelector('#input_declaracion #tycDP').addEventListener('click',actionTyC)
     }
     const openURL= (data)=>{
         const {url,taggeo,target='_blank'} = data
@@ -413,24 +391,19 @@
     }
     //Funcion validar parametros inputs
     const validateInputs = () =>{
-        let boolDNI = validateInput('input_dni','CampoNumerico');
-        let boolTLF = validateInput('input_celular','CampoNumerico');
-        // let booltName = validateInput('input_name','CampoTexto');
-        // isExpBSOSSalud == true ? booltName = true : booltName = 
-        let booltName = true;
-        /*waitForElm('.exp_activity_sos_salud').then((elm) => {
-            if(xpStorage != 'testB'){
-                booltName = validateInput('input_name','CampoTexto');
-            }else {
-                booltName = true;
+        let boolDNI = false
+        if(xpStorage){
+            if(xpStorage == 'control'){
+                boolDNI = validateInput('input_dni','CampoNumerico')
+            } else {
+                boolDNI = frmInitSVDPlanes.Validar.TipoNroDocumento(document.querySelector('#bcp_tipo_nro_documento'))
             }
-        })*/
-        //let chkDeclaracion = frmSVDComunicacion.querySelector('#input_declaracion');
-        //let boolAceptaDeclaracion = true;
-        /*if(chkDeclaracion){
-            boolAceptaDeclaracion = false;
-            boolAceptaDeclaracion = chkDeclaracion.getAttribute('style') ? true : frmInitSVDPlanes.Validar.CampoCheckButton(chkDeclaracion);
+        } /*else {
+            boolDNI = validateInput('input_dni','CampoNumerico')
         }*/
+        let boolTLF = validateInput('input_celular','CampoNumerico');
+        let booltName = true;
+        
         if (!boolDNI || !boolTLF || !booltName ) {
             console.log('validacion false')
             return false
@@ -438,11 +411,39 @@
             return true;
         }
     }
-    
+    const launchExperiment = ()=>{
+        console.log('launchExperiment')
+        xpStorage = 'control'
+        launchFormulario()
+        waitForElm('.exp_activity_sos_salud').then((elm) => {
+            xpStorage = elm.querySelector('#expButtonW')?.value
+            statusExperiment = true
+            if(xpStorage){
+                dataTaggeoSOS.version = xpStorage == 'control' ? 'Control2001': 'Test2001'
+                taggeoSVDModal({label:'',name:'MODAL ONE CLICK - HOME',type:'trackFormView'})
+                console.log('ABTEST=>'+xpStorage)
+                generarInputs(xpStorage)
+                frmInitSVDPlanesCaptcha = frmSVDComunicacion.querySelector('#frmSVDCaptcha');
+            }  
+        })
+        .catch((error) => {
+            digitalData.push({
+                error:{code:"VIABCP-FP-SOSSALUD",message:'Error carga de experimento'},
+                event:"trackError"
+            })
+        })
+        .finally(() => console.log('Operación completada'));
+    }
+    const launchUTM = ()=>{
+        console.log('launchUTM')
+        xpStorage = 'piloto'
+        launchFormulario('piloto')
+        taggeoSVDModal({label:'',name:'MODAL ONE CLICK - HOME',type:"trackFormView"})
+    }
     document.querySelector('.input_llamar button').onclick = () => {
         if(!validateInputs()) return
         const indexCaptcha = frmInitSVDPlanesCaptcha.getAttribute('index')
-        taggeoSVDModal({label:'Te llamamos',dataTaggeo:dataTaggeoExpWB})
+        taggeoSVDModal({label:'Te llamamos',dataTaggeo:dataTaggeoSOS})
         grecaptcha.execute(indexCaptcha)
     }
     const actionLink = () => {
@@ -460,7 +461,6 @@
     }
     const actionScrollTop=()=>{
         const buttonsBannerFix = document.querySelectorAll('.bcp_boton_solicitalo_inferior a')
-
         buttonsBannerFix.forEach(btnScroll => {
             btnScroll.setAttribute('target','_self')
             btnScroll.querySelector('div').removeAttribute('tipo_enlace')
@@ -472,26 +472,39 @@
         })
         
     }
+    [Component name="resources/endpointsapis/microcomp.box.formulariosapi"]
     //ENVIO DE SOLICITUD
     function frmSVDCaptchaCallback(strTokenCaptcha) {
         //const url_sendmail ="https://preprodportal.viabcp.com/apis/form/send/message;";
-        const url_sendmail = "https://www.viabcp.com/apis/form/send/message;";
-        let inputDNI= frmSVDComunicacion.querySelector('#input_dni');
-        let inputTLF = frmSVDComunicacion.querySelector('#input_celular');
-        //let chkDeclaracion = frmSVDComunicacion.querySelector('#input_declaracion');
-        let dniHash = fnsha256(inputDNI.value.trim());
-        let indexCaptcha = frmInitSVDPlanesCaptcha.getAttribute('index');
-        let boolDNI = frmInitSVDPlanes.Validar.CampoNumerico(inputDNI);
-        let boolTLF = frmInitSVDPlanes.Validar.CampoNumerico(inputTLF);
-        let nroDocumento = inputDNI.value.trim();
-        let telefono = inputTLF.value.trim();
-        //let boolAceptaDeclaracion = true;
-        /*if(chkDeclaracion){
-            boolAceptaDeclaracion = false;
-            boolAceptaDeclaracion = chkDeclaracion.getAttribute('style') ? true : frmInitSVDPlanes.Validar.CampoCheckButton(chkDeclaracion);
-        }*/
+        //const url_sendmail = ''
+        let cicHash = '';
+        let tipoDoc = 'DNI'
+        let inputDNI = ''
+        let descripcionpromocion = '-'
+        let boolDNI = false
+        if(xpStorage){
+            if(xpStorage == 'control'){
+                boolDNI = validateInput('input_dni','CampoNumerico')
+                tipoDoc = 'DNI'
+                inputDNI= frmSVDComunicacion.querySelector('#input_dni').value
+                if(statusExperiment){descripcionpromocion = 'CONTROL'}
+            } else {
+                boolDNI = frmInitSVDPlanes.Validar.TipoNroDocumento(document.querySelector('#bcp_tipo_nro_documento'))
+                tipoDoc = document.querySelector(`#bcp_tipo_nro_documento .bcp_texto_seleccion`).innerText.trim()
+                inputDNI = frmInitSVDPlanes.getNroDocumento();
+                if(statusExperiment){descripcionpromocion = 'PILOTO'}
+            }
+        } 
+
+        const inputTLF = frmSVDComunicacion.querySelector('#input_celular')
+        const dniHash = fnsha256(inputDNI)
+        const indexCaptcha = frmInitSVDPlanesCaptcha.getAttribute('index')
+        const boolTLF = frmInitSVDPlanes.Validar.CampoNumerico(inputTLF)
+        const nroDocumento = inputDNI;
+        const telefono = inputTLF.value.trim()
+        
         if (!boolDNI || !boolTLF ) { grecaptcha.reset(indexCaptcha) ;return; };
-    
+        
         const jsonRequest = {
             leadId: getLeadID(),
             producto: "MODAL ONE CLICK - HOME",
@@ -499,27 +512,29 @@
             tipoProducto: "MODAL ONE CLICK - HOME",
             captchaToken: strTokenCaptcha,
             data: {
-                tdocumento: "DNI",
+                intencionventa:"SI",
+                tipodocumento: tipoDoc,
+                documento: nroDocumento,
+                tdocumento: tipoDoc,
                 ndocumento: nroDocumento,
                 fechaNEO: "-",
                 ndocumentohash: dniHash,
                 aceptopromocion: "si",
                 productopromocion:  'Seguro Salud SOS' ,
                 abreviaturaproducto: "SSOS" ,
-                descripcionpromocion:'-' ,
+                descripcionpromocion: descripcionpromocion ,
                 email: "sinemail@sinmail.com",
                 flujoventa: "VIABCP",
                 promocioncancelada: telefono,
                 canal: 'VIABCP',
                 tipoplan: '-' 
-            }
-            ,
+            },
             metadata: {
                 origen: document.location.href,
                 agente: navigator.userAgent,
             },
         }
-    
+        //console.log(jsonRequest.data)
         const requestOptions = {
             method: "POST",
             headers: {
@@ -536,6 +551,8 @@
                 console.log('**Solicitud Registrada**')
                 pantalla1.style.display="none"
                 pantalla2.style.display="flex"
+                fbq('track', 'CompleteRegistration');
+                ttq.instance('CML9MTBC77UBB48CJQ8G').track('SubmitForm')
                 if(innerWidth < 657){document.querySelector('.bcp_beneficio_presentacion_producto').style.marginTop = '250px'};
                 //document.querySelector('.bcp_breadcrum').classList.add('confirm');
                 taggeoSVDModal({label:'',name:jsonRequest.tipoProducto,type:"trackFormSubmit"})
@@ -556,6 +573,10 @@
                     "label": "SOS-SALUD"
                 })
                 fbq('track', 'CompleteRegistration');
+                //trackAction Pixel Bing
+                window.uetq = window.uetq || [];
+                window.uetq.push("event", "submit_lead_form", {});
+                unsubscribeTopic()
             } else {
             console.warn("No se registro", response.status);
             }
@@ -597,30 +618,37 @@
         }
     }
        
+    function actionTyC(){
+       taggeoSVDModal({label:'Terminos y condiciones'});
+       window.open(urltyc.link1,'_blank');
+    }
     function ocultarChatFlotante(){
         const chatFlotante = document.querySelector('.bcp_footer_ayuda_flotante');
         if(chatFlotante){chatFlotante.style.display = 'none'};
         console.log('ocultar chat');
     }
     document.addEventListener('DOMContentLoaded',()=> {
+        launchUTM()
+    });
+
+    function launchFormulario(type='control'){
         const containerBanner = document.querySelector("main.bcp_banner-sin-carousel.producto > div > div > div > div > div")
         if(containerBanner){
             containerBanner.appendChild(formularioSVD)
-            frmSVDComunicacion = document.querySelector('#frmSVDComunicacion'); //frmMocSegurosHome
-            frmInitSVDPlanes = new Formulario(frmSVDComunicacion);//formContentMOCSegurosHome
-            frmInitSVDPlanesCaptcha;
-            generarInputs()
+            generarInputs(type)
             actionLink()
             ocultarChatFlotante()
             actionScrollTop()
-
             document.querySelector('.bcp_beneficio_presentacion_producto_titulo p span:nth-child(1)').classList.add('custom-font24')
             document.querySelector('.bcp_beneficio_presentacion_producto_titulo p span:nth-child(3)').classList.add('custom-font20')
             formularioSVD.removeAttribute('style')
-            //taggeoSVDModal({label:'',name:'Landing-Pnd',type:'trackFormView'});
+            frmSVDComunicacion = document.getElementById('frmSVDComunicacion'); //frmMocSegurosHome
+            frmInitSVDPlanes = new Formulario(frmSVDComunicacion);//formContentMOCSegurosHome
+            frmInitSVDPlanesCaptcha = frmSVDComunicacion.querySelector('#frmSVDCaptcha');
+            setTimeout(()=>{renderizarCaptchaModalOneClickSOS()},1000)
+            
         }
-    });
-
+    }
     function waitForElm(selector) {
         return new Promise(resolve => {
             if (document.querySelector(selector)) {
@@ -640,4 +668,69 @@
             });
         });
     }
+    //VALIDA reCAPTCHA
+    function renderizarCaptchaModalOneClickSOS(){
+        if (!frmInitSVDPlanes.Captcha.getAttribute('index')) {
+            try {
+                frmInitSVDPlanes.RenderIndividualCaptcha.SetRederCaptcha(frmInitSVDPlanesCaptcha);
+            } catch (error) {
+                console.log(error)
+            }
+            setTimeout(() => {
+                console.log('captcha-forcerender', frmInitSVDPlanes.Captcha.getAttribute('index'));
+            }, 500);
+        }
+    }
+
+//TEST RETARGETING 
+function retargeting_subscribeTopic(){ 
+    if (Notification.permission == "granted"){ 
+        indigitall.topicsSubscribe(["TestSOSNoFinaliza"]); 
+        var event_code = "testSOS"; 
+        console.log("Ingresa Retargeting y suscribe grupo de no finaliza"); 
+        indigitall.sendCustomEvent({ 
+            eventType: event_code, 
+            customData: {}, 
+            async: false, 
+        }); 
+        console.log('indigitall topicsSubscribe')
+    } 
+    console.log('indigitall retargeting')
+} 
+
+function unsubscribeTopic(){ 
+    if (Notification.permission == "granted"){ 
+        console.log("Desuscribe de Topic No finaliza compra"); 
+        indigitall.topicsUnsubscribe(["TestSOSNoFinaliza"]); 
+    } 
+} 
+
+function iniciarTimerEspera(){
+    let contador = 0
+    const idIntervalo = setInterval(() => {
+        console.log(`Ejecutando acción en el intervalo, ${contador}`);
+        if(typeof indigitall == 'function'){
+            clearInterval(idIntervalo)
+            retargeting_subscribeTopic()
+        }
+        if(contador == 10){clearInterval(idIntervalo)}
+        contador++
+    }, 1000);
+    
+}
+window.addEventListener("load", iniciarTimerEspera); 
+
+function searchUTM(dataSearch) {
+    try {
+        const {utm,value,actionTrue,actionFalse} = dataSearch
+        const urlParams = new URLSearchParams(window.location.search);
+        if(urlParams.has(utm)&&urlParams.get(utm) == value){
+            actionTrue()
+        } else {
+            actionFalse()
+        } 
+    } catch (error) {
+        console.error(error)
+    }
+}
 </script>

@@ -1,0 +1,2181 @@
+<!--MODAL VIAJES ODV JULIO -->
+<style>
+    /* GENERIC */
+    .qi_contenedor_modal {
+        position: fixed;
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        z-index: 9999;
+    }
+    .qi_contenedor_modal .qi_modal_venta {
+        max-width: 345px;
+        position: fixed;
+        background: #FFFFFF;
+        box-shadow: 0px 8px 16px rgba(0, 67, 206, 0.1);
+        width: 100%;
+        z-index: 2;
+        border-radius: 8px;
+        font-family: 'Flexo';
+
+    }
+    .qi_contenedor_modal form-captcha {
+        display: none;
+    }
+    .qi_contenedor_modal .qi_modal_venta > button {
+        position: absolute;
+        right: 6px;
+        top: 12px;
+        background: transparent;
+        border: unset;
+        z-index: 2;
+        cursor: pointer;
+    }
+    
+    .qi_contenedor_modal .qi_modal_venta ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+		display: block;
+    }
+
+    .qi_contenedor_modal .qi_modal_venta ul > li {
+        display: flex;
+        align-items: flex-start;
+    }
+    .qi_contenedor_modal .qi_modal_venta ul > li p {
+        color: #202e44;
+        font-size: 16px;
+        line-height: 24px;
+        font-family: 'Flexo';
+        margin:0 0 8px 0;
+    }
+    .qi_contenedor_modal .qi_modal_venta ul > li img {
+        width: 20px;
+        margin-right: 10px;
+        position: relative;
+        top: 2px;
+    }
+    .qi_grupo_botones{
+        display: flex;
+        flex-direction: row-reverse;
+    }
+
+    /* CUSTOM MODAL */
+    .qi_modal_venta b {
+        font-family: 'Flexo-Demi';
+        font-weight: 500;
+    }
+    .cont_text_precio {
+        font-size: 16px;
+        line-height: 20px;
+        color: #202E44;
+        font-family: 'Flexo';
+        margin: 0 0 16px 0;
+    }
+    .cont_text_precio span {
+        font-family: 'Flexo-Demi';
+    }
+    #control .contenedor_moc_header_home {
+        height: 133px;
+        padding: 35px 16px 14px 16px;
+        overflow: hidden;
+    }
+    .contenedor_moc_header_home {
+        background-image: linear-gradient(108deg, #627BFA -2%, #4A5BCF 98%);
+        padding: 28px 16px 14px 16px;
+        height: 116px;
+        display: flex;
+        justify-content: space-between;
+        border-radius: 0 8px 0 0;
+    }
+    
+    .contenedor_moc_header_home > div:nth-child(1) {
+        font-size: 20px;
+        line-height: 26px;
+        text-align: left;
+        color: #fff;
+        width: 215px;
+    }
+    .contenedor_moc_header_home > div:nth-child(2) {
+        position: relative;
+    }
+    #control .contenedor_moc_header_home > div:nth-child(2) img {
+        position: absolute;
+        right: -16px;
+        top:auto;
+        bottom: -14px;
+        width: 130px;
+    }
+    .contenedor_moc_header_home > div:nth-child(2) img {
+        top: -8px;
+        right: -16px;
+        width: 118px;
+        position: relative;
+    }
+    .contenedor_moc_body_home {
+        padding: 16px;
+        border-radius: 0 0 8px 8px;
+        overflow-y: auto;
+        max-height: 511px;
+    }
+    
+    .title_list {
+        color: #202e44;
+        font-size: 16px;
+        line-height: 24px;
+        font-family: 'Flexo-Demi';
+        margin-bottom: 12px;
+    }
+    .contenedor_moc_coberturas {
+        margin-bottom: 8px;
+    }
+    .contenedor_moc_button {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        margin-bottom: 16px;
+    }
+    .respaldo-pacifico-wo {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .respaldo-pacifico-wo p {
+        font-family: 'Flexo';
+        font-size: 12px;
+        font-weight: 400;
+        line-height: 16px;
+        color: #606C7F;
+        margin-right: 8px;
+    }
+    .contenedor_moc_button button {
+        outline: none;
+        border: none;
+        cursor: pointer;
+        font-family: 'Flexo';
+    }
+    .contenedor_moc_button .btn_no_gracias {
+        color: #ff7800;
+        font-size: 16px;
+        background-color: transparent!important;
+        width: 130px;
+        height: 40px;
+        font-family: Flexo-Demi;
+    }
+    .contenedor_moc_button .btn_no_gracias:hover {
+        background-color: transparent!important;
+        border: none;
+        box-shadow: none;
+    }
+	.qi_contenedor_modal button.bcp_boton_naranja {
+		 background-color: #FF7800;
+	}
+    .qi_contenedor_modal .bcp_boton_naranja {
+        width: 130px;
+        color: var(--white);
+    }
+    .qi_contenedor_modal button.bcp_boton_naranja:focus, 
+    .qi_contenedor_modal button.bcp_boton_naranja:hover {
+        background-color: #FF7800;
+        color: var(--white);
+    }
+    
+    .section-first {
+        padding-bottom: 12px;
+        border-bottom: 1px solid #fff;
+        margin: 0 16px;
+        color:#fff;
+    }
+    .section-first > :nth-child(1) {
+        font-family: 'Flexo-Demi';
+        font-size: 20px;
+        line-height: 28px;
+        letter-spacing: 0px;
+        margin-bottom: 8px;
+    }
+    .section-first > :nth-child(2) {
+        font-family: 'Flexo';
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 20px;
+        letter-spacing: 0px;
+    }
+    .section-first > :nth-child(2) > span {
+        font-family: 'Flexo-Demi';
+    }
+    .section-second {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between; 
+        align-items: flex-start;
+        margin:18px 16px 16px 16px;
+        color:#FFFFFF;
+    }
+    .p_info {
+        display: flex;
+    }
+    .p_info > div {
+        margin-left: 8px;
+    }
+    .p_info > div > :nth-child(1) {
+        font-family: 'Flexo-Demi';
+        font-size: 14px;
+        line-height: 16.8px;
+    }
+    .p_info > div > :nth-child(2) {
+        font-family: 'Flexo';
+        font-size: 12px;
+        line-height: 18px;
+    }
+    .section-third {
+        font-family: Flexo;
+        font-size: 10px;
+        line-height: 12px;
+        text-align: left;
+        color:#FFF;
+        margin:0 16px 16px 16px;
+    }
+    .section-third > a,
+    .section-third > a:hover,
+    .section-third > a:link,
+    .section-third > a:active {
+        color:#ff7800;
+        cursor: pointer;
+    }
+    .bcp_cintillo_seguro{
+        position: relative;
+        height: 0px;
+        z-index: 12;
+    }
+
+    .bcp_cintillo_seguro img{
+        width: 81px;
+        position: relative;
+        right: 5px;
+        top: -10px;
+    }
+    .txt_small_gris_primary {
+        font-family: Flexo;
+        font-weight: 400;
+        font-size: 12px;
+        line-height: 14.4px;
+        letter-spacing: 0px; 
+        width: 100%;
+        margin-bottom: 16px;
+    }
+    .txt_small_gris_primary {
+       color:#606C7F;
+    }
+    .txt_small_gris_primary > a,
+    .txt_small_gris_primary > a:hover,
+    .txt_small_gris_primary > a:active {
+        color:#ff7800;
+        cursor: pointer;
+    }
+    .qi_modal_venta .contenedor_moc_header_home b {
+        font-size: 24px;
+    }
+    @media (max-width:991px) {
+        .qi_contenedor_modal {
+            padding: 0px 12px;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100%;
+            background: rgb(32 46 68 / 85%);
+            top: 0px;
+            left: 0px;
+        }
+        .qi_contenedor_modal .bcp_modal_venta.cerrar {
+            opacity: 1;
+                animation: fadeOut 1s ease-out forwards;
+            }
+
+        .qi_contenedor_modal .bcp_modal_venta.mostrar {
+            opacity: 0;
+            animation: fadeIn 1s ease-in forwards;
+        }
+    }
+    @media (min-width:992px) {
+        .qi_contenedor_modal {
+            padding: 0px 12px;
+            display: flex;
+            flex-direction: row;
+            justify-content: end;
+        }
+        .qi_contenedor_modal .qi_modal_venta.cerrar {
+            animation: slide-down 1s;
+        }
+        .qi_contenedor_modal .qi_modal_venta.mostrar {
+            bottom: 10px;
+            animation: slide-up 1s;
+            right: 10px;
+        }
+    }
+    /*EFECTOS*/
+    @keyframes slide-down {
+        0% {bottom: 16px;}
+        100% {bottom: -100%;}
+    }
+    @keyframes slide-up {
+        0% {bottom: -100%;}
+        80% {bottom: 60px;}
+        100% {bottom: 16px;}
+    }
+    @keyframes fadeIn {
+        from {opacity: 0;}
+        to {opacity: 1;}
+    }
+    @keyframes fadeOut {
+        from {opacity: 1;}
+        to {opacity: 0;}
+    }
+    @keyframes typing {
+        from { width: 0 }
+        to { width: 100% }
+    }
+    @keyframes blink-caret {
+        from, to { border-color: transparent }
+        50% { border-color: orange; }
+    }
+</style>
+<div id="modal-viajes" class="qi_contenedor_modal" style="display: none;">
+    <!-- Begin - Modal Venta de Seguro-->
+    <div class="qi_modal_venta">
+        <button class="btn_cerrar_modal fill_color" attrib-step="0">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" clip-rule="evenodd"
+                    d="M0.209705 0.387101L0.292893 0.292893C0.653377 -0.0675907 1.22061 -0.0953203 1.6129 0.209705L1.70711 0.292893L7 5.585L12.2929 0.292893C12.6834 -0.0976311 13.3166 -0.0976311 13.7071 0.292893C14.0976 0.683418 14.0976 1.31658 13.7071 1.70711L8.415 7L13.7071 12.2929C14.0676 12.6534 14.0953 13.2206 13.7903 13.6129L13.7071 13.7071C13.3466 14.0676 12.7794 14.0953 12.3871 13.7903L12.2929 13.7071L7 8.415L1.70711 13.7071C1.31658 14.0976 0.683418 14.0976 0.292893 13.7071C-0.0976311 13.3166 -0.0976311 12.6834 0.292893 12.2929L5.585 7L0.292893 1.70711C-0.0675907 1.34662 -0.0953203 0.779392 0.209705 0.387101L0.292893 0.292893L0.209705 0.387101Z"
+                    fill="#FFFFFF" />
+            </svg>
+        </button>
+        <div class="step1"></div>
+    </div>
+    <!-- End - Modal Venta de Seguro-->
+</div>
+<script>
+    //CLASES
+    class QIHTMLElement {
+        constructor(tagName='div') {
+            this.element = document.createElement(tagName)
+        }
+        addchildren(listElement){
+            listElement.forEach((e)=>{e && this.element.appendChild(e)})
+            return this;
+        }
+        addClass(data) {
+            if(typeof data == 'string'){
+                this.element.classList.add(data);
+            } else {
+                data.forEach((className)=>{this.element.classList.add(className)})
+            }
+            return this;
+        }
+        setAttribute(attributes) {
+            for (const [key, value] of Object.entries(attributes)) {this.element.setAttribute(key, value)}
+            return this;
+        }
+        setText(text) {
+            this.element.textContent = text;
+            return this;
+        }
+        setHTML(html) {
+            this.element.innerHTML = html;
+            return this;
+        }
+        appendChild(child) {
+            if (child instanceof QIHTMLElement) {
+                this.element.appendChild(child.element);
+            } else if (child instanceof Node) {
+                this.element.appendChild(child);
+            } else {
+                throw new Error("El hijo debe ser una instancia de QIHTMLElement o Node.");
+            }
+            return this;
+        }
+        appendTo(parent) {
+            if (parent instanceof QIHTMLElement) {
+                parent.element.appendChild(this.element);
+            } else if (parent instanceof Node) {
+                parent.appendChild(this.element);
+            } else {
+                throw new Error("El padre debe ser una instancia de QIHTMLElement o Node.");
+            }
+            return this;
+        }
+        getElement() {
+            return this.element;
+        }
+    }
+    const builHTML = (data) =>{
+        const tag = data.hasOwnProperty('tag') ? data.tag : 'div'
+        const node = new QIHTMLElement(tag)
+        data.hasOwnProperty('clase') && node.addClass(data.clase)
+        data.hasOwnProperty('content') && node.setHTML(data.content)
+        data.hasOwnProperty('attrib') && node.setAttribute(data.attrib)
+        return node.getElement()
+    }
+    const buildlist = (data)=>{
+        let container = new QIHTMLElement().addClass(data.clase)
+        let items = '<ul>'
+        const iconDefault = `<img src="/wcm/connect/a050ebdd-380f-4539-bfbd-58f5571a61fb/color%F0%9F%8E%A8%3F.svg?MOD=AJPERES&attachment=true&id=1739392831989" alt="check">`
+        data.content.forEach(element => {
+            const icon = element.hasOwnProperty('icon') ? element.icon : iconDefault
+            items += '<li>'
+            items += icon
+            items += '<p>'+element.item+'</p>'
+            items += '</li>'
+        })
+        items += '</ul>'
+        container.setHTML(items)
+        return container.getElement()
+    }
+    const builButtons = (data)=>{
+        const allButtons = []
+        data.content.forEach(button =>{
+            const parametro = button.hasOwnProperty('parametro') ? button.parametro : button.label
+            const newButton = new QIHTMLElement('button').addClass(button.clases).setText(button.label).getElement()
+            newButton.onclick = ()=>{button.functions(parametro)}
+            allButtons.push(newButton)
+        })
+        const sectionButton = new QIHTMLElement().addClass(data.clase).addchildren(allButtons).getElement()
+        return sectionButton
+    }
+    const builMaster = (data)=>{
+        const containerELement = []
+            data.forEach((element,index) =>{
+                if(element.hasOwnProperty('type')){
+                    containerELement.push(element.type(element))
+                } else {
+                    console.error("Body["+index+"] sin propiedad type")
+                }
+            })
+        return containerELement
+    }
+    //TAGGEOS
+    let taggeoGeneric = {
+        product_category:"Seguros",
+        channel : "ViaBCP",
+        group : "ViaBCP",
+        position:"",
+        subflow:"",
+        name: "Click",
+        creative:"",
+        category:"Modal-Viajes",
+        product:"Viajes",
+        message:'',
+        event:"trackAction",
+        version:'Seguros-1707'
+    }
+    //DATA PARA EL MODAL
+    const dataModalViaje = {
+        generic:{
+            tyc:[
+                {node:'tycODV',link:'/wcm/connect/0471bfb7-1c45-4957-9414-2efa7a8b116f/tyc.pdf?MOD=AJPERES&attachment=true'}
+            ]
+        },
+        control:{
+            header:[
+                {content:'Asegúrate y <br>aprovecha hasta<br> <b>25% de descuento</b>',type:builHTML},
+                {content:'<img src="/wcm/connect/89478131-d8b4-442c-8b48-cde0152d15c1/spot_julio.png?MOD=AJPERES&attachment=true">',type:builHTML}
+            ],
+            body:{
+                step1:[
+                    {clase:'cont_text_precio',content:'Compra tu Seguro de Viaje desde<br> <b>$2.93 por día</b>',type:builHTML},
+                    {clase:'title_list',content:'Te cubrimos:',type:builHTML},
+                    {clase:'contenedor_moc_coberturas', content:[
+                        {item:'<b>Hasta $50,000</b> en gastos médicos.'},
+                        {item:'<b>Hasta $1,500</b> por imprevistos del viaje como la pérdida del equipaje.'},
+                        {item:'<b>Hasta $500</b> por cancelación o retraso de viaje.'}
+                    ],type:buildlist},
+                    {clase:'txt_small_gris_primary',content:'Comprando el seguro participas de la promoción, revisa las bases <a id="tycODV">aquí</a>.',type:builHTML},
+                    {clase:['contenedor_moc_button'],
+                    content:[
+                        {
+                            clases:['bcp_boton_blanco','btn_no_gracias'],
+                            label:'No, gracias',
+                            functions:cerrarModal
+                        },
+                        {
+                            clases:'bcp_boton_naranja',
+                            label:'Lo quiero',
+                            functions:openURL
+                        }
+                        ],
+                        type:builButtons
+                    },
+                    {clase:'respaldo-pacifico-wo',content:'<p class="">Con el respaldo de</p><img src="/wcm/connect/2db31610-d5e9-4a05-9f64-83bc1fa4490f/Group+%281%29.png?MOD=AJPERES&attachment=false&id=1729805654191" alt="">',type:builHTML}
+
+                ],
+            },
+            taggeo:{
+                version:'Seguros-1707'
+            }, 
+            tyc:[{
+                node:'tycODV',
+                link:'https://www.viabcp.com/wcm/connect/716a08ef-e354-423e-ab80-cdcccc708821/08.-Viajes-+TyC+Agosto.pdf?MOD=AJPERES&attachment=true'
+            }]     
+        },
+        piloto:{
+            header:[
+                {content:'<b>Gana 2,000 millas</b> para tu viaje <b>Asegúrate hoy</b>',type:builHTML},
+                {content:'<img src="/wcm/connect/1199534d-2ca0-451f-a447-31a365e43b85/viajes_hand.png?MOD=AJPERES&attachment=false&id=1739378219339">',type:builHTML}
+            ],
+            body:{
+                step1:[
+                    {clase:'cont_text_precio',content:'Compra tu Seguro de Viaje desde<br> <b>$2.93 por día</b>',type:builHTML},
+                    {clase:'title_list',content:'Te cubrimos:',type:builHTML},
+                    {clase:'contenedor_moc_coberturas', content:[
+                        {item:'<b>Hasta $50,000</b> en gastos médicos.'},
+                        {item:'<b>Hasta $1,500</b> por imprevistos del viaje como la pérdida del equipaje.'},
+                        {item:'<b>Hasta $500</b> por cancelación o retraso de viaje.'}
+                    ],type:buildlist},
+                    {clase:'txt_small_gris_primary',content:'Comprando el seguro participas del sorteo, revisa las bases <a id="tycODV">aquí</a>.',type:builHTML},
+                    {clase:['contenedor_moc_button'],
+                    content:[
+                        {
+                            clases:['bcp_boton_blanco','btn_no_gracias'],
+                            label:'No, gracias',
+                            functions:cerrarModal
+                        },
+                        {
+                            clases:'bcp_boton_naranja',
+                            label:'Lo quiero',
+                            functions:openURL
+                        }
+                        ],
+                        type:builButtons
+                    },
+                    {clase:'respaldo-pacifico-wo',content:'<p class="">Con el respaldo de</p><img src="/wcm/connect/2db31610-d5e9-4a05-9f64-83bc1fa4490f/Group+%281%29.png?MOD=AJPERES&attachment=false&id=1729805654191" alt="">',type:builHTML}
+
+                ],
+            },
+            taggeo:{
+                version:'Seguros-0805Test'
+            },
+            tyc:[{
+                node:'tycODV',
+                link:'https://www.viabcp.com/wcm/connect/9d02cebe-8ea2-4e60-a2d7-2da16929d046/200millas.pdf?MOD=AJPERES&attachment=true&id=1747057904149'
+            }]
+        }
+        
+    }
+    // ELEMENTOS GLOBALES
+    let tipoExperiment = 'piloto'
+    const containerModal = document.querySelector('.qi_contenedor_modal')
+    const modalVenta = document.querySelector('.qi_modal_venta')
+    const btnCerrarModal = document.querySelector('.btn_cerrar_modal')
+    const imgClose = btnCerrarModal.querySelector('svg path')
+    const colorFillClose = ['#FFFFFF','#FF7800']
+    // EVENTOS BOTONES
+    btnCerrarModal.onclick = ()=>{cerrarModal('Cerrar')}
+    //FUNCIONES GENERALES
+    function openURL(){
+        taggeoActionMulti({label:'Lo quiero'})
+        window.open("https://seguro-viaje.pacifico.com.pe/bcp?utm_modal=pm&utm_source=modal&utm_campaign=bcpperf:modal:viajes:2024:modal:conv:cpc&utm_content=cobertura_seguro_viaje:kws","_blank")
+    }
+    function btnCloseAll(source){
+        document.querySelector('.qi_contenedor_modal').style.display="none"
+        taggeoActionMulti({label:source})
+    }
+    function cerrarModal(source){
+        let label = source
+        modalVenta.classList.remove('mostrar')
+        modalVenta.classList.add('cerrar')
+        setInterval(()=>{containerModal.style.display = 'none'},1500)
+        if(typeof step !== 'undefined'){
+            if(step.status()){
+                label = source == 'Cerrar' ? source +" "+step.position().toString() : source
+            }
+        }
+        taggeoActionMulti({label:label})
+    }
+    const insertNodeAll = (label,elements)=>{
+        const container = document.querySelector(label)
+        container && elements.forEach(e=>{container.appendChild(e)})
+    }
+    const contentModalExperiment = (data)=>{
+        const {taggeo,body,header} = data
+        taggeoGeneric.version = taggeo.version
+        insertNodeAll('.step1',[
+            new QIHTMLElement().addClass('bcp_cintillo_seguro').setHTML('<img src="/wcm/connect/618c49dc-cd67-400f-bc23-ffbd6e491fbd/cintillo_promo_verde.svg?MOD=AJPERES&attachment=true" alt="">').getElement(),
+            new QIHTMLElement().addClass('contenedor_moc_header_home').addchildren(builMaster(header)).getElement(),
+            new QIHTMLElement().addClass('contenedor_moc_body_home').addchildren(builMaster(body.step1)).getElement() 
+        ])
+        addActionLink(data.tyc)
+        modalVenta.classList.add('mostrar')
+        taggeoActionMulti({name:'Modal',event:'trackFormView'})
+    }
+    //BEGIN EXPERIMENTO
+    const modalExperiment = {
+        control: function(data){ contentModalExperiment(data) },
+        piloto: function (data){ contentModalExperiment(data)}
+    }
+    function taggeoActionMulti (taggeoCustom){
+        const taggeoDataDefault = taggeoGeneric
+        const taggeo = {...taggeoDataDefault,...taggeoCustom}
+        //console.log(taggeo)
+        if(typeof digitalData !== 'undefined'){
+            let dataTaggeo = {
+                trackAction : {
+                    action: {group: taggeo.group,category: taggeo.category,name: taggeo.name,label: taggeo.label},
+                    metadata: {key: "Producto",value: taggeo.product},
+                    event: "trackAction"
+                },
+                trackPromotionView: {
+                    promotion:{name:taggeo.name,creative:taggeo.creative,position:taggeo.position},
+                    event:"trackPromotionView"
+                },
+                trackInsurancesRequests:{
+                    application:{product:taggeo.product,product_category:taggeo.product_category,subflow:taggeo.subflow},
+                    event:"trackInsurancesRequests"
+                },
+                trackElement: {
+                    element:{container:taggeo.container,type:taggeo.type,name:taggeo.name},
+                    event:"trackElement"
+                },
+                trackFormView:{
+                    form:{channel:taggeo.channel,name:taggeo.name,product:taggeo.product,version:taggeo.version},
+                    event:"trackFormView"
+                },
+                trackFormSubmit:{
+                    form:{channel:taggeo.channel,name:taggeo.name,product:taggeo.product,version:taggeo.version},
+                    event:"trackFormSubmit"
+                },
+                trackError:{
+                    error:{code:"VIABCP-HOME-VIAJES",message:taggeo.message},
+                    event:"trackError"
+                },
+                trackPopup :{
+                    popup:{name:taggeo.category,name}, 
+                    event:"trackPopup" 
+                }
+            }
+            dataTaggeo[taggeo.event] ? digitalData.push(dataTaggeo[taggeo.event]) : console.log('No se encontro el evento: '+taggeo.event)
+        }
+    }
+    function launchModalABTest(){
+        try {
+            const abtest = ['control','piloto']
+            let porcent = () => Math.random() > 0.5 ? 1 : 0;
+            tipoExperiment = abtest[0]
+            modalVenta.setAttribute('id',tipoExperiment)
+            modalExperiment[tipoExperiment](dataModalViaje[tipoExperiment])
+            containerModal.setAttribute('id',tipoExperiment)
+            containerModal.removeAttribute('style')
+            
+        } catch (error) {
+            console.log(error)
+            taggeoActionMulti({message:'launchModalABTest',event:'trackError'})
+        }
+    }
+    function addActionLink(data){
+        data.forEach(element => {
+            const node = document.getElementById(element.node)
+            if(node){
+                node.onclick = ()=>{
+                    taggeoActionMulti({label:'Aqui',name:'Click'})
+                    window.open(element.link,"_blank")
+                }
+            }
+        })
+    }
+</script>
+<!--MODAL CARDS -->
+<div
+	class="q-modal"
+	id="modal_oferta"
+	q-posicion="abajo derecha"
+	q-estado="pendiente"
+>
+	<div class="q-modal__contenedor">
+		<div class="q-modal__contenido">
+			<div class="q-modal__acciones">
+				<button
+					class="q-boton q-boton--flotante q-modal__acciones__cerrar"
+				>
+					<svg
+						width="14"
+						height="14"
+						viewBox="0 0 14 14"
+						fill="none"
+						xmlns="http://www.w3.org/2000/svg"
+					>
+						<path
+							fill-rule="evenodd"
+							clip-rule="evenodd"
+							d="M2.50895 0.326207C1.89872 -0.148276 1.01636 -0.105141 0.455612 0.455612L0.326207 0.602156C-0.148276 1.21239 -0.105141 2.09475 0.455612 2.6555L4.79889 7L0.455612 11.3445C-0.151871 11.952 -0.151871 12.9369 0.455612 13.5444C1.06309 14.1519 2.04802 14.1519 2.6555 13.5444L7 9.20111L11.3445 13.5444L11.491 13.6738C12.1013 14.1483 12.9836 14.1051 13.5444 13.5444L13.6738 13.3978C14.1483 12.7876 14.1051 11.9053 13.5444 11.3445L9.20111 7L13.5444 2.6555C14.1519 2.04802 14.1519 1.06309 13.5444 0.455612C12.9369 -0.151871 11.952 -0.151871 11.3445 0.455612L7 4.79889L2.6555 0.455612L2.50895 0.326207Z"
+							fill="#FF7800"
+						></path>
+					</svg>
+				</button>
+			</div>
+			<div class="q-tarjeta tarjeta-inicio" q-mostrar-estado="pendiente">
+				<div class="q-tarjeta__header">
+					<h4>
+						¡Descubre si tienes una Tarjeta de Crédito BCP
+						preaprobada!
+					</h4>
+					<figure>
+						<img
+							src="https://www.viabcp.com/wcm/connect/4245df5d-3f7a-46df-84b5-67770468afdf/kv-hero.png?MOD=AJPERES&amp;attachment=false&amp;id=1749142361618"
+						/>
+					</figure>
+				</div>
+				<div class="q-tarjeta__body">
+					<h3 class="q-tarjeta__titulo">
+						Averígualo solo con tu DNI
+					</h3>
+					<form
+						class="q-form"
+						id="ingreso_dni_oferta"
+						novalidate="novalidate"
+						action="https://www.viabcp.com/solicitar-tarjeta-de-credito-bcp" 
+						method="post"
+					>
+						<input
+							class="q-input"
+							name="dni"
+							type="tel"
+							placeholder="Ingresa tu DNI"
+							maxlength="8"
+							required="required"
+						/>
+						<div class="texto"></div>
+						<button class="q-boton">Descubrir oferta</button>
+					</form>
+					<div>
+						<p class="nota">
+							Al enviarnos esta información, autorizas al BCP al
+							tratamiento de tus datos personales.
+						</p>
+						<!-- <p class="nota">
+                            Este sitio está protegido por reCAPTCHA y se aplican las<a
+                                href="https://policies.google.com/privacy" target="_blank">Políticas de privacidad</a>
+                            y
+                            <a href="https://policies.google.com/terms" target="_blank">Términos del servicio de
+                                Google</a>.
+                        </p> -->
+						<p class="nota">
+							<form-captcha
+								datacallback="consultarApiMultiuso"
+								id="recaptchaModalOferta"
+							></form-captcha>
+						</p>
+					</div>
+				</div>
+			</div>
+			<div
+				class="q-tarjeta tarjeta-esperando"
+				q-mostrar-estado="esperando"
+			>
+				<div>
+					<svg
+						width="23"
+						height="24"
+						viewBox="0 0 23 24"
+						fill="none"
+						xmlns="http://www.w3.org/2000/svg"
+					>
+						<path
+							d="M3.64206 3.81873C3.27396 3.40944 3.30506 2.77552 3.74347 2.44264C5.51281 1.09922 7.62633 0.269196 9.85064 0.0551689C12.4067 -0.190782 14.9742 0.389688 17.1759 1.71126C19.3776 3.03284 21.0973 5.02581 22.0822 7.39727C23.0671 9.76873 23.2654 12.3936 22.6478 14.8861C22.0302 17.3786 20.6293 19.6072 18.6511 21.2445C16.6729 22.8817 14.2217 23.8412 11.6577 23.982C9.09367 24.1227 6.55214 23.4372 4.40662 22.0263C2.53956 20.7985 1.05808 19.0777 0.120675 17.0636C-0.1116 16.5646 0.156874 15.9895 0.673484 15.7994C1.19009 15.6093 1.75852 15.8768 1.99902 16.372C2.78354 17.9872 3.9914 19.3675 5.5019 20.3608C7.29101 21.5373 9.41035 22.1089 11.5484 21.9915C13.6865 21.8742 15.7305 21.0741 17.3801 19.7088C19.0297 18.3435 20.1979 16.4851 20.7129 14.4067C21.2279 12.3282 21.0626 10.1394 20.2412 8.16187C19.4199 6.18435 17.9859 4.52244 16.15 3.42041C14.3141 2.31837 12.173 1.83433 10.0416 2.03942C8.24204 2.21257 6.52947 2.86924 5.08159 3.93127C4.63773 4.25685 4.01016 4.22802 3.64206 3.81873Z"
+							fill="#BFC4CC"
+						>
+							<animateTransform
+								attributeName="transform"
+								attributeType="XML"
+								type="rotate"
+								from="0 11.5 12"
+								to="360 11.5 12"
+								dur=".5s"
+								repeatCount="indefinite"
+							></animateTransform>
+						</path>
+					</svg>
+				</div>
+			</div>
+			<div
+				class="q-tarjeta tarjeta_resultado"
+				q-mostrar-estado="ejecutado"
+				q-resultado="lead"
+			>
+				<div class="q-tarjeta__body tarjeta-resultado-lead">
+					<div class="contenido">
+						<p class="qu-align-center">
+							¡Felicidades! <br />
+							Tienes una Tarjeta de Crédito
+						</p>
+						<h3 class="qu-align-center">[Nombre]</h3>
+					</div>
+					<figure>
+						<img
+							src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+							alt=""
+						/>
+					</figure>
+					<div class="enlaces">
+						<a
+							class="q-boton"
+							href="https://www.mitarjetabcp.viabcp.com/login?utm_medium=bcp&utm_source=viabcp&utm_campaign=nn:tc:2025:nn:modal_3:lead:nn:conv&utm_content=boton:cta"
+							>¡La quiero!</a
+						>
+					</div>
+				</div>
+				<div class="q-tarjeta__body tarjeta-resultado-nolead">
+					<figure>
+						<img
+							src="https://www.viabcp.com/wcm/connect/fe5e358c-1190-47c0-9661-317d2c29bc3f/curva_3.png?MOD=AJPERES&attachment=false&id=1749508195585"
+							alt=""
+						/>
+					</figure>
+					<div class="textos">
+						<h3>
+							Evalúate y descubre si tienes una tarjeta aprobada
+						</h3>
+						<p>Solo te tomará 2 minutos</p>
+						<a
+							class="q-boton"
+							href="https://www.mitarjetabcp.viabcp.com/login?utm_medium=bcp&utm_source=viabcp&utm_campaign=nn:tc:2025:nn:modal_3:nolead:nn:conv&utm_content=boton:cta"
+							>Iniciar evaluación</a
+						>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<style>
+	.q-modal {
+		position: fixed;
+		inset: 0;
+		z-index: 500;
+		background-color: rgba(0, 0, 0, 0.5);
+		place-items: center;
+		transition: all 150ms linear;
+		transform: translateY(100%);
+		display: grid;
+		opacity: 0;
+		pointer-events: none;
+	}
+
+	.q-modal--visible {
+		opacity: 1;
+		transform: translateY(0);
+		pointer-events: auto;
+	}
+
+	@media screen and (min-width: 768px) {
+		.q-modal {
+			background: none;
+			inset: auto;
+			bottom: 2rem;
+			right: 2.5rem;
+			width: 320px;
+		}
+	}
+
+	.q-modal__contenedor {
+		padding: 1rem;
+		width: 100%;
+	}
+
+	@media screen and (min-width: 768px) {
+		.q-modal__contenedor {
+			padding: 0;
+		}
+	}
+
+	.q-modal__acciones {
+		display: flex;
+		justify-content: flex-end;
+		margin-bottom: 0.5rem;
+	}
+
+	@media screen and (min-width: 768px) {
+		.q-modal__acciones {
+			position: absolute;
+			top: 0;
+			left: -1rem;
+			right: -1rem;
+			transform: translateY(-50%);
+			z-index: 10;
+		}
+	}
+
+	.q-modal__acciones__cerrar {
+		box-shadow: 0px 4px 5px 0px rgba(82, 112, 148, 0.2);
+	}
+
+	.q-modal__contenido {
+		max-width: 340px;
+		margin-inline: auto;
+		box-shadow: 0px 8px 10px 1px rgba(82, 112, 148, 0.4);
+		border-radius: 0.5rem;
+	}
+
+	[q-estado="pendiente"]
+		[q-mostrar-estado]:not([q-mostrar-estado="pendiente"]) {
+		display: none;
+	}
+
+	[q-estado="esperando"]
+		[q-mostrar-estado]:not([q-mostrar-estado="esperando"]) {
+		display: none;
+	}
+
+	[q-estado="ejecutado"]
+		[q-mostrar-estado]:not([q-mostrar-estado="ejecutado"]) {
+		display: none;
+	}
+
+	[q-estado="error"] [q-mostrar-estado]:not([q-mostrar-estado="error"]) {
+		display: none;
+	}
+
+	.q-tarjeta {
+		background-color: #fff;
+		display: block;
+		border-radius: 0.5rem;
+		overflow: hidden;
+	}
+
+	.q-tarjeta__header {
+		background-color: #ebf4ff;
+		display: flex;
+		align-items: center;
+	}
+
+	.q-tarjeta__header h4 {
+		font-family: Flexo;
+		font-family: "Flexo-Demi";
+		font-size: 16px;
+		line-height: 24px;
+		letter-spacing: 0px;
+		color: #002473;
+		text-wrap: balance;
+		margin-inline: 1.5rem -1.5rem;
+		z-index: 1;
+		position: relative;
+	}
+
+	.q-tarjeta__header figure {
+		margin: 0;
+		padding: 0;
+		align-self: stretch;
+	}
+
+	.q-tarjeta__header img {
+		display: block;
+	}
+
+	.q-tarjeta__titulo {
+		color: #002473;
+		margin: 0;
+		font-family: Flexo-Demi;
+		font-weight: normal;
+		font-size: 20px;
+		line-height: 28px;
+		letter-spacing: 0px;
+	}
+
+	.q-tarjeta__body {
+		padding: 1rem 1.5rem;
+		display: flex;
+		flex-direction: column;
+		gap: 0.8rem;
+	}
+
+	.q-tarjeta__body h3 {
+		font-family: Flexo-Demi;
+		font-weight: normal;
+		font-size: 20px;
+		line-height: 28px;
+		letter-spacing: 0px;
+		color: #002a8d;
+		margin: 0;
+	}
+
+	.q-tarjeta__body p {
+		font-family: Flexo;
+		font-weight: normal;
+		font-size: 16px;
+		line-height: 24px;
+		letter-spacing: 0px;
+		color: #202e44;
+		margin: 0;
+	}
+
+	.q-form {
+		display: flex;
+		flex-direction: column;
+		gap: 0.5rem;
+	}
+
+	.q-input {
+		padding: 0.8rem 1rem;
+		border: 1px solid #bfc4cc;
+		border-radius: 0.5rem;
+		font-family: Flexo-Demi;
+		font-weight: normal;
+		font-size: 16px;
+		line-height: 24px;
+		letter-spacing: 0px;
+	}
+
+	.q-input:focus {
+		outline: 1px solid #bfc4cc;
+	}
+
+	.q-input.error {
+		border-color: #e30425;
+	}
+
+	.q-input.error + .texto {
+		display: block;
+		padding: 0 1rem;
+		font-family: Flexo;
+		font-weight: 400;
+		font-size: 12px;
+		margin: 0;
+		color: #e30425;
+	}
+
+	.q-boton {
+        /* background: #FF7800 !important; */
+		background-color: #ff7800;
+		border-radius: 20px;
+		padding: 8px 16px 8px 16px;
+		border: 1px;
+		color: #fff;
+		font-family: "Flexo-Demi";
+		font-weight: normal;
+		cursor: pointer;
+		font-size: 16px;
+		line-height: 24px;
+		letter-spacing: 0px;
+		text-align: center;
+		vertical-align: middle;
+		text-decoration: none;
+	}
+
+	.q-boton:hover {
+		color: #fff;
+	}
+
+	.q-boton--flotante {
+		background-color: #fff;
+		aspect-ratio: 1;
+		border-radius: 100%;
+		display: flex;
+		place-items: center;
+		place-content: center;
+		padding: 0;
+		width: 2.5rem;
+	}
+
+	.qu-ratio-cuadrado {
+		aspect-ratio: 1/1;
+	}
+
+	.qu-flex {
+		display: flex;
+	}
+
+	.qu-items-center {
+		align-items: center;
+	}
+
+	.qu-justify-center {
+		justify-content: center;
+	}
+
+	.qu-align-center {
+		text-align: center;
+	}
+
+	#modal_oferta .tarjeta-inicio .nota {
+		font-family: Flexo;
+		font-weight: 400;
+		font-size: 10px;
+		line-height: 14px;
+		letter-spacing: 0px;
+		text-align: center;
+		margin: 0;
+		color: #606c7f;
+	}
+
+	#modal_oferta .tarjeta-inicio .nota a {
+		display: inline-block;
+		color: inherit;
+	}
+
+	#modal_oferta .tarjeta-esperando div {
+		width: 100%;
+		aspect-ratio: 1;
+		display: flex;
+		place-items: center;
+		place-content: center;
+	}
+
+	#modal_oferta .tarjeta_resultado {
+		position: relative;
+	}
+
+	#modal_oferta .tarjeta-resultado-lead {
+		padding: 0;
+		display: none;
+		background-color: #ebf4ff;
+		gap: 0;
+	}
+
+	#modal_oferta [q-resultado="lead"] .tarjeta-resultado-lead {
+		display: flex;
+	}
+
+	#modal_oferta .tarjeta-resultado-lead .contenido {
+		padding: 1.5rem 1rem 1rem;
+	}
+
+	#modal_oferta .tarjeta-resultado-lead figure {
+		background-image: url("https://www.viabcp.com/wcm/connect/78f6a518-3afa-4db1-87a6-74ff38ffd38c/curva.png?MOD=AJPERES&attachment=false&id=1749504991384");
+		background-repeat: no-repeat;
+		background-size: 100% auto;
+		padding: 2.25rem 1.75rem;
+		width: 210px;
+		margin: auto;
+	}
+
+	#modal_oferta .tarjeta-resultado-lead figure img {
+		display: block;
+		width: 100%;
+		height: auto;
+		margin: auto;
+		border-radius: 4px;
+	}
+	#modal_oferta .tarjeta-resultado-lead .enlaces {
+		background-color: #fff;
+		padding: 1rem 1rem 1.5rem;
+		display: flex;
+	}
+	#modal_oferta .tarjeta-resultado-lead .enlaces > a {
+		flex: 1 1 100%;
+	}
+
+	#modal_oferta .tarjeta-resultado-nolead {
+		padding: 0;
+		display: none;
+	}
+
+	#modal_oferta [q-resultado="nolead"] .tarjeta-resultado-nolead {
+		display: flex;
+	}
+
+	#modal_oferta .tarjeta-resultado-nolead figure {
+		padding: 0;
+		margin: auto;
+		width: 100%;
+		background-color: #ebf4ff;
+	}
+
+	#modal_oferta .tarjeta-resultado-nolead figure img {
+		display: block;
+		width: 180px;
+		height: 116px;
+		margin: auto;
+		-o-object-fit: cover;
+		object-fit: cover;
+	}
+
+	#modal_oferta .tarjeta-resultado-nolead .textos {
+		padding: 1rem 1.5rem 1.5rem;
+		display: flex;
+		flex-direction: column;
+		gap: 0.8rem;
+	}
+
+	#modal_oferta .tarjeta-resultado-nolead .textos p {
+		font-family: Flexo;
+		font-weight: normal;
+		font-size: 14px;
+		line-height: 20px;
+		letter-spacing: 0px;
+		margin-bottom: 1rem;
+	}
+
+	.particula-confetti {
+		position: absolute;
+		pointer-events: none;
+		z-index: 1000;
+	}
+</style>
+
+<script>
+	function asignar(objeto, valores) {
+		for (const clave of Object.keys(valores)) {
+			const objetivo = clave.trim();
+			let origen, destino;
+
+			if (clave.includes(".")) {
+				const ruta = clave.split(".");
+				const prop = ruta.shift();
+				origen = valores[clave];
+				destino = objeto[prop];
+
+				if (typeof destino === "object" && destino !== null) {
+					objeto[prop] = asignar(destino, {
+						[ruta.join(".")]: origen,
+					});
+				} else {
+					objeto[prop] = origen;
+				}
+			} else {
+				origen = valores[clave];
+				destino = objeto[objetivo];
+
+				if (typeof destino === "object" && destino !== null) {
+					objeto[objetivo] = asignar(destino, origen);
+				} else {
+					objeto[objetivo] = origen;
+				}
+			}
+		}
+
+		return { ...objeto };
+	}
+
+	// factory de funcion de taggeos
+	function generarTaggeo(datos, plantilla) {
+		return function (valores) {
+			// Crear un nuevo objeto combinando la plantilla con el objeto recibido
+			const item = asignar(plantilla, valores);
+
+			// Validar si datos es un string y si existe un objeto con ese nombre en el entorno global
+			let objetoDatos;
+			if (typeof datos === "string") {
+				objetoDatos = window[datos] || global[datos]; // Usar window o global según el entorno
+			} else {
+				objetoDatos = datos;
+			}
+
+			// Verificar si el objeto tiene el método push
+			if (typeof objetoDatos?.push === "function") {
+				// console.debug("Agregando elemento al objeto", item);
+				objetoDatos.push(item); // Agregar el nuevo item al objeto
+			} else {
+				console.warn(`El objeto no tiene el método push: "${datos}"`);
+			}
+		};
+	}
+
+	/**
+	 * Función que verifica si el objeto existe en el ámbito global
+	 * Soporta objetos anidados usando notación de punto (ej: "window.miObjeto.propiedad")
+	 */
+	function obtener(propiedad, objeto = window) {
+		if (typeof propiedad !== "string" || !propiedad) {
+			return null;
+		}
+		return propiedad.split(".").reduce((actual, parte) => {
+			return actual?.[parte] ?? null;
+		}, objeto);
+	}
+
+	/**
+	 * Espera a que un objeto esté disponible en el entorno especificado y luego ejecuta un callback.
+	 * @param {string} objeto - La propiedad (posiblemente anidada) a esperar.
+	 * @param {object} entorno - El objeto en el que buscar (por defecto es window o global).
+	 * @param {function} callback - Función a ejecutar cuando el objeto esté disponible.
+	 * @param {object} config - Configuración con intervalo (ms) y tiempoMaximo (ms).
+	 */
+	function esperar(objeto, callback = () => {}, config = {}) {
+		const {
+			entorno = window,
+			intervalo = 256,
+			tiempoMaximo = 15000,
+		} = config;
+		const inicio = Date.now();
+
+		// console.debug('esperar', { objeto, entorno, intervalo, tiempoMaximo });
+
+		function verificar() {
+			const tiempoTranscurrido = Date.now() - inicio;
+
+			if (tiempoTranscurrido >= tiempoMaximo) {
+				console.warn(
+					[
+						"Tiempo máximo alcanzado al esperar por:",
+						objeto,
+						"en",
+						entorno,
+					].join(" ")
+				);
+				return;
+			}
+
+			const obj = obtener(objeto, entorno);
+			if (obj !== null) {
+				callback.call(entorno, obj);
+			} else {
+				// Verificar nuevamente después del intervalo
+				setTimeout(verificar, intervalo);
+			}
+		}
+
+		// Iniciar la verificación
+		verificar();
+	}
+</script>
+
+<script>
+	// Array de tarjetas con datos
+	const tarjetas = [
+		{
+			tioaux: "TCRLY1",
+			titulo: "Visa Infinite BCP Qore",
+			imagen: "https://www.viabcp.com/wcm/connect/5dd6241e-5775-4611-9e7f-88423542dfe4/Tarjetas-Qore-Horizontal-Infinite-239x154px.png?MOD=AJPERES&CACHEID=ROOTWORKSPACE-5dd6241e-5775-4611-9e7f-88423542dfe4-pnZ4Sjd",
+			marca: "visa",
+			programa: "qore",
+			nivel: 5,
+			prioridad: 14,
+		},
+		{
+			tioaux: "TCRLY2",
+			titulo: "Visa Signature BCP Qore",
+			imagen: "https://www.viabcp.com/wcm/connect/8c4d314b-2c80-484f-8871-d4b6f79216e1/Tarjetas-Qore-Horizontal-Signature-239x154px+%281%29.png?MOD=AJPERES&CACHEID=ROOTWORKSPACE-8c4d314b-2c80-484f-8871-d4b6f79216e1-pnZ4RRN",
+			marca: "visa",
+			programa: "qore",
+			nivel: 4,
+			prioridad: 13,
+		},
+		{
+			tioaux: "TCRLY3",
+			titulo: "Visa Oro BCP Qore",
+			imagen: "https://www.viabcp.com/wcm/connect/78c8b3d8-a71c-4098-912e-8120a53ff870/Tarjetas-Qore-Horizontal-Gold-239x154px+%281%29.png?MOD=AJPERES&CACHEID=ROOTWORKSPACE-78c8b3d8-a71c-4098-912e-8120a53ff870-pnZ4S.6",
+			marca: "visa",
+			programa: "qore",
+			nivel: 2,
+			prioridad: 12,
+		},
+		{
+			tioaux: "TCRINF",
+			titulo: "Visa Infinite Iridium BCP LATAM Pass",
+			imagen: "https://www.viabcp.com/wcm/connect/2184b6ca-991f-40cc-b71d-9bab9dfa5424/Desktop_142x90+%281%29.png?MOD=AJPERES&CACHEID=ROOTWORKSPACE-2184b6ca-991f-40cc-b71d-9bab9dfa5424-pnZ4UkV",
+			marca: "visa",
+			programa: "latam",
+			nivel: 5,
+			prioridad: 11,
+		},
+		{
+			tioaux: "TCRBA7",
+			titulo: "Visa Infinite Sapphire BCP LATAM Pass",
+			imagen: "https://www.viabcp.com/wcm/connect/11c5f148-d907-4e3b-b53d-aabb61896f38/142x90.png?MOD=AJPERES&CACHEID=ROOTWORKSPACE-11c5f148-d907-4e3b-b53d-aabb61896f38-pnZ4UVB",
+			marca: "visa",
+			programa: "latam",
+			nivel: 5,
+			prioridad: 10,
+		},
+		{
+			tioaux: "AMXGRE",
+			titulo: "American Express Black LATAM Pass",
+			imagen: "https://www.viabcp.com/wcm/connect/90495ee7-bf9e-46ba-9adc-7558b7941613/Amex+Black.png?MOD=AJPERES&CACHEID=ROOTWORKSPACE-90495ee7-bf9e-46ba-9adc-7558b7941613-pnZ4SyG",
+			marca: "amex",
+			programa: "latam",
+			nivel: 4,
+			prioridad: 9,
+		},
+		{
+			tioaux: "TCRPL1",
+			titulo: "Visa Signature LATAM Pass",
+			imagen: "https://www.viabcp.com/wcm/connect/c7a363e3-55a5-4600-bea3-f64e7d9dfeed/Visa+Signature+LATAM+Pass.png?MOD=AJPERES&CACHEID=ROOTWORKSPACE-c7a363e3-55a5-4600-bea3-f64e7d9dfeed-pnZ4T.X",
+			marca: "visa",
+			programa: "latam",
+			nivel: 4,
+			prioridad: 8,
+		},
+		{
+			tioaux: "AMXPLL",
+			titulo: "American Express Platinum LATAM Pass",
+			imagen: "https://www.viabcp.com/wcm/connect/ae9dc651-8749-43d3-b5b4-47a9ccac2919/Amex+Platinum.png?MOD=AJPERES&CACHEID=ROOTWORKSPACE-ae9dc651-8749-43d3-b5b4-47a9ccac2919-pnZ4SND",
+			marca: "amex",
+			programa: "latam",
+			nivel: 3,
+			prioridad: 7,
+		},
+		{
+			tioaux: "TCRPLL",
+			titulo: "Visa Platinum LATAM Pass",
+			imagen: "https://www.viabcp.com/wcm/connect/9b0b38c1-ce1d-411f-9b2b-859a31397c42/Visa+Platinum+LATAM+Pass.png?MOD=AJPERES&CACHEID=ROOTWORKSPACE-9b0b38c1-ce1d-411f-9b2b-859a31397c42-pnZ4Wgg",
+			marca: "visa",
+			programa: "latam",
+			nivel: 3,
+			prioridad: 6,
+		},
+		{
+			tioaux: "AMXGLL",
+			titulo: "American Express Oro LATAM Pass",
+			imagen: "https://www.viabcp.com/wcm/connect/be3c4938-459c-4d0e-ad6b-d2631d43b6b9/Amex+Oro.png?MOD=AJPERES&CACHEID=ROOTWORKSPACE-be3c4938-459c-4d0e-ad6b-d2631d43b6b9-pnZ4UEs",
+			marca: "amex",
+			programa: "latam",
+			nivel: 2,
+			prioridad: 5,
+		},
+		{
+			tioaux: "TCRORL",
+			titulo: "Visa Oro LATAM Pass",
+			imagen: "https://www.viabcp.com/wcm/connect/db7653d8-4820-4ecb-92ef-ad5d76c9b1a2/Visa+Oro+LATAM+Pass.png?MOD=AJPERES&CACHEID=ROOTWORKSPACE-db7653d8-4820-4ecb-92ef-ad5d76c9b1a2-pnZ4TuX",
+			marca: "visa",
+			programa: "latam",
+			nivel: 2,
+			prioridad: 4,
+		},
+		{
+			tioaux: "AMXCLL",
+			titulo: "American Express Clásica LATAM Pass",
+			imagen: "https://www.viabcp.com/wcm/connect/891af71d-5ff6-4be4-93de-a1fa831f23ed/Amex+Clasica.png?MOD=AJPERES&CACHEID=ROOTWORKSPACE-891af71d-5ff6-4be4-93de-a1fa831f23ed-pnZ4Vwc",
+			marca: "amex",
+			programa: "latam",
+			nivel: 1,
+			prioridad: 3,
+		},
+		{
+			tioaux: "TCRCLL",
+			titulo: "Visa Clásica LATAM Pass",
+			imagen: "https://www.viabcp.com/wcm/connect/0eeb51f6-e91d-4a4d-83d3-af4c1461a227/Visa+Cl%C3%A1sica+LATAM+Pass.png?MOD=AJPERES&CACHEID=ROOTWORKSPACE-0eeb51f6-e91d-4a4d-83d3-af4c1461a227-pnZ4VNH",
+			marca: "visa",
+			programa: "latam",
+			nivel: 1,
+			prioridad: 2,
+		},
+		{
+			tioaux: "TCRCLB",
+			titulo: "Visa Clásica",
+			imagen: "https://www.viabcp.com/wcm/connect/28e1e511-7b9f-464a-877e-7560be17f02d/Visa+Cl%C3%A1sica.png?MOD=AJPERES&CACHEID=ROOTWORKSPACE-28e1e511-7b9f-464a-877e-7560be17f02d-pnZ4S4m",
+			marca: "visa",
+			programa: "ninguno",
+			nivel: 1,
+			prioridad: 1,
+		},
+		{
+			tioaux: "TCRMIN",
+			titulo: "Visa Light",
+			imagen: "https://www.viabcp.com/wcm/connect/cfdcb3f1-8936-4a91-a1f5-6cb917ba0264/Rounded+rectangle.png?MOD=AJPERES&CACHEID=ROOTWORKSPACE-cfdcb3f1-8936-4a91-a1f5-6cb917ba0264-pnZ4Tbj",
+			marca: "visa",
+			programa: "ninguno",
+			nivel: 0,
+			prioridad: 0,
+		},
+	];
+
+	const $modalOferta = document.querySelector("#modal_oferta");
+	const $recaptcha = $modalOferta.querySelector("#recaptchaModalOferta");
+	const $formulario = document.querySelector("#ingreso_dni_oferta");
+	const inputDni = $formulario.querySelector("[name=dni]");
+
+	taguearAccion = generarTaggeo("digitalData", {
+		action: {
+			group: "ViaBCP",
+			category: "Modal Form Experimento",
+			name: "Click",
+			label: "",
+		},
+		event: "trackAction",
+	});
+	taguearError = generarTaggeo("digitalData", {
+		error: {
+			code: "VIABCP-HOME-OFERTAS-T042",
+			message: "Error en la consulta de ofertas",
+		},
+		event: "trackError",
+	});
+
+	async function modalOfertaPersonalizada() {
+		if (window.grecaptcha) {
+			$formConsultaOferta = new Formulario($modalOferta);
+			if (!$formConsultaOferta?.Captcha?.getAttribute("index")) {
+				try {
+					$formConsultaOferta.RenderIndividualCaptcha?.SetRederCaptcha(
+						$recaptcha
+					);
+				} catch (error) {
+					throw new Error(error);
+				}
+				// setTimeout(() => {
+				//     console.log('captcha-forcerender =>', $formConsultaOferta.Captcha.getAttribute('index'));
+				// }, 1000);
+			}
+		}
+
+		const modalOferta = {};
+
+		$modalOferta.classList.add("q-modal--visible");
+
+		$modalOferta
+			.querySelectorAll(".q-modal__acciones__cerrar")
+			.forEach((boton) => {
+				boton.addEventListener("click", () => {
+					$modalOferta.classList.remove("q-modal--visible");
+					taguearAccion({ "action.label": "cerrar" });
+				});
+			});
+
+		$modalOferta
+			.querySelector(".tarjeta-resultado-lead .q-boton")
+			.addEventListener("click", () => {
+				taguearAccion({
+					"action.label": "¡La quiero!",
+				});
+			});
+
+		$modalOferta
+			.querySelector(".tarjeta-resultado-nolead .q-boton")
+			.addEventListener("click", () => {
+				taguearAccion({
+					"action.label": "Iniciar evaluación",
+				});
+			});
+
+		// Manejador para la entrada del teclado
+		inputDni.addEventListener("input", function (event) {
+			validarNumero(event.target);
+		});
+
+		// Manejador para el pegado desde el portapapeles
+		inputDni.addEventListener("paste", function (event) {
+			validarPegado(event);
+		});
+
+		$formulario.addEventListener("submit", (evt) => {
+			evt.preventDefault();
+			// if (window.grecaptcha) {
+			//     grecaptcha.reset(document.querySelector('#recaptchaModalOferta').getAttribute('index'));
+			// }
+
+			const dni = inputDni.value.trim();
+			const esValido = /^[0-9]{8}$/.test(dni);
+
+			if (!dni) {
+				mostrarError("Ingresa Nº documento válido");
+				return;
+			}
+
+			if (!esValido) {
+				mostrarError("Ingresa Nº documento válido");
+				return;
+			}
+
+			limpiarError();
+
+			$modalOferta.setAttribute("q-estado", "esperando");
+
+			if (window.grecaptcha) {
+				grecaptcha.execute(
+					document
+						.querySelector("#recaptchaModalOferta")
+						.getAttribute("index")
+				);
+			}
+
+			taguearFormulario({ event: "trackFormSubmit" });
+		});
+
+		taguearFormulario({ event: "trackFormView" });
+	}
+
+	function mostrarError(mensaje) {
+		inputDni.classList.add("error");
+		$formulario.querySelector(".texto").textContent = mensaje;
+	}
+
+	function limpiarError() {
+		inputDni.classList.remove("error");
+		$formulario.querySelector(".texto").textContent = "";
+	}
+
+	function validarNumero(input) {
+		// Eliminar cualquier carácter que no sea un número
+		input.value = input.value.replace(/[^0-9]/g, "");
+	}
+
+	function validarPegado(event) {
+		// Obtener los datos del portapapeles
+		var datosPegado = event.clipboardData || window.clipboardData;
+		var textoPegado = datosPegado.getData("text");
+
+		// Filtrar el texto pegado para eliminar caracteres no numéricos
+		var textoFiltrado = textoPegado.replace(/[^0-9]/g, "");
+
+		// Cancelar el pegado original y pegar el texto filtrado
+		event.preventDefault();
+		document.execCommand("insertText", false, textoFiltrado);
+	}
+
+	// Constantes para configuración
+	const API = {
+		URL: "https://www.viabcp.com/apis/public/productocampana/multiuso",
+		CONTENIDO: "application/json",
+		BASE: "BASE_PERSONALIZACION_TC",
+	};
+
+	// Función principal optimizada
+	async function consultarApiMultiuso(tokenCaptcha = "") {
+		// console.debug("consultarApiMultiuso", arguments)
+		try {
+			const dni = inputDni.value.trim();
+
+			// const documentoHash = calcularSHA256(dni);
+			const { generarIDC } = await import(
+				"/wcm/connect/resources/templates/formulario-v2/generador-identificadores.js?subtype=javascript"
+			);
+			const idc = generarIDC("DNI", dni, false);
+			const documentoHash = await obtenerSha512(idc.toUpperCase());
+
+			// Configurar encabezados HTTP
+			const encabezadosApi = new Headers();
+			encabezadosApi.append("Accept", API.CONTENIDO);
+			encabezadosApi.append("Content-Type", API.CONTENIDO);
+
+			// Preparar datos de la solicitud
+			const datosSolicitud = {
+				nroDocumentoHash: documentoHash,
+				campana: API.BASE,
+				captchaToken: tokenCaptcha,
+			};
+
+			// Configurar opciones de la solicitud
+			const opcionesSolicitud = {
+				method: "POST",
+				headers: encabezadosApi,
+				body: JSON.stringify(datosSolicitud),
+			};
+
+			// Realizar solicitud a la API
+			const respuesta = await fetch(API.URL, opcionesSolicitud);
+
+			// Verificar estado de la respuesta
+			if (!respuesta.ok) {
+				throw new Error(`Error en la respuesta: ${respuesta.status}`);
+			}
+
+			// Procesar respuesta exitosa
+			const resultado = await respuesta.text();
+			const datosProcesados = JSON.parse(resultado);
+
+			// Procesar según el estado recibido
+			return procesarResultado(datosProcesados);
+		} catch (error) {
+			console.error("Error en la solicitud:", error);
+			taguearError({ error });
+			throw error;
+		}
+	}
+
+	// Función para procesar resultados
+	function procesarResultado(datos) {
+		const $resultado = $modalOferta.querySelector(".tarjeta_resultado");
+		// console.debug("procesarResultado", { datos });
+
+		$modalOferta.setAttribute("q-estado", "ejecutado");
+		if (!datos.length) {
+			$resultado.setAttribute("q-resultado", "nolead");
+			return;
+		}
+
+		const tarjeta = datos[0].data?.split("/")[6] ?? false;
+		const info = tarjetas.find((item) => item.tioaux == tarjeta);
+
+		// console.debug("procesarResultado", { tarjeta, info });
+
+		if (!tarjeta || !info) {
+			$resultado.setAttribute("q-resultado", "nolead");
+			return;
+		}
+
+		$resultado.setAttribute("q-resultado", "lead");
+		$resultado.querySelector("h3").textContent = info.titulo;
+		$resultado.querySelector("figure img").src = info.imagen;
+
+		const configuraciones = [
+			{ left: 0, top: 0 },
+			{ right: 0, top: 0 },
+			{ left: 0, bottom: 0 },
+			{ right: 0, bottom: 0 },
+		];
+
+		configuraciones.forEach((config) => {
+			const origen = document.createElement("div");
+			Object.assign(origen.style, {
+				position: "absolute",
+				width: "1px",
+				height: "1px",
+				...config,
+			});
+			$resultado.appendChild(origen);
+
+			crearExplosionConfetti({
+				nodoOrigen: origen,
+				cantidadParticulas: 40,
+				colores: ["#002da0", "#ff7800", "#ffbb5c"],
+				velocidadInicial: 20,
+			});
+
+			setTimeout(() => origen.remove(), 150);
+		});
+	}
+
+
+  function lanzarExpT042(){
+	if (!window.grecaptcha) {
+		cargarRecursoReCaptcha();
+
+		esperar("grecaptcha.render", () => modalOfertaPersonalizada());
+	}
+    else{
+      modalOfertaPersonalizada();
+    }
+    
+  } 
+</script>
+
+<script>
+	/**
+	 * Calcula el hash SHA-256 de un texto de forma síncrona
+	 * Implementación completa del algoritmo SHA-256 sin dependencias externas
+	 * @param {string} textoEntrada - El texto del cual se calculará el hash
+	 * @returns {string} El hash SHA-256 en formato hexadecimal
+	 */
+	function calcularSHA256(textoEntrada) {
+		/**
+		 * Función interna para rotar bits hacia la derecha
+		 * Operación fundamental en el algoritmo SHA-256
+		 * @param {number} numeroEntero - El número a rotar (32 bits)
+		 * @param {number} posicionesRotacion - Número de posiciones a rotar
+		 * @returns {number} El número con bits rotados
+		 */
+		function rotarBitsDerecha(numeroEntero, posicionesRotacion) {
+			// Rotación circular: los bits que salen por la derecha entran por la izquierda
+			return (
+				((numeroEntero >>> posicionesRotacion) |
+					(numeroEntero << (32 - posicionesRotacion))) >>>
+				0
+			);
+		}
+
+		/**
+		 * Función interna para convertir 4 bytes en un entero de 32 bits (big-endian)
+		 * @param {Uint8Array} arrayBytes - Array de bytes
+		 * @param {number} indiceInicio - Índice donde empezar a leer los 4 bytes
+		 * @returns {number} Entero de 32 bits
+		 */
+		function bytesAEntero32(arrayBytes, indiceInicio) {
+			return (
+				(arrayBytes[indiceInicio] << 24) |
+				(arrayBytes[indiceInicio + 1] << 16) |
+				(arrayBytes[indiceInicio + 2] << 8) |
+				arrayBytes[indiceInicio + 3]
+			);
+		}
+
+		// ===== CONSTANTES DEL ALGORITMO SHA-256 =====
+
+		// Constantes K: primeros 32 bits de las raíces cúbicas de los primeros 64 números primos
+		const constantesRondas = [
+			0x428a2f98, 0x71374491, 0xb5c0fbcf, 0xe9b5dba5, 0x3956c25b,
+			0x59f111f1, 0x923f82a4, 0xab1c5ed5, 0xd807aa98, 0x12835b01,
+			0x243185be, 0x550c7dc3, 0x72be5d74, 0x80deb1fe, 0x9bdc06a7,
+			0xc19bf174, 0xe49b69c1, 0xefbe4786, 0x0fc19dc6, 0x240ca1cc,
+			0x2de92c6f, 0x4a7484aa, 0x5cb0a9dc, 0x76f988da, 0x983e5152,
+			0xa831c66d, 0xb00327c8, 0xbf597fc7, 0xc6e00bf3, 0xd5a79147,
+			0x06ca6351, 0x14292967, 0x27b70a85, 0x2e1b2138, 0x4d2c6dfc,
+			0x53380d13, 0x650a7354, 0x766a0abb, 0x81c2c92e, 0x92722c85,
+			0xa2bfe8a1, 0xa81a664b, 0xc24b8b70, 0xc76c51a3, 0xd192e819,
+			0xd6990624, 0xf40e3585, 0x106aa070, 0x19a4c116, 0x1e376c08,
+			0x2748774c, 0x34b0bcb5, 0x391c0cb3, 0x4ed8aa4a, 0x5b9cca4f,
+			0x682e6ff3, 0x748f82ee, 0x78a5636f, 0x84c87814, 0x8cc70208,
+			0x90befffa, 0xa4506ceb, 0xbef9a3f7, 0xc67178f2,
+		];
+
+		// Valores hash iniciales H: primeros 32 bits de las raíces cuadradas de los primeros 8 números primos
+		let valorHash0 = 0x6a09e667,
+			valorHash1 = 0xbb67ae85,
+			valorHash2 = 0x3c6ef372,
+			valorHash3 = 0xa54ff53a;
+		let valorHash4 = 0x510e527f,
+			valorHash5 = 0x9b05688c,
+			valorHash6 = 0x1f83d9ab,
+			valorHash7 = 0x5be0cd19;
+
+		// ===== PREPARACIÓN DEL MENSAJE =====
+
+		// Convertir el texto de entrada a un array de bytes UTF-8
+		const codificadorTexto = new TextEncoder();
+		const bytesOriginales = codificadorTexto.encode(textoEntrada);
+		const longitudOriginalBits = bytesOriginales.length * 8; // Longitud en bits para el padding
+
+		// Calcular el tamaño necesario para el padding
+		// El mensaje debe ser múltiplo de 512 bits (64 bytes) y terminar con la longitud original
+		const longitudConPadding =
+			Math.ceil((bytesOriginales.length + 9) / 64) * 64;
+		const mensajeCompleto = new Uint8Array(longitudConPadding);
+
+		// Copiar el mensaje original
+		mensajeCompleto.set(bytesOriginales);
+
+		// Agregar el bit '1' obligatorio después del mensaje (representado como 0x80 = 10000000 en binario)
+		mensajeCompleto[bytesOriginales.length] = 0x80;
+
+		// Los bytes restantes ya son 0 por defecto (padding con ceros)
+
+		// Agregar la longitud original como entero de 64 bits al final (big-endian)
+		// En JavaScript solo podemos manejar 32 bits fácilmente, así que ponemos la parte alta en 0
+		const vistaBuffer = new DataView(mensajeCompleto.buffer);
+		vistaBuffer.setUint32(mensajeCompleto.length - 8, 0, false); // Parte alta de 64 bits = 0
+		vistaBuffer.setUint32(
+			mensajeCompleto.length - 4,
+			longitudOriginalBits,
+			false
+		); // Parte baja = longitud real
+
+		// ===== PROCESAMIENTO EN BLOQUES DE 512 BITS =====
+
+		// Procesar cada bloque de 64 bytes (512 bits)
+		for (
+			let indiceByte = 0;
+			indiceByte < mensajeCompleto.length;
+			indiceByte += 64
+		) {
+			// Crear el programa de mensajes W de 64 palabras de 32 bits cada una
+			const programaMensajes = new Array(64);
+
+			// Las primeras 16 palabras son directamente del bloque actual
+			for (let indicePalabra = 0; indicePalabra < 16; indicePalabra++) {
+				programaMensajes[indicePalabra] = bytesAEntero32(
+					mensajeCompleto,
+					indiceByte + indicePalabra * 4
+				);
+			}
+
+			// Extender las 16 palabras iniciales a 64 palabras usando la fórmula SHA-256
+			for (let indicePalabra = 16; indicePalabra < 64; indicePalabra++) {
+				// Aplicar las funciones sigma (σ) del algoritmo SHA-256
+				const sigma0 =
+					rotarBitsDerecha(programaMensajes[indicePalabra - 15], 7) ^
+					rotarBitsDerecha(programaMensajes[indicePalabra - 15], 18) ^
+					(programaMensajes[indicePalabra - 15] >>> 3);
+
+				const sigma1 =
+					rotarBitsDerecha(programaMensajes[indicePalabra - 2], 17) ^
+					rotarBitsDerecha(programaMensajes[indicePalabra - 2], 19) ^
+					(programaMensajes[indicePalabra - 2] >>> 10);
+
+				// Calcular la nueva palabra combinando palabras anteriores
+				programaMensajes[indicePalabra] =
+					(programaMensajes[indicePalabra - 16] +
+						sigma0 +
+						programaMensajes[indicePalabra - 7] +
+						sigma1) >>>
+					0; // >>> 0 para mantener 32 bits sin signo
+			}
+
+			// ===== INICIALIZACIÓN DE VARIABLES DE TRABAJO =====
+
+			// Copiar los valores hash actuales a las variables de trabajo
+			let variableA = valorHash0,
+				variableB = valorHash1,
+				variableC = valorHash2,
+				variableD = valorHash3;
+			let variableE = valorHash4,
+				variableF = valorHash5,
+				variableG = valorHash6,
+				variableH = valorHash7;
+
+			// ===== BUCLE PRINCIPAL DE COMPRESIÓN (64 RONDAS) =====
+
+			for (let numeroRonda = 0; numeroRonda < 64; numeroRonda++) {
+				// Calcular las funciones Sigma mayúsculas del algoritmo
+				const sigmaMayuscula1 =
+					rotarBitsDerecha(variableE, 6) ^
+					rotarBitsDerecha(variableE, 11) ^
+					rotarBitsDerecha(variableE, 25);
+
+				// Función Choice: E escoge entre F y G
+				const funcionChoice =
+					(variableE & variableF) ^ (~variableE & variableG);
+
+				// Primer valor temporal combinando múltiples elementos
+				const valorTemporal1 =
+					(variableH +
+						sigmaMayuscula1 +
+						funcionChoice +
+						constantesRondas[numeroRonda] +
+						programaMensajes[numeroRonda]) >>>
+					0;
+
+				const sigmaMayuscula0 =
+					rotarBitsDerecha(variableA, 2) ^
+					rotarBitsDerecha(variableA, 13) ^
+					rotarBitsDerecha(variableA, 22);
+
+				// Función Majority: mayoría entre A, B y C
+				const funcionMayority =
+					(variableA & variableB) ^
+					(variableA & variableC) ^
+					(variableB & variableC);
+
+				// Segundo valor temporal
+				const valorTemporal2 =
+					(sigmaMayuscula0 + funcionMayority) >>> 0;
+
+				// Actualizar las variables de trabajo (rotación de registros)
+				variableH = variableG;
+				variableG = variableF;
+				variableF = variableE;
+				variableE = (variableD + valorTemporal1) >>> 0;
+				variableD = variableC;
+				variableC = variableB;
+				variableB = variableA;
+				variableA = (valorTemporal1 + valorTemporal2) >>> 0;
+			}
+
+			// ===== ACTUALIZACIÓN DEL HASH INTERMEDIO =====
+
+			// Sumar las variables de trabajo a los valores hash acumulados
+			valorHash0 = (valorHash0 + variableA) >>> 0;
+			valorHash1 = (valorHash1 + variableB) >>> 0;
+			valorHash2 = (valorHash2 + variableC) >>> 0;
+			valorHash3 = (valorHash3 + variableD) >>> 0;
+			valorHash4 = (valorHash4 + variableE) >>> 0;
+			valorHash5 = (valorHash5 + variableF) >>> 0;
+			valorHash6 = (valorHash6 + variableG) >>> 0;
+			valorHash7 = (valorHash7 + variableH) >>> 0;
+		}
+
+		// ===== PRODUCCIÓN DEL HASH FINAL =====
+
+		// Concatenar todos los valores hash y convertir a hexadecimal
+		const valoresHashFinales = [
+			valorHash0,
+			valorHash1,
+			valorHash2,
+			valorHash3,
+			valorHash4,
+			valorHash5,
+			valorHash6,
+			valorHash7,
+		];
+
+		// Convertir cada valor de 32 bits a una cadena hexadecimal de 8 caracteres
+		const hashHexadecimal = valoresHashFinales
+			.map((valorHash) => valorHash.toString(16).padStart(8, "0")) // Convertir a hex con padding de ceros
+			.join(""); // Concatenar todas las partes
+
+		return hashHexadecimal;
+	}
+</script>
+
+<script>
+	/**
+	 * Función principal para crear una explosión de confetti
+	 * @param {Object} configuracion - Configuración de la explosión
+	 * @param {HTMLElement} configuracion.nodoOrigen - Elemento DOM desde donde se origina la explosión
+	 * @param {number} configuracion.cantidadParticulas - Número de partículas a generar (default: 50)
+	 * @param {Array} configuracion.colores - Array de colores para las partículas (default: colores variados)
+	 * @param {number} configuracion.tamaño - Tamaño base de las partículas en píxeles (default: 8)
+	 * @param {number} configuracion.velocidadInicial - Velocidad inicial de dispersión (default: 15)
+	 * @param {number} configuracion.gravedad - Fuerza de gravedad aplicada (default: 0.5)
+	 */
+	function crearExplosionConfetti(configuracion = {}) {
+		// Configuración por defecto
+		const config = {
+			nodoOrigen: document.body,
+			cantidadParticulas: 50,
+			colores: [
+				"#ff6b6b",
+				"#4ecdc4",
+				"#45b7d1",
+				"#96ceb4",
+				"#feca57",
+				"#ff9ff3",
+				"#54a0ff",
+				"#5f27cd",
+			],
+			tamaño: 8,
+			velocidadInicial: 15,
+			gravedad: 0.5,
+			...configuracion,
+		};
+
+		// Obtener posición del nodo origen
+		const rectanguloOrigen = config.nodoOrigen.getBoundingClientRect();
+		const origenX = rectanguloOrigen.left + rectanguloOrigen.width / 2;
+		const origenY = rectanguloOrigen.top + rectanguloOrigen.height / 2;
+
+		// Array para almacenar todas las partículas activas
+		const particulasActivas = [];
+
+		// Crear las partículas
+		for (let i = 0; i < config.cantidadParticulas; i++) {
+			crearParticula(origenX, origenY, config, particulasActivas);
+		}
+
+		// Iniciar la animación
+		animarParticulas(particulasActivas, config);
+	}
+
+	/**
+	 * Crear una partícula individual de confetti
+	 */
+	function crearParticula(origenX, origenY, config, particulasActivas) {
+		// Crear elemento DOM para la partícula
+		const particula = document.createElement("div");
+		particula.className = "particula-confetti";
+
+		// Propiedades físicas de la partícula
+		const propiedadesParticula = {
+			elemento: particula,
+			x: origenX,
+			y: origenY,
+			// Velocidades iniciales aleatorias en todas las direcciones
+			velocidadX: (Math.random() - 0.5) * config.velocidadInicial * 2,
+			velocidadY:
+				(Math.random() - 0.5) * config.velocidadInicial * 2 -
+				config.velocidadInicial,
+			// Rotación aleatoria
+			rotacion: Math.random() * 360,
+			velocidadRotacion: (Math.random() - 0.5) * 10,
+			// Color aleatorio del array de colores
+			color: config.colores[
+				Math.floor(Math.random() * config.colores.length)
+			],
+			// Tamaño con variación aleatoria
+			tamaño: config.tamaño + Math.random() * 4,
+			// Opacidad inicial
+			opacidad: 1,
+		};
+
+		// Aplicar estilos iniciales a la partícula
+		aplicarEstilosParticula(propiedadesParticula);
+
+		// Agregar al DOM
+		document.body.appendChild(particula);
+
+		// Agregar a la lista de partículas activas
+		particulasActivas.push(propiedadesParticula);
+	}
+
+	/**
+	 * Aplicar estilos CSS a una partícula
+	 */
+	function aplicarEstilosParticula(particula) {
+		const elemento = particula.elemento;
+		elemento.style.left = particula.x + "px";
+		elemento.style.top = particula.y + "px";
+		elemento.style.width = particula.tamaño + "px";
+		elemento.style.height = particula.tamaño + "px";
+		elemento.style.backgroundColor = particula.color;
+		elemento.style.opacity = particula.opacidad;
+		elemento.style.borderRadius = Math.random() > 0.5 ? "50%" : "0%"; // Círculos o cuadrados aleatorios
+		elemento.style.transform = `rotate(${particula.rotacion}deg)`;
+	}
+
+	/**
+	 * Función principal de animación usando requestAnimationFrame
+	 */
+	function animarParticulas(particulasActivas, config) {
+		// Si no hay partículas activas, terminar la animación
+		if (particulasActivas.length === 0) {
+			return;
+		}
+
+		// Procesar cada partícula
+		for (let i = particulasActivas.length - 1; i >= 0; i--) {
+			const particula = particulasActivas[i];
+
+			// Actualizar posición
+			particula.x += particula.velocidadX;
+			particula.y += particula.velocidadY;
+
+			// Aplicar gravedad
+			particula.velocidadY += config.gravedad;
+
+			// Actualizar rotación
+			particula.rotacion += particula.velocidadRotacion;
+
+			// Desvanecer gradualmente cuando se acerca al suelo
+			const alturaVentana = window.innerHeight;
+			if (particula.y > alturaVentana * 0.8) {
+				particula.opacidad = Math.max(
+					0,
+					(alturaVentana - particula.y) / (alturaVentana * 0.2)
+				);
+			}
+
+			// Aplicar los cambios visuales
+			aplicarEstilosParticula(particula);
+
+			// Eliminar partícula si sale del viewport o es invisible
+			if (
+				particula.y > alturaVentana + 50 ||
+				particula.x < -50 ||
+				particula.x > window.innerWidth + 50 ||
+				particula.opacidad <= 0
+			) {
+				// Remover del DOM
+				particula.elemento.remove();
+				// Remover del array de partículas activas
+				particulasActivas.splice(i, 1);
+			}
+		}
+
+		// Continuar la animación en el siguiente frame
+		requestAnimationFrame(() =>
+			animarParticulas(particulasActivas, config)
+		);
+	}
+</script>
+
+<!--ACTIVA EL ABTEST-->
+<script>
+    //MODULO ABTEST
+(function (){
+	setTimeout(() => {
+    digitalData.push({
+		"form": {
+			channel: "ViaBCP",
+			name: "Modal Form Experimento",
+			product: "ViaBCP",
+			version: "V1",
+		},
+		"event": "trackFormView"
+	})
+    }, 500);
+// ViaBCP:Exp Modal Viajes vs Cards:Seguros-Cards:V1
+    try {
+        const abtest = ['control','piloto']
+        let porcent = () => Math.random() > 0.5 ? 1 : 0;
+        let tipoExperiment = abtest[0]
+        if(tipoExperiment =='piloto') {
+            lanzarExpT042();
+			taguearFormulario = generarTaggeo("digitalData", {
+			form: {
+				"channel": 'ViaBCP',
+				"version": 'V1',
+				"name": 'Exp Modal Viajes vs Cards',
+				"product": 'Seguros-Cards'
+				
+			},
+			event: "trackFormView",
+	});
+        } else {
+            launchModalABTest();
+        }
+    } catch (error) {
+        console.log(error)
+        taggeoActionMulti({message:'modulo ABTEST',event:'trackError'})
+    }
+})()
+
+</script>       

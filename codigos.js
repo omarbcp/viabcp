@@ -25,3 +25,10 @@ const Step = {
         this.step1.classList.add('mostrar');
     }
 }
+
+// FUNCION PARA GENERAR UNA VISTA   
+function changeView({hide,show}){
+    document.getElementById(hide).style.display = 'none'
+    document.getElementById(show).style.display = 'block'
+}
+

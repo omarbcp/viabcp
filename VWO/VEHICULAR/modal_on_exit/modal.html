@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            background-color: aqua;
+            box-sizing: border-box;
+        }
+        .modal-on-exit {
+            width: 327px;
+            height: 393px;
+            box-shadow: 0px 8px 10px -5px rgba(82, 112, 148, 0.2);
+            box-shadow: 0px 6px 30px 5px rgba(82, 112, 148, 0.12);
+            box-shadow: 0px 16px 24px 2px rgba(82, 112, 148, 0.14);
+            padding: 16px;
+            background-color: #fff;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+        }
+        .modal-on-exit > div {
+            position: relative;
+        }
+        .moe-title {
+            font-family: Flexo;
+            font-size: 22px;
+            font-weight: 700;
+            line-height: 26.4px;
+            margin-bottom: 16px;
+            text-align: center;
+           color: rgba(0, 153, 204, 1);
+        }
+        .moe-content {
+            font-family: Flexo;
+            font-size: 16px;
+            font-weight: 400;
+            line-height: 19px;
+            margin: 0 auto 24px auto;
+            text-align: center;
+            width: 279px;
+        }
+        .moe-btn-secundary {
+            width: 231px;
+            height: 40px;
+            border-radius: 20px;
+            opacity: 0px;
+            border: 1px solid rgba(0, 153, 204, 1);
+            color:rgba(0, 153, 204, 1);
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+        }
+        .moe-btn-primary {
+            width: 231px;
+            height: 40px;
+            border-radius: 20px;
+            background: rgba(238, 44, 112, 1);
+            color:#fff;
+            margin: 0 auto 24px auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+        }
+        .moe-btn-close {
+            color: rgba(0, 155, 208, 1);
+            appearance: none;
+            border:0 none;
+            background: url('https://www.viabcp.com/wcm/connect/1663b563-8065-4447-a2ed-e62cd2b984c2/32px.svg?MOD=AJPERES&attachment=true&id=1733506780592') no-repeat right center;
+            width: auto;
+            cursor: pointer;
+            position: absolute;
+            right: 0;
+            top: 0;
+            padding-right: 37px;
+        }
+        .moe-icon-ws {
+            background: url('https://www.viabcp.com/wcm/connect/ca1677ca-e271-40b2-bad0-783b83230c79/ic_social_whatsapp.svg?MOD=AJPERES&attachment=true&id=1733505654842');
+            width: 24px;
+            height: 24px;
+            margin-right: 10px;
+        }
+        .moe-txt-ws {
+            height: 24px;
+            line-height: 24px;
+        }
+        .moe-img {
+            margin-top: 10px;
+            text-align: center;
+        }
+        @media (max-width:991px) {
+            .moe-wrap-modal {
+                background: transparent;
+                padding:0;
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                align-items: center;
+                transition: background .4s linear;
+                width: 100%;
+                height: 100%;
+                background: rgb(32 46 68 / 85%);
+                top: 0px;
+                left: 0px;
+                position: fixed;
+                z-index: 100;
+            }
+            .modal-on-exit {
+                z-index: 101;
+                border-radius: 20px;
+            }
+        }
+        @media (min-width:992px) {
+            .moe-wrap-modal {
+                padding: 0px 12px;
+                display: flex;
+                flex-direction: row;
+                justify-content: end;
+            }
+            .modal-on-exit {
+                position: fixed;
+                border-radius: 20px 20px 0 0;
+                bottom: -100%;
+                right: 44px;
+            }
+            .modal-on-exit.mostrar {
+                animation: move_up 1s;
+                bottom: 0;
+            }
+            .modal-on-exit.cerrar {
+                animation: move_down 1.5s;
+            }
+
+        }
+        /*ANIMACIONES*/
+        @keyframes move_down {
+            0% {bottom: 0;}
+            100% {bottom: -100%;}
+        }
+        @keyframes move_up {
+            0% {bottom: -100%;}
+            100% {bottom: 0px;}
+        }
+    </style>
+</head>
+<body>
+    <div class="moe-wrap-modal">
+        <div class="modal-on-exit mostrar">
+            <div>
+                <button class="moe-btn-close">Cerrar</button>
+                <div class="moe-img">
+                    <img src="https://www.viabcp.com/wcm/connect/210e08a1-68a8-421c-953d-e726f4354333/car.svg?MOD=AJPERES&attachment=true&id=1733502108132">
+                </div>
+                <div class="moe-title">¡No te vayas!</div>
+                <div class="moe-content">Estás a un clic de asegurar tu<br> vehículo. Si tienes alguna duda, elige<br> uno de estos canales:</div>
+                <div class="moe-btn-primary">
+                    <div class="moe-icon-ws"></div>
+                    <div class="moe-txt-ws">Hablar con un asesor</div>
+                </div>
+                <div class="moe-btn-secundary">Continuar en la Web</div>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    const moeModal = document.querySelector('.modal-on-exit')
+    const btnClose = document.querySelector('.moe-btn-close')
+    const btnPrimary = document.querySelector('.moe-btn-primary')
+    const btnSecundary = document.querySelector('.moe-btn-secundary')
+    const urlWS = 'https://api.whatsapp.com/send/?phone=+51975135000&text=Hola,%20quiero%20informaci%C3%B3n%20sobre%20el%20Seguro%20Vehicular%20de%20Pac%C3%ADfico%20para%20clientes%20BCP '
+    const closeModal = ()=>{
+        moeModal.classList.remove('mostrar')
+        moeModal.classList.add('cerrar')
+    }
+    //ACTION
+    btnClose.onclick = ()=>{closeModal()}
+    btnSecundary.onclick = ()=>{closeModal()}
+    btnPrimary.onclick = ()=>{window.open(urlWS,'_blank')}
+</script>
+</html>

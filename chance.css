@@ -1,0 +1,28 @@
+.bcp_banner-sin-carousel .container-fluid.Fondo-Imagen h1 .banner_title.color_texto_oscuro{
+    font-weight: 500;
+}
+
+@media only screen and (min-width: 1280px) {
+    .bcp_banner-sin-carousel .container-fluid.Fondo-Imagen .banner_textos {
+        width: 695px!important;
+    }
+    
+}
+@media only screen and (min-width: 768px) {
+    .bcp_boton_solicitalo_inferior .bcp_flex_solicitala .bcp_imagen > img {
+        width: 45px!important;
+        height: auto;
+        margin-top: 0!important;
+    }
+}
+@media only screen and (min-width: 1px) and (max-width: 767px) {
+    .bcp_boton_solicitalo_inferior .bcp_flex_solicitala.vista_mobile .bcp_imagen img {
+        height: 42px!important;
+        width: auto;
+        margin-right: 18px!important;
+        margin-bottom: 0!important;
+    }
+    .bcp_banner-sin-carousel .container-fluid.Fondo-Imagen h1 .banner_title.color_texto_oscuro {
+        width: 171px;
+    }
+}

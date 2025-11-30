@@ -1,0 +1,85 @@
+<style>
+    .expand-inicial {
+        height: 1px;
+        overflow: hidden;
+    }
+    .button_container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 20px 0;
+        flex-direction: column;
+    }
+    .button_container .btn_cotizar {
+        outline-offset: unset;
+        outline: 0;
+        background-color: #ff7800;
+        color: #fff;
+        font-size: 14px;
+        font-weight: 500;
+        border-radius: 20px;
+        height: 40px;
+        text-align: center;
+        border: none;
+        cursor: pointer !important;
+        transition: box-shadow .2s linear, color .2s linear, background-color .2s linear;
+        vertical-align: middle;
+        font-family: flexo-demi;
+        padding: 0 20px;
+    }
+    .button_container .btn_comparar {
+        margin: 0px;
+        font-size: 16px;
+        line-height: 100%;
+        color: #012D74;
+        font-family: 'Flexo-Demi';
+        margin-bottom: 20px;
+        text-decoration: none;
+        cursor: pointer;
+    }
+    .bcp_banner_carousel_vertical .bcp_banner{
+        cursor: default;
+    }
+</style>
+<script>
+    const utmSearchSEO = urlParams.has('utm_content');
+    waitForElm('.bcp_footer').then((elm) => {
+        buttonsAditional();
+        const dataABTEST = {
+            clases: {
+                on : 'expand-inicial',
+                off : 'expand-animation'
+            }
+        }
+        const urlBtn = 'https://ventasonline.pacifico.com.pe/seguro-vehicular/bcp/principal?utm_source=viabcp&utm_medium=organic&utm_campaign=2025-08_BBSS_AUTOS_AON_TRA_VIABCP-SEO_PILOTOFICHA&utm_content=TRA_TODOS_N-A_GEN_REGULAR_NONE_-_N_NULL_AUTOS-VIABCP-PILOTO-FICHA&from=viabcp_-_organic_-_2025-08_BBSS_AUTOS_AON_TRA_VIABCP-SEO_PILOTOFICHA_-_TRA_TODOS_N-A_GEN_REGULAR_NONE_-_N_NULL_AUTOS-VIABCP-PILOTO-FICHA'
+        const contentPlanes = document.querySelector('.content_tabla_detalles');
+        const buttonComparar = document.querySelector('.button_container .btn_comparar');
+        const buttonCotizar = document.querySelector('.button_container .btn_cotizar');
+        const sectionPreguntas = document.querySelector('.bcp_preguntas_frecuentes_sin_categorias');
+        const ofertasBox = document.querySelector('.bcp_carousel_box_ofertas');
+        contentPlanes.classList.add('expand-inicial');
+        if (sectionPreguntas) sectionPreguntas.style.display = 'none';
+        if (ofertasBox) ofertasBox.style.display = 'none';
+
+        buttonComparar.onclick = function() {
+            const {clases} = dataABTEST;
+            if(contentPlanes.classList.contains(clases.on)) {
+                contentPlanes.classList.remove(clases.on);
+                contentPlanes.classList.add(clases.off);
+            } else {
+                contentPlanes.classList.remove(clases.off);
+                contentPlanes.classList.add(clases.on);
+            }
+        };
+        buttonCotizar.onclick = function() {
+            window.open(urlBtn,'_blank')
+        };
+        buildCustomSEO();
+        containerModal.style.display = 'none';
+        swiper_banner_vertical.disable();
+        swiper_banner_vertical.autoplay.stop();
+        const btnBanner = swiper_banner_vertical.visibleSlides[0].querySelector('.bcp_boton_naranja')
+        if(btnBanner) {btnBanner.parentElement.href = urlBtn}
+        console.log('experiencia B')
+    })
+</script>

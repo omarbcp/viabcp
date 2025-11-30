@@ -1,0 +1,1501 @@
+<!-- SVD MODAL BUENOS PAGADORES V5-->
+<style>
+    .bcp_contenedor_modal_one_click {
+        position: fixed;
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        z-index: 9999;
+    }
+
+    .bcp_contenedor_modal_one_click form-captcha {
+        display: none;
+    }
+
+    .bcp_contenedor_modal_one_click .bcp_modal_cabecera button {
+        position: absolute;
+        right: 6px;
+        top: 12px;
+        background: transparent;
+        border: unset;
+        z-index: 2;
+        cursor: pointer;
+    }
+
+    .bcp_contenedor_modal_one_click .bcp_modal_venta {
+        position: fixed;
+        background: #FFFFFF;
+        box-shadow: 0px 8px 16px rgba(0, 67, 206, 0.1);
+        width: 100%;
+        z-index: 2;
+        border-radius: 8px;
+    }
+
+    .bcp_contenedor_modal_one_click .bcp_modal_venta .bcp_descripcion {
+        font-family: 'Flexo';
+        color: #FFFFFF;
+        width: 158px;
+        font-size: 20px;
+        line-height: 24px;
+    }
+    .bcp_contenedor_modal_one_click .bcp_modal_venta .bcp_descripcion  span{
+        font-family: 'Flexo-Demi';
+        font-weight: 100;
+    }
+    .bcp_contenedor_modal_one_click .bcp_modal_venta .bcp_titulo {
+        font-family: 'Flexo';
+        font-style: normal;
+        font-weight: 400;
+        color: #ffffff;
+    }
+
+    .bcp_contenedor_modal_one_click .bcp_modal_venta .bcp_subtitulo {
+        font-family: 'Flexo';
+        font-style: normal;
+        font-weight: 400;
+        color: #868686;
+    }
+
+    .bcp_contenedor_modal_one_click .bcp_modal_venta .bcp_listado_titulo {
+        font-family: 'Flexo-Demi';
+        /* font-style: normal; */
+        font-weight: 400;
+        color: #202E44;
+        margin: 0px;
+        margin-bottom: 16px;
+        font-size: 16px;
+        line-height: 24px;
+    }
+
+    .bcp_contenedor_modal_one_click .bcp_modal_venta .bcp_descripcion_lista {
+        font-family: 'Flexo';
+        font-style: normal;
+        color: #202E44;
+    }
+
+    .bcp_contenedor_modal_one_click .bcp_modal_venta .bcp_descripcion_lista p {
+        margin: 0px;
+        font-size: 16px;
+        width: 242px;
+        line-height: 24px;
+        margin-left: 10px;
+    }
+
+    .bcp_contenedor_modal_one_click .bcp_modal_venta .bcp_descripcion_lista p strong{
+        font-family: 'Flexo-Demi';
+        font-weight: 100 !important;
+    }
+
+    .bcp_contenedor_modal_one_click .bcp_modal_venta .bcp_modal_legal {
+        font-family: 'Flexo';
+        font-style: normal;
+        font-weight: 500;
+        max-width: 305px;
+        color: #606C7F;
+        margin-bottom: 11px;
+    }
+
+    .bcp_contenedor_modal_one_click .bcp_modal_venta .bcp_paso {
+        display: none;
+    }
+
+    .bcp_contenedor_modal_one_click .bcp_modal_venta .bcp_paso.mostrar {
+        display: block;
+
+    }
+
+    .bcp_contenedor_modal_one_click .bcp_modal_venta:nth-child(2) .bcp_procesando {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .bcp_contenedor_modal_one_click .bcp_modal_venta .bcp_modal_cuerpo .bcp_paso:nth-child(3) img {
+        width: 108px;
+        height: 104px;
+        display: block;
+        margin: auto;
+    }
+
+    .bcp_contenedor_modal_one_click .bcp_modal_venta .bcp_titulo_confirmacion {
+        font-family: 'Flexo-demi';
+        font-style: normal;
+        color: #002A8D;
+        text-align: center;
+    }
+
+    .bcp_contenedor_modal_one_click .bcp_modal_venta .bcp_descripcion_confirmacion {
+        font-family: 'Flexo';
+        font-style: normal;
+        font-weight: 400;
+        color: #202E44;
+        text-align: center;
+    }
+
+    .bcp_contenedor_modal_one_click .bcp_modal_venta .btn_entendido {
+        margin: auto;
+    }
+
+    .bcp_contenedor_modal_one_click .bcp_modal_venta .bcp_grupo_cancelar {
+        background: #F5F8FF;
+        border-radius: 12px;
+        padding: 16px;
+        text-align: left;
+        margin-top: 16px;
+    }
+
+
+    .bcp_contenedor_modal_one_click .bcp_modal_venta .bcp_titulo_grupo_cancelar {
+        font-family: 'Flexo-demi';
+        font-style: normal;
+        color: #000000;
+    }
+
+    .bcp_contenedor_modal_one_click .bcp_modal_venta .bcp_descripcion_grupo_cancelar {
+        font-family: 'Flexo';
+        font-style: normal;
+        font-weight: 400;
+        color: #000000;
+    }
+
+    .bcp_contenedor_modal_one_click .bcp_modal_venta #declaracion {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 8px;
+    }
+
+    .bcp_contenedor_modal_one_click .bcp_modal_venta .bcp_input_microcomponent {
+        margin-bottom: 0px;
+    }
+
+    .bcp_contenedor_modal_one_click .bcp_modal_venta #declaracion .bcp_checkbox_microcomponent {
+        align-items: center;
+    }
+
+    .bcp_contenedor_modal_one_click .bcp_modal_venta .bcp_grupo_emotivo {
+        background: linear-gradient(90deg, #0263A6 0%, #0AA295 100%);
+        border-radius: 8px 8px 0px 0px;
+        padding: 36px 16px 16px 16px;
+        display: flex;
+        height: 125px;
+    }
+
+    .bcp_grupo_legal_venta {
+        padding: 16px;
+        border-radius: 0px 0px 8px 8px;
+        background-color: #ffffff;
+        position: relative;
+    }
+
+    .bcp_grupo_emotivo .bcp_grupo svg {
+        right: -16px;
+        position: relative;
+        bottom: 27px;
+        width: 120px;
+    }
+
+    .bcp_grupo_emotivo .bcp_grupo.bcp_grupo_svg_confirmar svg {
+        right: -11px;
+        position: relative;
+        bottom: 27px;
+        width: 87px;
+    }
+
+    .hidden-captcha {
+        display: none;
+    }
+
+    .bcp_confirm_title h3 {
+        color: #002a8d;
+        margin: 0px;
+        line-height: 28px;
+        font-size: 20px;
+        margin-bottom: 24px;
+        max-width: 349px;
+        font-family: 'flexo-demi';
+        margin-top: 12px;
+    }
+
+    .img_paso_final {
+        padding-right: 0px !important;
+        object-fit: contain !important;
+        position: relative !important;
+        right: 20px !important;
+        top: 0px !important;
+    }
+
+    .bcp_modal_legal span {
+        font-size: 11px;
+    }
+
+    .bcp_modal_legal span a {
+        color: #ff7800;
+        cursor: pointer;
+        text-decoration: none;
+    }
+
+    .bcp_boton_blanco_a {
+        color: #ff7800 !important;
+        box-shadow: none !important;
+        border: none !important;
+        margin-left: 42px;
+    }
+
+    .bcp_boton_otp_secodary{
+        height: 24px;
+        top: -48px;
+        right: -31px;
+        width: 90px;
+        position: relative;
+        visibility: visible;
+        background-color: transparent;
+        outline: none;
+        font-size: 13px;
+        opacity: 0;
+
+    }
+
+
+    .btn_hidden{
+        transition: visible 1s ease;
+    }
+
+    .bcp_cancelar_venta {
+        cursor: pointer;
+        color: #ff7800;
+        text-decoration: none;
+    }
+
+    #btn_cancelar {
+        align-self: center;
+        margin-right: 8px;
+        background-color: transparent;
+        cursor: pointer;
+    }
+
+    .bcp_paso_final {
+        padding: 24px 20px;
+        text-align: center;
+    }
+
+    #btn_lo_quiero_spt {
+        margin-right: 8px;
+        width: 136px;
+    }
+
+    .bcp_descripcion.bcp_paso_confirm {
+        max-width: 156px;
+    }
+
+    .bcp_confirm_terms {
+        padding: 22px 20px;
+    }
+
+    .bcp_confirm_remember {
+        display: flex;
+        margin-bottom: 27px;
+    }
+
+    .bcp_confirm_remember p {
+        font-size: 12px;
+        line-height: 18px;
+        font-weight: bold;
+        max-width: 262px;
+    }
+
+    .bcp_confirm_remember .bcp_confirm_svg {
+        margin-right: 9px;
+    }
+
+    .bcp_confirm_t1 {
+        font-size: 16px;
+        margin-bottom: 13px !important;
+        line-height: 24px;
+        color: #202e44;
+    }
+
+    .bcp_confirm_p {
+        margin: 0px;
+        color: #202e44;
+        font-size: 12px;
+        line-height: 18px;
+    }
+
+    .btn_cerrar_modal.fill_color svg path {
+        fill: #FFFFFF;
+    }
+
+
+    .bcp_campos_formulario {
+        margin-bottom: 11px;
+    }
+
+    .bcp_contenedor_modal_one_click .bcp_modal_venta.mostrar {
+        height:auto;
+        width: 326px;
+    }
+
+    
+    .bcp_iframe_container_container_spt{
+        bottom: -100%;
+        display: flex;
+        justify-content: center;
+        align-items: flex-end;
+        position: fixed;
+        z-index: 9999;
+        transition: all .5s ease;
+    }
+
+    .bcp_iframe_container_container_spt.mostrar{
+        bottom: 17px;
+    }
+
+    .bcp_ifrm_container{
+        max-width: 345px;
+        height: 555px;
+        border-radius: 8px;
+        border: none;
+        box-shadow: 0px 8px 16px rgb(0 67 206 / 10%);
+    }
+
+    .bcp_ifrm_container object{
+        border: none;
+        border-radius: 8px;
+        width: 345px;
+        height: 535px;
+    }
+
+    .bcp_contenedor_modal_one_click .bcp_modal_venta .bcp_detalle_lista {
+        margin-bottom: 12px;
+    }
+    .bcp_contenedor_modal_one_click .bcp_modal_venta .bcp_grupo_botones {
+        display: flex;
+        flex-direction: row-reverse;
+        margin-top: 0px;
+        align-items: center;
+        justify-content: space-between;
+    }
+    
+    .btn_cerrar_modal_gracias{
+        position: relative;
+        height: 0px;
+        background-color: transparent;
+        border: none;
+        text-align: right;
+        width: 14px;
+        height: 14px;
+        right: -322px;
+        top: 30px;
+    }
+
+
+    .btn-primary-comprar {
+        outline-offset: unset;
+        outline: 0;
+        background-color: #ff7800;
+        color: #fff;
+        font-size: 14px;
+        font-weight: 500;
+        border-radius: 20px;
+        width: 136px;
+        height: 40px;
+        text-align: center;
+        border: none;
+        cursor: pointer !important;
+        transition: box-shadow .2s linear, color .2s linear, background-color .2s linear;
+        vertical-align: middle;
+        font-family: flexo-demi;
+        margin-right: 0;
+    }
+
+    .btn-primary-comprar:hover {
+        background-color: #ff961f;
+        transition: .2s ease-in-out;
+        box-shadow: 0 2px 2px rgb(82 112 148 / 14%), 0 3px 1px rgb(82 112 148 / 12%), 0 1px 5px rgb(82 112 148 / 20%)
+    }
+
+    .btn-entendido{
+        margin-right: 0px;
+    }
+
+    .btn_cerrar_modal_gracias svg{
+        position: relative;
+        top: 3px;
+        right: -2px;
+        opacity: 0;
+    }
+    .bcp_desc_subtxt {
+        margin: 0px;
+        margin-top: 0px;
+        font-size: 16px;
+        line-height: 20px;
+        font-family: 'Flexo';
+        color: #202E44;
+        margin-bottom: 16px !important;
+    }
+    .bcp_desc_subtxt span {
+        font-family: 'Flexo-Demi';
+    }
+    .bcp_desc_subtxt label {
+        font-size: 12px;
+    }
+    .bcp_modal_cuerpo_modal_detallado{
+        background: #fff;
+        border-radius: 8px;
+    }
+    .img_logo {
+        width: 128px;
+        position: absolute;
+        top: 22px;
+        right: 0px;
+    }
+    .mdl-cintillo{
+        position: relative;
+        height: 0px;
+    }
+    .mdl-cintillo img{
+        position: relative;
+        top: -7px !important;
+        right: 5px !important;
+    }
+    @media (max-width:991px) {
+        .bcp_ifrm_container object{
+            height: 482px;
+        }
+        .bcp_iframe_container_container_spt.mostrar{
+            bottom: -34px;
+        }
+        .bcp_contenedor_modal_one_click {
+            background: transparent;
+            padding: 0px 12px;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            transition: background .4s linear;
+            width: 100%;
+            height: 100%;
+            background: rgb(32 46 68 / 85%);
+            top: 0px;
+            left: 0px;
+            align-items: center;
+        }
+
+        .bcp_contenedor_modal_one_click.fondo_transparente {
+            height: 100%;
+            width: 100%;
+            top: 0;
+            transition-delay: .4s;
+        }
+
+        .bcp_contenedor_modal_one_click.fondo_oscuro {
+            background: rgb(32 46 68 / 85%);
+        }
+
+        .bcp_contenedor_modal_one_click .bcp_modal_entrada_mobile {
+            position: fixed;
+            background: #FFFFFF;
+            box-shadow: 0px 8px 16px rgba(0, 67, 206, 0.1);
+            border-radius: 8px;
+            width: 350px;
+            height: 169px;
+            z-index: 1;
+            padding: 20px;
+            bottom: -100%;
+            transition: bottom 1s linear;
+        }
+
+        .bcp_contenedor_modal_one_click .bcp_modal_entrada_mobile.mostrar {
+            bottom: 60px;
+        }
+
+        .bcp_contenedor_modal_one_click .bcp_modal_cuerpo_mobile {
+            display: flex;
+        }
+
+        .bcp_contenedor_modal_one_click .bcp_modal_cuerpo_mobile .bcp_descripcion {
+            font-family: 'Flexo-demi';
+            font-style: normal;
+            font-weight: 600;
+            color: #002A8D;
+            font-size: 18px;
+            line-height: 24px;
+            margin-bottom: 6px;
+        }
+
+        .bcp_contenedor_modal_one_click .bcp_modal_cuerpo_mobile .bcp_titulo {
+            font-family: 'Flexo';
+            font-style: normal;
+            font-weight: 400;
+            color: #002A8D;
+            font-size: 12px;
+            line-height: 16px;
+            margin-bottom: 6px;
+        }
+
+        .bcp_contenedor_modal_one_click .bcp_modal_cuerpo_mobile .bcp_grupo:nth-child(1) {
+            width: 74%;
+        }
+
+        .bcp_contenedor_modal_one_click .bcp_modal_cuerpo_mobile .btn_ver_mas {
+            padding-left: 24px;
+            padding-right: 24px;
+            height: 30px;
+        }
+
+        .bcp_contenedor_modal_one_click .bcp_modal_venta {
+            bottom: 0px;
+            max-width: 345px;
+            bottom: -200%;
+            transition: bottom .4s linear;
+        }
+
+        .bcp_contenedor_modal_one_click .bcp_modal_venta.mostrar {
+            bottom: 0;
+            position: relative;
+            animation: keyframes_modal_venta_one_click 1s;
+        }
+        .bcp_contenedor_modal_one_click .bcp_modal_venta .bcp_titulo {
+            font-size: 14px;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        .bcp_contenedor_modal_one_click .bcp_modal_venta .bcp_subtitulo {
+            font-size: 11px;
+            line-height: 20px;
+            margin-bottom: 10px;
+        }
+        .bcp_contenedor_modal_one_click .bcp_modal_venta ul {
+            margin: 0;
+            padding: 0;
+        }
+
+        .bcp_contenedor_modal_one_click .bcp_modal_venta ul>li {
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .bcp_grupo_botones{
+            display: flex;
+            flex-direction: row-reverse;
+        }
+
+        .bcp_contenedor_modal_one_click .bcp_modal_venta .btn_obtener {
+            padding-left: 38px;
+            padding-right: 38px;
+            margin: 0px;
+        }
+
+        .bcp_contenedor_modal_one_click .bcp_modal_venta .btn_gracias {
+            margin: 0px;
+            margin-right: 24px;
+        }
+
+        .bcp_contenedor_modal_one_click .bcp_modal_venta .bcp_modal_legal {
+            font-size: 10px;
+            line-height: 14px;
+        }
+
+        .bcp_contenedor_modal_one_click .bcp_modal_venta .bcp_titulo_confirmacion {
+            font-size: 22px;
+            line-height: 30px;
+            margin-top: 6px;
+            margin-bottom: 6px;
+        }
+
+        .bcp_contenedor_modal_one_click .bcp_modal_venta .bcp_descripcion_confirmacion {
+            font-size: 16px;
+            line-height: 22px;
+            margin-bottom: 16px;
+        }
+
+        .bcp_contenedor_modal_one_click .bcp_modal_venta .btn_entendido {
+            margin-bottom: 26px;
+        }
+
+        .bcp_contenedor_modal_one_click .bcp_modal_venta .bcp_titulo_grupo_cancelar {
+            font-size: 12px;
+            line-height: 20px;
+            margin-bottom: 0px;
+        }
+
+        .bcp_contenedor_modal_one_click .bcp_modal_venta .bcp_descripcion_grupo_cancelar {
+            font-size: 11px;
+            line-height: 16px;
+        }
+
+        .bcp_grupo_botones.bcp_grupo_confirmar{
+            margin: 0px;
+            margin-top: 27px;
+            display: flex;
+            flex-direction: row-reverse;
+        }
+        #btn_cancelar{
+            margin: auto;
+            margin-right: 12px !important;
+        }
+
+        .bcp_grupo_botones.bcp_grupo_confirmar .bcp_btn_enviar_form{
+            margin: 0px;
+            margin-right: 0px !important;
+        }
+
+        .bcp_confirm_title h3{
+            max-width: 237px;
+            margin-bottom: 16px;
+        }
+
+        .bcp_confirm_terms p{
+            max-width: 256px;
+        }
+        .bcp_paso_final .img_paso_final{
+            width: initial !important;
+            padding-left: 0px !important;
+        }
+        .bcp_confirm_terms{
+            padding: 22px 20px 0px 20px !important;
+        }
+        .bcp_paso_final{
+            padding: 16px 20px !important;
+        }
+    }
+    .bcp_contenedor_modal_one_click .bcp_modal_venta .bcp_grupo_emotivo .bcp_grupo:nth-child(1){
+        width: 177px;
+    }
+    @media (min-width:992px) {
+        .bcp_contenedor_modal_one_click {
+            padding: 0px 12px;
+            display: flex;
+            flex-direction: row;
+            justify-content: end;
+        }
+
+        @keyframes keyframes_modal_venta_one_click_cerrar {
+            0% {bottom: 16px;}
+            100% {bottom: -100%;}
+        }
+
+        @keyframes keyframes_modal_venta_one_click {
+            0% {bottom: -100%;}
+            80% {bottom: 60px;}
+            100% {bottom: 16px;}
+        }
+
+        .bcp_contenedor_modal_one_click .bcp_modal_entrada_mobile {
+            display: none;
+        }
+
+        .bcp_contenedor_modal_one_click .bcp_modal_venta {
+            max-width: 345px;
+            bottom: -1000%;
+            border-bottom-right-radius: 8px;
+            border-bottom-left-radius: 8px;
+        }
+
+        .bcp_contenedor_modal_one_click .bcp_modal_venta.cerrar {
+            animation: keyframes_modal_venta_one_click_cerrar 1s;
+        }
+
+        .bcp_contenedor_modal_one_click .bcp_modal_venta.mostrar {
+            bottom: 10px;
+            animation: keyframes_modal_venta_one_click 1s;
+            right: 10px;
+        }
+        .bcp_contenedor_modal_one_click .bcp_modal_venta .bcp_titulo {
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 2px;
+        }
+
+        .bcp_contenedor_modal_one_click .bcp_modal_venta .bcp_subtitulo {
+            font-size: 11px;
+            line-height: 20px;
+            margin-bottom: 12px;
+        }
+        .bcp_contenedor_modal_one_click .bcp_modal_venta ul {
+            margin: 0;
+            padding: 0;
+        }
+
+        .bcp_contenedor_modal_one_click .bcp_modal_venta ul>li {
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .bcp_contenedor_modal_one_click .bcp_modal_venta .btn_obtener {
+            padding-left: 38px;
+            padding-right: 38px;
+            margin: auto;
+            margin-left: 0px;
+            margin-right: 8px;
+        }
+
+        .bcp_contenedor_modal_one_click .bcp_modal_venta .btn_gracias {
+            margin: auto;
+            margin-left: 0px;
+            margin-right: 8px;
+        }
+
+        .bcp_contenedor_modal_one_click .bcp_modal_venta .bcp_modal_legal {
+            font-size: 10px;
+            line-height: 14px;
+        }
+
+        .bcp_contenedor_modal_one_click .bcp_modal_venta .bcp_grupo_botones_legales {
+            display: flex;
+            flex-direction: column-reverse;
+        }
+
+        .bcp_contenedor_modal_one_click .bcp_modal_venta .bcp_titulo_confirmacion {
+            font-size: 22px;
+            line-height: 28px;
+            margin-top: 12px;
+            margin-bottom: 12px;
+        }
+
+        .bcp_contenedor_modal_one_click .bcp_modal_venta .bcp_descripcion_confirmacion {
+            font-size: 14px;
+            line-height: 20px;
+            margin-bottom: 20px;
+        }
+
+        .bcp_contenedor_modal_one_click .bcp_modal_venta .btn_entendido {
+            margin-bottom: 30px;
+        }
+
+        .bcp_contenedor_modal_one_click .bcp_modal_venta .bcp_titulo_grupo_cancelar {
+            font-size: 12px;
+            line-height: 20px;
+            margin-bottom: 4px;
+        }
+
+        .bcp_contenedor_modal_one_click .bcp_modal_venta .bcp_descripcion_grupo_cancelar {
+            font-size: 11px;
+            line-height: 16px;
+        }
+        .bcp_grupo_botones.bcp_grupo_confirmar{
+            margin-top: 4px !important;
+
+        }
+        .bcp_paso_final .img_paso_final{
+            width: initial !important;
+            padding-left: 0px !important;
+        }
+        .bcp_grupo_svg_confirmar{
+            padding-left: 30px;
+        }
+
+    }
+    .bcp_beneficio {
+        font-family: Flexo;
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 20px;
+        text-align: left;
+    }
+    .bcp_beneficio > span {
+        font-family: Flexo-Demi;
+    }
+    .banner_promo{
+        border-radius: 8px;
+        padding: 8px 4px;
+        background-color: #ebf4ff;
+        color: #002a8d;
+        font-family: 'Flexo';
+        font-size: 12px;
+        margin-bottom: 16px;
+        text-align: center;
+    }
+    .banner_promo strong{
+        font-family: 'Flexo-Demi';
+        font-weight: 100;
+    }
+    .banner_promo a{
+        color: #ff7800;
+        cursor: pointer;
+        font-family: 'Flexo-Demi';
+    }
+    /* STEP THANK PAGE */
+    .step2 {
+        display: none;
+        padding: 74px 16px;
+    }
+    .step2.mostrar {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+    }
+    .step2 > div {
+        text-align: center;
+    }
+    .thpg_title {
+        font-family: Flexo;
+        font-size: 20px;
+        font-weight: 600;
+        line-height: 28px;
+        text-align: center;
+        color: #002A8D;
+    }
+    .thpg_content {
+        font-family: Flexo;
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 20px;
+        text-align: center;
+        color: #202E44;
+        margin-top: 24px;
+    }
+    .thpg_content > span {
+        font-family: Flexo-Demi;
+    }
+    .thpg_close {
+        width: 130px;
+        height: 40px;
+        padding: 8px 16px 8px 16px;
+        border-radius: 20px;
+        background: #FF7800;
+        font-family: Flexo;
+        font-size: 16px;
+        font-weight: 600;
+        line-height: 19.2px;
+        text-align: center;
+        color:#fff;
+        margin-top: 24px;
+        border: 0 none;
+    }
+    /* FORMULARIO */
+    .plan_sor_formulario_inputs {
+        margin:16px 0 12px 0;
+    }
+    .title_form {
+        font-family: Flexo;
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 24px;
+        text-align: left;
+        margin-bottom: 16px;
+        color: #202E44;
+    }
+    .input_declaracion {
+        font-family: Flexo;
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 20px;
+        text-align: left;
+        color:#606C7F;
+
+    }
+    .input_declaracion > a {
+        cursor: pointer;
+    }
+    .respaldo-pacifico-wo{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 16px;
+        margin-bottom: 24px;
+    }
+    .respaldo-pacifico-wo p{
+        font-family: 'Flexo';
+        font-size: 12px;
+        font-weight: 400;
+        line-height: 16px;
+        color: #606C7F;
+        margin-right: 8px;
+    }
+    .respaldo-pacifico-wo img{
+        width: 73px;
+    }
+</style>
+
+<div id="bcp_modal_one_click" class="bcp_contenedor_modal_one_click " style="display: none;">
+    <!-- Modal venta de Seguro-->
+    <div class="bcp_formulario bcp_modal_venta mostrar" aria-hidden="true">
+        <div class="bcp_modal_cabecera">
+            <button class="btn_cerrar_modal fill_color" data-step="1">
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" clip-rule="evenodd"
+                        d="M0.209705 0.387101L0.292893 0.292893C0.653377 -0.0675907 1.22061 -0.0953203 1.6129 0.209705L1.70711 0.292893L7 5.585L12.2929 0.292893C12.6834 -0.0976311 13.3166 -0.0976311 13.7071 0.292893C14.0976 0.683418 14.0976 1.31658 13.7071 1.70711L8.415 7L13.7071 12.2929C14.0676 12.6534 14.0953 13.2206 13.7903 13.6129L13.7071 13.7071C13.3466 14.0676 12.7794 14.0953 12.3871 13.7903L12.2929 13.7071L7 8.415L1.70711 13.7071C1.31658 14.0976 0.683418 14.0976 0.292893 13.7071C-0.0976311 13.3166 -0.0976311 12.6834 0.292893 12.2929L5.585 7L0.292893 1.70711C-0.0675907 1.34662 -0.0953203 0.779392 0.209705 0.387101L0.292893 0.292893L0.209705 0.387101Z"
+                        fill="#FF7800" />
+                </svg>
+            </button>
+        </div>
+        <div class="bcp_modal_cuerpo">
+            <div class="bcp_paso mostrar">
+                <div class="bcp_modal_cuerpo_modal_detallado">
+                    <div class="mdl-cintillo">
+                        <img src="/wcm/connect/c9c6efba-602b-48da-865f-fd87fe000375/Cintillo.svg?MOD=AJPERES&attachment=true&id=1710340444880" alt="cintillo">
+                    </div>
+                    <div class="bcp_grupo_emotivo" id="modalHeader"></div>
+                    <div class="bcp_grupo_legal_venta" id="modalBody"></div>
+                </div>
+            </div>
+            <!-- paso confirmación -->
+        </div>
+        <!--<div id="frmLead">
+            <div class="hidden-captcha">
+                <form-captcha id="goodPayersCaptcha" datacallback="goodPayersCaptchaCallback"></form-captcha>
+            </div>
+        </div>-->
+        <div class="respaldo-pacifico-wo">
+            <p>Con el respaldo de </p><img src="https://www.viabcp.com/wcm/connect/83e348ec-a740-454e-b572-a764882bb060/pacifico.png?MOD=AJPERES&attachment=false&id=1730905701547" alt="">
+        </div>
+    </div>
+</div>
+<script>
+    //CLASES
+    class HTMLElement {
+        constructor(tagName='div') {
+            this.element = document.createElement(tagName)
+        }
+        addChild(listElement){
+            listElement.forEach((e)=>{
+                this.element.appendChild(e)
+            })
+            return this;
+        }
+        addClass(data) {
+            if(typeof data == 'string'){
+                this.element.classList.add(data);
+            } else {
+                data.forEach((className)=>{
+                    this.element.classList.add(className);
+                })
+            }
+            return this;
+        }
+        setAttribute(attribute, value) {
+            this.element.setAttribute(attribute, value);
+            return this;
+        }
+        setText(text) {
+            this.element.textContent = text;
+            return this;
+        }
+        setHTML(html) {
+            this.element.innerHTML = html;
+            return this;
+        }
+        appendChild(child) {
+            if (child instanceof HTMLElement) {
+                this.element.appendChild(child.element);
+            } else if (child instanceof Node) {
+                this.element.appendChild(child);
+            } else {
+                throw new Error("El hijo debe ser una instancia de HTMLElement o Node.");
+            }
+            return this;
+        }
+        appendTo(parent) {
+            if (parent instanceof HTMLElement) {
+                parent.element.appendChild(this.element);
+            } else if (parent instanceof Node) {
+                parent.appendChild(this.element);
+            } else {
+                throw new Error("El padre debe ser una instancia de HTMLElement o Node.");
+            }
+            return this;
+        }
+        getElement() {
+            return this.element;
+        }
+    }
+    //TAGGEO GENERAL
+    const taggeoGeneric =  {
+        channel : "ViaBCP",
+        group : "ViaBCP",
+        label : "Lo quiero",
+        name : "Modal Form",
+        producto : "SVD",
+        version : "Seguros-deciles1-3",
+        category : "Modal Form-SVD",
+        type:"trackAction"
+    }
+
+    
+    //REQUEST
+    let requestSVD = {
+        promocioncancelada : '-'
+    }
+    //DATA PARA EL MODAL
+    const iconoGeneric = {
+        check : '<img src="https://www.viabcp.com/wcm/connect/a050ebdd-380f-4539-bfbd-58f5571a61fb/color%F0%9F%8E%A8%3F.svg?MOD=AJPERES&attachment=true&id=1721857067922" alt="check_blue">',
+        info : '<img src="https://www.viabcp.com/wcm/connect/691970c5-0c65-435b-a5c6-532697cc9260/ic_info.svg?MOD=AJPERES&attachment=true&id=1724980934405" alt="info">'
+    }
+    const dataModalSVD = {
+        control:{
+            header:{
+                content: 'Obtén tu <span>Seguro Vida Devolución</span> y gana S/ 10,000',
+                spot:'https://www.viabcp.com/wcm/connect/25d40e11-9183-48d0-a4c6-2ff8a83fc271/Frame+1000005033.png?MOD=AJPERES&attachment=false&id=1730827320126'
+            },
+            body:{
+                lineList:'',
+                labelList:'Beneficios:',
+                coberturas: [
+                    {icon:iconoGeneric.check,item:'<p>Recuperar <strong>hasta 120%</strong> de lo pagado.</p>'},
+                    {icon:iconoGeneric.check,item:'<p>Hasta <strong>S/ 200 mil</strong> en caso de fallecimiento.</p>'},
+                    {icon:iconoGeneric.check,item:'<p>Cobertura dentro de Perú y en el extranjero.</p>'},
+                    {icon:iconoGeneric.info,item:'<p>Edad máxima para adquirir el seguro: 53 años.</p>'},
+                ],
+                promo: 'Adquiriendo este seguro participas del <strong>sorteo de vales.</strong> Revisa las bases del sorteo <a id="btn-tyc">aquí</a>'
+            },
+            buttons:{
+                primary: {
+                    label:'Lo quiero',
+                    functions:openURL
+                },
+                secundary: {
+                    label:'No, gracias',
+                    functions:cerrarModal
+                }
+            }   
+        },
+        piloto:{
+            header:{
+                content: 'Gana <span>S/ 15,000</span> con el <span>Seguro Vida Devolución</span>',
+                spot:'https://www.viabcp.com/wcm/connect/3276330f-0a7d-4907-bcdd-2a87710cd31b/Frame+1000005033.png?MOD=AJPERES&attachment=false&id=1733411001938'
+            },
+            body:{
+                lineList:'Desde <span>S/ 55 al mes</span> (Inc. IGV).',
+                coberturas: '<span>Te cubrimos hasta S/ 200,000</span> en caso de fallecimiento.',
+                legal: 'Al enviar la información autorizas al BCP el tratamiento de tus datos personales. Conoce más <a id="tyc">aquí</a>. Al comprar el seguro participas del sorteo, revisa las bases <a id="tyc">aquí.</a>'
+            },
+            buttons:{
+                primary: {
+                    label:'Llámenme',
+                    functions:sendForm
+                },
+                secundary: {
+                    label:'No, gracias',
+                    functions:cerrarModal
+                }
+            }   
+        }
+    }
+    // ELEMENTOS GLOBALES
+    const btnCerrarModal = document.querySelector('.btn_cerrar_modal')
+    let frmSVDComunicacion,frmInitSVDPlanes,frmInitSVDPlanesCaptcha;
+    // FUNCIONES DECLARATIVAS GLOBALES
+    const cookieValues = (e)=>{
+      const valor = document.cookie.split("; ").find((row) => row.startsWith(e+"="))?.split("=")[1]
+      return valor
+    }
+    const openURLCustom = (data)=>{
+        const {url,target='_blank'} = data
+        //taggeoSVDModal(taggeo)
+        window.open(url,target)
+    }
+    const validateInput=(id,campo)=>{
+        const input = document.getElementById(id)
+        const bool = frmInitSVDPlanes.Validar[campo](input)
+        return bool
+    }
+    const validateInputs = () =>{
+        let boolDNI = validateInput('input_dni','CampoNumerico');
+        let boolTLF = validateInput('input_celular','CampoNumerico');
+
+        if (!boolDNI || !boolTLF ) {
+            console.log('validacion false')
+            return false
+        } else {
+            return true;
+        }
+    }
+    const buildlist = (data)=>{
+        let items = '<ul>'
+        data.forEach(element => {
+            items += '<li style="display:flex;">'
+            items += '<span class="bcp_icon">'+element.icon+'</span>';
+            items += '<span class="bcp_descripcion_lista">'+element.item+'</span>'
+            items += '</li>'
+        });
+        items += '</ul>'
+        return items
+    }
+    const generarInputs = `<div class="title_form">Completa tus datos y te contactaremos</div>
+        <form-input id="input_dni" name="input_dni" datatype="tel"
+            minlength="8" maxlength="8" constraint="soloNumeros" label="Número de DNI"
+            msgerror="Ingresa tu número de documento">
+        </form-input>
+        <form-input id="input_celular" name="input_celular" datatype="tel"
+            minlength="9" maxlength="9" constraint="soloNumeros" label="Celular"
+            msgerror="Ingresa tu número de celular">
+        </form-input>
+        <div id="input_declaracion" class="input_declaracion">Declaro conocer que esta información será utilizada únicamente para los fines de este proceso, y será tratada según lo indicado en nuestra <a id="tycDP">Política de Privacidad.</a> Al adquirir este seguro participas del sorteo, revisa las bases <a id="tycCJ">aquí</a></div>
+        <div class="hidden-captcha">
+        <form-captcha id="frmSOSCaptcha" datacallback="frmSOSCaptchaCallback"></form-captcha></div>`;
+    const step = {
+        init:function(steps){
+            this.step1 = document.querySelector(steps[0]) 
+            this.step2 = document.querySelector(steps[1])
+        },
+        next:function(){
+            this.step1.classList.remove('mostrar')
+            this.step2.classList.add('mostrar')
+            btnCerrarModal.classList.remove('fill_color')
+        }
+    }
+    const renderizarCaptchaModalOneClick = (data) => {
+        const {form,idtag} = data
+        if (!form.Captcha.getAttribute('index')) {
+            try {
+                form.RenderIndividualCaptcha.SetRederCaptcha(idtag);
+            } catch (error) {
+                throw new Error(error)
+            }
+            setTimeout(() => {
+                console.log('captcha-forcerender =>', form.Captcha.getAttribute('index'));
+            }, 1000);
+        }
+    }
+    const renderizarCaptchaLead = () => {
+        if (!frmInitSVDLead.Captcha.getAttribute('index')) {
+            try {
+                frmInitSVDLead.RenderIndividualCaptcha.SetRederCaptcha(frmInitSVDLeadCaptcha);
+            } catch (error) {
+                taggeoSOSModal({message:'RenderCaptcha',type:'trackError'})
+                throw new Error(error)
+            }
+            setTimeout(() => {
+                console.log('captcha-forcerender =>', frmInitSVDLead.Captcha.getAttribute('index'));
+            }, 1000);
+        }
+    }
+    //ARMAR ESTRUCTURA DE HTML
+    const modalExperiment = {
+        init:function(data){
+            this.container = document.querySelector(data.container)
+            this.response = {}
+        },
+        addElements:function(label,elements){
+            const container = document.querySelector(label)
+            if(container){
+                elements.forEach((e)=>{
+                    container.appendChild(e)
+                })
+            }
+        },
+        buttons:function(data){
+            const {primary,secundary} = data
+            const btnPrimary = new HTMLElement('button').addClass(['btn-primary-comprar']).setText(primary.label).getElement()
+            const btnSecundary = new HTMLElement('button').addClass(['bcp_boton_blanco','bcp_boton_blanco_a']).setText(secundary.label).getElement()
+            const sectionButton = new HTMLElement('div',).addClass(['bcp_grupo_botones','bcp_grupo_confirmar']).addChild([btnPrimary,btnSecundary]).getElement()
+            //CLICK
+            btnPrimary.onclick = ()=>{primary.functions()}
+            btnSecundary.onclick = ()=>{secundary.functions('No gracias')}
+            return sectionButton
+        },
+        control: function(data){
+            try {
+                const {header,body,buttons} = data
+                const contentBody = [], contentHead = []
+                //BODY
+                contentBody.push(new HTMLElement('div').setHTML(body.lineList).getElement()) 
+                contentBody.push(new HTMLElement('p').addClass('bcp_listado_titulo').setText(body.labelList).getElement())
+                contentBody.push(new HTMLElement('div').addClass(['bcp_detalle_lista']).setHTML(buildlist(body.coberturas)).getElement())
+                contentBody.push(new HTMLElement('div').addClass('banner_promo').setHTML(body.promo).getElement())
+                contentBody.push(this.buttons(buttons))
+                //HEADER
+                contentHead.push(new HTMLElement('div').addClass(['bcp_descripcion']).setHTML(header.content).getElement())
+                contentHead.push(new HTMLElement('img').addClass(['img_logo']).setAttribute('src',header.spot).getElement())
+                this.addElements('#modalHeader',contentHead)
+                this.addElements('.bcp_grupo_legal_venta',contentBody)
+                const linkTyC = document.getElementById('btn-tyc')
+                linkTyC.onclick = ()=>{
+                    window.open('https://www.viabcp.com/wcm/connect/11c501f7-06f1-4288-a998-3607f73ea8a8/TyC-SVD-Agosto2024.pdf?MOD=AJPERES&attachment=true&id=1722528589574','_blank')
+                }
+                taggeoSOSModal({type:'trackFormView'})
+            } catch (error) {
+                console.log(error)
+            }
+        },
+        piloto: function (data){
+            try {
+                const {header,body,buttons} = data
+                const urltyc = {
+                    link1:'https://www.viabcp.com/transparencia/#protecciondedatos',
+                    link2:'/wcm/connect/5d7e47d7-d48b-4fac-9236-208bb6ffd097/tyc_svd_odv.pdf?MOD=AJPERES&attachment=true&id=1736288424814'
+                }
+                const contentBody = [], contentHead = []
+                contentBody[0] = new HTMLElement('p').addClass('bcp_desc_subtxt').setHTML(body.lineList).getElement()
+                contentBody[1] = new HTMLElement('p').addClass('bcp_beneficio').setHTML(body.coberturas).getElement()
+                contentBody[2] = new HTMLElement('div').addClass('plan_sor_formulario_inputs').setHTML(generarInputs).getElement()
+                contentBody[4] = this.buttons(buttons)
+                contentHead[0] = new HTMLElement('div').addClass(['bcp_descripcion']).setHTML(header.content).getElement()
+                contentHead[1] = new HTMLElement('img').addClass(['img_logo']).setAttribute('src',header.spot).getElement()
+                this.addElements('#modalHeader',contentHead)
+                this.addElements('.bcp_grupo_legal_venta',contentBody)
+                //CREAR STEP THANKPAGE
+                const imgClose = '<img src="/wcm/connect/c2dd6ca8-a84d-421a-9f77-f34e8133cd25/c_ic_close_orange.svg?MOD=AJPERES&attachment=true&id=1722145479416" alt="">'
+                const imgSpot = '<img src="/wcm/connect/82a836f8-cb4c-494e-9a94-2cfaee078567/spot_circle_m_spc_mobile_success_hand_d_l.svg?MOD=AJPERES&attachment=true&id=1722142373600" alt="">'
+                const contentThankPage = []
+                contentThankPage[0] = new HTMLElement().addClass(['thpg_spot']).setHTML(imgSpot).getElement()
+                contentThankPage[1] = new HTMLElement().addClass(['thpg_title']).setHTML('¡Gracias por tu interés en nuestro seguro!').getElement()
+                contentThankPage[2] = new HTMLElement()
+                    .addClass(['thpg_content'])
+                    .setHTML('Nos comunicaremos contigo para brindarte más información acerca del<br><span>Seguro Vida Devolución.</span>')
+                    .getElement()
+                contentThankPage[3] = new HTMLElement('button').addClass(['thpg_close']).setText('Entendido').getElement()
+                const stepThankPage = new HTMLElement().addChild(contentThankPage).addClass('step2').getElement()
+                //ADD FUNCTIONS
+                contentThankPage[3].onclick = ()=>{cerrarModal('Entendido')}
+                document.querySelector('#input_declaracion #tycDP').addEventListener('click',()=>{
+                    window.open(urltyc.link1,'_blank');
+                })
+                document.querySelector('#input_declaracion #tycCJ').addEventListener('click',()=>{
+                    window.open(urltyc.link2,'_blank');
+                })
+                this.addElements('.bcp_modal_cuerpo',[stepThankPage])
+                step.init(['.bcp_paso','.step2'])
+                //PARAMETROS PARA ENVIO DE FORM
+                frmSVDComunicacion = document.getElementById('modalBody'); //frmMocSegurosHome
+                frmInitSVDPlanes = new Formulario(frmSVDComunicacion);//formContentMOCSegurosHome
+                frmInitSVDPlanesCaptcha = frmSVDComunicacion.querySelector('#frmSOSCaptcha');
+                //VALIDA reCAPTCHA
+                renderizarCaptchaModalOneClick({form:frmInitSVDPlanes,idtag:frmInitSVDPlanesCaptcha})
+                taggeoSOSModal({type:'trackFormView'})
+            } catch (error) {
+                //throw new Error(error);
+                console.error(error)
+            }
+        }
+    }
+    // EVENTOS BOTONES
+    btnCerrarModal.onclick = ()=>{cerrarModal('Cerrar')}
+    //FUNCIONES GENERALES
+    function openURL(){
+        taggeoSOSModal({label:'Lo quiero',name:'Click'})
+        window.open("https://www.viabcp.com/seguros/complementarios/seguro-devolucion-total","_blank")
+    }
+    function sendForm(){
+        if(!validateInputs()) return
+        const indexCaptcha = frmInitSVDPlanesCaptcha.getAttribute('index')
+        grecaptcha.execute(indexCaptcha)
+        taggeoSOSModal({label:'Lo quiero',name:'Click'})
+    }
+    function cerrarModal(source){
+        document.querySelector('.bcp_contenedor_modal_one_click').style.display="none"
+        /*if(tipoExperiment == abtest[0]){//CONTROL
+            taggeoSOSModal({label:source,name:'Click'})
+        } else {//PILOTO
+            const stepCurrent = document.querySelector('.bcp_paso')
+            if(stepCurrent.classList.contains('mostrar')){
+                taggeoSOSModal({label:source + '1',name:'Click'})
+            } else {
+                taggeoSOSModal({label:source + '2',name:'Click'})
+            }
+        }*/
+        const stepCurrent = document.querySelector('.bcp_paso')
+        if(stepCurrent.classList.contains('mostrar')){
+            taggeoSOSModal({label:source + '1',name:'Click'})
+        } else {
+            taggeoSOSModal({label:source + '2',name:'Click'})
+        }
+    }
+     // TAGGEO ADOBE
+    function taggeoSOSModal(taggeoCustom){
+        const taggeoDefault = taggeoGeneric
+        const taggeFinal = {...taggeoDefault, ...taggeoCustom}
+        const {channel,group,label,name,producto,version,category,type,message} = taggeFinal
+
+        /*if(type=='trackAction') {
+            digitalData.push({
+                action:{group:group,category:category,name:name,label:label},
+                metadata:{key:"Producto",value:producto},
+                event:"trackAction"
+            })
+        } else {
+            digitalData.push({
+                form:{channel:channel,version:version,name:name,product:producto},
+                event:type
+            })
+        }*/
+        const dataTaggeoSend = {
+            trackAction: {
+                action:{group:group,category:category,name:name,label:label},
+                metadata:{key:"Producto",value:producto},
+                event:"trackAction"
+            },
+            trackFormView: {
+                form:{channel:channel,version:version,name:name,product:producto},
+                event:"trackFormView"
+            },
+            trackFormSubmit: {
+                form:{channel:channel,version:version,name:name,product:producto},
+                event:"trackFormSubmit"
+            },
+            trackError:{
+                error:{code:"VIABCP-HOME",message:message},
+                event:"trackError"
+            }
+        }
+        digitalData.push(dataTaggeoSend[type])
+    }
+    //ENVIO DE SOLICITUD
+    function frmSOSCaptchaCallback(strTokenCaptcha) {
+        //const url_sendmail ="https://preprodportal.viabcp.com/apis/form/send/message;";
+        const url_sendmail = "https://www.viabcp.com/apis/form/send/message";
+        let inputDNI= frmSVDComunicacion.querySelector('#input_dni');
+        let inputTLF = frmSVDComunicacion.querySelector('#input_celular');
+
+        let dniHash = fnsha256(inputDNI.value.trim());
+        let indexCaptcha = frmInitSVDPlanesCaptcha.getAttribute('index');
+        let boolDNI = frmInitSVDPlanes.Validar.CampoNumerico(inputDNI);
+        let boolTLF = frmInitSVDPlanes.Validar.CampoNumerico(inputTLF);
+        let nroDocumento = inputDNI.value.trim();
+        let telefono = inputTLF.value.trim();
+
+        if (!boolDNI || !boolTLF ) { grecaptcha.reset(indexCaptcha) ;return; };
+    
+        const jsonRequest = {
+            leadId: getLeadID(),
+            producto: "FORMULARIO - FP SVD",
+            tipoFormulario: "FORMULARIOONECLICK",
+            tipoProducto: "FORMULARIO - FP SVD",
+            captchaToken: strTokenCaptcha,
+            data: {
+                tdocumento: "DNI",
+                ndocumento: nroDocumento,
+                fechaNEO: "-",
+                ndocumentohash: dniHash,
+                aceptopromocion: "si",
+                productopromocion:  'Seguro Vida Devolución' ,
+                abreviaturaproducto: "SVD" ,
+                descripcionpromocion:'HOME' ,
+                email: "sinemail@sinmail.com",
+                flujoventa: "VIABCP",
+                promocioncancelada: requestSVD.promocioncancelada,
+                canal: 'VIABCP',
+                tipoplan: '-' ,
+                tipodevice:'-',
+                telefono:telefono
+            },
+            metadata: {
+                origen: document.location.href,
+                agente: navigator.userAgent,
+            },
+        }
+        const requestOptions = {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "g-recaptcha-response": strTokenCaptcha,
+            },
+            body: JSON.stringify(jsonRequest),
+            redirect: "follow",
+        }
+        fetch(url_sendmail, requestOptions)
+        .then((response) => {
+            if (response.status == 200) {
+                console.log('**Solicitud Registrada**')
+                taggeoSOSModal({type:'trackFormSubmit'})
+                step.next()
+            } else {
+                console.warn("No se registro", response.status);
+            }
+            grecaptcha.reset(indexCaptcha);
+        })
+        .catch((error) => {
+            taggeoSOSModal({message:'CALLBACK SEND',type:'trackError'})
+            console.error("error", error);
+            grecaptcha.reset(indexCaptcha);
+        });
+    }
+    /*
+    function goodPayersCaptchaCallback(strTokenCaptcha) {
+        try {
+            //const urlAPIMultiuso = "https://preprodportal.viabcp.com/apis/public/productocampana/multiuso"
+            const urlAPIMultiuso = "https://www.viabcp.com/apis/public/productocampana/multiuso"
+
+            const jsonRequest = {
+                nroDocumentoHash: cicHASH,
+                campana:'SEG_VIDA_CAMPANA',
+                captchaToken: strTokenCaptcha,
+            };
+            const requestOptions = {
+                method: 'POST',
+                headers: {"Content-Type": "application/json","g-recaptcha-response": strTokenCaptcha},
+                body: JSON.stringify(jsonRequest),
+                redirect: 'follow'
+            };
+            fetch(urlAPIMultiuso,requestOptions)
+                .then( function(response){
+                    console.log("response: "+response.status);
+                    console.log("******API STATUS: "+response.status);
+                    if(response.status == 200){
+                        return response.body
+                    }else{
+                        grecaptcha.reset();
+                        console.warn('No se registro', response.status);
+                        return;
+                    }
+                }).then( function(body){
+                        var reader = body.getReader();
+                        var v =  reader.read();
+                        return v
+                }).then(function(data){
+                    var dec = new TextDecoder().decode(data.value)
+                    console.log('data',JSON.parse(dec))
+                    const resolve = JSON.parse(dec)
+                    if(resolve.length > 0){
+                        modalExperiment.piloto(dataModalSVD['piloto'])
+                        const containerModal = document.querySelector('.bcp_contenedor_modal_one_click')
+                        containerModal.removeAttribute('style')
+                    } else {
+                        taggeoSOSModal({name:'Impresion',label:'Denegado'})
+                    }
+                    grecaptcha.reset()
+                })
+                .catch(function(error) {
+                    console.log('error',error)
+                    taggeoSOSModal({message:'API LEAD RESPONSE',type:'trackError'})
+                    grecaptcha.error();
+                })
+        } catch (error) {
+            taggeoSOSModal({message:'CALLBACK LEAD',type:'trackError'})
+            console.log(error)
+        } 
+    }*/
+    function waitForElm(selector) {
+        return new Promise(resolve => {
+            if (document.querySelector(selector).getAttribute('index')) {
+                return resolve(document.querySelector(selector));
+            }
+            const observer = new MutationObserver(mutations => {
+                if (document.querySelector(selector).getAttribute('index')) {
+                    observer.disconnect();
+                    resolve(document.querySelector(selector));
+                }
+            });
+            observer.observe(document.body, {
+                childList: true,
+                subtree: true,
+                attributes: true
+            });
+        });
+    }
+    //INICIO DE EXPERIMENTO
+    /*var cicHASH = cookieValues('audience.profileid')
+    const frmSVDLead = document.getElementById('frmLead')
+    const frmInitSVDLead = new Formulario(frmSVDLead)
+    const frmInitSVDLeadCaptcha = frmSVDLead.querySelector('#goodPayersCaptcha')*/
+    
+    /*waitForElm('#goodPayersCaptcha').then((e)=>{
+        renderizarCaptchaLead()
+        // setTimeout(() => {
+        //     if(cicHASH){
+        //     taggeoGeneric.version = 'Seguros-deciles1-3'
+        //     requestSVD.promocioncancelada = 'deciles1-3'
+        //     grecaptcha.execute(frmInitSVDLeadCaptcha.getAttribute('index'))
+        //     console.log('second')
+        // } else {
+           
+        // }
+        // }, 1500);
+    })*/
+
+    modalExperiment.piloto(dataModalSVD['piloto'])
+    const containerModal = document.querySelector('.bcp_contenedor_modal_one_click')
+    containerModal.removeAttribute('style')
+</script>

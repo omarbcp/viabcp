@@ -1,0 +1,1057 @@
+<style>
+    .plan_sor_formulario_button,
+    .plan_sor_formulario_select{
+        text-align: center;
+    }
+    .plan_sor_formulario_select button,
+    .plan_sor_formulario_button button,
+    .confirmar_sor_action button,
+    .congrats_sor_action button{
+        background-color: #FF7800;
+        outline: none;
+        border-color: #FF7800;
+        border-radius: 20px;
+        border: 1px solid #FF7800;
+        width: 139px;
+        height: 40px;
+        font-size: 16px;
+        color: #ffffff;
+        font-family: 'flexo';
+        font-weight: 600;
+        cursor: pointer;
+        transition: all .2s; 
+    }
+    .plan_sor_formulario_inputs{
+        margin-bottom: 16px;
+    }
+    .plan_sor_formulario_select button.disabled,
+    .plan_sor_formulario_button button.disabled{
+        pointer-events: none;
+        background-color: #EFF0F2;
+        color: #BFC4CC;
+        border-color: #EFF0F2;
+    }
+    .step {
+        display: none;
+        width: 100%;
+        margin:0 auto;
+    }
+    .step.mostrar {
+        display: block;
+    }
+    .hidden-captcha {
+        width: 0;
+        height: 0;
+        overflow: hidden;
+    }
+    main.bcp_footer {
+        display: none!important;
+    }
+    footer{
+        padding: 0px 16px;
+        max-width: 100%;
+        width: calc(100% - 32px);
+        display: flex;
+        justify-content: space-between;
+    }
+    footer p {
+        margin: 0px;
+        color: #868F9E;
+        font-family: 'flexo';
+        font-size: 14px;
+        line-height: 20px;
+        margin-bottom: 4px;
+    }
+    footer p b {
+        font-family: Flexo-Demi;
+    }
+    .plan_sor_title {
+        font-family: 'flexo';
+        font-size: 20px;
+        font-weight: 400;
+        color: #002DA0;
+        margin-bottom: 16px;
+        text-align: left;
+    }
+    .plan_sor_title b {
+        font-weight: 600;
+    }
+    .plan_sor_subtitle {
+        font-family: Flexo;
+        font-size: 16px;
+        font-weight: 600;
+        line-height: 24px;
+        text-align: left;
+    }
+    .plan_sor_formulario {
+        box-shadow: 0px 1px 6px 0px #52709433;
+        width: 350px;
+        padding: 16px;
+        border-radius: 8px;
+    }
+    .label-form {
+        font-family: Flexo;
+        font-size: 16px;
+        font-weight: 600;
+        line-height: 24px;
+        text-align: left;
+        display: block;
+    }
+    .plan_sor_formulario_inputs {
+        margin-bottom: 0;
+    }
+    .plan_sor_desc {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+    }
+    .container-asegurados {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        padding: 24px;
+        box-shadow: 0px 1px 4px 0px #52709433;
+        width: 100%;
+        max-width: 920px;
+        margin: 78px auto 20px;
+    }
+    /*THANK PAGE*/
+    .congrats_sor_title{
+        text-align: center;
+        margin-top: 24px;
+    }
+    .congrats_sor_title img{
+        height: 72px;
+    }
+    .congrats_sor_title p{
+        margin: auto;
+        text-align: center;
+        color: #002A8D;
+        font-size: 20px;
+        line-height: 28px;
+        font-family: 'Flexo-Demi';
+        max-width: 380px;
+        margin-top: 24px;
+        margin-bottom: 24px;
+    }
+    .congrats_sor_description p{
+        margin: 0px;
+        font-size: 16px;
+        line-height: 24px;
+        font-family: 'flexo';
+        text-align: center;
+        margin-bottom: 24px;
+    }
+    .congrats_sor_action{
+        text-align: center;
+        margin-bottom: 24px;
+    }
+    .confirmar_sor_detail_table {
+        margin-bottom: 24px;
+    }
+    .confirmar_sor_detail_table .detail_info {
+        display: flex;
+        justify-content: space-between;
+        height: 56px;
+        align-items: center;
+        border-bottom: 1px solid #E5E7EB;
+    }
+    .det_value p {
+        font-weight: 600;
+    }
+    .plan_sor_seleccion label{
+        font-size: 16px;
+        line-height: 24px;
+        font-family: 'flexo';
+        font-weight: 550;
+    }
+    .plan_sor_seleccion .label-select{
+        margin: 0px;
+        margin-bottom: 16px;
+        font-size: 16px;
+        font-weight: 600;
+        line-height: 24px;
+        font-family: 'Flexo-Demi';
+    }
+    /* .plan_sor_seleccion .radioDiv{
+        margin-bottom: 16px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .plan_sor_seleccion .radioDiv input{
+        width: 16px;
+        height: 16px;
+    } */
+    @media (min-width: 767px) {
+        .plan_sor_desc {
+            padding: 24px;
+            box-shadow: 0px 1px 4px 0px #52709433;
+            margin: 78px auto 50px auto;
+            width: 696px;
+        }
+        .label-form {
+            margin-bottom: 25px;
+        }
+        .pantalla_2 {
+            max-width: 500px;
+        }
+        footer {
+            position: fixed;
+            left: 0;
+            bottom: 0;
+        }
+    }
+    @media (max-width: 766px) {
+        .plan_sor_desc {
+            flex-direction: column;
+            align-items: center;
+        }
+        .plan_sor_formulario {
+            width: calc(100% - 48px);
+            margin: 24px auto 48px auto;
+        }
+        .label-form {
+            margin-bottom: 16px;
+        }
+        footer {
+            flex-direction: column;
+        }
+        .step.pantalla_2{
+            width: calc(100% - 48px);
+            padding: 0 24px;
+        }
+    }
+
+    .container-sos-select {
+    display: block;
+    position: relative;
+    padding-left: 16px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 22px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    }
+
+    .container-sos-select input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+    }
+
+    .checkmark {
+        position: absolute;
+        top: 0;
+        right: 0;
+        height: 16px;
+        width: 16px;
+        background-color: #fff;
+        border-radius: 50%;
+        border: 2px solid #BFC4CC;
+    }
+
+    /* On mouse-over, add a grey background color */
+    .container-sos-select:hover input ~ .checkmark {
+        background-color: #FFF;
+    }
+
+    /* When the radio button is checked, add a blue background */
+    .container-sos-select input:checked ~ .checkmark {
+        background-color: #FFF;
+        border: 2px solid #FF7800;
+    }
+
+    /* Create the indicator (the dot/circle - hidden when not checked) */
+    .checkmark:after {
+        content: "";
+        position: absolute;
+        display: none;
+    }
+
+    /* Show the indicator (dot/circle) when checked */
+    .container-sos-select input:checked ~ .checkmark:after {
+        display: block;
+    }
+
+    /* Style the indicator (dot/circle) */
+    .container-sos-select .checkmark:after {
+        top: 2px;
+        left: 2px;
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: #FF7800;
+    }
+    .back_home {
+        display: flex;
+        margin-top: 22px;
+        align-items: center;
+        cursor: pointer;
+    }
+    .back_home > div {
+        color: #868F9E;
+        font-size: 14px;
+    }
+    .form_insured {
+        padding: 32px 32px 85px 14px;
+        box-shadow: 0px 1px 4px 0px #52709433;
+        margin: 32px auto 50px auto;
+        width: 100%;
+        max-width: 916px;
+        border-radius: 8px;
+    }
+    .form_insured > div:first-child {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+    }
+
+    .container_insured {
+        display: flex;
+        flex-wrap: wrap;
+        width: calc(100% - 222px);
+    }
+    .container_insured .item_insured {
+        width:calc(50% - 16px);
+        margin:0 8px 16px 8px; 
+    }
+    .item_insured {
+        box-shadow: 0px 1px 4px 0px #52709433;
+        padding: 16px;
+        border-radius: 8px;
+    }
+    .item_insured_title {
+       color: #202E44;
+       font-size: 16px;
+       font-weight: 600;
+        line-height: 24px;
+        margin-bottom: 32px;
+    }
+    .plan_sor_tipo {
+        font-size: 16px;
+        font-weight: 600;
+        line-height: 24px;
+        margin-top: 16px;
+    }
+    .container_data_plan {
+        width: 214px;
+        text-align: left;
+    }
+    .container_data_plan > img {
+        margin-bottom: 16px;
+    }
+    .box-option {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        margin-bottom: 16px;
+    }
+    .box-option > div:first-child {
+        font-size: 16px;
+        font-weight: 550;
+        line-height: 24px;
+        text-align: left;
+    }
+    #containerButtonRegisterInsured.plan_sor_formulario_button {
+        text-align: right;
+    }
+    .title_form {
+        font-size: 16px;
+        font-weight: 600;
+        line-height: 24px;
+        text-align: left;
+        margin-bottom: 24px;
+    }
+</style>
+
+<div class="step pantalla_1">
+    <div id="btnBackHome" class="back_home" style="display: none;">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M19.9964 11.0023H6.41238L9.70738 7.70725C10.0984 7.31625 10.0984 6.68425 9.70738 6.29325C9.31638 5.90225 8.68337 5.90225 8.29338 6.29325L3.29338 11.2933C2.90238 11.6842 2.90238 12.3163 3.29238 12.7073L8.28837 17.7072C8.48438 17.9022 8.74038 18.0002 8.99638 18.0002C9.25238 18.0002 9.50838 17.9022 9.70338 17.7072C10.0944 17.3172 10.0944 16.6842 9.70438 16.2933L6.41538 13.0023H19.9964C20.5494 13.0023 20.9964 12.5553 20.9964 12.0023C20.9964 11.4493 20.5494 11.0023 19.9964 11.0023Z" fill="#868F9E"/>
+        </svg>
+        <div>Atras</div>
+    </div>
+    <div class="plan_sor_desc" id="formHome">
+        <!--Botón Back -->
+        <div class="container_data_plan">
+            <img src="/wcm/myconnect/23bb531c-5d03-4420-9c9a-217f76616e1f/icono.svg?MOD=AJPERES&amp;CACHEID=ROOTWORKSPACE-23bb531c-5d03-4420-9c9a-217f76616e1f-pbV6WUk" alt="" />
+            <div class="plan_sor_title">Seguro <b>S.O.S. Salud</b></div>
+            <div class="plan_sor_subtitle"></div>
+        </div>
+        <!--Selecciona Plan -->
+        <div class="plan_sor_seleccion plan_sor_formulario bcp_formulario" id="frmPlans">
+            <p class="label-select">Selecciona una opción</p>
+            <div class="box-option">
+                <div>Plan Regular</div>
+                <label class="container-sos-select bcp_radio_microcomponent">
+                    <input type="radio" name="plans" value="regular" id="pRegular">
+                    <span class="radio_checked"></span>
+                </label>
+            </div>
+            <div class="box-option">
+                <div>Plan Familiar</div>
+                <label class="container-sos-select bcp_radio_microcomponent">
+                    <input type="radio" name="plans" value="familiar" id="pfamiliar">
+                    <span class="radio_checked"></span>
+                </label>
+            </div>
+            <div class="plan_sor_formulario_select">
+                <button id="btnSelectPlan">Siguiente</button>
+            </div>
+        </div>
+        <!--Formulario Plan-->
+        <div class="plan_sor_formulario bcp_formulario" style="display: none;"  id="frmPlanesSOR">
+            <div class="title_form" id="formTitle"></div>
+            <div class="plan_sor_formulario_inputs" id="formInputs"></div>
+            <div class="plan_sor_formulario_button" id="formButton"></div>
+            <div class="hidden-captcha">
+                <form-captcha id="frmPlanesSORCaptcha" datacallback="frmPlanesSORCaptchaCallback"></form-captcha>
+            </div>
+        </div>
+    </div>
+    <!--Formulario Asegurados-->
+    <div class="form_insured bcp_formulario"  id="formInsured" style="display: none;">
+        <div>
+            <div class="container_data_plan">
+                <img src="/wcm/myconnect/23bb531c-5d03-4420-9c9a-217f76616e1f/icono.svg?MOD=AJPERES&amp;CACHEID=ROOTWORKSPACE-23bb531c-5d03-4420-9c9a-217f76616e1f-pbV6WUk" alt="" />
+                <div class="plan_sor_title">Seguro <b>S.O.S. Salud</b></div>
+                <div class="plan_sor_subtitle"></div>
+                <div class="plan_sor_tipo">Plan Familiar</div>
+            </div>
+            <div id="containerInsured" class="container_insured"></div>
+        </div>
+    </div>
+    
+</div>
+<div class="step pantalla_2">
+    <div class="congrats_sor_title">
+        <img src="/wcm/myconnect/6beb7d80-6d5f-4dbc-a4dd-c2effcd46e12/spc_mobile_success_hand_d_l.png?MOD=AJPERES&amp;CACHEID=ROOTWORKSPACE-6beb7d80-6d5f-4dbc-a4dd-c2effcd46e12-pbV6WUk" alt="" />
+        <p>¡La solicitud del Seguro S.O.S Salud ha sido realizada con éxito!</p>
+    </div>
+   <!--  <div class="congrats_sor_description">
+        <p>En los próximos días enviaremos la póliza de seguro al medio de contacto registrado</p>
+    </div> -->
+    <div class="congrats_sor_detail">
+        <div class="confirmar_sor_detail_table">
+            <div class="detail_agente detail_info">
+                <div class="det_text"><p>Asesor:</p></div>
+                <div class="det_value detail_info det_agente_grats"><p>Botíca Arcangel</p></div>
+            </div>
+            <div class="detail_dni detail_info">
+                <div class="det_text"><p>DNI:</p></div>
+                <div class="det_value det_dni_grats"><p>4444444</p></div>
+            </div>
+            <div class="detail_insured detail_info" style="display: none;">
+                <div class="det_text"><p>Nro total de asegurados:</p></div>
+                <div class="det_value det_dni_insured"><p></p></div>
+            </div>
+            <div class="detail_celular detail_info">
+                <div class="det_text"><p>Operación:</p></div>
+                <div class="det_value det_operacion_grats"><p>10</p></div>
+            </div>
+        </div>
+    </div>
+    <div class="congrats_sor_action">
+        <button id="btn_back">Ir a inicio</button>
+    </div>
+</div>
+<footer>
+    <div>
+        <img src="/wcm/myconnect/983b434a-e41e-41d9-ab18-d6a250a24283/Shape.png?MOD=AJPERES&amp;CACHEID=ROOTWORKSPACE-983b434a-e41e-41d9-ab18-d6a250a24283-pbV6WUk" alt="logo" />
+        <p>©2024 Todos los derechos reservados</p>
+    </div>
+    <div>
+        <p><b>Banca por teléfono:</b></p><p>(01) 311-9898</p>
+    </div>
+</footer> 
+[Component name="plantillas de presentacion (ux-frontend)/codigohtml-componentes-presentacionenlista/microcomponentes/microcomp.referenciaformulariowebcomponent"]
+<script>
+    class HTMLElement {
+        constructor(tagName) {
+            this.element = document.createElement(tagName);
+        }
+        addClass(className) {
+            this.element.classList.add(className);
+            return this;
+        }
+        setAttribute(attribute, value) {
+            this.element.setAttribute(attribute, value);
+            return this;
+        }
+        setText(text) {
+            this.element.textContent = text;
+            return this;
+        }
+        setHTML(html) {
+        this.element.innerHTML = html;
+            return this;
+        }
+        appendChild(child) {
+            if (child instanceof HTMLElement) {
+                this.element.appendChild(child.element);
+            } else if (child instanceof Node) {
+                this.element.appendChild(child);
+            } else {
+                throw new Error("El hijo debe ser una instancia de HTMLElement o Node.");
+            }
+            return this;
+        }
+        getElement() {
+            return this.element;
+        }
+    }
+    /* VARIABLE GENERALES */
+    const frmPlanesSor = document.getElementById('frmPlanesSOR');
+    const frmInitPlanesSor = new Formulario(frmPlanesSor);
+    const frmPlanesSORCaptcha = document.getElementById('frmPlanesSORCaptcha');
+    const btnSelectPlan = document.getElementById('btnSelectPlan')
+    //const btnComprar = frmPlanesSor.querySelector('.plan_sor_formulario_button button');//btnComprar
+    const btnBack = document.getElementById('btn_back');
+    const formSelect = document.getElementById('frmPlans')
+    const formPlans = document.getElementById('frmPlanesSOR')
+    const btnBackHome = document.getElementById('btnBackHome')
+    const frmInsured = document.getElementById('containerInsured')
+    const frmInsuredSend = new Formulario(frmInsured)
+    /* FUNCIONES */
+    const hideElement = (data)=>{
+        const {contenedor,items} = data
+        const elements = document.querySelectorAll(contenedor)
+        if(elements){
+            elements.forEach((e,i)=>{
+                if(i >= items){ e.style.display = 'none'}
+            })
+            return true
+        } else {
+            return false
+        }
+    }
+    const getTitular = ()=>{
+        if(document.querySelector('#titular')){
+            const valor = frmInitPlanesSor.getOpcionCheckButtonSeleccionado(document.querySelector('#titular'))
+            return valor.length > 0 ? ';Asegurado' : ';No asegurado'
+        } else {
+            return 'error'
+        }
+    } 
+    const util = {
+        changeText: function (element, text) {
+            const container = document.querySelectorAll(element);
+            if(container){container.forEach(e => {e.innerHTML = text})}
+        },
+        createMsg:function(msg){
+            const msgElement = document.createElement('h1');
+            msgElement.style.textAlign = 'center';
+            msgElement.innerHTML = msg;
+            document.querySelector('body').appendChild(msgElement);
+        }
+    }
+    const changeView = (data)=>{
+        const c1 = document.getElementById(data.hide)
+        const c2 = document.getElementById(data.show)
+        if(c1&&c2){
+            c1.style.display = 'none';
+            c2.removeAttribute('style')
+        }
+    }
+    const Step = {
+        init:function(data){
+            const {step1,step2} = data
+            this.step1 = document.querySelector(step1)
+            this.step2 = document.querySelector(step2)
+        },
+        screen :function(id) {
+            this.children = document.getElementById(id)
+        },
+        begin:function(){
+            this.step1.classList.add('mostrar');
+        },
+        next : function() {
+            this.step1.classList.remove('mostrar');
+            this.step2.classList.add('mostrar');
+        },
+        back : function() {
+            changeView({hide:'frmPlanesSOR',show:'frmPlans'})
+            btnBackHome.style.display = 'none'
+            this.step2.classList.remove('mostrar');
+            if(dataInsuredSend.tipoplan == 'familiar'){
+                changeView({hide:'formInsured',show:'formHome'})
+                document.querySelector('.detail_insured').style.display = 'none'
+            }
+            this.step1.classList.add('mostrar');
+        }
+    }
+    //TAGGEOS
+    const variables_taggeo = {
+            category: "SOS",
+            grupo: "Asesor",
+            product: "Seguros-SOS",
+            channel: "VIABCP",
+            version: ""
+    }
+    const taggeoAdobeSeguros = (data) => {
+        const {label,groupCustom='',name="click",event="trackAction" } = data
+        const group = groupCustom.length == 0 ? variables_taggeo.grupo : variables_taggeo.grupo+'-'+groupCustom
+        if (event!=="trackAction") {
+            digitalData.push({
+                "form": {"channel": variables_taggeo.channel,"version": variables_taggeo.version,"name": variables_taggeo.titulo,"product": variables_taggeo.product},
+                "event": event
+            })
+        }
+        else {
+            digitalData.push({
+                "action": {"group": group,"category": variables_taggeo.category,"name": name,"label": label},
+                "metadata": {"key": "Producto","value": variables_taggeo.product},
+                "event": "trackAction"
+            })
+        }
+    }
+    //ASESORES
+    const asesorCALL = [
+        { cod: "T40603", name: "T40603" },
+        { cod: "T36638", name: "T36638" },
+        { cod: "T46980", name: "T46980" },
+        { cod: "T46963", name: "T46963" },
+        { cod: "T46864", name: "T46864" },
+        { cod: "T46922", name: "T46922" },
+        //{ cod: "T46877", name: "T46877" },
+        { cod: "T46851", name: "T46851" },
+        { cod: "T46944", name: "T46944" },
+        { cod: "T46984", name: "T46984" },
+        { cod: "T45809", name: "T45809" },
+        { cod: "T36638", name: "T36638" },
+        { cod: "T50432", name: "T50432" },
+        { cod: "T51017", name: "T51017" },
+        { cod: "T45828", name: "T45828" },
+        { cod: "T52149", name: "T52149" }
+    ]
+
+    let asesorCALLTemp = {}
+    let dataInsuredSend = {
+        tipoplan : '',
+        descripcionpromocion: '',
+        cant: ''
+    }
+    const insertFormElements = (data)=>{
+        const {tipo,atributos,label=''} = data
+        const tagLabel = label.length > 0 ? '<label class="label-form">'+label+'</label>':''
+        //INSERTA ATTRIBUTOS
+        const writeAttrib = (type,list)=>{
+            const attrib = {
+                input:['id','name','label','datatype','minlength','maxlength','constraint','msgerror'],
+                cbo:['id','label','class','datajson','msgerror'],
+                date:['id','label','msgerror'],
+                cbodoc:['id-inputs'],
+                checkbox:['id','label','displaydirection','datahtml','msgerror']
+            } 
+            let string = ''
+            if(attrib[type].length == list.length) {
+                list.forEach((element,index) => {string += `${attrib[type][index]}='${element}' `});
+            }
+            return string
+        }
+
+        const elements = {
+            input:()=>`<form-input ${writeAttrib('input',atributos)}></form-input>`, 
+            select:()=>`<form-cbo ${writeAttrib('cbo',atributos)}></form-cbo>`,
+            date:()=>`<form-datepicker ${writeAttrib('date',atributos)} initialize="true"></form-datepicker>`,
+            cbodocumento:()=>`<form-cbodocumento ${writeAttrib('cbodoc',atributos)}></form-cbodocumento>`,
+            checkbox:()=>`<form-check ${writeAttrib('checkbox',atributos)}></form-check>`
+        }
+        return tagLabel+elements[tipo]()
+    }
+    const planSelect = (select)=>{
+        const jsonData = `[{"titulogrupo": "Nro de asegurados"},[{"codigo": "1","descripcion": "01"},{"codigo": "2","descripcion": "02"},{"codigo": "3","descripcion": "03"},{"codigo": "4","descripcion": "04"},{"codigo": "5","descripcion": "05"}]]`
+        const contentCheckbox = '<p dir="ltr">El titular es asegurado</p>'
+        const listContent = {
+            regular :{
+                title : 'Plan Regular',
+                content : [
+                {tipo:'cbodocumento',atributos:['inputDOC'],label:'Ingresa el DNI/CE del cliente'}
+                ],
+                button:{
+                    label:'Realizar venta',
+                    action:()=>{sendRegisterUnit()}
+                }
+            } ,
+            familiar : {
+                title:'Plan Familiar',
+                content:[
+                    {tipo:'cbodocumento',atributos:['inputDOC'],label:'Ingresa el DNI/CE del contratante'},
+                    {tipo:'checkbox',atributos:['titular','titular','vertical',contentCheckbox,''],label:''},
+                    {tipo:'select',atributos:['selectCant','Nro de asegurados','select_cant',jsonData,'Selecciona una cantidad'],label:'Número de asegurados'}
+                ],
+                button:{
+                    label:'Siguiente',
+                    action:()=>{stepInsured()}
+                }
+            }
+        }
+
+        const createHTML =(plan)=> {
+            document.getElementById('formButton').innerHTML = ''
+            const btnForm = new HTMLElement('button')
+                .setAttribute('id','btnHome')
+                .setHTML(plan.button.label)
+                .getElement();
+            let inputsInsert=''
+            plan.content.forEach(e=>{inputsInsert+=insertFormElements(e)})
+            document.getElementById('formTitle').innerHTML = plan.title
+            document.getElementById('formInputs').innerHTML = inputsInsert
+            document.getElementById('formButton').appendChild(btnForm)
+            btnForm.onclick = ()=>{plan.button.action()}
+        }
+        //ACCION PARA GENERAR EL PANTALLA DEL PLAN SELECCIONADO
+        if(formSelect&&formPlans){
+            createHTML(listContent[select])
+            formSelect.style.display = 'none'
+            formPlans.removeAttribute('style')
+            hideElement({contenedor:'.bcp_contenedor_cbo_input .bcp_cbo_scroll li',items:2})
+            renderizarCaptchaModalOneClickSPT()
+        }
+    }
+    
+    const crearAsegurados = (number)=>{
+        
+        const jsonData = `[{"titulogrupo": "Nro de asegurados"},[{"codigo": "Esposo","descripcion": "Esposo"},{"codigo": "Esposa","descripcion": "Esposa"},{"codigo": "Hijo","descripcion": "Hijo"},{"codigo": "Hija","descripcion": "Hija"},{"codigo": "Padre","descripcion": "Padre"},{"codigo": "Madre","descripcion": "Madre"},{"codigo": "Conviviente masculino","descripcion": "Conviviente masculino"},{"codigo": "Conviviente femenino","descripcion": "Conviviente femenino"}]]`
+        const containerInsured = document.getElementById('containerInsured')
+        const inputsInsert = (n)=>{
+            const elements = [
+                {tipo:'input',atributos:[`inputName${n}`,`inputName${n}`,'Nombre','text','3','100','soloLetras','Ingresar un Nombre']},
+                {tipo:'input',atributos:[`inputPater${n}`,`inputPater${n}`,'Apellido Paterno','text','3','100','soloLetras','Ingresar un Apellido Paterno']},
+                {tipo:'input',atributos:[`inputMater${n}`,`inputMater${n}`,'Apellido Materno','text','3','100','soloLetras','Ingresar un Apellido Materno']},
+                {tipo:'cbodocumento',atributos:[`inputDOC${n}`]},
+                {tipo:'date',atributos:[`inputDate${n}`,'Fecha de nacimiento','Ingresar una fecha de nacimiento']},
+                {tipo:'select',atributos:[`selectCant${n}`,'Parentesco','select_cant',jsonData,'Parentesco']}
+            ]
+            let html = ''
+            elements.forEach((e)=>{html+=insertFormElements(e)})
+            return html
+        }
+
+        for (let index = 1; index <= number; index++) {
+            const htmlItem = `<div class="item_insured_title">Asegurado ${index}</div>${inputsInsert(index)}`
+            const item = new HTMLElement('div')
+            .addClass('item_insured')
+            .setAttribute('id',`item${index}`)
+            .setHTML(htmlItem)
+            .getElement()
+            containerInsured.appendChild(item)
+        }
+        
+        const btnForm = new HTMLElement('button')
+            .setAttribute('id','btnRegisterInsured')
+            .setHTML('Realizar venta')
+            .getElement();
+        const containerButton = new HTMLElement('div')
+            .setAttribute('id','containerButtonRegisterInsured')
+            .addClass('plan_sor_formulario_button')
+            .setHTML('<div id="alertError"></div>')
+            .appendChild(btnForm)
+            .getElement();
+        document.getElementById('formInsured').appendChild(containerButton)
+        //OCULTA LO OTROS TIPOS DE DOCUMENTOS
+        for (let index = 1; index <= number; index++){
+            hideElement({contenedor:`#item${index} .bcp_contenedor_cbo_input .bcp_cbo_scroll li`,items:2})
+        }
+        //AGREGAR EVENTO EN EL BOTON PARA REGISTRAR A LOS ASEGURADOS    
+        btnForm.onclick = (event)=>{
+            const active = event.currentTarget
+            active.setAttribute('disabled','disabled')
+            let dataInsured = listInsured()
+            if(dataInsured.length > 0){
+                active.innerHTML = 'Registrando...'
+                dataInsuredSend.descripcionpromocion = `${dataInsured.join('|')}`
+                grecaptcha.execute(frmPlanesSORCaptcha.getAttribute('index'))
+                taggeoAdobeSeguros({label:"Realizar Venta",groupCustom:`Plan ${dataInsuredSend.tipoplan}`})
+            } else {
+                active.removeAttribute('disabled')
+                const containerMSG = document.getElementById('alertError')
+            }
+        }
+    }
+    const thankPage=(data)=>{
+        const {asesor,dni,tdocumento} = data
+        util.changeText('.det_agente_grats p', asesor)
+        if(dataInsuredSend.tipoplan == 'familiar'){
+            util.changeText('.detail_dni .det_text p', `${tdocumento} del contratante:`)
+            util.changeText('.det_dni_grats p', dni)
+            util.changeText('.det_dni_insured',`<p>${dataInsuredSend.cant}</p>`)
+            document.querySelector('.detail_insured').removeAttribute('style')
+            frmInsured.innerHTML = ""
+            document.getElementById('containerButtonRegisterInsured').remove()
+            dataInsuredSend.descripcionpromocion = ''
+        } else {
+            util.changeText('.det_dni_grats p', dni)
+            util.changeText('.detail_dni .det_text p',`${tdocumento}:`)
+        }
+        util.changeText('.det_operacion_grats p', generarCodigoOperacion())
+        Step.next()
+    }
+    //ACTION BUTTON
+    const validateFormSend = {
+        cbdoc:(value)=>{
+            const bool = frmInsuredSend.Validar.TipoNroDocumento(value)
+            return !bool
+        },
+        input:(input,campo)=>{
+            const bool = frmInsuredSend.Validar[campo](input)
+            return !bool
+        },
+        other:(input,tipo,index)=>{
+            const boxError = document.getElementById('alertError')
+            boxError.innerHTML = ''
+            const data = {
+                date : {
+                    value : input.value.length,
+                    msg : `Falta ingresar fecha de nacimiento al Asegurado ${index}`
+                },
+                select : {
+                    value : input.length,
+                    msg : `Falta ingresar parentesco al Asegurado ${index}`
+                }
+            }
+            const validate = (t)=>{
+                let result = null
+                if(t.value == 0){
+                    result =  true;
+                    boxError.innerHTML = t.msg
+                } else {
+                    result = false;
+                }
+                return result
+            }
+            return validate(data[tipo])
+        }
+    }
+    const getnroDOC = (item)=>{
+        const typeDOC = document.querySelector(`#item${item} #bcp_tipo_nro_documento .bcp_texto_seleccion`).innerText.trim()
+        const dataTypeDOC = {DNI:'1',CE:'3'}
+        const listDOC = {
+            DNI:document.querySelector(`#item${item} #dni_inputDOC${item}`),
+            CE:document.querySelector(`#item${item} #extranjeria_inputDOC${item}`)
+        }
+        const nroDOC = listDOC[typeDOC]
+        return nroDOC ? {type: dataTypeDOC[typeDOC], nro: nroDOC.value.trim()}: null
+    }
+    const listInsured = ()=>{
+        let validaForm = true
+        let dataInsured = []
+        const cantInsured = parseInt(document.querySelector('#selectCant .bcp_texto_seleccion').innerText, 10)
+        const dniHeadline = frmInitPlanesSor.getNroDocumento()
+        
+        for (let index = 1; index <= cantInsured; index++) {
+            const name = document.getElementById(`inputName${index}`)
+            if(validateFormSend.input(name,'CampoTexto')){validaForm = false; break;}
+            const lastnameP = document.getElementById(`inputPater${index}`)
+            if(validateFormSend.input(lastnameP,'CampoTexto')){validaForm = false; break;}
+            const lastnameM = document.getElementById(`inputMater${index}`)
+            if(validateFormSend.input(lastnameM,'CampoTexto')){validaForm = false; break;}
+            const dni = document.querySelector(`#item${index} #bcp_tipo_nro_documento`)
+            if(validateFormSend.cbdoc(dni)){validaForm = false; break;}
+            const date = document.getElementById(`inputDate${index}`)
+            if(validateFormSend.other(date,'date',index)){validaForm = false; break;}
+            const relationship = document.querySelector(`#selectCant${index} .bcp_texto_seleccion`).innerText
+            const nDocument = getnroDOC(index)
+            if(nDocument){
+                const dataPush = `${fnsha256(dniHeadline)};${name.value};${lastnameP.value};${lastnameM.value};${nDocument.type};${nDocument.nro};${date.value};${relationship}${getTitular()}`
+                dataInsured.push(dataPush)
+            } else {
+                break;
+            }
+        }
+        return validaForm ? dataInsured : dataInsured = []
+    }
+    const sendRegisterUnit = () =>{
+        const inputDNI= frmInitPlanesSor.elementForm.querySelector('#bcp_tipo_nro_documento')
+        const boolDNI = frmInitPlanesSor.Validar.TipoNroDocumento(inputDNI)
+        if(boolDNI){
+            taggeoAdobeSeguros({label:"Realizar Venta",groupCustom:`Plan ${dataInsuredSend.tipoplan}`})
+            grecaptcha.execute(0)
+        }
+    }
+    const stepInsured = ()=>{
+        const inputDNI= frmInitPlanesSor.elementForm.querySelector('#bcp_tipo_nro_documento')
+        const boolDNI = frmInitPlanesSor.Validar.TipoNroDocumento(inputDNI)
+        const cantInsured = document.querySelector('#selectCant .bcp_texto_seleccion').innerText
+        dataInsuredSend.cant = cantInsured
+        if(cantInsured.length > 0 && boolDNI){
+            crearAsegurados(parseInt(cantInsured, 10))
+            changeView({hide:'formHome',show:'formInsured'})
+        }
+    }
+    btnBack.onclick = () =>{
+        Step.back()
+        taggeoAdobeSeguros({label: "Ir a inicio"})
+    }
+    btnSelectPlan.onclick = ()=>{
+        const valorActivo = document.querySelector('input[name="plans"]:checked').value
+        if(valorActivo){
+            planSelect(valorActivo)
+            dataInsuredSend.tipoplan = valorActivo
+            btnBackHome.removeAttribute('style')
+            taggeoAdobeSeguros({label: "Siguiente",groupCustom:`Opcion-Plan ${dataInsuredSend.tipoplan}`})
+        }
+    }
+    btnBackHome.onclick = ()=>{
+        if(document.getElementById('formInsured').getAttribute('style')){
+            formPlans.style.display = 'none'
+            formSelect.removeAttribute('style')
+            btnBackHome.style.display = 'none'
+        } else {
+            changeView({hide:'formInsured', show:'formHome'})
+            frmInsured.innerHTML = ''
+            document.getElementById('containerButtonRegisterInsured').remove()
+        }
+    }
+    function searchParam(params) {
+      const urlParams = new URLSearchParams(window.location.search);
+      //Accedemos a los valores
+      if (urlParams.has(params)) {
+        const data = asesorCALL.filter(element => element.cod == urlParams.get(params))
+        
+        if(data.length > 0){
+            asesorCALLTemp = data[0]
+            util.changeText('.plan_sor_subtitle', `Asesor: ${asesorCALLTemp.name}`)
+            Step.begin();
+        } else {
+            util.createMsg('No se encontro el codigo de asesor');
+            taggeoAdobeSeguros({label: "Codigo incorrecto", name: "Error"})
+        }
+      } else {
+        util.createMsg('Necesita un codigo de asesor para continuar');
+        taggeoAdobeSeguros({label: "Parametro incorrecto", name: "Error"})
+      }
+    }
+    //Envio de datos
+    function frmPlanesSORCaptchaCallback(strTokenCaptcha) {
+        try {
+            //const url_sendmail ="https://preprodportal.viabcp.com/apis/form/send/message;";
+            const url_sendmail = "https://www.viabcp.com/apis/form/send/message;";
+            let {cod,name} = asesorCALLTemp;
+            const tdocumento = frmInitPlanesSor.elementForm.querySelector('#bcp_tipo_nro_documento .bcp_texto_seleccion').innerText.trim()
+            let inputDNI= frmInitPlanesSor.getNroDocumento();
+            let dniHash = fnsha256(inputDNI);
+            //let indexCaptcha = frmPlanesSORCaptcha.getAttribute('index');
+            //let boolDNI = frmInitPlanesSor.Validar.TipoNroDocumento(inputDNI);
+            let nroDocumento = inputDNI;
+            console.log(url_sendmail)
+            //if (!boolDNI) { grecaptcha.reset() ;return; };
+    
+            const jsonRequest = {
+                leadId: getLeadID(),
+                producto: "MODAL ONE CLICK - HOME",
+                tipoFormulario: "MODALONECLICK",
+                tipoProducto: "MODAL ONE CLICK - HOME",
+                captchaToken: strTokenCaptcha,
+                data: {
+                    tdocumento: tdocumento,
+                    ndocumento: nroDocumento,
+                    fechaNEO: "-",
+                    ndocumentohash: dniHash,
+                    aceptopromocion:'',
+                    productopromocion:  name ,
+                    abreviaturaproducto: "SSOS" ,
+                    descripcionpromocion:dataInsuredSend.descripcionpromocion,
+                    email: "sinemail@sinmail.com",
+                    flujoventa: "ASESOR",
+                    promocioncancelada: "-",
+                    canal: cod,
+                    tipoplan: dataInsuredSend.tipoplan,
+                },
+                metadata: {
+                    origen: document.location.href,
+                    agente: navigator.userAgent,
+                },
+            }
+
+            const requestOptions = {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "g-recaptcha-response": strTokenCaptcha,
+            },
+            body: JSON.stringify(jsonRequest),
+            redirect: "follow",
+            }
+
+            fetch(url_sendmail, requestOptions)
+            .then((response) => {
+                if (response.status == 200) {
+                    thankPage({asesor:name,dni:nroDocumento,tdocumento:tdocumento})
+                    inputDNI.value = '';
+                    console.log('**Venta Registrada**')
+                    taggeoAdobeSeguros({label:"Seguros",groupCustom:`Plan ${dataInsuredSend.tipoplan}`,name:'Compra Exitosa'})
+                    digitalData.push({
+                        "application":{
+                            "product":"SOS",
+                            "product_category":"Seguros",
+                            "subflow":"Asesor"
+                        },
+                        "event":"trackInsurancesRequests"
+                    });
+
+                    digitalData.push({ 
+                        "metadata":{ 
+                        "key":`SOS-Plan ${dataInsuredSend.tipoplan}`, 
+                        "value":`Plan ${dataInsuredSend.tipoplan}` 
+                        }, 
+                        "event":"trackMetadata" 
+                    });
+                } else {
+                    taggeoAdobeSeguros({label: "Falla API - "+response.status, name: "Error - Falla API"});
+                    console.log("No se registro", response.status);
+                }
+                grecaptcha.reset();
+            })
+            .catch((error) => {
+                console.error("error", error);
+                grecaptcha.reset();
+                taggeoAdobeSeguros({label: "Falla API", name: "Error - Falla API"});
+            });
+        } catch (error) {
+            console.error("error", error);
+        }
+    }
+    function ocultarChatFlotante(){
+        const chatFlotante = document.querySelector('.bcp_footer_ayuda_flotante');
+        if(chatFlotante){chatFlotante.style.display = 'none'};
+    }
+    function generarCodigoOperacion() {
+        const timestamp = new Date().getTime().toString();
+        const codigoOperacion = timestamp.substring(timestamp.length - 6);
+        return codigoOperacion;
+    }
+    document.addEventListener("DOMContentLoaded",()=>{
+        console.log('terminno la carga del DOM')
+        Step.init({
+            step1:'.pantalla_1',
+            step2:'.pantalla_2'
+        })
+        searchParam("codigo")
+        ocultarChatFlotante()
+    })
+    document.querySelector("input[type=radio]").click(function(event) {
+        document.querySelector("input[type=radio]").prop("checked", false);
+        console.log(this)
+        this.prop("checked", true);
+        //event.preventDefault();
+    });
+    function renderizarCaptchaModalOneClickSPT() {
+        if (!frmInitPlanesSor.Captcha.getAttribute('index')) {
+            try {
+                frmInitPlanesSor.RenderIndividualCaptcha.SetRederCaptcha(frmPlanesSORCaptcha);
+            } catch (error) {
+                console.log(error)
+            }
+            setTimeout(() => {
+                console.log('captcha-forcerender', frmInitPlanesSor.Captcha.getAttribute('index'));
+            }, 500);
+        }
+    }
+</script>

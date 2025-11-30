@@ -1,0 +1,23 @@
+.custom-ws{
+    height: 40px;
+}
+/*MOVIL*/
+@media (max-width: 859px) {
+    .custom-ws {
+        width: 168px;
+        background: url('https://www.viabcp.com/wcm/connect/324fb59f-4b5f-43cb-8253-6869bd93cdc9/main.svg?MOD=AJPERES&attachment=true&id=1733426800620') no-repeat  0 0;
+    }
+    .contact-button{
+        top:310px!important;
+    }
+}
+/*DESKTOP*/
+@media (min-width: 860px) {
+    .custom-ws {
+        width: 207px;
+        background: url('https://www.viabcp.com/wcm/connect/3d0cf99a-f744-4fd9-8722-d910f6202a30/main.svg?MOD=AJPERES&attachment=true&id=1733437775841') no-repeat  0 0;
+    }
+    .contact-button{
+        top:282px!important;
+    }
+}

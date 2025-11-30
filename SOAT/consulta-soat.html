@@ -1,0 +1,862 @@
+<style>
+    .container-primary {
+        width: 100%;
+    }
+    .wrap_banner {
+        background-color: #D9EBFF;
+        height: 344px;
+        overflow: hidden;
+        /*background: #CDE9FC url("/wcm/connect/0e7ea45d-5259-41f4-9796-40281e486e2e/banner_desktop.jpg?MOD=AJPERES&attachment=true&id=1701386760676") no-repeat center top;
+        background-size: cover;*/
+    }
+    .wrap_banners {
+        max-width: 1115px;
+        margin: 0 auto;
+        position: relative;
+    }
+    .banner-soat-1 {
+        width: auto;
+        margin-top:68px;
+        position: relative;
+    }
+    .banner-soat-1 > div {
+        width: 100%;
+    }
+    .banner-titulo {
+        font-size: 24px;
+        text-align: left;
+        color: #002A8D;
+    }
+    .banner-subtitulo {
+        font-size: 56px;
+        text-align: left;
+        color: #002A8D;
+        font-family: 'Flexo';
+        line-height: 64px;
+        margin-bottom: 8px;
+        font-weight: 600;
+    }
+    .banner-solohoy{
+        font-family: 'Flexo';
+        font-size: 24px;
+        line-height: 32px;
+        margin-bottom: 8px;
+        color: #002A8D;
+    }
+    .banner-msg{
+        font-family: 'Flexo-Demi';
+        font-size: 24px;
+        line-height: 32px;
+        margin-bottom: 8px;
+        color: #002A8D;
+        font-weight: 600;
+    }
+    img.img-banner {
+        position: absolute;
+        right: 0;
+        width: 280px;
+        top: -55px;
+    }
+    .form-placa {
+        width: 100%;
+        max-width: 538px;
+        padding: 24px 32px;
+        margin: 0 auto;
+        z-index: 2;
+        border-radius: 8px;
+        background: #FFF;
+        box-shadow: 0px 5px 5px -3px rgba(82, 112, 148, 0.20), 0px 3px 14px 2px rgba(82, 112, 148, 0.12), 0px 8px 10px 1px rgba(82, 112, 148, 0.14);
+        height: 160px;
+        position: relative;
+        bottom: 106px;
+    }
+    .input-placa {
+        border:1px solid #868F9E;
+        border-radius: 8px;
+        height: 40px;
+        width: 278px;
+        padding: 16px;
+        outline: none;
+    }
+    .btn-primary-comprar {
+        outline-offset: unset;
+        outline: 0;
+        background-color: #ff7800;
+        color: #fff;
+        font-size: 14px;
+        font-weight: 500;
+        border-radius: 20px;
+        width: 180px;
+        height: 40px;
+        text-align: center;
+        border: none;
+        cursor: pointer !important;
+        transition: box-shadow 0.2s linear, color 0.2s linear, background-color 0.2s linear;
+        vertical-align: middle;
+        font-family: flexo-demi;
+    }
+    .btn-primary-comprar:hover {
+        background-color: #ff961f;
+        transition: 0.2s ease-in-out;
+        box-shadow: 0 2px 2px rgb(82 112 148 / 14%), 0 3px 1px rgb(82 112 148 / 12%), 0 1px 5px rgb(82 112 148 / 20%);
+    }
+    .d-flex {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+    .btn-cobertura, .btn-cobertura:hover, .btn-cobertura:active, .btn-cobertura:link {
+        color: #ff7800;
+        cursor: pointer;
+        text-decoration: none;
+        font-family: Flexo;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 600;
+    }
+    button[disabled], .btn-primary-comprar[disabled] {
+        background-color:#eff0f2;
+        color:#BFC4CC;
+    }
+    .form-placa > div:nth-child(2) {
+        margin-top: 42px;
+        text-align: center;
+    }
+    /*MODAL COBERTURAS*/
+    .modal {
+        position: fixed;
+        top:0;
+        left:0;
+        height:100%;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index:6668;
+        background-color: rgba(0,0,0,0.5);
+        visibility: hidden;
+        opacity: 0;
+        transition: opacity 0.5s, visibility 0s 0.5s;
+    }
+    .modal_wrap button {
+        -webkit-appearance: none; /* remove default appearance on Webkit-based browsers */
+        -moz-appearance: none; /* remove default appearance on Mozilla-based browsers */
+        appearance: none; /* remove default appearance on all other browsers */
+        border:0 none;
+        cursor: pointer;
+    }
+    .modal.active {
+        opacity: 1;
+        visibility: visible;
+        transition: opacity 0.5s;
+    }
+    .modal_wrap {
+        display:block;
+        position: relative;
+        max-width: 500px;
+        width: 100%;
+        padding: 32px 24px 16px 24px;
+        border-radius: 8px;
+        box-shadow: 0 0 4px 0 rgba(82, 112, 148, 0.2), 0 1px 1px 0 rgba(82, 112, 148, 0.12), 0 1px 1px 0 rgba(82, 112, 148, 0.14);
+        background-color: #fff;
+    }
+    .modal_wrap_title {
+        
+        font-size: 20px;
+        font-weight: bold;
+        font-stretch: normal;
+        font-style: normal;
+        line-height: 28px;
+        letter-spacing: normal;
+        color: #002a8d;
+        margin-bottom: 32px;
+    }
+    .modal_wrap_subtitle {
+        
+        font-size: 14px;
+        font-weight: normal;
+        font-stretch: normal;
+        font-style: normal;
+        line-height: 20px;
+        letter-spacing: normal;
+        color: #202e44;
+        margin-bottom: 24px;
+    }
+    .modal_wrap_subtitle > span.resaltado{
+        font-weight: bold;
+    }
+    .modal_wrap_etiquetas {
+        
+        font-size: 14px;
+        font-weight: normal;
+        text-align: center;
+        color: #99a1ad;
+        display: flex;
+        justify-content: flex-start;
+        margin-bottom: 16px;
+    }
+    .modal_wrap_etiquetas button {
+        padding:0 0 14px 0;
+        border-bottom: 1px solid  #e5e7eb;
+        background: none;
+    }
+    .modal_wrap_etiquetas button:first-child {
+        width: 115px;
+    }
+    .modal_wrap_etiquetas button:last-child {
+        width: 118px;
+    }
+    .modal_wrap_etiquetas button.activo {
+        color: #202e44;
+        border-bottom: 2px solid  #ff7800;
+    }
+    .wrap_buttons {
+        display: flex;
+        justify-content: flex-end;
+        position: absolute;
+        right: 9px;
+        top:16px;
+    }
+    .modal-content-list > div {
+        display: flex;
+        width: 100%;
+    }
+    .modal-content-list > div > div:last-child {
+        margin-left: 12px;
+        font-size: 14px;
+        font-weight: normal;
+        font-stretch: normal;
+        font-style: normal;
+        line-height: 1.43;
+        letter-spacing: normal;
+        color: #202e44;
+        margin-bottom: 8px;
+    }
+    .wrap_button_buy {
+        display: flex;
+        justify-content: flex-end;
+    }
+    .btn_naranja {
+        padding: 8px 16px;
+        border-radius: 20px;
+        background-color: #ff7800;
+        color:#fff;
+        margin-top: 40px;
+    }
+    .hidden-content {
+        display: none;
+    }
+    /*beneficios*/
+    /*BENEFICIOS*/
+    #que-brinda-soat {
+        overflow: hidden;
+        background-color: #f2f4f8;
+    }
+    .bnf-soat-title {
+        font-size: 24px;
+        line-height: 32px;
+        text-align: center;
+        color: #002a8d;
+        margin-bottom: 40px;
+        font-family: 'Flexo';
+        margin-top: 64px;
+    }
+    .bnf-soat-subtitle {
+        font-size: 16px;
+        line-height: 1.5;
+        text-align: center;
+        color: #202e44;
+        margin-bottom: 32px;
+    }
+    .bnf-soat-subtitle span {
+        font-weight: bold;
+    }
+    .bnf-soat-footer {
+        font-size: 16px;
+        line-height: 1.5;
+        text-align: center;
+        color: #202e44;
+        margin-top: 32px;
+        margin-bottom: 40px;
+    }
+    .bnf-soat-footer a {
+        color:#ff7800;
+        font-weight: bold;
+    }
+    .wrap_banners {
+        max-width: 1115px;
+        margin: 0 auto;
+        position: relative;
+        z-index: 3;
+    }
+    .bg-sweetie {
+        background-color: #fff;
+        height: 90px;
+        padding: 16px;
+        color:#868f9e;
+    }
+    .card-item {
+        background-color: #FFF;
+        -ms-border-radius: 8px;
+        -o-border-radius: 8px;
+        -moz-border-radius: 8px;
+        -webkit-border-radius: 8px;
+        border-radius: 8px;
+        height: auto;
+        /* display: flex; */
+        /* justify-content: space-between; */
+        /* align-items: center; */
+        box-shadow: 0px 5px 5px -3px rgba(82, 112, 148, 0.20), 0px 3px 14px 2px rgba(82, 112, 148, 0.12), 0px 8px 10px 1px rgba(82, 112, 148, 0.14);
+        width: 302px;
+        /*cursor: pointer;*/
+    }
+    .card_item_child{
+        padding: 28px 8px 28px 16px;
+    }
+    .card_item_parent{
+        display: flex;
+        justify-content: space-between;
+    }
+    .cards-wrap {
+        display: flex;
+        justify-content: center;
+        
+    }
+    .cards-wrap > div:nth-child(2){
+        margin:0 16px;
+    }
+    /* .card-item div:first-child p{
+        text-align: left;
+        color:#002A8D;
+        margin: 0;
+        font-size: 14px;
+        line-height: 20px;
+    }
+    .card-item div:first-child p:first-child{
+        font-size: 20px;
+        font-weight: 700;
+        line-height: 28px;
+        margin-bottom: 8px;
+    } */
+    .title_card{
+        font-size: 20px;
+        line-height: 28px;
+        margin-bottom: 8px;
+        color: #002A8D;
+        font-weight: 600;
+    }
+    .subtitle_card{
+        text-align: left;
+        color:#002A8D;
+        margin: 0;
+        font-size: 14px;
+        line-height: 20px;
+    }
+    .subtitle_card b {
+        font-weight: 600;
+    }
+    .card-item div:first-child a {
+        color: #FF7800;
+        font-size: 14px;
+        font-weight: 600;
+    }
+    .card-item div:last-child img {
+        display: block;
+        width: 122px;
+        height: 133px;
+        border-radius: 0px 8px 8px 0px;
+    }
+    .wrap-brinda-items {
+        max-width: 1091px;
+        margin: 40px auto 64px auto;
+    }
+    .wrap-brinda-items > div {
+        width: 100%;
+        max-width: 327px;
+    }
+    .wrap-brinda-items > div > div {
+        text-align: center;
+    }
+    .wrap-brinda-items > div > div:nth-child(1){
+        margin-bottom: 24px;
+    }
+    .wrap-brinda-items > div > div:nth-child(2){
+        color: #002A8D;
+        font-size: 20px;
+        font-family: 'Flexo-Demi';
+        line-height: 28px; 
+        margin-bottom: 16px;
+    }
+    .wrap-brinda-items > div > div:nth-child(3){
+        color: var(--on-text, #202E44);
+        text-align: center;
+        font-family: Flexo;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 24px; 
+    }
+    /**/
+    .campaing-txt-end {
+        color: #202E44;
+        text-align: center;
+        font-family: Flexo;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 24px;
+        margin-top: 30px;
+    }
+    .first-section{
+        margin-top: -50px;
+    }
+    .desc_ch{
+        position: relative;
+        background-color: #1F46E7;
+        width: 53px;
+        height: 38px;
+        color: #FFF;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 10px;
+        font-size: 18px;
+        font-family: 'Flexo';
+        padding-left: 16px;
+        padding-right: 16px;
+        top: -18px;
+        right: 8px;
+    }
+    .desc_ch_p{
+        position: relative;
+        height: 0px;
+        float: right;
+    }
+    @media (max-width: 960px){
+        .cards-wrap {
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        .cards-wrap > div {
+            margin-bottom: 32px!important;
+        }
+    }
+    @media(max-width: 598px){
+        .d-flex {
+            flex-direction: column;
+        }
+        .banner-soat-1 {
+            width: calc(100% - 100px);
+            margin:24px;
+        }
+
+        .banner-subtitulo {
+            font-size:24px;
+            line-height: 100%;
+        }
+        /*BENEFICIOS*/
+        .bnf-soat-title {
+            font-size: 24px;
+        }
+        .bnf-soat-subtitle,.bnf-soat-title {
+            margin-bottom: 24px;
+            margin-left: auto;
+            margin-right: auto;
+            width: 327px;
+        }
+        .cards-wrap {
+            flex-direction: column;
+            align-items: center;
+        }
+        .cards-wrap > div {
+            margin-bottom: 32px;
+        }
+        .card-item {
+            width: 100%;
+            max-width: 327px;
+        }
+        #que-brinda-soat > div {
+            width: calc(100% - 48px);
+            margin-left: 24px;
+            margin-right: 24px;
+        }
+        .wrap_banner {
+            background-color: #D9EBFF;
+            /*background-image: url('/wcm/connect/6499e39c-3704-4a2d-8326-d2b59c9c6016/banner-movil.jpg?MOD=AJPERES&attachment=true&id=1701395408716');*/
+        }
+        .form-placa {
+            width: calc(100% - 48px);
+            margin:0 24px;
+            height: 239px;
+            padding: 24px 16px;
+            top:240px;
+            bottom: auto;
+            position: absolute;
+        }
+        .wrap-beneficios {
+            margin-top: 140px;
+        }
+        .input-placa {
+            width: 100%;
+        }
+        .btn-primary-comprar {
+            margin-top: 30px;
+            width: 100%;
+        }
+        .banner-soat-1 > div {
+            width: 210px;
+        }
+        .banner-solohoy{
+            font-size: 24px;
+            line-height: 100%;
+        }
+        .banner-msg {
+            display: none;
+        }
+        .btn-cobertura {
+            font-size: 14px;
+        }
+        img.img-banner {
+            width: 130px;
+            top: -10px;
+            right: 20px;
+        }
+    }
+    ::placeholder {
+        color: #99A1AD;
+        opacity: 1; /* Firefox */
+    }
+    ::-ms-input-placeholder { /* Edge 12 -18 */
+        color: #99A1AD;
+    }
+    .txt_legal{
+        font-size: 12px;
+        font-family: 'Flexo';
+        margin-top: 20px;
+        max-width: ;
+    }
+</style>
+
+<div id="campaing-container" class="container-primary">
+    <div id="campaing-banner" class="wrap_banner"></div>
+    <div class="form-placa">
+        <div class="d-flex">
+            <input type="text" id="input_placa" onkeyup="javascript:this.value=this.value.toUpperCase();" maxlength="6" class="input-placa" placeholder="Número de placa">
+            <button class="btn-primary-comprar" id="btn_lo_quiero_soat">Cotiza ahora</button>
+        </div>
+        <div>
+            <a class="btn-cobertura">Ver coberturas y exclusiones</a>
+        </div>
+    </div>
+    <div class="wrap-beneficios"></div>
+    <div class="campaing-txt-end">Además, encuentra beneficios para usar en el día a día, cuidar tu salud, darte un gusto y más.Revisa los Términos y condiciones en Beneficios SOAT.</div>
+    <div class="txt_legal container">*Venta de llantas, aros y servicio de instalación a domicilio en Lima Metropolitana es brindado por SOS Llantas a través del Programa de Beneficios Pacífico. Para acceder al beneficio, el cliente deberá ingresar a Mi Espacio Pacífico, acceder a la sección Programa de Beneficios y seguir las indicaciones de la marca. Promoción válida sobre precio regular. Las asistencias de servicio de grúa y auxilio mecánico son brindadas por Pacífico Asiste a través del Programa de Beneficios Pacífico. Para acceder al beneficio, el cliente deberá ingresar a Mi Espacio Pacífico, acceder a la sección Programa de Beneficios y seguir las indicaciones de la marca. La disponibilidad de servicios puede estar sujeta a disponibilidad y/o programación.</div>
+    <div class="wrap-brinda">
+        <div class="bnf-soat-title"><strong>Coberturas del SOAT Virtual</strong><br>Que te brinda SOAT</div>
+        <div class="wrap-brinda-items d-flex"></div>
+    </div>
+</div>
+
+<script>
+const dataBanner = {
+    titulo:'',
+    subtitulo:{
+        desktop:'Consulta tu SOAT Virtual',
+        movil:'Consulta tu SOAT Virtual'
+    },
+    solohoy:{
+        desktop:'Verifica el estado de tu SOAT fácil',
+        movil:'Verifica el estado de tu SOAT fácil'
+    },
+    msg:{
+        desktop:'',
+        movil:''
+    }
+}
+const imgBanner = '<img src="/wcm/myconnect/52450a5b-43ce-4b28-b268-c6a7b7bff873/KV_SOAT.png?MOD=AJPERES&amp;CACHEID=ROOTWORKSPACE-52450a5b-43ce-4b28-b268-c6a7b7bff873-pc.ZlvI" class="img-banner" />'
+const htmlBannerDK = '<div class="wrap_banners">'+imgBanner+'<div class="banner-soat-1"><div class="banner-titulo">'+dataBanner.titulo+'</div><div class="banner-subtitulo">'+dataBanner.subtitulo.desktop+'</div><div class="banner-solohoy">'+dataBanner.solohoy.desktop+'</div><div class="banner-msg">'+dataBanner.msg.desktop+'</div></div></div>'
+const htmlBannerMV = '<div class="wrap_banners">'+imgBanner+'<div class="banner-soat-1"><div class="banner-titulo">'+dataBanner.titulo+'</div><div class="banner-subtitulo">'+dataBanner.subtitulo.movil+'</div><div class="banner-solohoy">'+dataBanner.solohoy.movil+'</div><div class="banner-msg">'+dataBanner.msg.movil+'</div></div></div>'
+//CREACION MODAL COBERTURAS
+modalCoberturas = '<div class="modal_wrap">'
+modalCoberturas += '<div class="wrap_buttons">'
+modalCoberturas += '<button onclick="closeModal()" class="modalbtn"  data="modal_wrap">'
+modalCoberturas += '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="m4.71 4.887.083-.094a1 1 0 0 1 1.32-.083l.094.083 5.293 5.292 5.293-5.292a1 1 0 1 1 1.414 1.414L12.915 11.5l5.292 5.293a1 1 0 0 1 .083 1.32l-.083.094a1 1 0 0 1-1.32.083l-.094-.083-5.293-5.292-5.293 5.292a1 1 0 0 1-1.414-1.414l5.292-5.293-5.292-5.293a1 1 0 0 1-.083-1.32z" fill="#FF7800"/></svg>'
+modalCoberturas += '</button>'
+modalCoberturas += '</div>'
+modalCoberturas += '<div class="modal_wrap_title">SOAT DIGITAL</div>'
+modalCoberturas += '<div class="modal_wrap_etiquetas">'
+modalCoberturas += '<button class="activo" data-label="contentCobert">Coberturas</button>'
+modalCoberturas += '<button data-label="contentExclu">Exclusiones</button>'
+modalCoberturas += '</div>'
+modalCoberturas += '<div class="wrap_content_label">'
+modalCoberturas += '<div class="modal-content-list" id="contentCobert"></div>'
+modalCoberturas += '<div class="modal-content-list hidden-content" id="contentExclu"></div>'
+modalCoberturas += '</div>'
+modalCoberturas += '<div class="wrap_button_buy"><button class="btn_naranja" id="btn_buy_cobertura" onclick="closeModal()">Entendido</button></div>'
+modalCoberturas += '</div>'
+
+dataCobertura = [
+    '4 UIT por fallecimiento',
+    'Hasta 4 UIT por invalidez permanente',
+    'Hasta 1 UIT por incapacidad temporal',
+    'Hasta 5 UIT por gastos médicos',
+    'Hasta 1 UIT por gastos de sepelio'
+];
+dataExclu = [
+    'Accidentes causados en carreras de autos y otras competencias de vehículos',
+    'Accidentes causados en carreras de autos y otras competencias de vehículos',
+    'Accidentes causados en carreras de autos y otras competencias de vehículos',
+    'Accidentes ocurridos en circunstancias ajenas a la circulación del vehículo',
+    'Suicidio o intento de suicidio'
+]
+iconAspa = `<svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="m4.71 5.736.083-.094a1 1 0 0 1 1.32-.083l.094.083 5.293 5.292 5.293-5.292a1 1 0 1 1 1.414 1.414l-5.292 5.293 5.292 5.293a1 1 0 0 1 .083 1.32l-.083.094a1 1 0 0 1-1.32.083l-.094-.083-5.293-5.292-5.293 5.292a1 1 0 0 1-1.414-1.414l5.292-5.293-5.292-5.293a1 1 0 0 1-.083-1.32z" fill="#0A47F0"/></svg>`
+iconCheck = `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="m8.671 16.539-3.94-4.221a1 1 0 1 0-1.462 1.364l4.667 5a1 1 0 0 0 1.458.005l11.333-12a1 1 0 0 0-1.454-1.374L8.671 16.54z" fill="#0A47F0"/></svg>`
+
+contenedorModalApertura = null
+btnEtiquetas = null
+modalCoberturasv2 = null
+/*BENFECIOS*/
+htmlBeneficios = {
+    titulo:'<div class="bnf-soat-title first-section">¡Verifica tu SOAT!<br>Adquiérelo hoy y accede a un Programa de Beneficios</div>',
+    subtitle:'',
+    footer:'',
+    cards: [
+        {producto:'SOS Llantas',detalle:'20% de dcto. en <br><b>llantas y aros</b>',descuento:'20%',image:'https://www.viabcp.com/wcm/connect/12ef09d5-d073-4b36-88be-5a92a4998e14/image+68.jpg?MOD=AJPERES&attachment=true&id=1700849600160'},
+        {producto:'E-Cars',detalle:'<b>Servicio de grúa</b><br>desde S/ 120',descuento:'20%',image:'https://www.viabcp.com/wcm/connect/7b60a542-35cf-4252-9d14-cf3644597f33/image+68+%281%29.jpg?MOD=AJPERES&attachment=true&id=1700849656237'},
+        {producto:'Battery',detalle:'50% de dcto. en<br><b>auxilio mecánico</b>',descuento:'15%',image:'https://www.viabcp.com/wcm/connect/76c3fc62-43d1-42d8-8469-7abf0b3a0557/image+68+%282%29.jpg?MOD=AJPERES&attachment=true&id=1700849707012'}
+    ]
+}
+
+htmlBrinda = {
+    cards:[
+        {
+            image:'https://www.viabcp.com/wcm/connect/41eba2b2-1905-4015-800d-0a6c1b29e8e2/atencion.svg?MOD=AJPERES&attachment=true&id=1700865869766',
+            title:'Atención médica por accidente',
+            detail:'Tu SOAT cubre hasta 5 UIT para los gastos de atención médica, hospitalaria, quirúrgica y farmacéutica.'},
+        {
+            image:'https://www.viabcp.com/wcm/connect/5cd92832-a34b-4eb6-9406-3937676e4269/incapacidad.svg?MOD=AJPERES&attachment=true&id=1700865746113',
+            title:'Incapacidad temporal o invalidez',
+            detail:'En caso de invalidez permanente, tu seguro te cubre hasta 4 UIT. Mientras que, por incapacidad temporal hasta 1 UIT,'
+        }, 
+        {
+            image:'https://www.viabcp.com/wcm/connect/d0aacde4-df6c-4548-9ce0-32543663ec93/sepelio.svg?MOD=AJPERES&attachment=true&id=1700865958013',
+            title:'Gastos de sepelio y muerte',
+            detail:'SOAT cubre hasta por 1 UIT por gastos de sepelio. En un escenario de muerte, la cobertura es de 4 UIT,'
+        }               
+    ]
+}
+
+util = {
+    validar: function(elemento){
+        if(typeof elemento === 'string') return document.querySelector(elemento)
+        else return elemento
+    },
+    agregarClase:function(elemento,clase){
+        if(typeof clase === 'object'){
+            wrap = this.validar(elemento)
+            clase.forEach(function(c){wrap.classList.add(c)})
+        }
+    },
+    nuevaClase:function(elemento,clase){
+        contenedor = this.validar(elemento)
+        contenedor.removeAttribute('class')
+        this.agregarClase(contenedor,clase)
+    },
+    nuevaClaseAll:function(ruta,clase) {
+        lista = document.querySelectorAll(ruta)
+        lista.forEach(function(elemento){
+            elemento.removeAttribute('class')
+            if(clase.length  > 0){elemento.classList.add(clase)}
+        })
+    },
+    nuevoElemento:function(data){
+        if(data.hasOwnProperty('tag')){
+            e = document.createElement(data.tag)
+            if(data.hasOwnProperty('clase')) {this.agregarClase(e,data.clase)}
+            if(data.hasOwnProperty('id')) {e.setAttribute("id",data.id)}
+            if(data.hasOwnProperty('html')){this.insertHTML(e,data.html)}
+            return e
+        }
+    },
+    crearMoverElemento:function(data){
+        if(data.hasOwnProperty('clase')) {div = this.nuevoElemento({tag:'div',clase:data.clase})}
+        if(data.hasOwnProperty('html')){this.insertHTML(div,data.html)}
+        if(document.querySelector(data.destino)){
+            document.querySelector(data.destino).appendChild(div)
+        }
+    },
+    insertHTML:function(element,content){
+        wrap = this.validar(element)
+        wrap.innerHTML = content
+    }
+}
+//VARIABLES TAGGEO - ADOBE
+let variables_taggeo = {
+    tituloModal: "Seguros-Landing SOAT",
+    grupoModal: "VIABCP - Landing SEO",
+    productModal: "Seguros-SOAT",
+    channelModal: "ViaBCP",
+    versionModal: "Landing SOAT",
+    producto: ''
+}
+const taggeoAdobeSeguros = (data) => {
+    let event = data.hasOwnProperty('event') ? data.event : null 
+    let label = data.hasOwnProperty('label') ? data.label : null
+    let name = data.hasOwnProperty('name') ? data.name : null
+    if (event != 'trackAction') {
+        digitalData.push({
+            "form": {
+                "channel": variables_taggeo.channelModal,
+                "version": variables_taggeo.versionModal,
+                "name": variables_taggeo.tituloModal,
+                "product": variables_taggeo.productModal
+            },
+            "event": event
+        })
+    }
+    else {
+        digitalData.push({
+            "action": {
+                "group": variables_taggeo.grupoModal,
+                "category": variables_taggeo.tituloModal,
+                "name": "Click",
+                "label": label
+            },
+            "metadata": {
+                "key": "Producto",
+                "value": variables_taggeo.productModal
+            },
+            "event": "trackAction"
+        })
+    }
+}
+const listarDetallesModal = (id,list,icon)=>{
+        wrapList = document.querySelector(id);
+        list.forEach(function(element){
+            html = document.createElement("div");
+            html.innerHTML = '<div>'+icon+'</div><div>'+element+'</div>';
+            wrapList.appendChild(html);
+        });
+    }  
+const armarModal=()=>{
+    html = document.createElement("div");
+    html.classList.add('modal');
+    html.innerHTML = modalCoberturas;
+    document.querySelector('body').appendChild(html);
+
+    listarDetallesModal('#contentCobert',dataCobertura,iconCheck);
+    listarDetallesModal('#contentExclu',dataExclu,iconAspa);
+
+    contenedorModalApertura = document.querySelector('.modal')
+    btnEtiquetas = document.querySelectorAll('.modal_wrap_etiquetas button')
+    modalCoberturasv2 = document.querySelector('.modal_wrap')
+
+    btnEtiquetas.forEach(function(element){
+        element.addEventListener('click',function(event){
+            btn = event.currentTarget;
+            label = '#'+btn.getAttribute("data-label");
+            activo = document.querySelector('.modal_wrap_etiquetas button.activo');
+            if(activo) {
+                labelActivo = '#'+activo.getAttribute("data-label");
+                activo.classList.remove('activo');
+                console.log(labelActivo)
+                modalCoberturasv2.querySelector(labelActivo).classList.add('hidden-content')
+                
+                btn.classList.add('activo')
+                modalCoberturasv2.querySelector(label).classList.remove('hidden-content')
+            }
+            else {
+                console.warn('Modal: No se encontro etiqueta activa')
+            }
+        })
+    })
+    document.querySelector('.btn-cobertura').addEventListener('click',(event)=>{openModal()})
+}
+const openModal=()=>{
+    taggeoAdobeSeguros({event:'trackAction',label:'Ver coberturas y exclusiones'})
+    contenedorModalApertura.classList.add('active')
+}
+const armarBeneficios = ()=>{
+    const beneficios = document.querySelector('.wrap-beneficios')
+    const brinda = document.querySelector('.wrap-brinda-items')
+    cards = '';
+    item = 1;
+    htmlBeneficios.cards.forEach((element)=>{
+        pos = item++
+        data = "Beneficio "+pos
+        cards += '<div class="card-item" data-label="'+data+'">'
+        //cards += '<div class="desc_ch_p"><div class="desc_ch">'+element.descuento+'</div></div>'
+        cards += '<div class="card_item_parent">'
+        cards += '<div class="card_item_child">'
+        //cards += '<p class="title_card">'+element.producto+'</p>'
+        cards += '<p class="subtitle_card">'+element.detalle+'</p>'
+        cards += '<a href="https://www.viabcp.com/beneficios-soat" title="" target="" style="display:none">Conoce más</a></div>'
+        cards += '<div><img src="'+element.image+'"></div>'
+        cards += '</div>'
+        cards += '</div>'
+    })
+    beneficios.innerHTML = htmlBeneficios.titulo+htmlBeneficios.subtitle+'<div class="cards-wrap">'+cards+'</div>'+htmlBeneficios.footer
+    cards = '';
+    htmlBrinda.cards.forEach((element)=>{
+        cards += '<div class="">'
+        cards += '<div><img src="'+element.image+'"></div>' 
+        cards += '<div>'+element.title+'</div>'
+        cards += '<div>'+element.detail+'</div>'
+        cards += '</div>'
+    })
+    brinda.innerHTML = cards
+}
+const actionCotizarSOAT = () =>{
+    const UTM = '&utm_source=viabcp&utm_medium=organic&utm_campaign=2024-6_BBSS_SOAT_AON_TRA_VIABCP-SEO&utm_content=TRA_TODOS_N-A_GEN_REGULAR_NONE_-_BAN_NULL_SOAT-VIABCPCONSULTA-SOAT&from=viabcp_-_organic_-_2024-6_BBSS_SOAT_AON_TRA_VIABCP-SEO_-_TRA_TODOS_N-A_GEN_REGULAR_NONE_-_BAN_NULL_SOAT-VIABCPCONSULTA-SOAT'
+    const placa = document.querySelector('#input_placa').value
+    if(placa){
+        url = 'https://soat.pacifico.com.pe/bcp/derivacion/?numero-placa='+placa+UTM
+        window.open(url,'_blank')
+    }
+    console.log('Ejecutado envio de placa')
+}
+function buildLanding(){
+    const contenedorBanner = document.getElementById('campaing-banner')
+    const btnCotizar = document.getElementById('btn_lo_quiero_soat')
+    const inputPlaca = document.querySelector('#input_placa')
+    contenedorBanner.innerHTML = innerWidth > 598 ? htmlBannerDK : htmlBannerMV
+    /*Validacion de placa*/
+    inputPlaca.addEventListener("keypress", (event) => {
+        if(innerWidth > 1024){btnCotizar.removeAttribute('disabled')}
+        const regex = new RegExp("^[a-zA-Z0-9]+$");
+        let key = String.fromCharCode(!event.charCode ? event.which : event.charCode);
+        if (!regex.test(key)) {
+            event.preventDefault();
+            return false;
+        }
+    });
+    inputPlaca.addEventListener('focusin', (event) => {
+        event.currentTarget.parentElement.classList.add('focusin');
+        let eleCboInput = fnGetParent(event.currentTarget, '.bcp_cbo_input_microcomponent');
+        if (eleCboInput != null) {
+            eleCboInput.classList.add('focusin');
+        }
+    });
+    inputPlaca.addEventListener('focusout', (event) => {
+        let microcomp = event.currentTarget.parentElement;
+        if (event.currentTarget.value.trim().length == 0) {
+            microcomp.classList.remove('focusin');
+        }
+    })
+    btnCotizar.addEventListener('click',()=>{
+        taggeoAdobeSeguros({event:'trackAction',label:'Cotizar ahora'})
+        actionCotizarSOAT()
+    })
+    armarModal()
+    armarBeneficios()
+    if(innerWidth > 1024){
+        btnCotizar.setAttribute('disabled','disabled')
+    }
+}
+buildLanding()
+
+function closeModal(){
+    document.querySelector('.modal').classList.remove('active');
+}
+
+</script>

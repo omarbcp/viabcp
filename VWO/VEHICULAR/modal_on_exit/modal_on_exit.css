@@ -1,0 +1,137 @@
+.modal-on-exit {
+    width: 327px;
+    height: 393px;
+    box-shadow: 0px 8px 10px -5px rgba(82, 112, 148, 0.2);
+    box-shadow: 0px 6px 30px 5px rgba(82, 112, 148, 0.12);
+    box-shadow: 0px 16px 24px 2px rgba(82, 112, 148, 0.14);
+    padding: 16px;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+.modal-on-exit > div {
+    position: relative;
+}
+.moe-title {
+    font-family: Flexo;
+    font-size: 22px;
+    font-weight: 700;
+    line-height: 26.4px;
+    margin-bottom: 16px;
+    text-align: center;
+   color: rgba(0, 153, 204, 1);
+}
+.moe-content {
+    font-family: Flexo;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 19px;
+    margin: 0 auto 24px auto;
+    text-align: center;
+    width: 279px;
+}
+.moe-btn-secundary {
+    width: 231px;
+    height: 40px;
+    border-radius: 20px;
+    opacity: 0px;
+    border: 1px solid rgba(0, 153, 204, 1);
+    color:rgba(0, 153, 204, 1);
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+.moe-btn-primary {
+    width: 231px;
+    height: 40px;
+    border-radius: 20px;
+    background: rgba(238, 44, 112, 1);
+    color:#fff;
+    margin: 0 auto 24px auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+.moe-btn-close {
+    color: rgba(0, 155, 208, 1);
+    appearance: none;
+    border:0 none;
+    background: url('https://www.viabcp.com/wcm/connect/1663b563-8065-4447-a2ed-e62cd2b984c2/32px.svg?MOD=AJPERES&attachment=true&id=1733506780592') no-repeat right center;
+    width: auto;
+    cursor: pointer;
+    position: absolute;
+    right: 0;
+    top: 0;
+    padding-right: 37px;
+}
+.moe-icon-ws {
+    background: url('https://www.viabcp.com/wcm/connect/ca1677ca-e271-40b2-bad0-783b83230c79/ic_social_whatsapp.svg?MOD=AJPERES&attachment=true&id=1733505654842');
+    width: 24px;
+    height: 24px;
+    margin-right: 10px;
+}
+.moe-txt-ws {
+    height: 24px;
+    line-height: 24px;
+}
+.moe-img {
+    margin-top: 10px;
+    text-align: center;
+}
+@media (max-width:991px) {
+    .moe-wrap-modal {
+        background: transparent;
+        padding:0;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        transition: background .4s linear;
+        width: 100%;
+        height: 100%;
+        background: rgb(32 46 68 / 85%);
+        top: 0px;
+        left: 0px;
+        position: fixed;
+        z-index: 100;
+    }
+    .modal-on-exit {
+        z-index: 101;
+        border-radius: 20px;
+    }
+}
+@media (min-width:992px) {
+    .moe-wrap-modal {
+        padding: 0px 12px;
+        display: flex;
+        flex-direction: row;
+        justify-content: end;
+    }
+    .modal-on-exit {
+        position: fixed;
+        border-radius: 20px 20px 0 0;
+        bottom: -100%;
+        right: 44px;
+    }
+    .modal-on-exit.mostrar {
+        animation: move_up 1s;
+        bottom: 0;
+    }
+    .modal-on-exit.cerrar {
+        animation: move_down 1.5s;
+    }
+
+}
+/*ANIMACIONES*/
+@keyframes move_down {
+    0% {bottom: 0;}
+    100% {bottom: -100%;}
+}
+@keyframes move_up {
+    0% {bottom: -100%;}
+    100% {bottom: 0px;}
+}

@@ -1,0 +1,969 @@
+<!-- componentes qi -->
+<style>
+    * {
+        margin: 0; padding: 0; border:0 none; box-sizing: border-box;
+    }
+    .container-primary {
+        width: 100%;
+    }
+    .wrap_banner {
+        background-color: #002DA0;
+        -webkit-clip-path: ellipse(100% 100% at 38% 0%);
+        clip-path: ellipse(100% 100% at 50% 0%);
+        height: 368px;
+        overflow: hidden;
+        /*background: #CDE9FC url("/wcm/connect/0e7ea45d-5259-41f4-9796-40281e486e2e/banner_desktop.jpg?MOD=AJPERES&attachment=true&id=1701386760676") no-repeat center top;
+        background-size: cover;*/
+    }
+    .wrap_banners {
+        max-width: 1115px;
+        margin: 0 auto;
+        position: relative;
+    }
+    .banner-soat-1 {
+        width: auto;
+        margin-top:68px;
+        position: relative;
+    }
+    .banner-soat-1 > div {
+        width: 100%;
+    }
+    .banner-titulo {
+        font-size: 24px;
+        text-align: left;
+        color: #FFF;
+    }
+    .banner-subtitulo {
+        font-size: 56px;
+        text-align: left;
+        color: #FFF;
+        font-family: 'Flexo';
+        line-height: 64px;
+        margin-bottom: 8px;
+        font-weight: 600;
+    }
+    .banner-solohoy{
+        font-family: 'Flexo';
+        font-size: 24px;
+        line-height: 32px;
+        margin-bottom: 8px;
+        color: #FFF;
+    }
+    .banner-msg{
+        font-family: 'Flexo-Demi';
+        font-size: 24px;
+        line-height: 32px;
+        margin-bottom: 8px;
+        color: #FFF;
+        font-weight: 600;
+    }
+    img.img-banner {
+        position: absolute;
+        right: 0;
+        width: 280px;
+        top: -55px;
+    }
+    .form-placa {
+        width: 100%;
+        max-width: 538px;
+        padding: 24px 32px;
+        margin: 0 auto;
+        z-index: 2;
+        border-radius: 8px;
+        background: #FFF;
+        box-shadow: 0px 5px 5px -3px rgba(82, 112, 148, 0.20), 0px 3px 14px 2px rgba(82, 112, 148, 0.12), 0px 8px 10px 1px rgba(82, 112, 148, 0.14);
+        height: 160px;
+        position: relative;
+        bottom: 106px;
+    }
+    .input-placa {
+        border:1px solid #868F9E;
+        border-radius: 8px;
+        height: 40px;
+        width: 278px;
+        padding: 16px;
+        outline: none;
+    }
+    .btn-primary-comprar {
+        outline-offset: unset;
+        outline: 0;
+        background-color: #ff7800;
+        color: #fff;
+        font-size: 14px;
+        font-weight: 500;
+        border-radius: 20px;
+        width: 180px;
+        height: 40px;
+        text-align: center;
+        border: none;
+        cursor: pointer !important;
+        transition: box-shadow 0.2s linear, color 0.2s linear, background-color 0.2s linear;
+        vertical-align: middle;
+        font-family: flexo-demi;
+    }
+    .btn-primary-comprar:hover {
+        background-color: #ff961f;
+        transition: 0.2s ease-in-out;
+        box-shadow: 0 2px 2px rgb(82 112 148 / 14%), 0 3px 1px rgb(82 112 148 / 12%), 0 1px 5px rgb(82 112 148 / 20%);
+    }
+    .d-flex {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+    .btn-cobertura, .btn-cobertura:hover, .btn-cobertura:active, .btn-cobertura:link {
+        color: #ff7800;
+        cursor: pointer;
+        text-decoration: none;
+        font-family: Flexo;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 600;
+    }
+    button[disabled], .btn-primary-comprar[disabled] {
+        background-color:#eff0f2;
+        color:#BFC4CC;
+    }
+    .form-placa > div:nth-child(2) {
+        margin-top: 42px;
+        text-align: center;
+    }
+    /*beneficios*/
+    /*BENEFICIOS*/
+    #que-brinda-soat {
+        overflow: hidden;
+        background-color: #f2f4f8;
+    }
+    .bnf-soat-title {
+        font-size: 24px;
+        line-height: 32px;
+        text-align: center;
+        color: #002a8d;
+        margin-bottom: 40px;
+        font-family: 'Flexo';
+        margin-top: 64px;
+    }
+    .bnf-soat-subtitle {
+        font-size: 16px;
+        line-height: 1.5;
+        text-align: center;
+        color: #202e44;
+        margin-bottom: 32px;
+    }
+    .bnf-soat-subtitle span {
+        font-weight: bold;
+    }
+    .bnf-soat-footer {
+        font-size: 16px;
+        line-height: 1.5;
+        text-align: center;
+        color: #202e44;
+        margin-top: 32px;
+        margin-bottom: 40px;
+    }
+    .bnf-soat-footer a {
+        color:#ff7800;
+        font-weight: bold;
+    }
+    .wrap_banners {
+        max-width: 1115px;
+        margin: 0 auto;
+        position: relative;
+        z-index: 3;
+    }
+    .bg-sweetie {
+        background-color: #fff;
+        height: 90px;
+        padding: 16px;
+        color:#868f9e;
+    }
+    .card-item {
+        background-color: #FFF;
+        -ms-border-radius: 8px;
+        -o-border-radius: 8px;
+        -moz-border-radius: 8px;
+        -webkit-border-radius: 8px;
+        border-radius: 8px;
+        height: auto;
+        /* display: flex; */
+        /* justify-content: space-between; */
+        /* align-items: center; */
+        box-shadow: 0px 5px 5px -3px rgba(82, 112, 148, 0.20), 0px 3px 14px 2px rgba(82, 112, 148, 0.12), 0px 8px 10px 1px rgba(82, 112, 148, 0.14);
+        width: 302px;
+        /*cursor: pointer;*/
+    }
+    .card_item_child{
+        padding: 28px 8px 28px 16px;
+        display: flex;
+        align-items: center;
+    }
+    .card_item_parent{
+        display: flex;
+    }
+    .cards-wrap {
+        display: flex;
+        justify-content: center;
+        
+    }
+    .cards-wrap > qi-cards:nth-child(2){
+        margin:0 16px;
+    }
+    /* .card-item div:first-child p{
+        text-align: left;
+        color:#002A8D;
+        margin: 0;
+        font-size: 14px;
+        line-height: 20px;
+    }
+    .card-item div:first-child p:first-child{
+        font-size: 20px;
+        font-weight: 700;
+        line-height: 28px;
+        margin-bottom: 8px;
+    } */
+    .title_card{
+        font-size: 20px;
+        line-height: 28px;
+        margin-bottom: 8px;
+        color: #002A8D;
+        font-weight: 600;
+    }
+    .subtitle_card{
+        text-align: left;
+        color:#002A8D;
+        margin: 0;
+        font-size: 18px;
+        line-height: 20px;
+    }
+    .subtitle_card span {
+        font-weight: 600;
+    }
+    .card-item div:first-child a {
+        color: #FF7800;
+        font-size: 14px;
+        font-weight: 600;
+    }
+    .card-item div:last-child img {
+        display: block;
+        width: 122px;
+        height: 133px;
+        border-radius: 0px 8px 8px 0px;
+    }
+    .wrap-brinda-items {
+        max-width: 1091px;
+        margin: 40px auto 64px auto;
+    }
+    .wrap-brinda-items > div {
+        width: 100%;
+        max-width: 327px;
+    }
+    .wrap-brinda-items > div > div {
+        text-align: center;
+    }
+    .wrap-brinda-items > div > div:nth-child(1){
+        margin-bottom: 24px;
+    }
+    .wrap-brinda-items > div > div:nth-child(2){
+        color: #002A8D;
+        font-size: 20px;
+        font-family: 'Flexo-Demi';
+        line-height: 28px; 
+        margin-bottom: 16px;
+    }
+    .wrap-brinda-items > div > div:nth-child(3){
+        color: var(--on-text, #202E44);
+        text-align: center;
+        font-family: Flexo;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 24px; 
+    }
+    /**/
+    .campaing-txt-end {
+        color: #202E44;
+        text-align: center;
+        font-family: Flexo;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 24px; 
+        margin-top: 32px;
+    }
+    .first-section{
+        margin-top: -50px;
+    }
+    .desc_ch{
+        position: relative;
+        background-color: #1F46E7;
+        width: 53px;
+        height: 38px;
+        color: #FFF;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 10px;
+        font-size: 18px;
+        font-family: 'Flexo';
+        padding-left: 16px;
+        padding-right: 16px;
+        top: -18px;
+        right: 8px;
+    }
+    .desc_ch_p{
+        position: relative;
+        height: 0px;
+        float: right;
+    }
+    .container-legal {
+        width: 100%;
+        max-width: 1091px;
+        margin: 20px auto;
+        font-size: 11px;
+        text-align: justify;
+    }
+    @media (min-width: 992px) and (max-width: 1279px){
+        .wrap-brinda,.campaing-txt-end,.container-legal,.wrap-beneficios,.wrap_banners {
+            width: 936px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+    }
+    @media (min-width: 769px) and (max-width: 992px){
+        .cards-wrap {
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        .cards-wrap > qi-cards {
+            margin-bottom: 32px!important;
+        }
+        .wrap-brinda,.campaing-txt-end,.container-legal,.wrap-beneficios,.wrap_banners {
+            width: 100%;
+            max-width: 732px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+    }
+    @media (min-width: 599px) and (max-width: 768px){
+        .wrap-brinda,.campaing-txt-end,.container-legal,.wrap-beneficios,.wrap_banners {
+            width: auto;
+            max-width: 720px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+    }
+    @media(max-width: 598px){
+        .d-flex {
+            flex-direction: column;
+        }
+        .banner-soat-1 {
+            width: calc(100% - 100px);
+            margin:24px;
+        }
+
+        .banner-subtitulo {
+            font-size:24px;
+            line-height: 100%;
+        }
+        /*BENEFICIOS*/
+        .bnf-soat-title {
+            font-size: 24px;
+        }
+        .bnf-soat-subtitle,.bnf-soat-title {
+            margin-bottom: 24px;
+            margin-left: auto;
+            margin-right: auto;
+            width: 327px;
+        }
+        .cards-wrap {
+            flex-direction: column;
+            align-items: center;
+        }
+        .cards-wrap > qi-cards {
+            margin-bottom: 32px;
+        }
+        .card-item {
+            width: 100%;
+            max-width: 327px;
+        }
+        #que-brinda-soat > div {
+            width: calc(100% - 48px);
+            margin-left: 24px;
+            margin-right: 24px;
+        }
+        .wrap_banner {
+            background-color: #002a8d;
+            /*background-image: url('/wcm/connect/6499e39c-3704-4a2d-8326-d2b59c9c6016/banner-movil.jpg?MOD=AJPERES&attachment=true&id=1701395408716');*/
+        }
+        .form-placa {
+            width: calc(100% - 48px);
+            margin:0 24px;
+            height: 239px;
+            padding: 24px 16px;
+            top:240px;
+            bottom: auto;
+            position: absolute;
+        }
+        .wrap-beneficios {
+            margin-top: 140px;
+        }
+        .input-placa {
+            width: 100%;
+        }
+        .btn-primary-comprar {
+            margin-top: 30px;
+            width: 100%;
+        }
+        .banner-soat-1 > div {
+            width: 210px;
+        }
+        .banner-solohoy{
+            font-size: 20px;
+            line-height: 100%;
+        }
+        .banner-msg {
+            display: none;
+        }
+        .btn-cobertura {
+            font-size: 14px;
+        }
+        img.img-banner {
+            width: 130px;
+            top: -10px;
+            right: 20px;
+        }
+        .cards-wrap > div:nth-child(2) {
+            margin: 0 0 32px 0;
+        }
+        .campaing-txt-end,.container-legal {
+            width: calc(100% - 48px);
+            margin-left:24px;
+            margin-right: 24px;
+        }
+    }
+    ::placeholder {
+        color: #99A1AD;
+        opacity: 1; /* Firefox */
+    }
+    ::-ms-input-placeholder { /* Edge 12 -18 */
+        color: #99A1AD;
+    }
+    .hide {
+        display: none!important;
+    }
+</style>
+<style id="customCSS">
+      /*MODAL COBERTURAS*/
+    .custom {
+        max-width: 500px;
+        width: 100%;  
+        padding: 32px 24px 16px 24px;
+    }
+    .custom button {
+        -webkit-appearance: none; /* remove default appearance on Webkit-based browsers */
+        -moz-appearance: none; /* remove default appearance on Mozilla-based browsers */
+        appearance: none; /* remove default appearance on all other browsers */
+        border:0 none;
+        cursor: pointer;
+    }
+    .modal_wrap_title {
+        
+        font-size: 20px;
+        font-weight: bold;
+        font-stretch: normal;
+        font-style: normal;
+        line-height: 28px;
+        letter-spacing: normal;
+        color: #002a8d;
+        margin-bottom: 32px;
+    }
+    .modal_wrap_subtitle {
+        
+        font-size: 14px;
+        font-weight: normal;
+        font-stretch: normal;
+        font-style: normal;
+        line-height: 20px;
+        letter-spacing: normal;
+        color: #202e44;
+        margin-bottom: 24px;
+    }
+    .modal_wrap_subtitle > span.resaltado{
+        font-weight: bold;
+    }
+    .modal_wrap_etiquetas {
+        
+        font-size: 14px;
+        font-weight: normal;
+        text-align: center;
+        color: #99a1ad;
+        display: flex;
+        justify-content: flex-start;
+        margin-bottom: 16px;
+    }
+    .modal_wrap_etiquetas button {
+        padding:0 0 14px 0;
+        border-bottom: 1px solid  #e5e7eb;
+        background: none;
+        
+    }
+    .modal_wrap_etiquetas button:first-child {
+        width: 115px;
+    }
+    .modal_wrap_etiquetas button:last-child {
+        width: 118px;
+    }
+    .modal_wrap_etiquetas button.activo {
+        color: #202e44;
+        border-bottom: 2px solid  #ff7800;
+    }
+    .wrap_buttons {
+        display: flex;
+        justify-content: flex-end;
+        position: absolute;
+        right: 9px;
+        top:16px;
+    }
+    .modal-content-list > div {
+        display: flex;
+        width: 100%;
+    }
+    .modal-content-list > div > div:last-child {
+        margin-left: 12px;
+        font-size: 14px;
+        font-weight: normal;
+        font-stretch: normal;
+        font-style: normal;
+        line-height: 1.43;
+        letter-spacing: normal;
+        color: #202e44;
+        margin-bottom: 8px;
+    }
+    .wrap_button_buy {
+        display: flex;
+        justify-content: flex-end;
+    }
+    .btn_naranja {
+        padding: 8px 16px;
+        border-radius: 20px;
+        background-color: #ff7800;
+        color:#fff;
+        margin-top: 40px;
+    }
+    .hidden-content {
+        display: none;
+    }
+</style>
+
+<div id="campaing-container" class="container-primary">
+    <div id="campaing-banner" class="wrap_banner"></div>
+    <div class="form-placa">
+        <div class="d-flex">
+            <input type="text" id="input_placa" onkeyup="javascript:this.value=this.value.toUpperCase();" maxlength="6" class="input-placa" placeholder="Número de placa">
+            <button class="btn-primary-comprar" id="btn_lo_quiero_soat">Cotiza ahora</button>
+        </div>
+        <div><a class="btn-cobertura">Ver coberturas y exclusiones</a></div>
+    </div>
+    <div class="wrap-beneficios"></div>
+    <div class="campaing-txt-end">Además, encuentra beneficios para usar en el día a día, cuidar tu salud, darte un gusto y más.</div>
+    <div class="container-legal">
+    *Consultar términos y condiciones en la categoría Día a Día de la sección Beneficios para ti del app Mi Espacio Pacífico.
+    </div>
+    <div class="wrap-brinda">
+        <div class="bnf-soat-title">Que te brinda SOAT</div>
+        <div class="wrap-brinda-items d-flex"></div>
+    </div>
+</div>
+<qi-modal id="modalInfo" size="custom"></qi-modal>
+<script src="/wcm/connect/392ca7a4-ef3d-4975-ae65-06b89b3d5569/rangofechasoat.js?MOD=AJPERES&attachment=true"></script>
+<script src="/wcm/connect/d97296a1-fd6a-43f3-8f79-d9a0b954f4f3/qi-modal.js?MOD=AJPERES&attachment=true"></script>
+<script>
+const obtenerPrecioHoy = ()=>{
+    let priceCurrent = "41.90"
+    const fechaActual = new Date();
+    if(rangofechas){
+        rangofechas.forEach((fecha)=>{
+            const inicio = new Date(fecha.inicio)
+            const fin = new Date(fecha.fin)
+            if (fechaActual >= inicio && fechaActual <= fin) {
+                priceCurrent = fecha.price
+                console.log(priceCurrent)
+            }
+        })
+    }
+    return priceCurrent
+}
+const dataBanner = {
+    titulo:'',
+    subtitulo:{
+        desktop:`Atrapa tu SOAT desde S/${obtenerPrecioHoy()}`,
+        movil:`Atrapa tu SOAT desde S/${obtenerPrecioHoy()}`
+    },
+    solohoy:{
+        desktop:'Pídelo ya y obtén beneficios exclusivos',
+        movil:'Pídelo ya y obtén beneficios exclusivos'
+    },
+    msg:{
+        desktop:'',
+        movil:''
+    }
+}
+const imgBanner = '<img src="/wcm/myconnect/49c71a1a-6948-4bae-b53a-bc63fc6b77db/Eco2_SOAT.png?MOD=AJPERES&amp;CACHEID=ROOTWORKSPACE-49c71a1a-6948-4bae-b53a-bc63fc6b77db-ptxL5co" class="img-banner" />'
+const htmlBannerDK = '<div class="wrap_banners">'+imgBanner+'<div class="banner-soat-1"><div class="banner-titulo">'+dataBanner.titulo+'</div><div class="banner-subtitulo">'+dataBanner.subtitulo.desktop+'</div><div class="banner-solohoy">'+dataBanner.solohoy.desktop+'</div><div class="banner-msg">'+dataBanner.msg.desktop+'</div></div></div>'
+const htmlBannerMV = '<div class="wrap_banners">'+imgBanner+'<div class="banner-soat-1"><div class="banner-titulo">'+dataBanner.titulo+'</div><div class="banner-subtitulo">'+dataBanner.subtitulo.movil+'</div><div class="banner-solohoy">'+dataBanner.solohoy.movil+'</div><div class="banner-msg">'+dataBanner.msg.movil+'</div></div></div>'
+
+/*BENFECIOS*/
+htmlBeneficios = {
+    titulo:'<div class="bnf-soat-title first-section">Adquiérelo hoy y disfruta de un Programa de Beneficios*</div>',
+    subtitle:'',
+    footer:'',
+    cards: [
+        {producto:'SOS Llantas',detalle:'20% de dcto. en <span>llantas y aros</span>',descuento:'20%',image:'/wcm/connect/12ef09d5-d073-4b36-88be-5a92a4998e14/image+68.jpg?MOD=AJPERES&attachment=true&id=1700849600160'},
+        {producto:'E-Cars',detalle:'15% de dcto. en <span>venta de accesorios</span>',descuento:'15%',image:'/wcm/connect/2530640e-c340-4ddf-b156-53690b32534f/Servicio_Grua_366x399.png?MOD=AJPERES&attachment=true&id=1705950883000'},
+        {producto:'Battery',detalle:'50% de dto. en <span>servicio de evaluación general</span>',descuento:'50%',image:'/wcm/connect/dc22404f-bcb5-4c41-9121-0c7130f89bbc/Auxilio_Mecanico_366x399.png?MOD=AJPERES&attachment=true&id=1705950767182'}
+    ]
+}
+
+htmlBrinda = {
+    cards:[
+        {
+            image:'https://www.viabcp.com/wcm/connect/41eba2b2-1905-4015-800d-0a6c1b29e8e2/atencion.svg?MOD=AJPERES&attachment=true&id=1700865869766',
+            title:'Atención médica por accidente',
+            detail:'Tu SOAT cubre hasta 5 UIT para los gastos de atención médica, hospitalaria, quirúrgica y farmacéutica.'},
+        {
+            image:'https://www.viabcp.com/wcm/connect/5cd92832-a34b-4eb6-9406-3937676e4269/incapacidad.svg?MOD=AJPERES&attachment=true&id=1700865746113',
+            title:'Incapacidad temporal o invalidez',
+            detail:'En caso de invalidez permanente, tu seguro te cubre hasta 4 UIT. Mientras que, por incapacidad temporal hasta 1 UIT,'
+        }, 
+        {
+            image:'https://www.viabcp.com/wcm/connect/d0aacde4-df6c-4548-9ce0-32543663ec93/sepelio.svg?MOD=AJPERES&attachment=true&id=1700865958013',
+            title:'Gastos de sepelio y muerte',
+            detail:'SOAT cubre hasta por 1 UIT por gastos de sepelio. En un escenario de muerte, la cobertura es de 4 UIT,'
+        }               
+    ]
+}
+
+util = {
+    validar: function(elemento){
+        if(typeof elemento === 'string') return document.querySelector(elemento)
+        else return elemento
+    },
+    agregarClase:function(elemento,clase){
+        if(typeof clase === 'object'){
+            wrap = this.validar(elemento)
+            clase.forEach(function(c){wrap.classList.add(c)})
+        }
+    },
+    nuevaClase:function(elemento,clase){
+        contenedor = this.validar(elemento)
+        contenedor.removeAttribute('class')
+        this.agregarClase(contenedor,clase)
+    },
+    nuevaClaseAll:function(ruta,clase) {
+        lista = document.querySelectorAll(ruta)
+        lista.forEach(function(elemento){
+            elemento.removeAttribute('class')
+            if(clase.length  > 0){elemento.classList.add(clase)}
+        })
+    },
+    nuevoElemento:function(data){
+        e = document.createElement(data.hasOwnProperty('tag') ? data.tag : 'div')
+        if(data.hasOwnProperty('clase')) {this.agregarClase(e,data.clase)}
+        if(data.hasOwnProperty('attrib')) {this.setAttribute(e,data.attrib)}
+        if(data.hasOwnProperty('html')){this.insertHTML(e,data.html)}
+        return e
+    },
+    crearMoverElemento:function(data){
+        if(data.hasOwnProperty('clase')) {div = this.nuevoElemento({tag:'div',clase:data.clase})}
+        if(data.hasOwnProperty('html')){this.insertHTML(div,data.html)}
+        if(document.querySelector(data.destino)){
+            document.querySelector(data.destino).appendChild(div)
+        }
+    },
+    insertHTML:function(element,content){
+        wrap = this.validar(element)
+        wrap.innerHTML = content
+    },
+    setAttribute(element,attributes) {
+        for (const [key, value] of Object.entries(attributes)) {element.setAttribute(key, value)}
+    }
+}
+//VARIABLES TAGGEO - ADOBE
+let taggeoGeneric = {
+    product_category:"Seguros",
+    channel : "ViaBCP",
+    group : "Seguros",
+    position:"",
+    subflow:"",
+    name: "Click",
+    creative:"",
+    category:"SOAT-Landing Deeplink",
+    product:"SOAT",
+    message:'',
+    event:"trackAction",
+    version:'Seguros'
+}
+function taggeoAdobeSeguros(taggeoCustom) {
+    const taggeoDataDefault = taggeoGeneric
+    const taggeo = {...taggeoDataDefault,...taggeoCustom}
+    if(typeof digitalData !== 'undefined'){
+        let dataTaggeo = {
+            trackAction : {
+                action: {group: taggeo.group,category: taggeo.category,name: taggeo.name,label: taggeo.label},
+                metadata: {key: "Producto",value: taggeo.product},
+                event: "trackAction"
+            },
+            trackPromotionView: {
+                promotion:{name:taggeo.name,creative:taggeo.creative,position:taggeo.position},
+                event:"trackPromotionView"
+            },
+            trackInsurancesRequests:{
+                application:{product:taggeo.product,product_category:taggeo.product_category,subflow:taggeo.subflow},
+                event:"trackInsurancesRequests"
+            },
+            trackElement: {
+                element:{container:taggeo.container,type:taggeo.type,name:taggeo.name},
+                event:"trackElement"
+            },
+            trackFormView:{
+                form:{channel:taggeo.channel,name:taggeo.name,product:taggeo.product,version:taggeo.version},
+                event:"trackFormView"
+            },
+            trackFormSubmit:{
+                form:{channel:taggeo.channel,name:taggeo.name,product:taggeo.product,version:taggeo.version},
+                event:"trackFormSubmit"
+            },
+            trackError:{
+                error:{code:"VIABCP-HOME-VIAJES",message:taggeo.message},
+                event:"trackError"
+            }
+        }
+        if(dataTaggeo[taggeo.event]){
+            digitalData.push(dataTaggeo[taggeo.event])
+        } else {
+            console.log('no se encontro evento de taggeo')
+        }
+    }
+}
+
+const armarModal=()=>{
+    const customCSS = document.querySelector('#customCSS')
+    const modalTravel = document.querySelector('#modalInfo')
+    const modalCoberturasv2 = modalTravel.shadowRoot;
+    const icons = {
+        check: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="m8.671 16.539-3.94-4.221a1 1 0 1 0-1.462 1.364l4.667 5a1 1 0 0 0 1.458.005l11.333-12a1 1 0 0 0-1.454-1.374L8.671 16.54z" fill="#0A47F0"></path></svg>`,
+        cross: `<svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="m4.71 5.736.083-.094a1 1 0 0 1 1.32-.083l.094.083 5.293 5.292 5.293-5.292a1 1 0 1 1 1.414 1.414l-5.292 5.293 5.292 5.293a1 1 0 0 1 .083 1.32l-.083.094a1 1 0 0 1-1.32.083l-.094-.083-5.293-5.292-5.293 5.292a1 1 0 0 1-1.414-1.414l5.292-5.293-5.292-5.293a1 1 0 0 1-.083-1.32z" fill="#0A47F0"></path></svg>`
+    }
+    const dataList = {
+        cobertura: [
+            {icon:icons.check,content:'4 UIT por fallecimiento'},
+            {icon:icons.check,content:'Hasta 4 UIT por invalidez permanente'},
+            {icon:icons.check,content:'Hasta 1 UIT por incapacidad temporal'},
+            {icon:icons.check,content:'Hasta 5 UIT por gastos médicos'},
+            {icon:icons.check,content:'Hasta 1 UIT por gastos de sepelio'}
+        ],
+        exclusiones: [
+            {icon:icons.cross,content:'Accidentes causados en carreras de autos y otras competencias de vehículos'},
+            {icon:icons.cross,content:'Accidentes causados en carreras de autos y otras competencias de vehículos'},
+            {icon:icons.cross,content:'Accidentes causados en carreras de autos y otras competencias de vehículos'},
+            {icon:icons.cross,content:'Accidentes ocurridos en circunstancias ajenas a la circulación del vehículo'},
+            {icon:icons.cross,content:'Suicidio o intento de suicidio'}
+        ],
+    }
+    const closeModal = (event,parametro)=>{
+        modalTravel.hide()
+    }
+    const openModal=()=>{
+        taggeoAdobeSeguros({event:'trackAction',label:'Ver coberturas y exclusiones'})
+        modalTravel.view()
+    }
+    const viewContentLabel=(event,parametro)=>{
+        const btn = event.currentTarget
+        const label = '#'+btn.getAttribute("source")
+        const activo = modalCoberturasv2.querySelector('.modal_wrap_etiquetas button.activo');
+        if(activo) {
+            labelActivo = '#'+activo.getAttribute("source")
+            activo.classList.remove('activo');
+            modalCoberturasv2.querySelector(labelActivo).classList.add('hidden-content')
+            btn.classList.add('activo')
+            modalCoberturasv2.querySelector(label).classList.remove('hidden-content')
+        }
+        else {
+            console.warn('Modal: No se encontro etiqueta activa')
+        }
+    } 
+    const buttonCloseModal = {
+        clase:'wrap_button_buy',
+        content:[
+            {   functions:closeModal,
+                clases:'btn_naranja',
+                label:'Entendido'
+            }
+        ]
+    }
+    const buttonsLabel = {
+        clase:'modal_wrap_etiquetas',
+        content:[
+            {   functions:viewContentLabel,
+                clases:'activo',
+                label:'Coberturas',
+                attrib:{source:'contentCobert'}
+            },
+            {   functions:viewContentLabel,
+                clases:'',
+                label:'Exclusiones',
+                attrib:{source:'contentExclu'}
+            }
+        ]
+    }
+    const wrapContentLabel = new QIHTMLElement()
+        .addClass('wrap_content_label')
+        .addchildren([
+            buildList(dataList.cobertura, {clase:"modal-content-list",attrib:{id:"contentCobert"}}),
+            buildList(dataList.exclusiones, {clase:["modal-content-list","hidden-content"],attrib:{id:"contentExclu"}})
+        ])
+        .getElement()
+    modalTravel.addCSS(customCSS)
+    modalTravel.data = [
+        buildHTML({clase:'modal_wrap_title',content:'SOAT DIGITAL'}),
+        buildButtons(buttonsLabel),
+        wrapContentLabel,
+        buildButtons(buttonCloseModal)
+    ]  
+    document.querySelector('.btn-cobertura').addEventListener('click',(event)=>{openModal()})
+}
+
+const armarBeneficios = ()=>{
+    const beneficios = document.querySelector('.wrap-beneficios')
+    const brinda = document.querySelector('.wrap-brinda-items')
+    const cardsWrap = util.nuevoElemento({tag:'div',clase:['cards-wrap']})
+    let cards = '';
+
+    htmlBeneficios.cards.forEach((element)=>{
+        const cardItem = util.nuevoElemento({tag:'qi-cards'})
+        cardItem.setAttribute('image',element.image)
+        cardItem.appendChild(util.nuevoElemento({tag:'p',html:element.detalle,attrib:{slot:'description'}}))
+        cardsWrap.appendChild(cardItem)
+    })
+    beneficios.innerHTML = htmlBeneficios.titulo+htmlBeneficios.subtitle
+    beneficios.appendChild(cardsWrap)
+
+    htmlBrinda.cards.forEach((element)=>{
+        cards += '<div class="">'
+        cards += '<div><img src="'+element.image+'"></div>' 
+        cards += '<div>'+element.title+'</div>'
+        cards += '<div>'+element.detail+'</div>'
+        cards += '</div>'
+    })
+    brinda.innerHTML = cards
+}
+
+
+    // Declarar la variable globalmente
+    var miClientId;
+var miSessionId;
+
+//Crear Etiqueta
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+
+// Función para obtener el client_id
+function obtenerClientId() {
+gtag('get', 'G-53ZGJY9DX6', 'client_id', function(client_id) {
+    miClientId = client_id; // Asignar el valor de client_id a la variable global
+    console.log(miClientId); // Opcional: imprimir el valor para verificar
+});
+}
+
+// Función para obtener el session_id
+function obtenerSessionId() {
+gtag('get', 'G-53ZGJY9DX6', 'session_id', function(session_id) {
+    miSessionId = session_id; // Asignar el valor de session_id a la variable global
+    console.log(miSessionId); // Opcional: imprimir el valor para verificar
+});
+}
+
+// Llamar a la función para obtener
+obtenerClientId();
+obtenerSessionId();
+
+const urlSoatByUTM = (utm) => {
+    let url_utm = window.location.search;
+    let url = ''
+    let utms_list = utms_soat.map((item)=>{  return item.url_utm})
+    if(utms_list.includes(url_utm)){
+        let index = utms_list.indexOf(url_utm)
+        url = utms_soat[index].url_soat
+    }else{
+        url='&clientId='+miClientId+'&sessionId='+miSessionId+'&utm_source=google&utm_medium=search&utm_campaign=2024-01_BBSS_SOAT_AON_TRA_VIA-BCP-LANDING-SOAT_PILOTO&utm_content=VEN_TODOS_CPC_PAL_GENERICO_NONE_-TXT_NULL_SOAT-VIABCP-LANDING-COMP&from=google-search-2024-01_BBSS_SOAT_AON_TRA_VIA-BCP-LANDING-SOAT_PILOTO-VEN_TODOS_CPC_PAL_GENERICO_NONE-_TXT_NULL_SOAT-VIABCP-LANDING-COMP'
+    }
+    return url;
+}
+
+
+const actionCotizarSOAT = () =>{
+
+    const placa = document.querySelector('#input_placa').value
+    if(placa){
+        url = 'https://soat.pacifico.com.pe/bcp/derivacion/?numero-placa='+placa+'&clientId='+miClientId+'&sessionId='+miSessionId+urlSoatByUTM(window.location.search);
+        window.open(url,'_blank')
+    }
+}
+function buildLanding(){
+    const contenedorBanner = document.getElementById('campaing-banner')
+    const btnCotizar = document.getElementById('btn_lo_quiero_soat')
+    const inputPlaca = document.querySelector('#input_placa')
+    contenedorBanner.innerHTML = innerWidth > 598 ? htmlBannerDK : htmlBannerMV
+    /*Validacion de placa*/
+    inputPlaca.addEventListener("keypress", (event) => {
+        if(innerWidth > 1024){btnCotizar.removeAttribute('disabled')}
+        const regex = new RegExp("^[a-zA-Z0-9]+$");
+        let key = String.fromCharCode(!event.charCode ? event.which : event.charCode);
+        if (!regex.test(key)) {
+            event.preventDefault();
+            return false;
+        }
+    });
+    inputPlaca.addEventListener('focusin', (event) => {
+        event.currentTarget.parentElement.classList.add('focusin');
+        let eleCboInput = fnGetParent(event.currentTarget, '.bcp_cbo_input_microcomponent');
+        if (eleCboInput != null) {
+            eleCboInput.classList.add('focusin');
+        }
+    });
+    inputPlaca.addEventListener('focusout', (event) => {
+        let microcomp = event.currentTarget.parentElement;
+        if (event.currentTarget.value.trim().length == 0) {
+            microcomp.classList.remove('focusin');
+        }
+    })
+    btnCotizar.addEventListener('click',()=>{
+        taggeoAdobeSeguros({label:'Cotizar ahora',name:'Click'})
+        actionCotizarSOAT()
+    })
+    armarModal()
+    armarBeneficios()
+    /*document.querySelectorAll('.card-item').forEach((card)=>{
+        card.addEventListener('click',(event)=>{
+            activo = event.currentTarget
+            benef = activo.getAttribute('data-label')
+            taggeoAdobeSeguros({event:'trackAction',label:benef})
+            window.open('https://www.viabcp.com/beneficios-soat','_blank')
+        })
+        
+    })*/
+    taggeoAdobeSeguros({name:'Landing Deeplink',event:'trackFormView'})
+    if(innerWidth > 1024){
+        btnCotizar.setAttribute('disabled','disabled')
+    }
+}
+buildLanding()
+
+var utms_soat = [
+    {
+        url_utm:'',
+        url_soat:'&utm_source=bmo&utm_medium=deeplink&utm_campaign=2025-02_BBSS_SOAT_EST_TRA_VIA-BCP-DEEPLINK-SOAT&utm_content=TRA_TODOS_N-A_BBDD_DEEPLINK_NONE_-_TXT_NULL_SOAT-VIABCP-DEEPLINK&from=bmo_-_deeplink_-_2025-02_BBSS_SOAT_EST_TRA_VIA-BCP-DEEPLINK-SOAT_-_TRA_TODOS_N-A_BBDD_DEEPLINK_NONE_-_TXT_NULL_SOAT-VIABCP-DEEPLINK'
+    }
+]
+
+</script>

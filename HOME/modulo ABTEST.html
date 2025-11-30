@@ -1,0 +1,32 @@
+<script>
+    (function (){
+        
+        try {
+            const abtest = ['control','piloto']
+            let porcent = () => Math.random() > 0.5 ? 1 : 0;
+            let tipoExperiment = abtest[porcent()]
+            const waitForElement = ()=>{
+                let count = 0
+                const interval = setInterval(()=>{
+                    count++
+                    if(count > 3){
+                        clearInterval(interval)
+                        console.log('No se encontro el elemento')
+                    }
+                    if(typeof lanzarExpT042 !== 'undefined' || typeof launchModalABTest !== 'undefined'){
+                        clearInterval(interval)
+                        if(tipoExperiment === 'control') {
+                            lanzarExpT042();
+                        } else {
+                            launchModalABTest();
+                        }
+                    }
+                },1000)
+            }
+            waitForElement();
+        } catch (error) {
+            console.log(error)
+            taggeoActionMulti({message:'modulo ABTEST',event:'trackError'})
+        }
+    })()
+</script>

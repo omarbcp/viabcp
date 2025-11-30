@@ -1,0 +1,45 @@
+<!--WIDGET VIDESK-->
+<style>
+.videsk-top-container {
+    right: 1%;
+    bottom: 4%;
+}
+</style>
+<script src="https://assets.videsk.io/js/videsk-widget.min.js" videsk-token="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyYWMiOiI2NjRmYjktOGQ5NTUwLTk5MjQ3ZC0zNDdmMmUiLCJpYXQiOjE3MTY1MDA4Nzd9.GyGK4VQyv5_tnRg0jRPA4RN4vn1P4ONuFKFebVZ-kRg" async></script>
+<script>
+let widgetVidesk = true
+document.addEventListener('videsk-load', () => {
+    videsk.events = {
+        onToggle: function (view){
+            console.log(view.status)
+            if(view.status && widgetVidesk){
+                digitalData.push({
+                    "popup":{"name":"VIVA-videollamadas"},
+                    "event":"trackPopup"
+                });
+                widgetVidesk = false
+            } else {
+                console.log('onToogle en false')
+                widgetVidesk = true
+            }
+        },
+        onSelected:function(select){
+            console.log(select)
+            if(select.name = "Llamar ahora" && select.available ){
+                digitalData.push({
+                    "action":{
+                        "group":"Viabcp-videollamadas",
+                        "category":"VIVA",
+                        "name":"Click",
+                        "label":"Llamar ahora"
+                    },
+                    "event":"trackAction"
+                });
+            }
+        },
+        onStart:function(){
+
+        }
+    };
+});
+</script>

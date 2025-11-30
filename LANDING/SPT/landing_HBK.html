@@ -1,0 +1,2728 @@
+    
+<style>
+    html {
+        scroll-behavior: smooth;
+    }
+    .backgroundBlue {
+        width: 100%;
+        background-color: #002a8d;
+    }
+    .spthbk_header {
+        width: 100%;
+        text-align: left;
+        padding:0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 64px;
+    }
+    .spthbk_header img {
+        width: 100%;
+    }
+    .modal {
+        position: fixed;
+        top:0;
+        left:0;
+        height:100%;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .modal {
+        z-index:9999;
+        background-color: rgba(0,0,0,0.5);
+        visibility: hidden;
+        opacity: 0;
+        transition: opacity 0.5s, visibility 0s 0.5s;
+    }
+    .modal button {
+        -webkit-appearance: none; /* remove default appearance on Webkit-based browsers */
+        -moz-appearance: none; /* remove default appearance on Mozilla-based browsers */
+        appearance: none; /* remove default appearance on all other browsers */
+        background: none;
+        border:0 none;
+    }
+    .modal.active {
+        opacity: 1;
+        visibility: visible;
+        transition: opacity 0.5s;
+    }
+    .modal_wrap {
+        position: relative;
+        max-width: 576px;
+        width: 100%;
+        padding: 32px 24px;
+        border-radius: 8px;
+        box-shadow: 0 0 4px 0 rgba(82, 112, 148, 0.2), 0 1px 1px 0 rgba(82, 112, 148, 0.12), 0 1px 1px 0 rgba(82, 112, 148, 0.14);
+        background-color: #fff;
+    }
+    .modal_wrap_title {
+        font-family: Flexo;
+        font-size: 20px;
+        font-weight: bold;
+        font-stretch: normal;
+        font-style: normal;
+        line-height: 28px;
+        letter-spacing: normal;
+        color: #002a8d;
+        margin-bottom: 16px;
+    }
+    .modal_wrap_subtitle {
+        font-family: Flexo;
+        font-size: 14px;
+        font-weight: normal;
+        font-stretch: normal;
+        font-style: normal;
+        line-height: 20px;
+        letter-spacing: normal;
+        color: #202e44;
+        margin-bottom: 24px;
+    }
+    .modal_wrap_etiquetas {
+        font-family: Flexo-Demi;
+        font-size: 14px;
+        font-weight: normal;
+        text-align: center;
+        color: #99a1ad;
+        display: flex;
+        justify-content: flex-start;
+        margin-bottom: 16px;
+    }
+    .modal_wrap_etiquetas button {
+        padding: 14px 0;
+        border-bottom: 1px solid  #e5e7eb;
+        
+    }
+    .modal_wrap_etiquetas button:first-child {
+        width: 115px;
+    }
+    .modal_wrap_etiquetas button:last-child {
+        width: 118px;
+    }
+    .modal_wrap_etiquetas button.activo {
+        color: #202e44;
+        border-bottom: 2px solid  #ff7800;
+    }
+    .modalbtnClose {
+        position: absolute;
+        top:16px;
+        right: 16px;
+    }
+    .spthbk_content_list.hidden-content {
+        display: none;
+    }
+    .modal_wrap > .spthbk_content_list {
+        margin-bottom: 0;
+    }
+    .wrap_content_label {
+        margin-bottom: 24px;
+    }
+    
+    /*LOADER*/
+    .lds-ring {
+        display: inline-block;
+        position: relative;
+        width: 80px;
+        height: 80px;
+    }
+    .lds-ring div {
+        box-sizing: border-box;
+        display: block;
+        position: absolute;
+        width: 64px;
+        height: 64px;
+        margin: 6px;
+        border: 4px solid #ff7800;
+        border-radius: 50%;
+        animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+        border-color: #ff7800 transparent transparent transparent;
+    }
+    .lds-ring div:nth-child(1) {
+        animation-delay: -0.45s;
+    }
+    .lds-ring div:nth-child(2) {
+        animation-delay: -0.3s;
+    }
+    .lds-ring div:nth-child(3) {
+        animation-delay: -0.15s;
+    }
+    .icono-bcp {
+        margin-top: 20px;
+        margin-left: 20px;
+    }
+    @keyframes lds-ring {
+        0% {
+            transform: rotate(0deg);
+        }
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+    .loader {
+        width: 100%;
+        height: 100%;
+        z-index:9999;
+        background-color: #002a8d;
+        position: fixed;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        top: 0;
+        left: 0;
+    }
+    .bannerFixed {
+        display: none;
+    }
+    @media (max-width: 768px){
+        .spthbk_header {
+            padding:0 16px;
+            height: 48px;
+        }
+    }
+    @media(max-width:576px){
+        .modal_wrap {
+            width: calc(100% - 32px);
+            margin: 0 16px;
+        }
+        .bannerFixed {
+            width: 100%;
+            height: 56px;
+            position: fixed;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            background-color: #002a8d;
+            bottom: -56px;
+            z-index: 10;
+        }
+        .bannerFixed.activo {
+            display: flex;
+            bottom: 0;
+            transition:all 2s ease-in;
+        }
+        .bannerFixed a, .bannerFixed a:hover, .bannerFixed a:active {
+            font-family: Flexo-Demi;
+            font-size: 16px;
+            font-weight: normal;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: normal;
+            letter-spacing: normal;
+            color: #fff;
+        }
+        .spthbk_header .spthbk_logopacifico {
+            width: 150px;
+        }
+        .spthbk_header .spthbk_logobcp{
+            width: 84px;
+        }
+    }
+    @media (max-width: 390px){
+        .spthbk_header {
+            height: 48px;
+        }
+    }
+</style>
+<div class="loader hidden">
+    <div class="lds-ring">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <img src="/wcm/connect/6e4c3fae-319e-4ad9-b40d-22d1a4c67d48/lg_favicon_light.svg?MOD=AJPERES&attachment=true&id=1683768834775" alt="" width="40" height="40" class="icono-bcp">
+    </div>
+</div>
+<div class="modal">
+    <div class="modal_wrap">
+        <button onclick="closeModal()" class="modalbtnClose" ><img src="/wcm/connect/4e212ad5-c039-48ca-9b49-6daf96066468/c-ic-close-r.svg?MOD=AJPERES&attachment=true&id=1683732902275" alt=""></button>
+        <div class="modal_wrap_title">Seguro Protección de Tarjetas Plus</div>
+        <div class="modal_wrap_subtitle">Refuerza la protección de tus tarjetas BCP por <strong>S/12.99 al mes.</strong></div>
+        <div class="modal_wrap_etiquetas">
+            <button class="activo" data-label="contentCobert" >Coberturas</button>
+            <button data-label="contentExclu" >Exclusiones</button>
+        </div>
+        <div class="wrap_content_label">
+            <div class="spthbk_content_list" id="contentCobert"></div>
+            <div class="spthbk_content_list hidden-content" id="contentExclu"></div>
+        </div>
+        <img src="/wcm/myconnect/a8e9a709-c718-44b1-b7c9-14db2170e8e8/group-9.png?MOD=AJPERES&amp;CVID=oX5mhdv" alt="" class="img-pacifico" />
+    </div>
+</div>
+<!--BANNER FIXED AZUL -->
+<div class="bannerFixed ">
+    <div>
+        <svg width="52" height="52" viewBox="0 0 52 52" xmlns="http://www.w3.org/2000/svg">
+            <g fill="none" fill-rule="evenodd">
+                <path d="M3.12 26c0 12.636 10.244 22.88 22.88 22.88S48.88 38.636 48.88 26 38.636 3.12 26 3.12 3.12 13.364 3.12 26" fill="#DCEDFF"/>
+                <path d="M40.05 14.95c.71 1.404.206 3.124-1.125 3.901l-.107.06c-1.142.605-2.06 3.77-1.07 6.866 1.185 3.039 2.238 5.277 3.16 6.713l.185.31c.16.259.331.522.516.79l.228.324c1.018 1.413 1.697 2.276 3.725 3.944-3.065 5.107-7.996 8.549-12.89 10.019-3.417-4.465-8.471-8.56-13.648-10.304-3.399-.85-7.197-.997-10.277-.763l-.52.043c-1.199.11-2.271.278-3.147.483-1.32.31-2.636-.535-2.938-1.884-.292-1.307.473-2.609 1.72-2.97a2.48 2.48 0 0 1-1.72-1.851c-.302-1.35.523-2.694 1.844-3.003.364-.085.78-.164 1.238-.235l-.007-.03c-.302-1.349.523-2.693 1.844-3.002.388-.09.834-.176 1.328-.255-.04-1.176.74-2.253 1.904-2.525l.358-.08.266-.055.288-.056.47-.085.338-.056.356-.057.374-.056.391-.055.408-.054.424-.051.662-.074.46-.046.471-.043.485-.04.495-.035.507-.032.516-.027.525-.022c.177-.007.355-.012.534-.017l.541-.011.274-.004.551-.002c4.009.011 7.881.473 11.617 1.386.047-.678.142-1.348.285-2.003.644-2.95 2.166-5.193 4.284-6.314 1.41-.747 3.146-.184 3.876 1.258z" fill="#FFC8E9"/>
+                <path d="M34.019 31.355c.744.391 1.326.962 1.557 1.528a.175.175 0 0 1-.09.226.17.17 0 0 1-.221-.093c-.38-.93-2.004-2.082-4.066-1.833a.17.17 0 0 1-.187-.15.172.172 0 0 1 .147-.193 4.846 4.846 0 0 1 2.86.515zm-15.8.237a.172.172 0 0 1 .141.197.17.17 0 0 1-.193.144c-.81-.13-1.601-.226-2.37-.294l-.574-.046a35.358 35.358 0 0 0-3.497-.08l-.5.017a35.7 35.7 0 0 0-.487.023l-.476.03-.465.034-.451.04-.44.043-.425.048-.412.052-.398.054-.194.029-.377.058-.362.06-.346.061-.332.062-.315.063-.442.094-.405.092-.478.117-.407.107a.17.17 0 0 1-.207-.122.174.174 0 0 1 .12-.212l.395-.105.433-.108.47-.109.507-.108.542-.106.38-.07.195-.033.402-.065.207-.032.423-.06.437-.057.451-.053.464-.048.478-.043.243-.02.496-.033a35.474 35.474 0 0 1 7.769.379zm1.718-4.62a.172.172 0 0 1 .141.198.17.17 0 0 1-.193.144 44.64 44.64 0 0 0-5.011-.516l-.583-.022a41.163 41.163 0 0 0-1.409-.021l-.543.005c-.537.009-1.055.028-1.554.057l-.491.032-.478.038-.463.044c-.533.053-1.035.118-1.505.191l-.395.065a22.89 22.89 0 0 0-.19.034l-.37.07-.18.037-.344.075c-.224.051-.436.104-.636.159a.17.17 0 0 1-.207-.122.174.174 0 0 1 .12-.212l.312-.082.33-.08.173-.038.357-.074.374-.072.391-.067c.333-.055.682-.105 1.048-.15l.446-.052c.075-.009.152-.017.229-.024l.468-.045.24-.02.49-.035.25-.015.51-.027.522-.02.536-.012c.633-.01 1.29-.006 1.97.015l.59.023.598.03.61.041a45.24 45.24 0 0 1 3.847.448zm3.222-3.168A.172.172 0 0 1 23.3 24a.17.17 0 0 1-.193.144 44.638 44.638 0 0 0-5.011-.516l-.583-.022a40.73 40.73 0 0 0-1.952-.016l-.531.013c-.35.01-.69.025-1.023.044l-.492.032-.24.019-.47.04-.23.023-.45.048c-.367.043-.72.091-1.055.143l-.395.065a22.89 22.89 0 0 0-.191.034l-.37.07-.353.074-.336.077c-.164.04-.32.08-.47.12a.17.17 0 0 1-.207-.122.174.174 0 0 1 .119-.212c.253-.069.525-.136.816-.2l.357-.074.185-.036.382-.07c.522-.09 1.087-.17 1.692-.235l.46-.047a32.8 32.8 0 0 1 .237-.021l.482-.039.247-.017.503-.029a40.137 40.137 0 0 1 3.58-.02l.593.028.605.035c1.32.087 2.71.239 4.153.47z" fill="#003CE5"/>
+                <path d="M30.853 28.977c-.058-.926-2.271-1.348-5.173-.872-2.903.475-4.94 1.52-5.053 2.245-.115.725 2.927.296 4.988.194 3.527-.282 5.16-.648 5.238-1.567z" fill="#FFB4DE"/>
+                <path d="m20.492 7.818 11.262 1.876 2.046 1.005-.029.51-.007.712-.01.606-.021.893c-.047 1.87-.125 3.64-.234 5.313-.416 6.408-7.592 10.992-12.509 11.94-.158-.09.201-.272 1.078-.546l-.019-.013c-2.602-1.908-5.042-5.716-5.542-7.897-.217-.947-.337-2.406-.398-3.998l-.023-.69a76.732 76.732 0 0 1-.016-.698l-.01-.702-.005-.699v-.688l.006-.998.013-.938.017-.856.02-.75h-1.183c1.775-.476 3.078-.795 3.908-.956.66-.128 1.309-.524 1.867-.977l-.211-1.45z" fill="#FFA900"/>
+                <path d="M20.918 30.678c-2.91-1.597-5.866-6.035-6.42-8.461-.747-3.252-1.145-10.855-1.145-10.855s6.95-3.79 7.132-3.76c3.545.603 11.27 2.092 11.27 2.092s.587 3.043-.073 9.229c-.659 6.186-10.546 11.877-10.764 11.755z" fill="#FFC74A"/>
+                <path d="M12.99 21.455c-1.039-4.072-.285-11.48-.285-11.48l7.78-2.372c-.95 8.148-.65 17.62.433 23.075-2.91-1.597-6.932-5.314-7.928-9.223z" fill="#FFE39C"/>
+                <path d="m18.353 22.23.755-4.989a1.38 1.38 0 0 1-.908-1.298c0-.764.621-1.362 1.388-1.383.137-.004.28-.004.382.02.615.142 1.006.708 1.006 1.363 0 .564-.337 1.05-.822 1.264l1.143 5.053.023.1-2.967-.13z" fill="#FFA900"/>
+                <path d="m19.016 22.26.653-5.043c-.554-.195-.949-.703-.949-1.304 0-.658.37-1.353 1.12-1.353.79.062 1.12.695 1.12 1.353 0 .566-.353 1.054-.86 1.27l1.22 5.177-2.304-.1z" fill="#470D00"/>
+            </g>
+        </svg>
+    </div>
+    <div><a id="btnSolictarSeguro">Solicita tu seguro</a></div>
+</div>
+
+<script>
+    const btnModal = document.querySelector('#coberturaExclu');//Boton que abre el modal
+    const modal = document.querySelector('.modal');
+    const iconoCheck = `<svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                        <path d="m7.226 13.783-3.283-3.518a.833.833 0 1 0-1.219 1.137l3.889 4.167a.833.833 0 0 0 1.215.003l9.445-10a.833.833 0 0 0-1.212-1.144l-8.835 9.355z" fill="#3D77FF" fill-rule="evenodd"/>
+                    </svg>`;
+    const iconoAspa = `<svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M6.257 4.439a1.297 1.297 0 0 0-1.71.107l-.108.122a1.297 1.297 0 0 0 .107 1.712L8.166 10l-3.62 3.62a1.296 1.296 0 0 0 1.834 1.834l3.62-3.62 3.62 3.62.123.107c.508.396 1.243.36 1.71-.107l.108-.122a1.297 1.297 0 0 0-.107-1.712L11.834 10l3.62-3.62a1.296 1.296 0 1 0-1.834-1.834L10 8.166l-3.62-3.62-.123-.107z" fill="#3D77FF" fill-rule="evenodd"/>
+                    </svg>`;
+    const btnEtiquetas = document.querySelectorAll('.modal_wrap_etiquetas button');
+    let btnActivo = '1';
+
+    function mostrarModal(){
+        if(modal){
+            modal.classList.add('active');
+            ModalFunctions.resize();
+        } 
+        else {
+            console.warn('No se encontro el modal')
+        } 
+    }
+    
+    function closeModal(){modal.classList.remove('active')}
+
+    function listarDetallesModal(id,list,icon){
+        const wrapList = document.querySelector(id);
+        list.forEach(element => {
+            const html = document.createElement("div");
+            html.innerHTML = `<div>${icon}</div><div>${element}</div>`;
+            wrapList.appendChild(html);
+        });
+    }
+
+    const dataCobertura = [
+        'Transferencias no reconocidas desde el App de BCP o Yape. Te cubrimos hasta S/15,000.',
+        'Compras no reconocidas por internet. Te cubrimos hasta S/15,000.',
+        'Compras no reconocidas en establecimientos comerciales. Te cubrimos hasta S/5,000.',
+        'Retiro de dinero no reconocido en Cajeros BCP. Te cubrimos hasta S/5,000.',
+        'Robo de tus retiros en Cajeros y Agentes ATM. Te cubrimos hasta S/5,000.'
+    ];
+    const dataExclu = [
+        'La clonación, falsificación y /o adulteración de la tarjeta.<br>¡Tranquilo! Si te sucede, es el banco quien se encargará de analizar estos  casos.',
+        'Eventos ocurridos bajo influencia de algún narcótico, droga o alcohol.',
+        'Tarjetas adicionales donde no figure tu nombre en el plástico.',
+        'Uso indebido de tus tarjetas BCP fuera del país en establecimientos físicos.',
+        'Tarjetas emitidas por otras entidades financieras al BCP.'
+    ]
+
+    listarDetallesModal('#contentCobert',dataCobertura,iconoCheck);
+    listarDetallesModal('#contentExclu',dataExclu,iconoAspa);
+
+    btnEtiquetas.forEach(element=>{
+        element.addEventListener('click',(event)=>{
+            const btn = event.currentTarget;
+            const label = `#${btn.getAttribute("data-label")}`;
+            const activo = document.querySelector('.modal_wrap_etiquetas button.activo');
+            console.log(`Etiqueta : ${label}`)
+            if(activo) {
+                const labelActivo = `#${activo.getAttribute("data-label")}`;
+                activo.classList.remove('activo');
+                modal.querySelector(labelActivo).classList.add('hidden-content')
+                
+                btn.classList.add('activo')
+                modal.querySelector(label).classList.remove('hidden-content')
+            }
+            else {
+                console.warn('Modal: No se encontro etiqueta activa')
+            }
+        })
+    })
+
+    const ModalFunctions = {
+        wrapList : document.querySelector('.wrap_content_label'),
+        modal: document.querySelector('.modal_wrap'),
+        resize : function () {
+            if(window.innerHeight < 530){
+                //const wrapList = document.querySelector('.wrap_content_label');
+                //const modal = document.querySelector('.modal_wrap');
+                const newHeight = window.innerHeight - 32;
+                const elementModal = [
+                    {clase:'.modal_wrap_title',margen: 16},
+                    {clase:'.modal_wrap_subtitle',margen: 24},
+                    {clase:'.modal_wrap_etiquetas',margen: 16}
+                ]
+                
+                const heightImg = 24;
+                let sumatorio = 0;
+
+                ModalFunctions.modal.style.height = `${newHeight}px`;
+                const heightNav =  newHeight - 64;
+
+                elementModal.forEach(element=>{
+                    if(document.querySelector(element.clase)){
+                        const heightDiv = document.querySelector(element.clase).offsetHeight;
+                        sumatorio = sumatorio + heightDiv + element.margen;
+                    }
+                })
+
+                const heightList = heightNav - (sumatorio + heightImg);
+                console.log(`Nueva Altura:${heightList}`)
+                ModalFunctions.wrapList.style.overflow = "scroll";
+                ModalFunctions.wrapList.style.height = `${heightList}px`;
+            }
+        },
+        reset: function(){
+            ModalFunctions.modal.style.height = "auto";
+            ModalFunctions.wrapList.style.overflow = "hidden";
+            ModalFunctions.wrapList.style.height = "auto";
+        }
+    }
+    
+    
+    window.addEventListener("resize",(e)=>{
+        console.log('resize')
+        closeModal();
+        ModalFunctions.reset();
+    })
+    const bannerFixedSeguro = document.querySelector('.bannerFixed');
+    let dataScroll,coordenada = 0;
+    const autoSuma = (data,extra=[])=>{
+        let sumatorio = 0;
+        let sumaExtra = 0;
+        data.forEach(element=>{
+            if(document.querySelector(element)){
+                const heightDiv = document.querySelector(element).offsetHeight;
+                sumatorio = sumatorio + heightDiv;
+            }
+        })
+        if(extra){
+            extra.forEach(e=>{sumaExtra = sumaExtra + e})
+        }
+        return sumatorio + sumaExtra;
+    }
+
+    const calcHeightElement=(data)=>{
+        try {
+            let elements=[];
+            if(data == 1)elements = ['.backgroundBlue','.spthbk_banner','.hbk_top','.hbk_wrap']
+            else elements = ['.backgroundBlue','.spthbk_banner','.hbk_top','.hbk_wrap','.hbk_input'];
+            return autoSuma(elements,[25]);
+        } catch (error) {
+            console.log(error)
+        }
+    }
+    const activarFixedBanner= ()=>{
+        document.querySelector('#btnSolictarSeguro')?.addEventListener('click',()=>{
+            topFunction(coordenada);
+            console.log('Scroll automatico a '+coordenada)
+        })
+        window.addEventListener("scroll",(event)=>{
+            console.log(window.scrollY)
+            if(window.scrollY > dataScroll ){
+                bannerFixedSeguro.classList.add('activo');
+                console.log(window.scrollY)
+            }
+            else {
+                if(consultaSeguros){
+                    if(window.scrollY > dataScroll){
+                        bannerFixedSeguro.classList.remove('activo')
+                    }
+                }
+                else {
+                    if(bannerFixedSeguro.classList.contains('activo')){
+                        bannerFixedSeguro.classList.remove('activo');
+                    }
+                }
+                
+            }
+        })
+    }
+
+    ModalFunctions.resize();
+    document.addEventListener("DOMContentLoaded",()=>{
+        dataScroll = calcHeightElement(0);
+        coordenada = calcHeightElement(1);
+        activarFixedBanner();
+    })//Activa el fixed
+</script>
+<!--V2.0-->
+<style>
+    .spthbk_content {
+        width: 640px;
+        margin:24px auto 40px auto;
+        text-align: center;
+    }
+    .spthbk_content span,.spthbk_content input {
+        display: block;
+        width: 100%;
+        text-align: left;
+    }
+    .spthbk_content input {
+        height: 48px;
+        font-size: 16px;
+        line-height: 16px;
+        border-radius: 8px;
+        border: solid 1px #868f9e;
+        padding: 0 16px;
+    }
+    .spthbk_content input:focus-visible {
+        outline: none;
+    }
+    .spthbk_content input::placeholder {
+        font-size: 16px;
+        opacity: 1;
+        color: #99a1ad;
+    }
+    .spthbk_content_message {
+        padding: 16px 12px 16px 16px;
+        border-radius: 4px;
+        background-color: #ebf4ff;
+        font-family: Flexo;
+        font-size: 12px;
+        color: #002a8d;
+        line-height: 18px;
+        width: auto;
+        margin-bottom: 18px;
+        text-align: left;
+        display: flex;
+        align-items: flex-start;
+    }
+    .spthbk_content_message svg{
+        margin-right: 8px;
+    }
+    #hbk_registro .spthbk_content_message > div:first-child {
+        margin-right:8px;
+    }
+    #hbk_registro .spthbk_content_message > div:last-child {
+        line-height: 18px;
+    }
+    
+    .spthbk_content_check {
+        font-family: Flexo;
+        font-size: 12px;
+        margin-top: 24px;
+        margin-bottom: 0;
+        display: flex;
+        color: #868f9e;
+    }
+    .spthbk_content_check div:nth-child(1){
+        line-height: 18px;
+        text-align: left;
+    }
+    .spthbk_content_check a {
+        color:#ff7800;
+        cursor: pointer;
+        font-family: 'Flexo-Demi';
+        font-weight: bold;
+    }
+    .spthbk_content_buy {
+        width: 100%;
+        height: 48px;
+        margin: 16px auto 0 auto;
+        padding: 11px 12px;
+        border-radius: 24px;
+        background-color: #ff7800;
+        font-family: Flexo-Demi;
+        font-size: 16px;
+        line-height: 18px;
+        color: #fff;
+        text-align: center;
+        cursor: pointer;
+        border:0 none;
+    }
+    #btn_home.spthbk_content_buy {
+        height: 48px;
+        max-width: 218px;
+        padding: 15px 12px;
+    } 
+    .spthbk_content_list {
+        margin-bottom: 22px;
+        display: block;
+        width: 100%;
+        font-family: Flexo;
+        font-size: 14px;
+        color: #202e44;
+        line-height: 20px;
+        text-align: left;
+    }
+
+    .spthbk_content_list > div {
+        display: flex;
+        align-items: flex-start;
+        margin-bottom: 8px;
+    }
+    .spthbk_content_list > div > div:first-child {
+        margin-right: 8px;
+        height: 20px;
+    }
+    .spthbk_content_list > div > div:nth-child(2) {
+        line-height: 20px;
+    }
+    .spthbk_content_list > span {
+        
+    }
+    .spthbk_content_title {
+        font-family: Flexo-Demi;
+        font-size: 16px;
+        line-height: normal;
+        color: #002a8d;
+        text-align: left;
+    }
+    span.spthbk_content_title {
+        margin-bottom: 16px;
+    }
+    .spthbk_content_list_title {
+        font-size: 16px;
+        line-height: normal;
+        color: #202e44;
+        display: block;
+        margin-bottom: 16px;
+    }
+    .spthbk_title {
+        font-family: Flexo-Demi;
+        font-size: 24px;
+        line-height: 32px;
+        letter-spacing: normal;
+        text-align: center;
+        color: #002a8d;
+        margin: 16px auto 16px auto;
+    }
+    .spthbk_price {
+        margin-bottom: 24px;
+        font-family: Flexo;
+        font-size: 20px;
+        line-height: 28px;
+        text-align: center;
+        color: #002a8d;
+    }
+    /*thank page*/
+    .spthbk_banner_thank {
+        width: 100%;
+        height: 311px;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+        background-image:url('/wcm/connect/3e2ac684-6525-4c3a-8f1c-412adad07d5b/banner_thank_page.png?MOD=AJPERES&attachment=true&id=1683606514817')
+    }
+    .spthbk_content_border {
+        border-bottom: 1px solid #e5e7eb;
+    }
+    .spthbk_content_info {
+        display: flex;
+        justify-content:space-between;
+        padding: 16px 0 20px 0;
+        font-size: 14px;
+        line-height: 20px;
+        font-family: 'Flexo';
+        border-bottom: 1px solid #e5e7eb;
+    }
+    .spthbk_content_info_detalle {
+        display: flex;
+        justify-content:space-between;
+        padding: 16px 0 20px 0;
+        font-size: 14px;
+        line-height: 20px;
+        font-family: 'Flexo';
+    }
+    .spthbk_content_info_adicional {
+        padding: 13px 16px 4px;
+        border-radius: 8px;
+        background-color: #f2f4f8;
+    }
+    .spthbk_content_border .spthbk_content_info_detalle .resaltado {
+        text-align: right;
+    }
+    #hbk_thank_page .spthbk_title {
+        max-width: 402px;
+    }
+    .spthbk_content_message{
+        margin-top: 16px;
+    }
+    #hbk_thank_page .spthbk_content_message {
+        margin-top: 32px;
+        margin-bottom: 56px;
+        text-align: left;
+    }
+    #hbk_thank_page .spthbk_content_message p {
+        text-align: left;
+    }
+    .spthbk_content_message a {
+        color: #ff7800
+    }
+    /*FOOTER*/
+    .spthbk_footer {
+        width: 100%;
+        box-shadow: 0 -1px 3px 0 rgba(82,112,148,.2), 0 -1px 1px 1px rgba(82,112,148,.12), 0 -1px 1px 0 rgba(82,112,148,.14);
+    }
+    .spthbk_footer_content, .spthbk_footer_content_copyright ul {
+        display: flex;
+    }
+    .spthbk_footer_content {
+        padding: 16px 0;
+        justify-content:space-between;
+    }
+    .spthbk_footer_content_copyright {
+        font-family: Flexo;
+        font-size: 14px;
+        line-height: 20px;
+        color: #868f9e;
+    } 
+    .spthbk_footer_content_copyright ul {
+        margin:0;
+        padding: 0;
+    }
+    .spthbk_footer_content_copyright ul li {
+        display: inline;
+        border-right: 1px solid #a2b5d2;
+        padding: 1px 16px 1px 0;
+        line-height: 30px;
+    }
+    .spthbk_footer_content_copyright ul li:last-child {
+        border-right: 0;
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+    .spthbk_footer_content_logo {
+        display: flex;
+        align-items: center;
+        height: 40px;
+    } 
+    .spthbk_footer_content_logo div {
+        width: 68px;
+    }
+    .spthbk_footer_content_logo img {
+        width: 100%;
+    }
+    
+    .spthbk_footer_right {
+        flex: 0 0 33.33333333%;
+        max-width: 33.33333333%;
+        font-family: Flexo;
+        font-size: 14px;
+        line-height: 20px;
+        color: #868f9e;
+    }
+    .spthbk_footer_left {
+        flex: 0 0 66.66666667%;
+        max-width: 66.66666667%;
+    }
+    .spthbk_footer_right div:first-child {
+        height: 40px;
+    }
+    .hidden {
+        display: none;
+    }
+    .spthbk_subtitle {
+        font-size: 14px;
+        line-height: 1.43;
+        text-align: center;
+        color: #202e44;
+        width: 100%;
+        max-width: 536px;
+        margin: 0 auto;
+    }
+    /*BANNER*/
+    .spthbk_banners {
+        display: flex;
+        padding-top: 24px;
+        
+    }
+    .spthbk_banners_item {
+        padding: 16px 16px 24px;
+        border-radius: 8px;
+        box-shadow: 0 0 4px 0 rgba(82, 112, 148, 0.2), 0 1px 1px 0 rgba(82, 112, 148, 0.12), 0 1px 1px 0 rgba(82, 112, 148, 0.14);
+        background-color: #fff;
+        width: calc(50% - 13.5px);
+    }
+    .btnLink {
+        border:0 none;
+        background: none;
+        font-size: 16px;
+        color: #ff7800;
+        font-family: 'Flexo-Demi';
+    }
+    .spthbk_banners div:first-child{
+        margin-right: 27px;
+    }
+    .spthbk_banners_item div {
+        text-align: left; 
+    }
+    .spthbk_banners_item div:nth-child(2){
+        font-size: 20px;
+        font-weight: bold;
+        color: #002a8d;
+        margin-bottom: 8px;
+        margin-top: 8px;
+    }
+    .spthbk_banners_item div:nth-child(3){
+        font-size: 16px;
+        color: #202e44;
+        margin-bottom: 24px;
+    }
+    .spthbk_banners_item div:nth-child(4){
+        display: flex;
+        align-items:center;
+        justify-content: space-between;
+        font-size: 16px;
+        
+    }
+    .spthbk_banners_item div:nth-child(4) a {
+        color: #ff7800;
+    }
+    .spthbk_banners_item div a{
+        font-family: 'Flexo-Demi';
+    }
+    #spthbk_banners .spthbk_content_title {
+        text-align: left;
+    }
+    .hidden-captcha {
+        visibility: hidden;
+    } 
+    .hidden-captcha form-captcha {
+        margin-bottom: 0;
+    }
+    .spthbk_content input.error {
+        border-color: #e30425;
+    }
+    .spthbk_content input.ok{
+        border-color:#868f9e
+    }
+    .bcp_mensaje_error {
+        font-size: 12px;
+        line-height: 18px;
+        color:#e30425;
+    }
+    .btnsnbackground {
+        text-align: left;
+        margin: 0 0 28px 0;
+    }
+    .btnsnbackground button {
+        font-family: Flexo-Demi;
+        font-size: 14px;
+        font-weight: normal;
+        font-stretch: normal;
+        font-style: normal;
+        line-height: normal;
+        color: #ff7800;
+        -webkit-appearance: none; /* remove default appearance on Webkit-based browsers */
+        -moz-appearance: none; /* remove default appearance on Mozilla-based browsers */
+        appearance: none; /* remove default appearance on all other browsers */
+        background: none;
+        border: 0 none;
+        cursor: pointer;
+    }
+    
+    .spthbk_banner {
+        width: 100%;
+        display: flex;
+        justify-content:center;
+        background: #fff;
+        overflow: visible;
+        height: 156px;
+        margin-top: 32px;
+    }        
+    .bg-banner {
+        background: #ebf4ff;
+        height: 275px;
+        width: calc(50% - 280px);
+    }
+    .img-banner {
+        width: 560px;
+        height: 311px;
+        background: transparent;
+    }
+    #hbk_registro form-input{
+        margin-bottom: 0;
+    }
+    .resaltado {
+        font-family: Flexo-Demi;
+    }
+    .bcp_legal_captcha {
+        display: none;
+    }
+    #spthbk_banners {
+        margin: auto;
+        margin-top: 48px;
+        max-width: 784px;
+    }
+    @media (min-width:391px) {
+
+    }
+    @media(max-width:560px){
+        .bg-banner {
+            display: none;
+        }
+    }
+    @media (max-width: 540px){
+        .spthbk_title {
+            font-size: 20px;
+            line-height: 28px;
+            margin: 16px auto 8px auto;
+        }
+        .spthbk_content {
+            width: 100%;
+            margin: 24px auto 40px auto;
+        }
+        .spthbk_banner {
+            height: 120px;
+            margin-top: 16px;
+        }
+        .img-banner > img{
+            width: 375px;
+            height: 193px;
+        }
+        .spthbk_banner_thank{
+            height: 240px;
+        }
+        .spthbk_content_list {
+            margin-bottom: 22px;
+        }
+        .btnsnbackground {
+            margin: 0 0 22px 0;
+        }
+        .spthbk_content_list_title {
+            font-size: 14px;
+            line-height: 20px;
+            margin-bottom: 8px;
+        }
+        .spthbk_content_list > div {
+            margin-bottom: 8px;
+        }
+        .spthbk_content_list {
+            margin-bottom: 22px;
+        }
+        .btnsnbackground button {
+            font-size: 14px;
+        }
+        .spthbk_price{
+            margin-bottom: 8px;
+        }
+        #hbk_registro .spthbk_content_message > div:last-child {
+            line-height: 18px;
+        }
+        .spthbk_content_buy{
+            width: calc(100% - 20px);
+            max-width: 100%;
+        }
+    }
+    @media (max-width: 400px){
+        .spthbk_banners_item {
+            width: 100%;
+        }
+        .spthbk_banners div:first-child{
+            margin-right: 0;
+            margin-bottom: 16px;
+        }
+        .spthbk_banners {
+            flex-direction: column;
+        }
+        .spthbk_content_buy{
+            width: calc(100% - 20px);
+            margin-left: 10px;
+            margin-right: 10px;
+            margin-bottom: 0;
+        }
+        #hbk_thank_page .spthbk_title {
+            max-width: calc(100% - 96px);
+            margin-bottom: 24px;
+        }
+        #hbk_thank_page .spthbk_content {
+            margin-top: 48px;
+        }
+    }
+    .hbk_top, .hbk_wrap {
+        overflow: hidden;
+    }
+    /* 2da opcion seguro - SVA */
+    .sva-wrap-content {
+        display: flex;
+        padding: 40px 40px 38px 40px;
+        border-radius: 16px;
+        width: 100%;
+        max-width: 784px;
+        margin:0 auto;
+        border: solid 1px #efefef;
+        background-color: #FFFFFF;
+    }
+    .sva-wrap-content > div {
+        width: 50%;
+    }
+    .sva-wrap-content > div:first-child {
+        padding-right: 40px;
+    }
+    .sva-wrap-content > div:last-child {
+        background-color: #fff;
+        padding:24px;
+        border-radius: 8px;
+        box-shadow: 0 0 4px 0 rgba(0, 31, 90, 0.3);
+    }
+    .sva-wrap-content > div:first-child div,
+    .sva-wrap-content > div:first-child h1,
+    .sva-wrap-content > div:first-child h2 {
+        text-align: left;
+    }
+    .sva-flex {
+        display: flex;
+    }
+    .w-100 {
+        width: 100%;
+    }
+    .sva-ico-check {
+        width: 20px;
+    }
+    .spthbk_content_buy:disabled{
+        background-color: #eff0f2;
+        color: #bfc4cc;
+    }
+    .sva-checkbox-tyc {
+        margin-right: 10px;
+    }
+    .sva-checkbox-tyc input[type=checkbox]{
+        display: none; 
+    }
+    .sva-checkbox-tyc input[type=checkbox] + label{
+    cursor:pointer;
+    }/*esta linea significa esto + el siguiente elemento*/
+
+    .sva-checkbox-tyc label:before{
+        content: url(/wcm/connect/315e3ecf-f9a9-4163-beb5-4bf4b6ebf909/forms-checkbox-1-default.svg?MOD=AJPERES&attachment=true&id=1687883111053);
+        background:transparent;
+        height: 16px;
+        width: 16px;
+    }
+    .sva-checkbox-tyc input[type=checkbox]:checked + label:before{
+        content: url(/wcm/connect/2bb496b4-1a62-41d3-a0d0-cb77deb71922/forms-checkbox-3-active.svg?MOD=AJPERES&attachment=true&id=1687883165722);
+    }
+    .sva-beneficios .sva-flex {
+        margin-bottom: 8px;
+    }
+    #sva-hbk .spthbk_content_buy {
+        margin:16px auto;
+        width: 186px;
+        height: 48px;
+    }
+    #sva-hbk .spthbk_content_check {
+        margin:0;
+    }
+    #sva-hbk .spthbk_title {
+        margin-bottom:8px;
+        margin-top:16px;
+    }
+    .accordion-wrap button h2 {
+        font-size: 16px;
+        margin: 0;
+        padding: 0;
+        padding-right: 8px;
+    }
+    .accordion-header {
+        display: flex;
+        align-items: center;
+        width: 207px;
+    }
+    .accordion-header span{
+        cursor: pointer;
+        color: #ff7800;
+    }
+    .sva-wrap-content > div > h2 {
+        font-family: Flexo-Demi;
+        font-size: 16px;
+        line-height: normal;
+        color: #002a8d;
+
+    }
+    .sva-wrap-content > div:first-child a,
+    .sva-wrap-content > div:first-child a:link,
+    .sva-wrap-content > div:first-child a:active,
+    .sva-wrap-content > div:first-child a:hover {
+        color: #ff7800;
+        font-family: 'Flexo-Demi';
+        text-align: center;
+    }
+    .accordion-item {
+        padding: 0px;
+        background-color: transparent;
+    }
+    .accordion-text {
+        margin: 16px 0 8px 0;
+        overflow: hidden;
+        height: 0;
+        transition: 5s;
+    }
+    .accordion-text.mostrar {
+        height: auto;
+        transition: 5s;
+    }
+    .cuotas-item {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 8px;
+    }
+    .cuotas-item > div:first-child {
+        font-family: 'Flexo';
+        font-size: 16px;
+        line-height: 1.5;
+        color: #202e44;
+    }
+    .cuotas-item > div:last-child {
+        font-family: 'Flexo-Demi';
+        font-size: 16px;
+        line-height: 1.5;
+        color: #202e44;
+    }
+    .linkCobertura {
+        margin-top: 30px;
+        display: block;
+    }
+    .sva-checkbox-label {
+        font-size: 14px;
+    }
+    .sva-checkbox-label span {
+        font-family: 'Flexo-Demi'
+    }
+    #spthbk_banners2 {
+        width: 784px;
+        margin: 32px auto;
+    }
+    .spthbk_banners_SVA {
+        display: flex;
+        justify-content: space-between;
+        margin-top:16px;
+        padding-bottom: 6px;
+    }
+    #spthbk_banners2 .banner-item-footer {
+        display: flex;
+        justify-content: space-between;
+    }
+    #spthbk_banners2 .banner-item-footer > div {
+        font-family: 'Flexo';
+        font-size: 14px;
+        color: #202e44;
+    }
+    #spthbk_banners2 .banner-item-footer > div > span {
+        font-family: 'Flexo-Demi';
+    }
+    #btn-cuotas .icon.bcp-angle-down-f {
+        transform: rotate(180deg);
+    }
+    .text-secondary{
+        text-align: right;
+    }
+    .sva_typ_title{
+        color: #202e44;
+        max-width: 464px !important;
+    }
+    .btn_home_sva{
+        margin-top: 32px;
+        border-radius: 24px;
+    }
+    .sva_content_message{
+        color: #002a8d;
+    }
+    .sva_asegurado_spt{
+        margin-top:24px !important;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #f4ffea;
+        border-radius: 8px;
+        height:40px;
+        max-width: 343px;
+    }
+    .sva_asegurado_spt p{
+        margin: 0px;
+        font-size: 12px;
+        color: #202e44;
+        margin-left: 8px;
+        margin-right: 8px;
+    }
+    .sva_title_content{
+        margin-top: 24px !important;
+        font-size: 24px !important;
+        line-height: 28px !important;
+        color: #002a8d !important;
+        font-family: 'Flexo-Demi';
+    }
+    #sva-hbk .spthbk_price{
+        color: #202e44;
+        font-size: 16px;
+        line-height: 24px;
+        margin: 0px;
+        margin-bottom: 32px;
+    }
+    .content_icon svg{
+        position: relative;
+        top: 5px;
+    }
+    .spthbk_body_content{
+        display: flex;
+        max-width: 784px;
+        border-radius: 16px;
+        border:1px solid #efefef;
+        padding: 32px;
+        justify-content: space-between;
+        margin: auto;
+    }
+    .spthbk_body_content_header .spthbk_banner{
+        height: initial;
+        text-align: left;
+        display: block;
+        margin-bottom: 16px;
+        margin-top: 0px;
+    }
+    .spthbk_body_content_header .spthbk_banner img{
+        height: 60px;
+    }
+    .spthbk_body_content_header .hbk_top{
+        text-align: left;
+        margin-bottom: 24px;
+    }
+    .spthbk_body_content_header .hbk_top h1{
+        margin: 0px;
+        text-align: left;
+        font-size: 20px;
+        line-height: 32px;
+        color: #002a8d;
+    }
+
+    .spthbk_body_content_header .hbk_top .spthbk_price{
+        margin: 0px;
+        text-align: left;
+        font-size: 16px;
+        line-height: 24px;
+        color: #202e44;
+    }
+    .spthbk_body_content_header .hbk_wrap .text_list{
+        max-width: 284px;
+    }
+    .spthbk_content_spt{
+        max-width: 343px;
+        margin: 0px;
+        box-shadow: 0 0 4px 0 rgba(0, 31, 90, 0.3);
+        border-radius: 8px;
+        padding: 16px;
+    }
+    .spthbk_content_list svg{
+        position: relative;
+        top: 2px;
+    }
+    .spthbk_body_title{
+        margin-top: 32px;
+        margin-bottom: 24px;  
+        text-align: center; 
+    }
+    .spthbk_body_title h3{
+        color: #002a8d;
+        font-size: 24px;
+        line-height: 28px;
+        font-family: 'Flexo-Demi';
+    }
+    /*BEGIN BANNER*/
+    .box-promo{position:relative;display:flex;flex-direction:row;justify-content:center;width:100%;margin:0;padding:16px 0;border-radius:16px;background-color:#e5f1ff;max-width: 784px;margin: 0 auto 20px auto;align-items: center;}
+    .box-promo > div:nth-child(2) p{font-family:Flexo-Demi;font-size:20px;font-weight:400;font-stretch:normal;font-style:normal;line-height:1.4;letter-spacing:normal;text-align:left;color:#002a8d}
+    .box-promo > div:nth-child(3) img{width:194px}
+    /*END BANNER*/
+    @media (min-width:880px) {
+        .box-promo > div:nth-child(2){
+            max-width: 368px;
+            margin-right: 50px;
+        }
+    }
+    @media(max-width: 879px) {
+        .box-promo{padding:53px 19px 24px;align-items:center; flex-direction: column;width:calc(100% - 48px);margin-left: 24px;margin-right: 24px;}
+        .box-promo > div:nth-child(2){order:2}
+        .box-promo > div:nth-child(3){order:1;margin-bottom:24px}
+        .box-promo > div:nth-child(3) img{width:100%}
+        .label-promo{top:8px}
+    }
+    @media (max-width: 784px){
+        .sva-wrap-content {
+            flex-direction: column;
+            border: none;
+        }
+        .sva-wrap-content > div {
+            width: 100%;
+        }
+        .sva-wrap-content > div:first-child {
+            padding-right: 0;
+        }
+        .sva-wrap-content {
+            padding: 24px 16px 16px 16px;
+        }
+        .sva-icono {
+            display: flex;
+            justify-content: center;
+        }
+        .sva-wrap-content > div:last-child {
+            padding: 16px;
+        }
+        #sva-hbk .spthbk_title {
+            margin-bottom: 2px;
+            margin-top: 24px;
+            font-size: 18px;
+            line-height: 28px;
+        }
+        #sva-hbk .spthbk_price{
+            font-size: 16px;
+            line-height: 24px;
+            margin-bottom: 0px;
+        }
+        #sva-hbk .spthbk_title,
+        #sva-hbk .spthbk_price {
+            text-align: center;
+        }
+        
+        .linkCobertura {
+            margin-top: 18px;
+            margin-bottom: 24px;
+        }
+        #sva-hbk .spthbk_content_buy {
+            width: 100%;
+        }
+        #spthbk_banners2 {
+            width: calc(100% - 32px);
+            margin: 32px 16px;
+            flex-direction: column;
+        }
+        .spthbk_banners_SVA {
+            flex-direction: column;
+        }
+        .spthbk_banners_SVA .spthbk_banners_item:first-child {
+            margin-bottom: 16px;
+        }
+        .sva-content-title{
+            display: flex;
+            align-items: center;
+        }
+        .sva-content-title .spthbk_title{
+            margin: 0px;
+            font-size: 18px;
+            line-height: 28px;
+        }
+
+        .sva-content-title .spthbk_price{
+            font-size: 16px;
+            line-height: 24px;
+        }
+
+        .sva-icono img{
+            width: 62px;
+            margin-right: 20px;
+        }
+        .sva_title_content{
+            font-size: 20px !important;
+            line-height: 28px;
+        }
+        .spthbk_body_content{
+            display: block !important;
+            max-width: 400px !important;
+            border: none !important;
+            padding-top: 0px ;
+            padding-left: 24px;
+            padding-right: 24px;
+        }
+        .btnsnbackground{
+            text-align: center;
+        }
+        .hbk_content_header_title{
+            display: flex;
+        }
+        .spthbk_banner{
+            width: initial;
+            margin-right: 20px;
+        }
+        .spthbk_body{
+            max-width: 500px;
+            margin: auto;
+        }
+        .spthbk_body_title h3{
+            font-size: 20px;
+            line-height: 28px;
+        }
+        .hbk_content_header_title .spthbk_title{
+            font-size: 18px !important;
+            line-height: 28px !important;
+        }
+        .hbk_content_header_title .spthbk_price{
+            font-size: 16px !important;
+            line-height: 24px !important;
+        }
+        #spthbk_banners{
+            padding: 0px 16px;
+        }
+        .spthbk_content_spt{
+            margin: auto;
+        }
+        .spthbk_subtitle {
+            width: calc(100% - 32px);
+            margin:0 16px;
+        }
+    }
+    .bcp_footer{
+        display: none !important;
+    }
+    .img_close_toast{
+        cursor: pointer;
+    }
+    
+</style>
+<div id="hbk_registro" class="spthbk_body">
+    <div class="spthbk_body_title">
+        <h3><b>¡Asegúrate ahora mismo!</b></h3>
+    </div>
+    <!--BEGIN BANNER-->
+    <!-- <div class="box-promo">
+        <div class="label-promo"></div>
+        <div><p>Adquiere uno de estos Seguros y participa por 10 vales de hasta S/ 3,000</p></div>
+        <div><img src="/wcm/myconnect/86b3c1e0-73f2-4cbe-892c-bc350fec74ae/tarjetas.png?MOD=AJPERES&amp;CVID=oX5mhdv" alt="" /></div>
+    </div> -->
+    <!--END BANNER-->
+    <div class="spthbk_body_content">
+        <div class="spthbk_body_content_header">
+            <div class="hbk_content_header_title">
+                <div class="spthbk_banner">
+                    <img src="https://www.viabcp.com/wcm/connect/54f28961-21c7-4ce4-a03f-30c9db08cc61/group-2.png?MOD=AJPERES&attachment=false&id=1690909465922" alt="">
+                </div>
+                <div class="hbk_top">
+                    <h1 class="spthbk_title">Protección de Tarjetas Plus</h1>
+                    <div class="spthbk_price" id="spthbkpricereg">Por <b>S/ 12.99</b> al mes</div>
+                </div>
+            </div>
+            <div class="hbk_wrap">
+                <b class="spthbk_content_list_title" >El seguro te cubre:</b>
+                <div class="spthbk_content_list">
+                    <div>
+                        <div>
+                            <svg width="17" height="17" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                <path d="m7.226 13.783-3.283-3.518a.833.833 0 1 0-1.219 1.137l3.889 4.167a.833.833 0 0 0 1.215.003l9.445-10a.833.833 0 0 0-1.212-1.144l-8.835 9.355z" fill="#3D77FF" fill-rule="evenodd"/>
+                            </svg>
+                        </div>
+                        <div class="text_list">Hasta S/15 mil en fraudes o compras no reconocidas por internet.</div>
+                    </div>
+                    <div>
+                        <div>
+                            <svg width="17" height="17" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                <path d="m7.226 13.783-3.283-3.518a.833.833 0 1 0-1.219 1.137l3.889 4.167a.833.833 0 0 0 1.215.003l9.445-10a.833.833 0 0 0-1.212-1.144l-8.835 9.355z" fill="#3D77FF" fill-rule="evenodd"/>
+                            </svg>
+                        </div>
+                        <div class="text_list">Hasta S/5 mil por robo de retiros en cajeros o agentes.</div>
+                    </div>
+                    <div>
+                        <div>
+                            <svg width="17" height="17" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                <path d="m7.226 13.783-3.283-3.518a.833.833 0 1 0-1.219 1.137l3.889 4.167a.833.833 0 0 0 1.215.003l9.445-10a.833.833 0 0 0-1.212-1.144l-8.835 9.355z" fill="#3D77FF" fill-rule="evenodd"/>
+                            </svg>
+                        </div>
+                        <div class="text_list">Hasta S/15 mil en transferencias no reconocidas en canales digitales.</div>
+                    </div>
+                </div>
+                <div class="btnsnbackground"><button id="coberturaExclu" onclick="mostrarModal()">Ver cobertura y exclusiones</button></div>
+            </div>
+        </div>
+        <div class="spthbk_content spthbk_content_spt">
+            <div class="hbk_input">
+                <span class="spthbk_content_title">Completa tus datos y obtén tu seguro</span>
+                    
+                <div class="bcp_campos_formulario">
+                    <!-- <input type="text" id="dni" name="dni" minlength="8" maxlength="8" placeholder="Ingresa tu DNI"/>
+                    <span class="bcp_mensaje_error"></span> -->
+                    <form-input id="dni" name="dni" datatype="tel" minlength="8" maxlength="8"
+                    constraint="soloNumeros" label="Ingresa tu DNI"
+                    msgerror="Ingresa Nº documento válido.">
+                    </form-input>
+                </div>
+                <button class="spthbk_content_buy" id="btn_buy">Comprar</button>
+                <div class="spthbk_content_message">
+                    <div>
+                        <svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 20a8 8 0 1 0 0-16 8 8 0 0 0 0 16m0 2A9.999 9.999 0 0 1 2 12C2 6.478 6.478 2 12 2s10 4.478 10 10c0 5.523-4.478 10-10 10m0-12a1 1 0 0 1 1 1v5a1 1 0 1 1-2 0v-5a1 1 0 0 1 1-1m0-1a1 1 0 1 1-.002-1.998A1 1 0 0 1 12 9" fill="#002A8D" fill-rule="evenodd"/>
+                        </svg>
+                    </div>
+                    <div>El pago se debitará de la cuenta vigente de ahorros en soles con mayor saldo.</div>
+                </div>
+            </div>    
+                <div class="spthbk_content_check">
+                    <div>El click en "Comprar" confirma la solicitud, el envío de la póliza vía electrónica, la aceptación de los 
+                        <a href="/wcm/myconnect/54bb8ed7-e3c9-43fa-8342-b01b4e38ff19/TYC_VIABCP_SPT.pdf?MOD=AJPERES&amp;CVID=oa3LLIJ&amp;useDefaultText=0&amp;useDefaultDesc=0&amp;attachment=false&amp;id=1668183042294" target="_blank" title=""><strong>Términos y condiciones</strong></a> 
+                        y el débito en la cuenta de ahorros vigente con mayor saldo. Límite de edad: 18 años a más. Si cuenta con Seguro de Protección de Tarjetas antiguo, la compra de este nuevo seguro se efectúa en la renovación.</div>
+                </div>
+            <!--Recatpcha-->
+            <!-- <div class="hidden-captcha">
+                <form-captcha id="recaptchaModalOneClick" datacallback="enviarDatosModalOneClick"></form-captcha>
+            </div> -->
+            <div class="hidden-captcha">
+                <form-captcha id="recaptchaModalOneClick" datacallback="enviarDatosModalOneClick"></form-captcha>
+                <form-captcha id="recaptchaObtenerLeads" datacallback="sendDataLeadsMultiProducto"></form-captcha>
+            </div>
+        </div>
+    </div>
+    <!--BEGIN BANNER-->
+    <div id="spthbk_banners">
+        <div class="spthbk_content_title">También te puede interesar</div>
+        <div class="spthbk_banners"></div >
+    </div>
+    <!--END BANNER-->
+</div>
+<!--2da opcion seguro-->
+<div id="sva-hbk" class="hidden">
+    <div class="spthbk_title sva_asegurado_spt">
+        <img src="https://www.viabcp.com/wcm/connect/8b6dcd45-7e26-49a8-96a4-1f1f26389490/c-ic-check-circle-b.png?MOD=AJPERES&attachment=false&id=1690815462580" alt="">
+        <p>Ya cuentas con el <b>Seguro Protección Tarjetas Plus</b></p>
+        <img class="img_close_toast" src="https://www.viabcp.com/wcm/connect/c82bbfa9-64e7-49ed-8eca-fbe391d73c1c/c-ic-close-r.png?MOD=AJPERES&attachment=false&id=1690815529734" alt="">
+    </div>
+    <div class="spthbk_price sva_title_content">Aprovecha y obtén este seguro</div>
+    <div class="sva-wrap-content">
+        <div>
+            <div class="sva-content-title">
+                <div class="sva-icono"><img src="https://www.viabcp.com/wcm/connect/caf730de-1bca-4d4a-9b31-5fdd88ac91fd/billetera-d-copy-4.png?MOD=AJPERES&attachment=false&id=1690818514379" alt=""></div>
+                <div class="sva-text-title">
+                    <h1 class="spthbk_title">Seguro Vida Ahorro</h1>
+                    <div class="spthbk_price" id="spthbkpricereg">Desde <span class="resaltado">S/ 50.00</span> al mes</div>
+                </div>
+            </div>
+            
+            <h2>El seguro te cubre:</h2>
+            <div class="sva-beneficios"></div>
+            <a href="/wcm/myconnect/3dcc3fb0-e3d8-4dd9-a9f9-972ac0c2cccb/Terminos%2By%2BCondiciones%2BSeguro%2BVida%2BAhorro.pdf?MOD=AJPERES&amp;CVID=oyjZQVF&amp;useDefaultText=0&amp;useDefaultDesc=0&amp;attachment=true&amp;id=1687961757561" target="_blank" title="" class="linkCobertura">Ver cobertura y exclusiones</a>
+        </div>
+        <div>
+            <div class="accordion-wrap">
+                <button id="btn-cuotas" tabindex="0" role="button" class="accordion-item" style="width:100%;border:unset">
+                    <div class="accordion-header">
+                        <h2 data-translate="true">Conoce tu cuota <span>aquí</span></h2>
+                        <div class="content_icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M18.59 8.39a1.288 1.288 0 0 1 0 1.886l-5.6 5.333c-.273.26-.632.391-.99.391s-.717-.13-.99-.39l-5.6-5.334a1.288 1.288 0 0 1 0-1.885C5.685 8.13 6.043 8 6.4 8h11.2c.358 0 .716.13.99.39z" fill="#FF7800" fill-rule="evenodd"/>
+                            </svg>                            
+                        </div>
+                    </div>
+                </button>
+                <div class="accordion-text"></div>
+            </div>
+            <div class="sva-flex">
+                <div class="sva-checkbox-tyc"><input type="checkbox" name="tyc" id="tyc" value=""><label for="tyc"></label></div>
+                <div class="sva-checkbox-label">Declaro <span>NO</span> tener obligaciones tributarias <span>fuera de Perú</span>.</div>
+            </div>
+            <div class="sva-flex">
+                <button class="spthbk_content_buy" id="btn_buy_option" disabled >Solicitar aquí</button>
+            </div>
+            <div class="spthbk_content_message">
+                <div>
+                    <svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 20a8 8 0 1 0 0-16 8 8 0 0 0 0 16m0 2A9.999 9.999 0 0 1 2 12C2 6.478 6.478 2 12 2s10 4.478 10 10c0 5.523-4.478 10-10 10m0-12a1 1 0 0 1 1 1v5a1 1 0 1 1-2 0v-5a1 1 0 0 1 1-1m0-1a1 1 0 1 1-.002-1.998A1 1 0 0 1 12 9" fill="#002A8D" fill-rule="evenodd"></path>
+                    </svg>
+                </div>
+                <div>El pago se debitará de la cuenta vigente de ahorros en soles con mayor saldo.</div>
+            </div>
+            <div class="spthbk_content_check">
+                <div>El click en "Solicitar aquí" confirma la solicitud, el envío de la póliza vía electrónica, la aceptación de los <a href="/wcm/myconnect/3dcc3fb0-e3d8-4dd9-a9f9-972ac0c2cccb/Terminos%2By%2BCondiciones%2BSeguro%2BVida%2BAhorro.pdf?MOD=AJPERES&amp;CVID=oyjZQVF&amp;useDefaultText=0&amp;useDefaultDesc=0&amp;attachment=true&amp;id=1687961757561" title="" target="">Términos y condiciones</a> y el débito en la cuenta de ahorros vigente con mayor saldo. Límite de edad: 18 a 63 años. Prima no incluye IGV por inafectación.</div>
+            </div>
+        </div>
+    </div>
+    <!--BEGIN BANNER-->
+    <div id="spthbk_banners2">
+        <div class="spthbk_content_title">También te puede interesar</div>
+        <div class="spthbk_banners_SVA"></div >
+    </div>
+    <!--END BANNER-->
+</div>
+<!-- thank page -->
+<div id="hbk_thank_page" class="spthbk_body hidden">
+    <div class="spthbk_banner_thank"></div>
+    <h1 class="spthbk_title sva_typ_title">¡Solicitud de Seguro de Protección de Tarjetas Plus exitosa!</h1>
+    <div class="spthbk_subtitle">En los próximos días te confirmaremos la activación de tu <span class="resaltado">Seguro Protección de Tarjetas Plus</span> a través de tu correo.</div>
+    <div class="spthbk_content">
+        <div class="spthbk_content_border">
+            <div class="spthbk_content_info_detalle">
+                <div>Pago mensual</div>
+                <div class="text-secondary">
+                    <div><span class="resaltado">S/ 12.99</span></div>
+                    <div>Renovación automática</div>
+                </div>
+            </div>
+            <div class="spthbk_content_info_adicional hidden"></div>
+        </div>
+        <div class="spthbk_content_info">
+            <div>Forma de pago</div>
+            <div><span class="resaltado">Débito automático</span></div>
+        </div>
+        <div class="spthbk_content_info">
+            <div>Cuenta</div>
+            <div><span class="resaltado">Vigente  de ahorro en soles  con mayor saldo</span></div>
+        </div>
+        <button class="spthbk_content_buy btn_home_sva" id="btn_home">Ir a VíaBCP</button>
+        <div class="spthbk_content_message sva_content_message">
+            <p><strong class="text-cancelar">¿Quieres cancelar este seguro?</strong> <br>Déjanos tus datos <a href="https://www.viabcp.com/cancelatusegurov2" target="_blank" title="">aquí</a> y estaremos procediendo con la baja de tu seguro a la brevedad.</p>
+        </div>
+        <!--BEGIN BANNER-->
+        <div id="spthbk_banners3">
+            <div class="spthbk_content_title">También te puede interesar</div>
+            <div class="spthbk_banners"></div >
+        </div>
+        <!--END BANNER-->
+    </div>
+</div>
+<!-- FOOTER HBK-->
+<div class="spthbk_footer hidden">
+    <div class="container">
+        <div class="spthbk_footer_content">
+            <div class="spthbk_footer_left">
+                <div class="spthbk_footer_content_logo">
+                    <div>
+                        <img src="/wcm/myconnect/d813fcea-fbcc-42ef-bb1e-a14766d57841/bcp-dark-grey.svg?MOD=AJPERES&amp;CVID=oX5mhdv" alt="" />
+                    </div>
+                </div>
+                <div class="spthbk_footer_content_copyright">
+                    <ul>
+                        <li>©2023 Banca por Internet</li>
+                        <li>Todos los derechos reservados</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="spthbk_footer_right">
+                <div></div>
+                <div><ul><li>Banca por teléfono: (01) 311-9898</li></ul></div>
+            </div>
+        </div>
+    </div>
+</div>
+[Component name="plantillas de presentacion (ux-frontend)/codigohtml-componentes-presentacionenlista/microcomponentes/microcomp.referenciaformulariowebcomponent"]
+<script type="text/javascript">
+        //VARIABLES NUEVO TAGGEO
+    const versionModal = "V22";
+    const productModal = "Seguros-SPT";
+    const productModalAlternativo = "Seguros-SVA";
+    const channelModal = "ViaBCP-HBK";
+    const grupoModal = "Landing HBK";
+    const tituloLandingSPT = "Seguro Protección Tarjetas Plus";
+    const tituloLandingSVA = "Seguro Vida Ahorro";
+    //VARIABLES LANDING
+    const buttonCloseToast = document.querySelector('.img_close_toast');
+    let consultaSeguros = false;
+    const wrapBanner = document.querySelectorAll('.spthbk_banners');
+    const wrapBannerSVA = document.querySelector('.spthbk_banners_SVA');
+
+    buttonCloseToast.addEventListener('click',()=>{
+        buttonCloseToast.parentElement.style.display="none";
+    });
+    const listBanner = ['sor','sva']
+    const listBannerSVA = ['sor','srv']
+    const dataBanner = {
+        sor :{
+            img:'/wcm/connect/20aba75f-7365-419f-9b2f-059045429c7b/Spot+_+Seguro-Onco-Respaldo.svg?MOD=AJPERES&attachment=true&id=1696636523834',
+            title:'Seguro Onco Respaldo Digital',
+            subtitle:'Protégete contra el cáncer',
+            linkText:'Obtener',
+            link:'sor',
+            taggeo:'SOR',
+            price:'Por <b>S/ 12.99 al mes</b>'
+        },
+        sva: {
+            img:'/wcm/connect/e51f0f84-6ff6-4213-bdd0-6c917ec61b45/Spot+_+Seguro-Vida-Ahorro.svg?MOD=AJPERES&attachment=true&id=1696636456811',
+            title:'Seguro Vida Ahorro',
+            subtitle:'Protege a tu familia y ahorra',
+            linkText:'Obtener',
+            link:'sva',
+            taggeo:'SVA',
+            price:'Por <b>S/ 50 al mes</b>'
+        },
+        srv: {
+            img:'/wcm/connect/42c93f69-9fe0-4ab3-b29d-e2e3007f744f/illustrations-spot-circle-seguro-respaldo-copy.png?MOD=AJPERES&amp;CACHEID=ROOTWORKSPACE-42c93f69-9fe0-4ab3-b29d-e2e3007f744f-ou.mIx3&amp;cache=none',
+            title:'Seguro Respaldo Vida',
+            subtitle:'Brinda tranquilidad a tu familia',
+            linkText:'Obtener',
+            link:'srv',
+            taggeo:'SRV',
+            price:'Por <b>S/ 12.99 al mes</b>'
+        },
+        soat:{
+            img:'/wcm/connect/e7550e6b-8569-4db3-8172-369f8d74ba09/illustrations-spot-circle-s-spc-soat-d-l.png?MOD=AJPERES&amp;CACHEID=ROOTWORKSPACE-e7550e6b-8569-4db3-8172-369f8d74ba09-ou.lm-Z&amp;cache=none',
+            title:'SOAT',
+            subtitle:'obtén tu SOAT Digital y viaja tranquilo',
+            linkText:'Obtener',
+            link:'soat',
+            taggeo:'SOAT',
+            price:'Desde <b>S/ 42</b>'
+        }
+    }
+        
+    const dataCuotas = [
+        {edad:'18 a 35 años',pago:'S/ 50 mensual'},
+        {edad:'36 a 45 años',pago:'S/ 56 mensual'},
+        {edad:'46 a 63 años',pago:'S/ 62 mensual'}
+    ]
+    const InputDNI = document.querySelector('#dni');
+    const msgError = {
+        contenedor: document.querySelector('.bcp_mensaje_error'),
+        msg:'Ingresa Nº documento válido.'
+    }
+    const loadingSPT = document.querySelector('.loader');
+    const dataEnvioRegistro = {
+        productopromocion:'BANNER SPT',
+        abreviaturaproducto:'SPT',
+        descripcionpromocion:'FORM SPT',
+        tipoplan: 'MENSUAL'
+    }
+    //Armando banner
+    const buildBanner = (banner,label)=>{
+        const contenedor = document.querySelector(label)
+        if(contenedor){
+            const htmlBanner = document.createElement("div");
+            htmlBanner.classList.add('spthbk_banners_item');
+            htmlBanner.setAttribute('taggeo',banner.taggeo);
+            htmlBanner.innerHTML = `
+                <div><img src="${banner.img}" alt=""></div>
+                <div>${banner.title}</div>
+                <div>${banner.subtitle}</div>
+                <div>
+                    <div>${banner.price}</div>
+                    <button class="btnLink" onclick="frmMocSegurosHomeAbrir('${banner.link}')">${banner.linkText}</button>
+                </div>`;
+            contenedor.appendChild(htmlBanner);
+        }
+    }
+    listBanner.forEach((element)=>{buildBanner(dataBanner[element],'#spthbk_banners .spthbk_banners')})
+    listBanner.forEach((element)=>{buildBanner(dataBanner[element],'#spthbk_banners3 .spthbk_banners')})
+    //validarDNI(InputDNI);
+    const registro =  document.querySelector('#hbk_registro');
+    const alternativaSeguro = document.querySelector('#sva-hbk')
+    const thankPage = document.querySelector('#hbk_thank_page');
+    const btnBuy = document.querySelector('#btn_buy');
+    const btnHome = document.querySelector('#btn_home');
+    const btnAlternativa = document.querySelector('#btn_buy_option');
+    const captchaModalOneClickSPT = document.querySelector('#recaptchaModalOneClick');
+    const formRegisterDNI = new Formulario(registro);
+
+    const validarSeguro = {
+        data : null,
+        alterno : false,
+        indexCaptcha : function(id){
+            return document.querySelector(id).getAttribute('index')
+        },
+        enviar :  function(){
+            grecaptcha.execute(this.indexCaptcha('#recaptchaObtenerLeads'));
+        },
+        search:function(data){
+            return data[0].data ? data[0].data.slice(0,1) :  null
+        },
+        obtener : function(data){
+            let seguros = data.filter((e)=> e.data[e.data.length - 1] === '1')
+            if(seguros.length > 0){
+                if(this.search(seguros) === '1') mostrarAlternativa()
+                else grecaptcha.execute(this.indexCaptcha('#recaptchaModalOneClick')) 
+            }
+            else {
+                grecaptcha.execute(this.indexCaptcha('#recaptchaModalOneClick'))
+            }
+        }
+    }
+    
+    function armarCuotas(destino){
+        const wrap = document.querySelector(destino)
+        dataCuotas.forEach((element)=>{
+            const html = document.createElement("div");
+            html.classList.add('cuotas-item');
+            html.innerHTML = `<div>${element.edad}</div><div>${element.pago}</div>`
+            wrap.appendChild(html)
+        })
+    }
+    function mostrarAlternativa(){
+        registro.classList.add('hidden')
+        alternativaSeguro.classList.remove('hidden')
+        loadingSPT.classList.add('hidden')
+        consultaSeguros = true
+        // bannerFixedSeguro.classList.add('activo')
+        //ThankPage
+        document.querySelector('#hbk_thank_page .spthbk_title').innerHTML = '¡Solicitud de Seguro Vida Ahorro exitosa!'
+        document.querySelector('#hbk_thank_page .spthbk_subtitle span').innerHTML = 'Seguro Vida Ahorro'
+        // document.querySelector('#hbk_thank_page .spthbk_content_info span').innerHTML = 'El monto depende de tu edad'
+        armarCuotas('.spthbk_content_info_adicional')
+        document.querySelector('.spthbk_content_info_adicional').classList.remove('hidden')
+        document.querySelector('#spthbk_banners3 .spthbk_banners').innerHTML = ''
+        listBannerSVA.forEach((element)=>{buildBanner(dataBanner[element],'.spthbk_banners_SVA')})
+        listBannerSVA.forEach((element)=>{buildBanner(dataBanner[element],'#spthbk_banners3 .spthbk_banners')})
+        digitalData.push({
+            "form":{"channel":channelModal,"version":versionModal,"name":tituloLandingSVA,"product":productModalAlternativo},
+            "event":"trackFormView"
+        });
+    }
+    btnBuy.addEventListener('click',(event)=>{
+        const btn = event.currentTarget;
+        let inputDNI = document.querySelector('#dni');
+        let boolDNI = formRegisterDNI.Validar.CampoNumerico(inputDNI);
+
+        if (!boolDNI) return;
+        
+        validarSeguro.data = fnsha256(inputDNI.value.trim())
+        validarSeguro.enviar();
+        //let indexCaptcha = captchaModalOneClickSPT.getAttribute('index');
+        //grecaptcha.execute(indexCaptcha);
+    })
+    btnAlternativa.addEventListener('click',(event)=>{
+        dataEnvioRegistro.productopromocion = 'BANNER SPT'
+        dataEnvioRegistro.abreviaturaproducto = 'SVA';
+        dataEnvioRegistro.descripcionpromocion = 'FORM SVA',
+        dataEnvioRegistro.tipoplan = '315'
+        let indexCaptcha = captchaModalOneClickSPT.getAttribute('index');
+        grecaptcha.execute(indexCaptcha);
+    })
+    btnHome.addEventListener('click',()=>{
+        window.open('https://www.viabcp.com','_self')
+    })
+    function pageThank(estado){
+        const taggeoSPT = [tituloLandingSPT,productModal]
+        const taggeoSVA = [tituloLandingSVA,productModalAlternativo]
+        let section = consultaSeguros ? alternativaSeguro : registro
+        let data = consultaSeguros ? taggeoSVA : taggeoSPT
+        if(estado){
+            section.classList.add('hidden');
+            thankPage.classList.remove('hidden');
+            loadingSPT.classList.add('hidden');
+            if(consultaSeguros){document.querySelector('.spthbk_content_info_detalle').classList.add('hidden')}
+            topFunction(0);
+            registrarVenta(data);
+            hbkTrackaction(data);
+            console.log('registro correctamente');
+        }
+        else {
+            loadingSPT.classList.add('hidden');
+            registro.classList.remove('hidden');
+            bannerFixedSeguro.classList.remove('hidden');
+            hbkErrorSubmitTGAB(data)
+        }
+    }
+    // API ENVIA SOLICITUD
+    function enviarDatosModalOneClick(strTokenCaptcha) {
+        //const url_sendmail = "https://preprodportal.viabcp.com/apis/form/send/message;";
+        const url_sendmail = "https://www.viabcp.com/apis/form/send/message;";
+        let indexCaptcha = captchaModalOneClickSPT.getAttribute('index');
+        let inputDNI = document.querySelector('#dni');
+        let nroDocumento = inputDNI.value.trim();
+        let dniHash = fnsha256(inputDNI.value.trim());
+    
+        let boolDNI = formRegisterDNI.Validar.CampoNumerico(inputDNI);
+
+        if (!boolDNI) {grecaptcha.reset(indexCaptcha); return};
+        
+        const jsonRequest = {
+            "leadId": getLeadID(),
+            "producto": 'MODAL ONE CLICK - HOME',
+            "tipoFormulario": "MODALONECLICK",
+            "tipoProducto": 'MODAL ONE CLICK - HOME',
+            "captchaToken": strTokenCaptcha,
+            "data": {
+                tipodocumento: 'DNI',
+                documento: nroDocumento,
+                tdocumento: 'DNI',
+                ndocumento: nroDocumento,
+                fechaNEO: '-',
+                ndocumentohash: dniHash,
+                aceptopromocion: 'si',
+                productopromocion: dataEnvioRegistro.productopromocion,
+                abreviaturaproducto: dataEnvioRegistro.abreviaturaproducto,
+                descripcionpromocion: dataEnvioRegistro.descripcionpromocion,
+                email: 'sinemail@sinmail.com',
+                flujoventa: 'VIABCP',
+                promocioncancelada: "-",
+                canal:"HBK",
+                tipoplan:dataEnvioRegistro.tipoplan
+            },
+            metadata: {
+                "origen": document.location.href,
+                "agente": navigator.userAgent
+            }
+        };
+
+        const requestOptions = {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json",
+                "g-recaptcha-response": strTokenCaptcha
+            },
+            body: JSON.stringify(jsonRequest),
+            redirect: 'follow'
+        };
+        
+        //registro.classList.add('hidden');
+        bannerFixedSeguro.classList.add('hidden');
+        if(validarSeguro.alterno){loadingSPT.classList.remove('hidden')};
+        fetch(url_sendmail, requestOptions)
+            .then((response) => {
+                console.log('*****API STATUS: ' + response.status);
+                if (response.status == 200) {
+                    pageThank(true)
+                } else {
+                    console.warn('No se registro', response.status);
+                    pageThank(false)
+                }
+                grecaptcha.reset(indexCaptcha);
+            })
+            .catch((error) => {
+                console.error('error', error);
+                pageThank(false)
+                grecaptcha.reset(indexCaptcha);
+                msgError.contenedor.innerHTML = "Hubo un error inténtalo de nuevo."
+            });
+    }
+
+    function terminoCondiciones(){
+        window.open('https://www.viabcp.com/wcm/connect/54bb8ed7-e3c9-43fa-8342-b01b4e38ff19/TYC_VIABCP_SPT.pdf?MOD=AJPERES&amp;attachment=false&amp;id=1668183042294','_blank')
+    }
+    function topFunction(pos) {
+        document.body.scrollTop = pos; // For Safari
+        document.documentElement.scrollTop = pos; // For Chrome, Firefox, IE and Opera
+        if(consultaSeguros){bannerFixedSeguro.classList.remove('activo')}
+    }
+    function ocultarChatFlotante(){
+        const chatFlotante = document.querySelector('.bcp_footer_ayuda_flotante');
+        if(chatFlotante){chatFlotante.classList.add('hidden')};
+        console.log('ocultar chat');
+    }
+    //TAGGEO ADOBE
+    function hbkErrorSubmitTGAB(data){
+        digitalData.push({
+            "form":{"channel":"ViaBCP","version":versionModal,"name":cleanLabel(data[0]),"product":data[1]},
+            "event":"trackFormError"
+        });
+    }
+
+    function hbkTrackaction(data){
+        digitalData.push({
+            "action":{"group":grupoModal,"category":data[0] + "-" + versionModal,"name":"Click","label":"Comprar"},
+            "metadata":{"key":"Producto","value":data[1]},
+            "event":"trackAction"
+        })
+    }
+
+    function registrarVenta(data){
+        digitalData.push({
+            "form":{"channel":channelModal,"version":versionModal,"name":data[0],"product":data[1]},
+            "event":"trackFormSubmit"
+        })
+    }
+    //TAGGEO DE BANNERS
+    const bannerSeguros = document.querySelectorAll('.spthbk_banners > .spthbk_banners_item');
+    const bannerSegurosva = document.querySelectorAll('.spthbk_banners_SVA > .spthbk_banners_item');
+
+    bannerSeguros.forEach(element => {
+        element.addEventListener('click',(event)=>{
+            const activo = event.currentTarget;
+            const value = 'Seguros-'+activo.getAttribute('taggeo');
+            const titulo = activo.querySelector('div:nth-child(2)').innerHTML;
+            digitalData.push({
+                "action":{"group":grupoModal,"category":cleanLabel(titulo)+ "-" + versionModal,"name":"Click","label":"Conoce mas"},
+                "metadata":{"key":"Producto","value":value},
+                "event":"trackAction"
+            })
+        })
+    });
+
+    bannerSegurosva .forEach(element => {
+        element.addEventListener('click',(event)=>{
+            const activo = event.currentTarget;
+            const value = 'Seguros-'+activo.getAttribute('taggeo');
+            const titulo = activo.querySelector('div:nth-child(2)').innerHTML;
+            digitalData.push({
+                "action":{"group":grupoModal,"category":cleanLabel(titulo)+ "-" + versionModal,"name":"Click","label":"Obtener"},
+                "metadata":{"key":"Producto","value":value},
+                "event":"trackAction"
+            })
+        })
+    });
+
+
+    document.addEventListener("DOMContentLoaded",()=>{
+        digitalData.push({
+            "form":{"channel":channelModal,"version":versionModal,"name":tituloLandingSPT,"product":productModal},
+            "event":"trackFormView"
+        });
+        ocultarChatFlotante();
+        console.log('carga terminada');
+    })
+
+    
+    //API MULTIPRODUCTO
+    function sendDataLeadsMultiProducto(strTokenCaptcha){
+        let indexCaptcha = document.querySelector('#recaptchaObtenerLeads').getAttribute('index')
+        try {
+            const urlAPIMultiuso = "https://www.viabcp.com/apis/public/productocampana/multiuso"
+            //debugger;
+            const jsonRequest = {
+                nroDocumentoHash: validarSeguro.data,
+                campana:'LEADS_SEGUROS',
+                captchaToken: strTokenCaptcha,
+            };
+            const requestOptions = {
+                method: 'POST',
+                headers: {"Content-Type": "application/json","g-recaptcha-response": strTokenCaptcha},
+                body: JSON.stringify(jsonRequest),
+                redirect: 'follow'
+            };
+            loadingSPT.classList.remove('hidden');
+            fetch(urlAPIMultiuso,requestOptions)
+                .then( function(response){
+                    console.log("response: "+response.status);
+                    console.log("******API STATUS: "+response.status);
+                    if(response.status == 200){
+                        return response.body
+                    }else{
+                        grecaptcha.reset(indexCaptcha);
+                        console.warn('No se registro', response.status);
+                        return;
+                    }
+                }).then( function(body){
+                        var reader = body.getReader();
+                        var v =  reader.read();
+                        return v
+                }).then(function(data){
+                    var dec = new TextDecoder().decode(data.value)
+                    validarSeguro.obtener(JSON.parse(dec))
+                    grecaptcha.reset(indexCaptcha)
+                })
+                .catch(function(error) {
+                    console.log('error',error)
+                    grecaptcha.error(indexCaptcha);
+                })
+        } catch (error) {
+            console.log(error)
+        } 
+    }
+    const wrapBeneficios = document.querySelector('.sva-beneficios')
+    const iconoCheckSVA = '/wcm/connect/278bea93-4928-4b07-bde8-cbe0292e8a85/c-ic-check-r.svg?MOD=AJPERES&attachment=true&id=1687807983769';
+    const beneficiosSVA = [
+        'Recuperar el 120% de lo pagado al finalizar el plazo de 7 años.',
+        'S/ 20,000 en caso de fallecimiento para proteger la tranquilidad de los que amas.',
+        // 'Servicios adicionales como médico a domicilio, delivery de medicamentos y más.'
+    ]
+    let contentBeneficios = ''
+    const checkTyc = document.querySelector('#tyc')
+    const btnOpcion = document.querySelector('#btn_buy_option')
+    const btnAcordion = document.querySelector('#btn-cuotas')
+    beneficiosSVA.forEach(element=>{
+        contentBeneficios += '<div class="sva-flex"><div class="sva-checkbox-tyc"><img src="'+iconoCheckSVA+'" class="sva-ico-check"></div>'
+        contentBeneficios += '<div>'+element+'</div>'
+        contentBeneficios += '</div>'
+    })
+    document.addEventListener("DOMContentLoaded",()=>{
+        wrapBeneficios.innerHTML = contentBeneficios;
+        armarCuotas('.accordion-text')
+        checkTyc.addEventListener("change",()=>{
+            if(checkTyc.checked) btnOpcion.disabled = false
+            else btnOpcion.disabled = true
+        })
+        btnAcordion.addEventListener("click",(event)=>{
+            document.querySelector('.accordion-text').classList.toggle('mostrar')
+            document.querySelector('#btn-cuotas .icon').classList.toggle('bcp-angle-down-f')
+        })
+    })
+</script>
+<!-- MODALES ONECLICK-->
+<style>
+.item_vacio{width:30px}
+.hidden-captcha{display:none}
+.contenedor_moc_home_principal{background-color: rgb(0 0 0 / 50%);position: fixed;top: 0px;left: 0px;width: 100%;height: 100%;display: flex;align-items: center;justify-content: center;z-index: 9999;}
+.contenedor_moc_home.abrir{animation:keyframe_moc_abrir .5s;bottom:24px}
+.contenedor_moc_home.cerrar{animation:keyframe_moc_cerrar .5s}
+.contenedor_moc_home{width:404px;box-shadow:0 8px 16px rgba(0,67,206,0.1);background-color:#FFF;border-radius:8px}
+.contenedor_moc_header_home{height:auto;border-radius:8px 8px 0 0;padding:16px;position:relative;}
+.contenedor_moc_close_header{position:relative;height:0;text-align:right;z-index:1}
+.contenedor_moc_close_header img{cursor:pointer;margin:8px 8px 0 0}
+.contenedor_moc_close_header img.paso_2{filter:brightness(0) saturate(100%) invert(45%) sepia(83%) saturate(1215%) hue-rotate(360deg) brightness(101%) contrast(106%)}
+.contenedor_moc_header_modal{display:flex;justify-content:space-between}
+.contenedor_moc_header_home h2,.contenedor_moc_header_home p{margin:0;}
+.contenedor_moc_header_home h2{font-size:20px;line-height:24px;font-family:'Flexo';margin-bottom:8px;max-width:158px;color:#002a8d;}
+.contenedor_moc_header_home p{font-size:16px;line-height:24px;font-family:'Flexo'; color:#202e44}
+.contenedor_moc_image_header img{position:relative;right:5px;top:0}
+.contenedor_moc_body_home{padding:16px; border-radius:0 0 8px 8px;overflow-y: auto;max-height: 511px;}
+.contenedor_moc_coberturas p{margin:0}
+.contenedor_moc_coberturas ul{list-style:none;padding:0;margin-bottom:19px}
+.contenedor_moc_coberturas ul li{display:flex;align-items:flex-start}
+.contenedor_moc_coberturas ul li img{height:20px;margin-right:10px;position:relative;top:2px}
+.contenedor_moc_coberturas p:nth-child(1){color:#202e44;font-size:16px;line-height:24px;font-family:'Flexo-Demi';margin-bottom:12px}
+.contenedor_moc_coberturas ul p{color:#202e44;font-size:16px;line-height:24px;font-family:'Flexo';margin-bottom:8px}
+.contenedor_moc_coberturas li:last-child p{margin-bottom:2px}
+.contenedor_moc_legales p{margin:0;font-size:12px;line-height:18px;color:#868f9e;font-family:'Flexo'}
+.contenedor_moc_legales p a{color:#ff7800;cursor:pointer;font-family:'Flexo-Demi';text-decoration:none}
+.contenedor_moc_button{margin-top:16px;display:flex;justify-content:flex-end;height:40px;align-items:center}
+.contenedor_moc_button button{outline:none;border:none;cursor:pointer;font-family:'Flexo'}
+.contenedor_moc_button .btn_no_gracias{color:#ff7800;font-size:16px;background-color:transparent!important;width:130px;height:40px}
+.contenedor_moc_button .btn_no_gracias:hover{background-color:transparent!important;border:none;box-shadow:none}
+.contenedor_moc_button .btn_comprar{background-color:transparent;border-color:#ff7800;background-color:#ff7800;color:#FFF;font-size:16px;width:128px;height:40px;cursor:pointer;border-radius:20px}
+.contenedor_moc_input{margin-bottom:8px}
+.contenedor_moc_input .bcp_input_microcomponent{margin-bottom:0!important}
+.contenedor_moc_checkbox form-check.horizontal .bcp_checkbox_microcomponent{align-items:flex-start!important}
+.contenedor_moc_checkbox form-check.horizontal{margin-bottom:0}
+.contenedor_moc_checkbox form-check.horizontal .bcp_check_titulo_group{display:none}
+
+@media(max-width:990px) {
+    .contenedor_moc_home.abrir{bottom:-4px;animation:keyframe_moc_abrir 1s}
+    .contenedor_moc_body_home{max-height: 545px;}
+}
+@media(max-width:452px){
+    .contenedor_moc_home{width:327px;}
+}
+@keyframes keyframe_moc_cerrar {
+    0%{bottom:16px}
+    100%{bottom:-100%}
+}
+@keyframes keyframe_moc_abrir {
+    0%{bottom:-100%}
+    80%{bottom:48px}
+    100%{bottom:24px}
+}
+@keyframes keyframe_moc_cerrar {
+    0%{bottom:16px}
+    100%{bottom:-100%}
+}
+@keyframes keyframe_moc_abrir {
+    0%{bottom:-100%}
+    80%{bottom:16px}
+    100%{bottom:-4px}
+}
+.contenedor_moc_home_card.ocultar{display:none}
+.contenedor_moc_confirm_img{padding-top:40px;padding-bottom:16px}
+.contenedor_moc_confirm_img img{width:88px}
+.contenedor_moc_confirm_title h3{margin:auto;font-size:20px;line-height:28px;color:#002a8d;font-family:'Flexo-Demi';width:287px;margin-bottom:16px}
+.contenedor_moc_confirm_title p{margin:auto;font-size:14px;width:287px;line-height:20px;color:#202e44;font-family:'Flexo';margin-bottom:16px}
+.contenedor_moc_confirm_cancelar {width: calc(100% - 48px);height: 86px;margin: auto;text-align: center;margin-top: 32px;border-radius: 8px;background-color: #ebf4ff;padding: 16px;margin-bottom: 42px;}
+.contenedor_moc_confirm_cancelar h3{margin:0;font-family:'Flexo-Demi';line-height:18px;font-size:12px;color:#002a8d}
+.contenedor_moc_confirm_cancelar p{margin:0;font-family:'Flexo';font-size:12px;line-height:18px;color:#002a8d}
+.contenedor_moc_confirm_cancelar p a{color:#ff7800;font-family:'Flexo-Demi';cursor:pointer}
+.contenedor_moc_confirm_link{margin-bottom:32px;text-align:center}
+.contenedor_moc_confirm_link a{cursor:pointer;color:#ff7800;font-size:16px;font-family:'Flexo-Demi'}
+.contenedor_moc_home_confirmacion{text-align:center;height:585px}
+.btn_entendido{margin:auto;margin-bottom:24px;width:128px}
+.contenedor_moc_plan_anual{background-color:#ebf4ff;width:294px;color:#002a8d;padding:16px;margin:auto;margin-bottom:24px;border-radius:8px}
+.contenedor_moc_plan_anual p{max-width:204px;font-size:12px;text-align:center;line-height:18px;margin:auto}
+.contenedor_moc_confirm_action{margin-top:32px}
+b {font-family: Flexo-Demi;font-weight: 500;}
+button.btn-cuota {
+    background: url('/wcm/connect/f778adf3-c992-479c-884e-712ae0c41432/drop_down_orange.svg?MOD=AJPERES&attachment=true&id=1694618420895') center right no-repeat;
+    width: 62px;
+    height: 24px;
+    border: 0 none;
+    cursor: pointer;
+    margin-left: 0;
+    text-align: right;
+    padding-right: 29px;
+    padding-left: 0;
+    font-family: Flexo-Demi;
+    font-size: 14px;
+    color: #ff7800;
+    line-height: 24px;
+}
+button.btn-beneficios.activo,
+button.btn-cuota.activo {
+    background: url('/wcm/connect/3d364f0b-27ab-4e5b-acd0-7fe2801d4228/a_ic_angle_drop_up.svg?MOD=AJPERES&attachment=true&id=1694727038485') center right no-repeat;
+}
+button.btn-beneficios {
+    background: url('/wcm/connect/f778adf3-c992-479c-884e-712ae0c41432/drop_down_orange.svg?MOD=AJPERES&attachment=true&id=1694618420895') center right no-repeat;
+    width: auto;
+    height: 24px;
+    border: 0 none;
+    cursor: pointer;
+    margin-left: 0;
+    text-align: right;
+    padding-right: 32px;
+    padding-left: 0;
+    font-family: Flexo-Demi;
+    font-size: 16px;
+    text-align: left;
+    color: #202e44;
+    margin-bottom: 12px;
+}
+.view-content {padding: 0;background-color: white;display: none;overflow: hidden;}
+/*TABLA DEVOLUCION*/
+.tabla_devolucion_sva{border-radius:8px 8px 0 0;text-align:center;margin:auto;width:100%}
+.th1,.th2,.th3,.th4{text-align:center;margin:0}
+.tabla_devolucion_sva tr th{font-size:12px;line-height:100%;font-weight:500;color:#fff;text-align:center;height:30px}
+.tabla_devolucion_sva tr th:first-child{border-radius:8px 0 0}
+.tabla_devolucion_sva tr th:not(:last-child){background-color:#002a8d;border-right:3px solid #fff}
+.tabla_devolucion_sva tr th:last-child{border-radius:0 8px 0 0;background-color:#ff7800}
+.tabla_devolucion_sva tr td{background-color:#eff0f2;font-size:12px;line-height:20px;color:#202e44;border-right:3px solid #fff;border-top:3px solid #fff;height:30px}
+.terms_sva {font-size: 12px;line-height: normal; color:#868f9e; margin-top: 10px;margin-bottom: 10px;}
+</style>
+<style id="styles-spt-modal">
+    .spt_modal .contenedor_moc_header_home.bg-spt{background-color: #d1e6ff;}
+    .spt_modal .contenedor_moc_image_header img{top: 8px;right: 19px;}
+    .spt_modal .contenedor_moc_header_home h2{max-width:208px;color:#002a8d}
+    .spt_modal .contenedor_moc_header_home p{font-weight:inherit;font-size:16px;line-height:24px}
+    @media(max-width:430px){
+        .spt_modal .contenedor_moc_header_home h2 {max-width: 196px;}
+        .spt_modal .contenedor_moc_image_header img {top: 20px;right: 0px;}
+    }
+</style>
+<style id="styles-sor-modal">
+    .sor_modal .contenedor_moc_header_home.bg-sor{background-color: #ece4fc;}
+    .sor_modal .contenedor_moc_image_header{height: 96px;}
+    .sor_modal .contenedor_moc_image_header img{position:relative;right: -16px;top:-5px}
+    .sor_modal .contenedor_moc_header_home{padding:16px;height:112px}
+    .sor_modal .contenedor_moc_header_home h2{max-width:100%;margin-bottom:8px;color:#002a8d}
+    .sor_modal .contenedor_moc_button{margin-top:16px}
+    .sor_modal .contenedor_moc_checkbox{margin-bottom:12px}
+</style>
+<!-- SRV MODAL MENSUAL -->
+<style id="styles-srv-modal">
+    .srv_modal .contenedor_moc_header_home.bg-srv{background:linear-gradient(90deg,rgba(159,213,251,1) 34%,rgba(109,181,238,1) 100%)}
+    .srv_modal .contenedor_moc_image_header img{position:relative;right:17px;top:27px}
+    .srv_modal .contenedor_moc_header_home h2{max-width:206px;margin-bottom:8px;color:#002a8d}
+    .srv_modal .contenedor_moc_header_home p{color:#002a8d;font-weight:inherit}
+    .srv_modal .contenedor_moc_header_home{padding:16px;height:108px}
+    .srv_modal .contenedor_moc_button{margin-top:36px}
+</style>
+<style id="styles-sva-modal">
+    .sva_modal .contenedor_moc_header_home.bg-sva{background-color: #d4faf5;}
+    .sva_modal .contenedor_moc_header_home{padding:16px;height: 86px;}
+    .sva_modal .contenedor_moc_header_home h2{margin-bottom:8px;max-width:205px;color:#002a8d}
+    .sva_modal .contenedor_moc_image_header img{top:-16px;right:0;width: 97px;}
+    .sva_modal .contenedor_moc_coberturas li:last-child p{height:initial}
+    .sva_modal .contenedor_moc_legales p{font-size:12px;line-height:16px}
+    .sva_modal .contenedor_moc_button{margin-top:16px}
+    .sva_modal .b-cuota-text{margin:0;color:#202e44;font-size:14px;line-height:20px}
+    .sva_modal .b-cuota-text span{color:#ff7800;}
+    .modal_container_cuotas_cont{width:500px;background-color:#FFF;border-radius:8px;max-width:500px}
+    .container_cuotas_cerrar{text-align:right}
+    .container_cuotas_cerrar img{cursor:pointer;filter:brightness(0) saturate(100%) invert(45%) sepia(83%) saturate(1215%) hue-rotate(360deg) brightness(101%) contrast(106%);margin:15px 15px 0 0}
+    .modal_container_cuotas{position:fixed;z-index:9999;background-color:#520000;display:flex;overflow:auto;box-shadow:0 0 7px 0 rgba(82,112,148,.2),0 2px 2px 0 rgba(82,112,148,.12),0 2px 2px 0 rgba(82,112,148,.14);top:0;left:0;width:100%;height:100%;align-items:center;justify-content:center}
+    .sva_modal .bcp_checkbox_microcomponent span{font-size:12px;line-height:18px}
+    .sva_modal .contenedor_moc_checkbox{margin-bottom:12px}
+    .wrap-cuota {display: flex;align-items: center;justify-content: space-between; margin-top: 10px;position: relative;}
+</style>
+<div id="frmMocSegurosHome" class="contenedor_moc_home_principal" style="display: none;">
+    <div class="contenedor_moc_home">
+        <div class="contenedor_moc_close_header">
+            <img src="/wcm/connect/646d01d6-7847-4c19-873d-92bf8f564c59/close_orange.svg?MOD=AJPERES&attachment=true&id=1694568536424" alt="">
+        </div>
+        <div class="contenedor_moc_home_compra contenedor_moc_home_card">
+            <div class="contenedor_moc_header_home">
+                <div class="contenedor_moc_header_modal">
+                    <div class="contenedor_moc_title_header"><h2></h2><p></p></div>
+                    <div class="contenedor_moc_image_header"><img src="" alt=""></div>
+                </div>
+            </div>
+            <div class="contenedor_moc_body_home">
+                <div class="contenedor_moc_coberturas" id="containerCobertura">
+                    <p>Te cubrimos:</p>
+                    <ul class="contenedor_moc_list_coberturas">
+                    </ul>
+                </div>
+                <div class="contenedor_moc_actions">
+                    <div class="contenedor_moc_input">
+                        <form-input id="frmMocSegurosHome_input_doc" name="frmMocSegurosHome_input_doc" datatype="tel"
+                            minlength="8" maxlength="8" constraint="soloNumeros" label="Ingresa tu número de DNI"
+                            msgerror="Ingresa Nº documento válido.">
+                        </form-input>
+                    </div>
+                    <div class="contenedor_moc_checkbox"></div>
+                    <div class="contenedor_moc_legales"><p></p></div>
+                    <div class="contenedor_moc_button">
+                        <button class="bcp_boton_blanco btn_no_gracias">No, gracias</button>
+                        <button class="bcp_boton_naranja  btn_comprar">Comprar</button>
+                    </div>
+                    <div class="hidden-captcha">
+                        <form-captcha id="frmMocSegurosHomeCaptcha" datacallback="frmMocSegurosHomeCaptchaSendData"></form-captcha>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="contenedor_moc_home_confirmacion contenedor_moc_home_card ocultar">
+            <div class="contenedor_moc_confirm_img">
+                <img src="/wcm/myconnect/58f644ae-5f12-4aeb-9ae7-f282959ced60/spot-circle-m-spc-mobile-success-hand-d-l.png?MOD=AJPERES&amp;CVID=oX5mhdv" alt="" />
+            </div>
+            <div class="contenedor_moc_confirm_title">
+                <h3>¡Gracias! Estamos procesando tu solicitud</h3>
+                <p></p>
+            </div>
+            <div class="contenedor_moc_plan_anual" style="display: none;">
+                <p>Recuerda que se hará un cargo por <b>S/142.89</b> a tu cuenta de ahorros.</p>
+            </div>
+            <div class="contenedor_moc_confirm_action">
+                <button class="bcp_boton_naranja btn_entendido">Entendido</button>
+            </div>
+            <div class="contenedor_moc_confirm_cancelar">
+                <h3>¿Quieres cancelar este seguro?</h3>
+                <p>
+                    Ingresa tus datos <a class="cancelar_solicitud">aquí</a> y procederemos con
+                    la baja de tu seguro a la brevedad.
+                </p>
+            </div>
+            <div class="contenedor_moc_confirm_link"><a href="#">Ver más seguros</a></div>
+        </div>
+    </div>
+</div>
+<script>
+    let icon_check = '/wcm/connect/0016321b-2394-4c18-adc7-5851814915da/ic_check.png?MOD=AJPERES&attachment=false&id=1692803728523';
+    let count = 0;
+    const frmMocSegurosHome = document.querySelector('#frmMocSegurosHome');
+    const formContentMOCSegurosHome = new Formulario(frmMocSegurosHome);
+    const frmMocSegurosHomeCaptcha = frmMocSegurosHome.querySelector('#frmMocSegurosHomeCaptcha')
+    //VARIABLES NUEVO TAGGEO
+    const variables_taggeo = {
+        tituloModal: '',
+        grupoModal: '',
+        productModal: '',
+        channelModal: '',
+        versionModal: '',
+        producto: ''
+    }
+    //REQUEST API SOLICITUDES
+    const dataJsonRequest = {
+        aceptopromocion: '-',
+        productopromocion: '',
+        abreviaturaproducto: '',
+        descripcionpromocion: "Sin promoción",
+        email: 'sinemail@sinmail.com',
+        flujoventa: 'VIABCP',
+        promocioncancelada: "-",
+        canal: "HBK",
+        tipoplan: "-"
+    }
+    const tablaDevolucion = `
+        <div class="modal_tabla">
+            <table class="tabla_devolucion_sva">
+                <tr><th>Tu edad</th><th>Tu ahorro mensual</th><th>Te devolveremos</th><th>TU GANAR&Aacute;S</th></tr>
+                <tr><td>18 a 35 a&ntilde;os</td><td>S/ 50</td><td>S/ 5,040</td><td><b>S/ 840</b></td></tr>
+                <tr><td>36 a 45 a&ntilde;os</td><td>S/ 56</td><td>S/ 5,645</td><td><b>S/ 941</b></td></tr>
+                <tr><td>46 a 62 a&ntilde;os</td><td>S/ 62</td><td>S/ 6,250</td><td><b>S/ 1,042</b></td></tr>
+            </table>
+        </div>
+        <div class="terms_sva">Limite de edad: 18 a 63 a&ntilde;os. Se considera tu edad actuarial, la cual corresponde a la edad en la fecha del cumplea&ntilde;os m&aacute;s pr&oacute;ximo a la firma del contrato (anterior o posterior). La devoluci&oacute;n de primas se realiza neta de impuesto.</div>`
+    //DATA DE MODALES
+    //PLAN MENSUAL
+    const dataModalSPT = {
+        seguro:'SPT',
+        category_modal:'Seguro Proteccion de Tarjetas',
+        name_modal:'Obten tu Seguro de Proteccion de Tarjetas Plus',
+        title_modal: 'Seguro <b>Protección de Tarjetas Plus</b>',
+        subtitle_modal: 'Por <b>S/12.99 al mes</b> ',
+        spot_hero: '/wcm/connect/da610388-d30b-4e61-8abf-5e47c2a5a432/PERSONAJES_SEGUROS-08+1.png?MOD=AJPERES&attachment=false',
+        coberturas: [
+            { icon: icon_check, texto: 'Hasta S/ 15 mil en fraude por internet y otros.' },
+            { icon: icon_check, texto: 'Robo por retiros de cajeros y agentes.' },
+            { icon: icon_check, texto: 'Transferencias no reconocidas.' }
+        ],
+        
+        texto_terminos: 'El click en “Comprar” confirma la solicitud, el envío de la póliza vía electrónica, la aceptación de los <a class="tyc_link">Términos y condiciones</a> y el débito en la cuenta de ahorros vigente con mayor saldo. Límite de edad: 18 años a más. La prima incluye IGV.',
+        bg_header: 'bg-spt',
+        dataRequest: {
+            productopromocion: 'BANNER SPT',
+            abreviaturaproducto: 'SPT',
+            descripcionpromocion: 'BANNER SPT'
+        },
+        url_terminos: '/wcm/connect/54bb8ed7-e3c9-43fa-8342-b01b4e38ff19/TYC_VIABCP_SPT.pdf?MOD=AJPERES&attachment=false&id=1668183042294',
+        texto_gracias: 'En los próximos días te confirmaremos la activación de tu <b>Seguro de Protección de Tarjetas Plus</b> a través de tu correo.',
+        tipoplan:'MENSUAL',
+        extra:{}
+    }
+    // PLAN MENSUAL SRV
+    const dataModalSRV = {
+        seguro:'SRV',
+        category_modal:'',
+        name_modal:'',
+        title_modal: 'Obtén tu <b>Seguro Respaldo Vida</b> aquí',
+        subtitle_modal: 'Por S/12.99 al mes',
+        spot_hero: '/wcm/connect/6485cd42-4f7a-4bf5-88d3-ff838ea79553/group-10.png?MOD=AJPERES&attachment=false&id=1684957322273',
+        coberturas: [
+            { icon: icon_check, texto: 'Te cubre S/ 20,000 en caso fallezcas.' },
+            { icon: icon_check, texto: 'S/ 50 diarios desde el segundo día si eres hospitalizado.' },
+            { icon: icon_check, texto: 'S/ 8,000 si te diagnostican cáncer.' }
+        ],
+        texto_terminos: 'El click en “Comprar” confirma la solicitud, el envío de la póliza vía electrónica, la aceptación de los <a class="tyc_link">Términos y condiciones</a> y el cargo en la cuenta de ahorros vigente con mayor saldo. Límite de edad: 18 a 65 años.',
+        bg_header: 'bg-srv',
+        dataRequest: {
+            productopromocion: 'BANNER SPT',
+            abreviaturaproducto: 'SRV',
+            descripcionpromocion: 'BANNER SRV'
+        },
+        url_terminos: '/wcm/connect/a46fa07b-e0ec-427a-a64b-a38e48115f0c/TYC_VIABCP_SRV.pdf?MOD=AJPERES&attachment=false&id=1668186570527',
+        texto_gracias: 'En los próximos días te confirmaremos la activación de tu <b>Seguro Respaldo Vida</b> a través de tu correo.',
+        tipoplan:'MENSUAL',
+        extra:{}
+    }
+
+    const dataModalSOR = {
+        seguro:'SOR',
+        category_modal:'Seguro Oncorespaldo Digital',
+        name_modal:'Obtén tu Seguro Onco Respaldo Digital',
+        title_modal: 'Seguro <b>Onco Respaldo Digital</b>',
+        subtitle_modal: 'Por <b>S/ 12.99 al mes</b>',
+        spot_hero: '/wcm/connect/60f2522b-8789-4ef0-81b3-644053d835d3/SOR.svg?MOD=AJPERES&attachment=true&id=1694640253330',
+        coberturas: [
+            { icon: icon_check, texto: 'Indemnización con hasta S/ 30 mil.' },
+            { icon: icon_check, texto: '6 teleconsultas y orientación telefónica con médico general.' },
+            { icon: icon_check, texto: 'Asesorías 24/7.' }
+        ],
+        
+        texto_terminos: 'El click en “Comprar” confirma la solicitud, el envío de la póliza vía electrónica, la aceptación de los <a class="tyc_link">Términos y condiciones</a> y el cargo en la cuenta de ahorros vigente con mayor saldo. Límite de edad: 18 a 65 años. Periodo de carencia de 30 días. <b>Este seguro es válido únicamente para asegurados que no hayan tenido cáncer previamente</b>. La prima incluye IGV.',
+        bg_header: 'bg-sor',
+        dataRequest: {
+            productopromocion: 'BANNER SPT',
+            abreviaturaproducto: 'SOR',
+            descripcionpromocion: 'BANNER SOR'
+        },
+        url_terminos: '/wcm/connect/944bf580-b46b-457a-a60f-71b23a4a2900/TERMINOS%2BY%2BCONDICIONES%2BSOR_MAR_2023+V20231704.pdf?MOD=AJPERES&attachment=true&id=1681933396896',
+        texto_gracias: 'En los próximos días te confirmaremos la activación de tu <b>Seguro Onco Respaldo Digital</b> a través de tu correo.',
+        tipoplan:'MENSUAL',
+        extra:{}
+    }
+
+    const dataModalSVA = {
+        seguro:'SVA',
+        category_modal:'Seguro Vida Ahorro',
+        name_modal:'Obtén tu Seguro Vida Ahorro aquí',
+        title_modal: 'Seguro <b>Vida Ahorro</b>',
+        subtitle_modal: 'Desde <b>S/ 50 al mes</b>',
+        spot_hero: '/wcm/connect/c7a9ea36-6385-497c-8126-1d84891562f7/SVA.png?MOD=AJPERES&attachment=false&id=1692820207162',
+        coberturas: [
+            { icon: icon_check, texto: 'Recuperar el 120% de los pagado al finalizar el plazo de 7 años.' },
+            { icon: icon_check, texto: 'S/ 20 mil en caso de fallecimiento.' },
+            { icon: icon_check, texto: 'Servicios adicionales: Médico a domicilio, delivery de medicinas.' },
+            { icon: '', texto: '<b class="b-cuota-text">Conoce tu cuota</b><button class="btn-cuota">aquí</button>' }
+        ],
+        texto_terminos: 'El click en "Comprar" confirma la solicitud, el envío de la póliza vía electrónica, la aceptación de los <a class="tyc_link">Términos y condiciones</a> y el cargo en la cuenta de ahorros vigente con mayor saldo. Límite de edad: 18 años a más.',
+        bg_header: 'bg-sva',
+        dataRequest: {
+            productopromocion: 'BANNER SPT',
+            abreviaturaproducto: 'SVA',
+            descripcionpromocion: 'BANNER SVA'
+        },
+        url_terminos: '/wcm/connect/0bbe0076-dbd3-46d6-b2ff-5a8bb524d810/Terminos+y+Condiciones+Seguro+Vida+Ahorro+v2.pdf?MOD=AJPERES&attachment=true&id=1678806215170',
+        texto_gracias: 'En los próximos días te confirmaremos la activación de tu <b>Seguro Vida Ahorro</b> a través de tu correo.',
+        tipoplan:'315',
+        extra:{
+            content: tablaDevolucion
+        }
+    }
+    //Función para ocultar modal
+    const frmMocSegurosHomeCerrar = () => {
+        frmMocSegurosHome.querySelector('.contenedor_moc_home').classList.remove('abrir');
+        frmMocSegurosHome.querySelector('.contenedor_moc_home').classList.add('cerrar');
+        setTimeout(() => {
+            frmMocSegurosHome.style.display = "none";
+        }, 200);
+    }
+
+    const frmMocSegurosHomeAbrir = (producto) => {
+        //console.log('producto selecionado', producto)
+        frmMocSegurosHomeCerrar();
+        if(document.querySelector('.view-content')){document.querySelector('.view-content').remove()}
+        setTimeout(() => {
+            cambioPantallaModal(2);
+            frmMocSegurosHome.removeAttribute('style');
+            frmMocSegurosHome.querySelector('.contenedor_moc_home').classList.remove('cerrar');
+            frmMocSegurosHome.querySelector('.contenedor_moc_home').classList.add('abrir');
+            cargarDataModalSegunTipoSeguro(producto);
+        }, 200);
+    }
+    //Función carga data de taggeos
+    const cargarDataTaggeoModal = (data) => {
+        variables_taggeo.tituloModal = cleanLabel(data.name_modal),
+        variables_taggeo.grupoModal = 'Landing HBK',
+        variables_taggeo.productModal = 'Seguros-' + data.dataRequest.abreviaturaproducto,
+        variables_taggeo.channelModal = 'ViaBCP-HBK',
+        variables_taggeo.versionModal = 'V21';
+        variables_taggeo.producto = data.dataRequest.abreviaturaproducto
+        dataJsonRequest.abreviaturaproducto = data.dataRequest.abreviaturaproducto;
+        dataJsonRequest.productopromocion = data.dataRequest.productopromocion;
+        dataJsonRequest.tipoplan = data.dataRequest.tipoplan;
+        dataJsonRequest.descripcionpromocion = data.dataRequest.descripcionpromocion;
+    }
+    //Función para agregar acción a los botones del modal
+    const cargarActionButtonsModal = (dataModalSPT, divContentModal, clase) => {
+        //Función para abrir Terminos y Condiciones
+        divContentModal.querySelector('.tyc_link').addEventListener('click', () => {
+            taggeoAdobeMOCSeguros('Click', 'Términos y Condiciones');
+            window.open(dataModalSPT.url_terminos, '_blank');
+        });
+        //Función para cerrar Modal - Botón Cerrar(X)
+        divContentModal.querySelector('.contenedor_moc_close_header img').addEventListener('click', () => {
+            if (divContentModal.querySelector('.contenedor_moc_close_header img').classList.contains('paso_2')) {
+                taggeoAdobeMOCSeguros('Click', 'Cerrar Modal Paso 2');
+            } else {
+                taggeoAdobeMOCSeguros('Click', 'Cerrar Modal Paso 1')
+            }
+            frmMocSegurosHomeCerrar();
+        });
+        //Función Botón Comprar
+        divContentModal.querySelector('.btn_comprar').addEventListener('click', () => {
+            let inputDNI = divContentModal.querySelector('.contenedor_moc_input #frmMocSegurosHome_input_doc');
+            let dniHash = fnsha256(inputDNI.value.trim());
+            let indexCaptcha = frmMocSegurosHomeCaptcha.getAttribute('index');
+            let boolDNI = formContentMOCSegurosHome.Validar.CampoNumerico(inputDNI);
+            let chkDeclaracion = frmMocSegurosHome.querySelector('#declaracion');
+            let boolAceptaDeclaracion = true;
+            if(chkDeclaracion){
+                boolAceptaDeclaracion = false;
+                boolAceptaDeclaracion = chkDeclaracion.getAttribute('style') ? true : formContentMOCSegurosHome.Validar.CampoCheckButton(chkDeclaracion);
+                // if (!boolAceptaDeclaracion) {grecaptcha.reset(indexCaptcha)};
+            }
+            if (!boolDNI || !boolAceptaDeclaracion) { grecaptcha.reset(indexCaptcha); return };
+            grecaptcha.reset(indexCaptcha);
+            grecaptcha.execute(indexCaptcha);
+        });
+        //Función Botón No gracias
+        divContentModal.querySelector('.btn_no_gracias').addEventListener('click', () => {
+            taggeoAdobeMOCSeguros('Click', 'No gracias');
+            frmMocSegurosHomeCerrar();
+        });
+        //Función Botón Entendido
+        divContentModal.querySelector('.btn_entendido').addEventListener('click', () => {
+            taggeoAdobeMOCSeguros('Click', 'Entendido');
+            frmMocSegurosHomeCerrar();
+        });
+        //Función Cancelar solicitud
+        divContentModal.querySelector('.cancelar_solicitud').addEventListener('click', () => {
+            taggeoAdobeMOCSeguros('Click', 'Cancelar solicitud');
+            window.open('https://www.viabcp.com/cancelatusegurov2', '_blank');
+        })
+    }
+    //Función para cambiar de pantalla compra a confirmación
+    const cambioPantallaModal = (pantalla = 1) => {
+        if (pantalla == 1) {
+            frmMocSegurosHome.querySelector('.contenedor_moc_home_compra').classList.add('ocultar');
+            frmMocSegurosHome.querySelector('.contenedor_moc_home_confirmacion').classList.remove('ocultar');
+            frmMocSegurosHome.querySelector('.contenedor_moc_close_header img').classList.add('paso_2');
+        } else {
+            frmMocSegurosHome.querySelector('.contenedor_moc_home_compra').classList.remove('ocultar');
+            frmMocSegurosHome.querySelector('.contenedor_moc_home_confirmacion').classList.add('ocultar');
+            frmMocSegurosHome.querySelector('.contenedor_moc_close_header img').classList.remove('paso_2');
+            let inputDNI = frmMocSegurosHome.querySelector('.contenedor_moc_input #frmMocSegurosHome_input_doc');
+            inputDNI.value = "";
+            inputDNI.parentElement.classList.remove('focusin')
+        }
+    }
+    //Función Taggeo Seguros
+    const taggeoAdobeMOCSeguros = (eventName, labelName, category = variables_taggeo.tituloModal + "-" + variables_taggeo.versionModal) => {
+        if (eventName == 'Impresión') {
+            digitalData.push({
+                "form": {
+                    "channel": variables_taggeo.channelModal,
+                    "version": variables_taggeo.versionModal,
+                    "name": variables_taggeo.tituloModal,
+                    "product": variables_taggeo.productModal
+                },
+                "event": "trackFormView"
+            })
+        }
+        else {
+            digitalData.push({
+                "action": {
+                    "group": variables_taggeo.grupoModal,
+                    "category": category,
+                    "name": eventName,
+                    "label": labelName
+                },
+                "metadata": {
+                    "key": "Producto",
+                    "value": variables_taggeo.productModal
+                },
+                "event": "trackAction"
+            })
+        }
+    }
+    //Función para agregar data al modal - Segun tipo de seguro
+    const frmMocSegurosHomeConstruirModal = (data, clase) => {
+        cargarDataTaggeoModal(data);
+        taggeoAdobeMOCSeguros('Boton', 'Lo quiero', data.category_modal)
+        taggeoAdobeMOCSeguros('Impresión', ' Modal One Click ' + variables_taggeo.productModal);
+        const producto = data.dataRequest.abreviaturaproducto
+        let contenedor_checkbox = '';
+
+        let frmMocSegurosHomeI = document.querySelector('#frmMocSegurosHome');
+        frmMocSegurosHomeI.removeAttribute('class');
+        frmMocSegurosHomeI.classList.add('contenedor_moc_home_principal');
+        frmMocSegurosHomeI.classList.add(clase);
+        frmMocSegurosHomeI = document.querySelector('#frmMocSegurosHome.' + clase);
+        //Setear titulo,texto,imagen,bgheader,legal,checkbox
+        frmMocSegurosHomeI.querySelector('.contenedor_moc_title_header h2').innerHTML = data.title_modal;
+        frmMocSegurosHomeI.querySelector('.contenedor_moc_title_header p').innerHTML = data.subtitle_modal;
+        frmMocSegurosHomeI.querySelector('.contenedor_moc_legales p').innerHTML = data.texto_terminos;
+        frmMocSegurosHomeI.querySelector('.contenedor_moc_image_header img').src = data.spot_hero;
+        frmMocSegurosHomeI.querySelector('.contenedor_moc_header_home').classList.add(data.bg_header);
+        frmMocSegurosHomeI.querySelector('.contenedor_moc_confirm_title p').innerHTML = data.texto_gracias;
+        (data.tipoplan == 'ANUAL') ? 
+                        frmMocSegurosHome.querySelector('.contenedor_moc_plan_anual').removeAttribute('style') :
+                        frmMocSegurosHome.querySelector('.contenedor_moc_plan_anual').style.display ="none";
+
+        dataJsonRequest.tipoplan = data.tipoplan;
+        console.log(frmMocSegurosHomeI)
+        //Agregar lista coberturas
+        let listaCoberturaHTML = "";
+        const tope = data.coberturas.length - 1
+        data.coberturas.forEach((item, index) => {
+            listaCoberturaHTML +=
+                '<li>' +
+                (item.icon == '' ? '<div class="item_vacio"></div>' : '    <img src=' + item.icon + ' alt="">') +
+                (index == tope && producto == 'SVA' ? '<div class="wrap-cuota">'+ item.texto +'</div>' : '<p>'+ item.texto +'</p>') +
+                '</li>';
+        })
+        const containerList = '#containerCobertura .contenedor_moc_list_coberturas'
+        frmMocSegurosHomeI.querySelector(containerList).innerHTML = listaCoberturaHTML;
+        //console.log('frmMocSegurosHome', frmMocSegurosHomeI);
+        if (count == 0) {cargarActionButtonsModal(data, frmMocSegurosHomeI, clase);count = 1}
+
+        if (producto == 'SVA') { 
+            
+            viewContent(data.extra.content,'#containerCobertura',)
+            contenedor_checkbox = `
+            <form-check id="declaracion" label="" displaydirection="horizontal"
+                datajson='[{"titulogrupo":""},[{"opcion":"Declaro <b>NO tener</b> obligaciones tributarias fuera de Perú"}]]'
+                msgerror="Debes seleccionar esta opción.">
+            </form-check>`;
+            
+        } 
+        else {
+            contenedor_checkbox = '';
+        }
+        frmMocSegurosHomeI.querySelector('.contenedor_moc_checkbox').innerHTML = contenedor_checkbox;
+        let checkbox = frmMocSegurosHome.querySelector('#declaracion0')
+        if(checkbox){
+            checkbox.onclick = () =>{
+                if(checkbox.checked){
+                    taggeoAdobeMOCSeguros('Click', 'Declaracion - Si');
+                }
+                else {
+                    taggeoAdobeMOCSeguros('Click', 'Declaracion - No');
+                }
+            }
+        }
+    }
+
+    const renderizarCaptchaModalOneClickSPT = () => {
+        //console.log('captcha', formContentMOCSegurosHome.Captcha.getAttribute('index'));
+        if (!formContentMOCSegurosHome.Captcha.getAttribute('index')) {
+            try {
+                formContentMOCSegurosHome.RenderIndividualCaptcha.SetRederCaptcha(frmMocSegurosHomeCaptcha);
+            } catch (error) {
+                console.log(error)
+            }
+            setTimeout(() => {
+                // btnObtenerModalOneClickSPT.removeAttribute('disabled');
+                console.log('captcha-forcerender', formContentMOCSegurosHome.Captcha.getAttribute('index'));
+            }, 500);
+        }
+    }
+
+    const seguros = {
+        'spt':dataModalSPT,
+        'sor':dataModalSOR,
+        'srv':dataModalSRV,
+        'sva':dataModalSVA,
+    }
+
+    const cargarDataModalSegunTipoSeguro = (seguro) => {
+        const value = seguro.toLowerCase();
+        frmMocSegurosHomeConstruirModal(seguros[value],seguro+'_modal');
+        renderizarCaptchaModalOneClickSPT();
+    }
+    function frmMocSegurosHomeCaptchaSendData(strTokenCaptcha) {
+        //const url_sendmail = "https://preprodportal.viabcp.com/apis/form/send/message;";
+        const url_sendmail = "https://www.viabcp.com/apis/form/send/message;";
+        let inputDNI = frmMocSegurosHome.querySelector('.contenedor_moc_input #frmMocSegurosHome_input_doc');
+        let dniHash = fnsha256(inputDNI.value.trim());
+        let indexCaptcha = frmMocSegurosHomeCaptcha.getAttribute('index');
+        let boolDNI = formContentMOCSegurosHome.Validar.CampoNumerico(inputDNI);
+        let nroDocumento = inputDNI.value.trim();
+        let chkDeclaracion = frmMocSegurosHome.querySelector('#declaracion');
+        let boolAceptaDeclaracion = true;
+        if(chkDeclaracion){
+            boolAceptaDeclaracion = false;
+            boolAceptaDeclaracion = chkDeclaracion.getAttribute('style') ? true : formContentMOCSegurosHome.Validar.CampoCheckButton(chkDeclaracion);
+            // if (!boolAceptaDeclaracion) {grecaptcha.reset(indexCaptcha)};
+        }
+        if (!boolDNI || !boolAceptaDeclaracion) { grecaptcha.reset(indexCaptcha); return };
+        
+        const jsonRequest = {
+            "leadId": getLeadID(),
+            "producto": 'MODAL ONE CLICK - HOME',
+            "tipoFormulario": "MODALONECLICK",
+            "tipoProducto": 'MODAL ONE CLICK - HOME',
+            "captchaToken": strTokenCaptcha,
+            "data": {
+                tipodocumento: 'DNI',
+                documento: nroDocumento,
+                tdocumento: 'DNI',
+                ndocumento: nroDocumento,
+                fechaNEO: '-',
+                ndocumentohash: dniHash,
+                aceptopromocion: '-',
+                productopromocion: dataJsonRequest.productopromocion,
+                abreviaturaproducto: dataJsonRequest.abreviaturaproducto,
+                descripcionpromocion: dataJsonRequest.descripcionpromocion,
+                email: 'sinemail@sinmail.com',
+                flujoventa: 'VIABCP',
+                promocioncancelada: "-",
+                canal: "HBK",
+                tipoplan: dataJsonRequest.tipoplan
+            },
+            metadata: {
+                "origen": document.location.href,
+                "agente": navigator.userAgent
+            }
+        };
+
+        const requestOptions = {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json",
+                "g-recaptcha-response": strTokenCaptcha
+            },
+            body: JSON.stringify(jsonRequest),
+            redirect: 'follow'
+        };
+        fetch(url_sendmail, requestOptions)
+            .then((response) => {
+                console.log('*****API STATUS: ' + response.status);
+                if (response.status == 200) {
+                    console.log('registro correctamente');
+                    taggeoAdobeMOCSeguros('Click', 'Comprar ' + dataJsonRequest.abreviaturaproducto);
+                    cambioPantallaModal();
+                    digitalData.push({
+                        "form": {
+                            "channel": variables_taggeo.channelModal,
+                            "version": variables_taggeo.versionModal,
+                            "name": variables_taggeo.tituloModal,
+                            "product": "Seguros-" + dataJsonRequest.abreviaturaproducto
+                        },
+                        "event": "trackFormSubmit"
+                    })
+                } else {
+                    console.warn('No se registro', response.status);
+                }
+                grecaptcha.reset(indexCaptcha);
+            })
+            .catch((error) => {
+                console.error('error', error);
+                grecaptcha.reset(indexCaptcha);
+            });
+    }
+    function viewContent(content,destination){
+        let element = document.createElement('div')
+        element.classList.add('view-content')
+        element.innerHTML = content
+        const container = document.querySelector(destination)
+        if(container){container.appendChild(element)}
+
+        document.querySelector('.btn-cuota').addEventListener('click',(event)=>{
+            const panel = document.querySelector('.view-content')
+            const btn = event.currentTarget
+            if (panel.style.display === "block"){
+                panel.style.display = "none"
+                btn.classList.remove('activo')
+            } 
+            else { 
+                panel.style.display = "block"
+                btn.classList.add('activo')
+            }
+        })
+        document.querySelector('#frmMocSegurosHome_input_doc').addEventListener('focus',()=>{
+            const panel = document.querySelector('.view-content')
+            const btn = document.querySelector('.btn-cuota')
+            if (panel.style.display === "block"){
+                panel.style.display = "none"
+                btn.classList.remove('activo')
+            } 
+        })
+    }
+</script>

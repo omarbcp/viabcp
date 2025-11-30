@@ -1,0 +1,81 @@
+.carrusel {
+    overflow: hidden; 
+}
+.carrusel-contenido {
+    display: flex;
+    transition: transform 1s ease;
+}
+
+.carrusel-item {
+    min-width: 100%;
+    box-sizing: border-box;
+    /*opacity: 0;
+    transition: opacity 1s ease;*/
+}
+.carrusel-item.active {
+    /*opacity: 1;*/
+}
+.carrusel img {
+    width: 100%;
+    display: block;
+}
+
+.carrusel-controles {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    transform: translateY(-50%);
+}
+
+.carrusel-controles button {
+    border: none;
+    color: white;
+    padding: 0;
+    cursor: pointer;
+}
+
+.carrusel-controles button.active svg circle {
+    fill: #fff;
+    stroke: #0080aa;
+}
+.carrusel-controles button.active svg path {
+    fill: #fff;
+}
+@media (max-width: 859px) {
+    .carrusel {
+        position: relative;
+        width: 100%;
+        margin-bottom: 15px;
+        border-radius: 16px;
+    }
+    #txtSlide {
+        display: none;
+    }
+    .carrusel-controles button:nth-child(1){
+        padding-left: 6px;
+    }
+    .carrusel-controles button:nth-child(2){
+        padding-right: 6px;
+    }
+    section > .relative > h1 {
+        padding-bottom: 12px;
+    }
+}
+
+@media (min-width: 860px) {
+    .carrusel {
+        position: absolute;
+        width: 490px;
+        top: 0;
+        right: 0;
+        border-radius: 24px;
+    }
+    .carrusel-controles button:nth-child(1){
+        padding-left: 8px;
+    }
+    .carrusel-controles button:nth-child(2){
+        padding-right: 8px;
+    }
+}

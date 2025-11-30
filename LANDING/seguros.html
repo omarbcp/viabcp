@@ -11,7 +11,7 @@
     }
     .wrapCards{
         display: flex;
-        justify-content: center;
+        justify-content: flex-start;
         flex-wrap: wrap;
         width:100%;
     }
@@ -128,14 +128,18 @@
         background-color: #ff7800;
         font-family: Flexo-Demi;
         font-size: 16px;
-        color:#fff;
         display: block;
         text-align: center;
         line-height: 100%;
         cursor: pointer;
+        outline: none;
+        color: #FFFFFF !important;
     }
     .ls_button_portal:hover {
         color:#fff;
+    }
+    .ls_button_portal:focus {
+        outline: none !important;
     }
     .scc_more_detail {
         display: flex;
@@ -157,7 +161,7 @@
         text-decoration: none;
         color:#ff7800;
     }
-    .label-sorteo {
+    .label-sorteo, .label-promo {
         position: absolute;
         right: -5px;
         top:16px;
@@ -306,182 +310,133 @@
             margin-right: 16px;
         }
     }
-  
-  </style>
-  <div class="container">
-    <div class="ls_title_home">Obtén el seguro perfecto para ti y participa</div>
-    <div class="ls_detail_promotion"></div>
-    <div class="wrapCards"></div>
-    <div class="ls_title_home" >¿Ya cuentas con un seguro?</div>
-    <div class="ls_text1_home" >Si necesitas reportar un incidente o cancelar tu seguro, ingresa a:</div>
-    <a href="https://www.segurosbcp.viabcp.com/?&amp;_ga=2.87318360.1798537598.1675357552-1651888815.1675357552#/mis-seguros?pcid=viabcp:home:gestiona-tus-seguros-online:masivo:menu-productos-seguros" target="_blank" title="" class="ls_button_portal">Mi portal de seguros</a>
-    <div  class="ls_text1_home">¿Tienes otras dudas? Consulta en el <a href="https://www.viabcp.com/ayuda-bcp" target="_blank" title="">Centro de ayuda.</a></div>
-  </div>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.11.0/lottie.min.js" integrity="sha512-XCthc/WzPfa+oa49Z3TI6MUK/zlqd67KwyRL9/R19z6uMqBNuv8iEnJ8FWHUFAjC6srr8w3FMZA91Tfn60T/9Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-  <script>
-    // const link_bases_navidad = document.getElementById('tyc')
-    const animationBanner=()=>{
-        const wrapAnimation = document.createElement("div");
-        const bannerPrimary = document.querySelector('.bcp_banner-sin-carousel .banner_imagen  > .container > .container');
-  
-        wrapAnimation.classList.add('bannerAnimation');
-        bannerPrimary.appendChild(wrapAnimation);
-        bannerPrimary.style.position = 'relative';
-  
-        let animation = lottie.loadAnimation({
-            container: document.querySelector('.bannerAnimation'),
-            path: '/wcm/connect/409f716e-6620-4450-beaf-a628ce274cbe/illustration_1.json?MOD=AJPERES&attachment=true&id=1682709819350',
-            render: 'svg',
-            loop: false,
-            autoplay: false,
-            name: 'bannerPrincipal'
-        });
-        animation.goToAndStop(30, true)
-        //animation.setSpeed(0.5);//Velocidad de animación
+    .label-sorteo img{
+        width: 92px;
     }
-    
+    .label-promo img {
+        width: 133px;
+    }
+</style>
+<div class="container">
+<div class="ls_title_home">Obtén el seguro perfecto para ti y participa</div>
+<div class="ls_detail_promotion"></div>
+<div class="wrapCards"></div>
+<div class="ls_title_home" >¿Ya cuentas con un seguro?</div>
+<div class="ls_text1_home" >Si necesitas reportar un incidente o cancelar tu seguro, ingresa a:</div>
+<a href="https://www.segurosbcp.viabcp.com/?&amp;_ga=2.87318360.1798537598.1675357552-1651888815.1675357552#/mis-seguros?pcid=viabcp:home:gestiona-tus-seguros-online:masivo:menu-productos-seguros" target="_blank" title="" class="ls_button_portal">Mi portal de seguros</a>
+<div  class="ls_text1_home">¿Tienes otras dudas? Consulta en el <a href="https://www.viabcp.com/ayuda-bcp" target="_blank" title="">Centro de ayuda.</a></div>
+</div>
+<script src="/wcm/connect/438c57da-0f21-4eeb-a1c7-f94a32cf12a7/qi-components.js?MOD=AJPERES&attachment=true"></script>
+  <script src="/wcm/connect/392ca7a4-ef3d-4975-ae65-06b89b3d5569/rangofechasoat.js?MOD=AJPERES&attachment=true"></script>
+  <script>
+    // BEGIN - PRECIOS SOAT //--------------------------------------
+    const obtenerPrecioHoy = ()=>{
+        let priceCurrent = "41.90"
+        const fechaActual = new Date();
+        if(rangofechas){
+            rangofechas.forEach((fecha)=>{
+                const inicio = new Date(fecha.inicio)
+                const fin = new Date(fecha.fin)
+                if (fechaActual >= inicio && fechaActual <= fin) {priceCurrent = fecha.price}
+            })
+        }
+        return priceCurrent
+    }
+    // END - PRECIOS SOAT // ----------------------------------------
+    const labelPromo = '/wcm/connect/d5e54796-cc31-4ed8-9282-df19b7f4c19f/cintillo_promo.svg?MOD=AJPERES&CACHEID=ROOTWORKSPACE-d5e54796-cc31-4ed8-9282-df19b7f4c19f-oK7COOz&cache=none'
+    const labelNew = '/wcm/connect/c5389bfb-f70e-4cc3-973c-44e76ebe13c0/cintillo_nuevo_cards.svg?MOD=AJPERES&attachment=true&id=1727281616356'
+    //const labelCyber = '/wcm/connect/35d0d5a1-19d8-458e-90dc-e5ecd051d267/cyber_nov.svg?MOD=AJPERES&attachment=true&id=1730827074094'
+    const labelCyber = '/wcm/connect/ee3891ce-1963-4c46-9c5d-1e6d121d884f/Cintillo%402x.png?MOD=AJPERES&attachment=false&id=1736353566426'
+    const labelPromoOnline = '/wcm/connect/ac937a89-cb78-4087-91fd-23a442fc3160/cintillo_promo_online.svg?MOD=AJPERES&attachment=false&id=1741274553710'
+    const labelPromoAsterisk = '/wcm/connect/3e7b162e-217b-45c4-a94b-577c477d1225/Frame+3.png?MOD=AJPERES&attachment=false'
+
     const dataCards = [
         {
-            subtitulo:'SOAT',
-            titulo:'Gana 1 vale de S/ 100 en gasolina.<br>Además obtén:',
-            precio:['Desde','S/ 38.50 al año'],
+            subtitulo:'Seguro Vehicular',
+            titulo:'Con hasta 20% de descuento* y ademas obtén:',
+            precio:['Desde','S/ 57 al mes'],
             detalles:[
-                'Programa de descuentos en más de 50 establecimientos afiliados.',
-                '20% de descuento en llantas y aros.',
-                'Planes de renovación automática o recompra directa.'
+                'Hasta el 100% de tu vehículo en caso de robo total.',
+                'Gana hasta S/200 en vales de gasolina. *Aplica TyC',
+                '50% de dcto. en pack undecoating + 10&nbsp;servicios express en Auto Limpio'
             ],
-            icono:'https://www.viabcp.com/wcm/connect/af534155-b4af-4b05-9a83-29ece2ecc4e3/spc_+soat_hand_d_l.png?MOD=AJPERES&attachment=false&id=1716822386124',
-            buy:'onclick="btnSolicitarSOAT()"',
-            more:'https://www.viabcp.com/seguros/vehicular/soat',
-            seguro:'SOAT',
-            label:true
-        },
-        {
-            subtitulo:'Seguro Vida Devolución',
-            titulo:'Gana S/ 10,000 y protege a tu familia. Conoce los beneficios:',
-            precio:['Desde','S/ 48.00 al mes'],
-            detalles:[
-                'Recupera hasta el 120% de lo pagado',
-                'Tu familia protegida hasta con S/ 150,000 en caso de fallecimiento',
-                'Médico a domicilio, consulta online, delivery de medicamentos y más'
-            ],
-            icono:'https://www.viabcp.com/wcm/connect/96bba10f-7658-402a-bbaf-d86225cc261b/spc_bills_dollars_d_l.png?MOD=AJPERES&attachment=false&id=1716822709488',
-            buy:'onclick="btnSolicitarSVD()"',
-            more:'https://www.viabcp.com/seguros/complementarios/seguro-devolucion-total',
-            seguro:'SVD',
-            label:true
+            icono:'/wcm/connect/827c357e-26ff-45a9-a3a2-6242efa40e3a/seguro_vehicular.svg?MOD=AJPERES&attachment=true&id=1720025159794',
+            buy:'onclick="btnSolicitar(this)"',
+            more:'https://www.viabcp.com/seguros/vehicular/seguro-vehicular',
+            url:'https://ventasonline.pacifico.com.pe/seguro-vehicular/bcp/principal?utm_source=viabcp&utm_medium=organic&utm_campaign=2024-07_BBSS_AUTOS_AON_TRA_VIABCP-LANDING-SEGUROS&utm_content=TRA_TODOS_N-A_GEN_REGULAR_NONE_-MOD_NULL_AUTOS-VIABCP-LANDING-SEGUROS-CARD&from=viabcp-organic-2024-07_BBSS_AUTOS_AON_TRA_VIABCP-LANDING-SEGUROS-TRA_TODOS_N-A_GEN_REGULAR_NONE-_MOD_NULL_AUTOS-VIABCP-LANDING-SEGUROS-CARD',
+            seguro:'VEHICULAR',
+            label:{status:true,img:labelPromoAsterisk,clase:'label-sorteo'}
         },
         {
             subtitulo:'Seguro S.O.S. Salud',
-            titulo:'Protégete de inmediato y gana 1 vale de S/ 100. ',
-            precio:['A solo','S/ 49.90 al mes'],
+            titulo:'Protégete ante Emergencias Médicas y Accidentales.',
+            precio:['A solo','S/ 1.70 al día'],
             detalles:[
                 'Hasta S/ 30,000 en clínicas para emergencias mêdicas y accidentales.',
                 'Atención ambulatoria por emergencia accidental o médico-quirúrgica.',
                 'Reembolso de hasta S/ 5,000 en provincias donde no hayan clínicas afiliadas.'
             ],
             icono:'/wcm/connect/3a6624ce-a8a2-42c3-af7e-8d647dab5b02/sossalud.svg?MOD=AJPERES&attachment=true&id=1719961965724',
-            buy:'onclick="btnSolicitarSOSSALUD()"',
+            buy:'onclick="btnSolicitar(this)"',
             more:'https://www.viabcp.com/seguros/salud/sos-salud',
+            url:'https://www.viabcp.com/seguros/salud/sos-salud',
             seguro:'SOSSALUD',
-            label:true
+            label:{status:false,img:labelCyber,clase:'label-sorteo'}
+        },
+
+        {
+            subtitulo:'SOAT',
+            titulo:'Cómpralo online y obtén estos beneficios:',
+            precio:['Desde',`S/ ${obtenerPrecioHoy()} al año`],
+            detalles:[
+                'Programa de descuentos en más de 50 establecimientos afiliados.',
+                '20% de descuento en llantas y aros.',
+                'Planes de renovación automática o recompra directa.'
+            ],
+            icono:'/wcm/connect/af534155-b4af-4b05-9a83-29ece2ecc4e3/spc_+soat_hand_d_l.png?MOD=AJPERES&attachment=false&id=1716822386124',
+            buy:'onclick="btnSolicitarSOAT()"',
+            more:'https://www.viabcp.com/seguros/vehicular/soat',
+            seguro:'SOAT',
+            label:{status:false,img:labelCyber,clase:'label-sorteo'}
         },
         {
-            subtitulo:'Seguro Protección de Tarjeta Plus',
-            titulo:'Refuerza la protección de tus tarjetas BCP',
-            precio:['A solo','S/ 12.99 al mes'],
+            subtitulo:'Seguro Vida Devolución',
+            titulo:'Asegúrate y obtén más dinero',
+            precio:['Desde','S/ 48.00 al mes'],
             detalles:[
-                'Hasta S/15 mil en fraudes o compras no reconocidas por internet.',
-                'Hasta S/5 mil por robo de retiros en cajeros o agentes.',
-                'Hasta S/5 mil en transferencias no reconocidas en canales digitales.'
+                'Recupera hasta el 200% de lo pagado',
+                'Tu familia protegida hasta con S/ 200,000 en caso de fallecimiento',
+                'Médico a domicilio, consulta online, delivery de medicamentos y más'
             ],
-            icono:'https://www.viabcp.com/wcm/connect/0082ae29-8631-418f-8973-23e760858be1/spc_+card_hand_d_l.png?MOD=AJPERES&attachment=false&id=1716822883814',
-            buy:'onclick="btnSolicitarSPT()"',
-            more:'https://www.viabcp.com/seguros/financieros/proteccion-de-tarjetas',
-            seguro:'SPT',
-            label:false
-        },
-        {
-            subtitulo:'Seguro Vida Ahorro',
-            titulo:'Recupera el 120% de lo pagado y obtén estos beneficios:',
-            precio:['Desde','S/ 50.00 al mes'],
-            detalles:[
-                'Recupera el 120% de lo pagado al finalizar el plazo de 7 años.',
-                'S/ 20,000 en caso de fallecimiento para tus familiares.',
-                'Médico a domicilio, delivery de medicamentos y más.'
-            ],
-            icono:'https://www.viabcp.com/wcm/connect/1265f0c2-06e6-434f-bec7-6fa675945af4/spc_+empathy_hand_d_l-1.png?MOD=AJPERES&attachment=false&id=1716822808835',
-            buy:'onclick="btnSolicitarSVA()"',
-            more:'https://www.viabcp.com/seguros/salud/vida-ahorro',
-            seguro:'SVA',
-            label:false
-        },
-        {
-            subtitulo:'Seguro Onco Respaldo Digital',
-            titulo:'Protégete contra el cáncer',
-            precio:['A solo','S/ 12.99 al mes'],
-            detalles:[
-                'S/30 mil por el primer diagnóstico de cáncer',
-                '6 teleconsultas y orientación telefónica con médico general',
-                'Asesorías cuando lo necesites 24/7'
-            ],
-            icono:'https://www.viabcp.com/wcm/connect/e20356bc-aec9-4b0f-b1d0-c6a9b79d8489/spc_onco_hand_d_l.png?MOD=AJPERES&attachment=false&id=1716822355372',
-            buy:'onclick="btnSolicitarSOR()"',
-            more:'https://www.viabcp.com/seguros/salud/onco-respaldo-digital',
-            seguro:'SOR',
-            label:false
+            icono:'/wcm/connect/96bba10f-7658-402a-bbaf-d86225cc261b/spc_bills_dollars_d_l.png?MOD=AJPERES&attachment=false&id=1716822709488',
+            buy:'onclick="btnSolicitar(this)"',
+            more:'https://www.viabcp.com/seguros/complementarios/seguro-devolucion-total',
+            url:'https://ventasonline.pacifico.com.pe/seguro-vida-devolucion/bcp/principal?utm_source=own&utm_medium=organic&utm_campaign=2023-10_BBSS_VIDA_AON_CON_TEADS_PILOTO&utm_content=CON_TODOS_N-A_BBDD_MODAL-SEGUROS-BCP_NONE_-_IMG_NULL_MODAL-VDT-SEGUROS-BCP_AON-OCTUBRE&from=own_-_organic_-_2023-10_BBSS_VIDA_AON_CON_TEADS_PILOTO_-_CON_TODOS_N-A_BBDD_MODAL-SEGUROS-BCP_NONE_-_IMG_NULL_MODAL-VDT-SEGUROS-BCP_AON-OCTUBRE',
+            seguro:'SVD',
+            label:{status:false,img:labelPromoOnline,clase:'label-promo'}
         },
         {
             subtitulo:'Seguro de Viajes',
-            titulo:'Viaja seguro y sin preocupaciones',
-            precio:['Desde','$ 7.50 al día'],
+            titulo:'Asegúrate hoy y viaja con tranquilidad, Y obtén:',
+            precio:['Desde','$ 2.93 al día'],
             detalles:[
                 'Hasta $15 mil en asistencia médica.',
                 'Hasta $ 1,200 en pérdida de equipaje.',
                 'Hasta $ 800 en estadía por enfermedad o '
             ],
             icono:'/wcm/connect/a968bf61-6624-47df-a109-25a42db0c9c7/spot-circle-e-spc-email-hand-a-d-l.png?MOD=AJPERES&CACHEID=ROOTWORKSPACE-a968bf61-6624-47df-a109-25a42db0c9c7-ou.mbZY&cache=none',
-            buy:'onclick="btnSolicitarVIAJES()"',
+            buy:'onclick="btnSolicitar(this)"',
             more:'https://www.viabcp.com/seguros/complementarios/seguro-viajes',
+            url:'https://seguro-viaje.pacifico.com.pe/bcp?pcid=viabcp:seguros:seguro-de-viajes:masivo:cards',
             seguro:'VIAJES',
-            label:false
-        },
-        {
-            subtitulo:'Seguro Respaldo Vida',
-            titulo:'Brinda tranquilidad a tu familia',
-            precio:['A solo','S/ 12.99 al mes'],
-            detalles:[
-                'Hasta S/15 mil en fraudes o compras no reconocidas por internet.',
-                'Hasta S/5 mil por robo de retiros en cajeros o agentes.',
-                'S/8 mil si te diagnostican Cáncer por primera vez'
-            ],
-            icono:'https://www.viabcp.com/wcm/connect/c5a3a1c0-08a3-4b92-8fcc-49d013825a8c/spc_+empathy_hand_d_l.png?MOD=AJPERES&attachment=false&id=1716822417040',
-            buy:'onclick="btnSolicitarSRV()"',
-            more:'https://www.viabcp.com/seguros/salud/seguro-respaldo',
-            seguro:'SRV',
-            label:false
-        },
-        {
-            subtitulo:'Seguro Vehicular',
-            titulo:'Protección 100% para tu vehículo en caso de robo total',
-            precio:['Desde','S/ 57 al mes'],
-            detalles:[
-                'Hasta el 100% de tu vehículo en caso de robo total.',
-                'Hasta US$ 150,000 en daños ocasionados a otros vehículos y objetos.',
-                'Auxilio mecánico ilimitado y gratis ante cualquier problema mecánico o eléctrico.'
-            ],
-            icono:'/wcm/connect/827c357e-26ff-45a9-a3a2-6242efa40e3a/seguro_vehicular.svg?MOD=AJPERES&attachment=true&id=1720025159794',
-            buy:'onclick="btnSolicitarVEHICULAR()"',
-            more:'https://www.viabcp.com/seguros/vehicular/seguro-vehicular',
-            seguro:'VEHICULAR',
-            label:false
+            label:{status:false,img:labelCyber,clase:'label-sorteo'}
         }
     ];
   
     const iconCheck = `<svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M15.343 4.557a1.25 1.25 0 0 1 1.897 1.622l-.083.098-9.083 9.583a1.25 1.25 0 0 1-1.741.071l-.09-.09-3.417-3.75a1.25 1.25 0 0 1 1.757-1.773l.091.09 2.51 2.755 8.159-8.606z" fill="#3D77FF" fill-rule="evenodd"/></svg>`;
     const wrapCards = document.querySelector('.wrapCards');
-    const labelPromo = '/wcm/connect/d5e54796-cc31-4ed8-9282-df19b7f4c19f/cintillo_promo.svg?MOD=AJPERES&CACHEID=ROOTWORKSPACE-d5e54796-cc31-4ed8-9282-df19b7f4c19f-oK7COOz&cache=none'
-    const insertPromo = (promo)=>{ return promo ? `<div class="label-sorteo"><img src="${labelPromo}"></div>`:''}
+
+    const insertPromo = (promo) => promo.status ? `<div class="${promo.clase}">${promo.img}</div>`:'';
     dataCards.forEach((element)=>{
         const htmlCard = document.createElement("div");
         htmlCard.classList.add('seguro_card');
@@ -494,7 +449,8 @@
             return htmldetails;
         } 
         htmlCard.innerHTML =
-            `${insertPromo(element.label)}<div>
+            `${insertPromo(element.label)}
+            <div>
                 <img class="seguro_card_icono" src="${element.icono}" alt="">
                 <div class="seguro_card_content">
                     <span class="scc_subtitle">${element.subtitulo}</span>
@@ -533,30 +489,19 @@
     }
     //VARIABLES NUEVO TAGGEO - ADOBE
     const versionDataSeguro = "V20";
-    const productDataSeguro = {
-        SPT:"Seguros-SPT",
-        SOAT:"Seguros-SOAT",
-        VIDA:"Seguros-VIDA",
-        SOR:"Seguros-SOR",
-        SRV:"Seguros-SRV",
-        SVA:"Seguros-SVA",
-        SVD:"Seguros-SVD",
-        VIAJES:"Seguros-VIAJES",
-        SOSSALUD:"Seguros-SOSSALUD",
-        SV:"Seguros-VEHICULAR"
-    };
     const channelDataSeguro = "ViaBCP";
-    const grupoDataSeguro = {
-        SPT:"Seguros - SPT",
-        SOAT:"Seguros - SOAT",
-        VIDA:"Seguros - VIDA",
-        SOR:"Seguros - SOR",
-        SRV:"Seguros - SRV",
-        SVA:"Seguros - SVA",
-        SVD:"Seguros - SVD",
-        VIAJES:"Seguros-VIAJES",
-        SOSSALUD:"Seguros - SOSSALUD",
-        SV:"Seguros - VEHICULAR"
+    const dataTaggeoInsurance = {
+        SPT:{product:"Seguros-SPT", group:"Seguros - SPT"},
+        SOAT:{product:"Seguros-SOAT", group:"Seguros - SOAT"},
+        VIDA:{product:"Seguros-VIDA", group:"Seguros - VIDA"},
+        SOR:{product:"Seguros-SOR", group:"Seguros - SOR"},
+        SRV:{product:"Seguros-SRV", group:"Seguros - SRV"},
+        SVA:{product:"Seguros-SVA", group:"Seguros - SVA"},
+        SVD:{product:"Seguros-SVD", group:"Seguros - SVD"},
+        VIAJES:{product:"Seguros-VIAJES", group:"Seguros-VIAJES"},
+        SOSSALUD:{product:"Seguros-SOSSALUD", group:"Seguros - SOSSALUD"},
+        VEHICULAR:{product:"Seguros-VEHICULAR", group:"Seguros - VEHICULAR"},
+        VIVA:{product:"Seguros-VIVA", group:"Seguros - VIVA"}
     }
     // link_bases_navidad.addEventListener('click',()=>{
     //     window.open('https://www.viabcp.com/wcm/connect/ac742720-52d4-45b3-8b38-85e69cf346c5/Campa%C3%B1a+navide%C3%B1a+Seguros+BCP+27.11.pdf?MOD=AJPERES&attachment=true&id=1701267846926','_self')
@@ -568,29 +513,6 @@
             "event": "trackAction"
         })
     }
-    //Botones Ver mas - Deprecado
-    /*function btnVerMasSPT(){     
-        window.open("https://www.viabcp.com/seguros/financieros/proteccion-de-tarjetas", "_blank");
-    }
-    function btnVerMasSOR(){
-        window.open("https://www.viabcp.com/seguros/salud/onco-respaldo-digital", "_blank");
-    }
-    function btnVerMasSRV(){
-        window.open("https://www.viabcp.com/seguros/salud/seguro-respaldo", "_blank");
-    }
-    function btnVerMasSVA(){
-        window.open("https://www.viabcp.com/seguros/salud/vida-ahorro", "_blank");
-    }
-    function btnVerMasSOAT(){
-        window.open("https://www.viabcp.com/seguros/vehicular/soat", "_blank");
-    }
-    function btnVerMasVIAJES(){
-        window.open("https://www.viabcp.com/seguros/complementarios/seguro-viajes","_blank")
-    }
-    function btnVerMasSVD(){
-        window.open('https://www.viabcp.com/seguros/complementarios/seguro-devolucion-total','_blank')
-    }*/
-
     function getCookieValue(name) 
     {
       const regex = new RegExp(`(^| )${name}=([^;]+)`)
@@ -610,65 +532,30 @@
         function btnSolicitarSOR(){
             window.open("https://www.viabcp.com/seguros/salud/onco-respaldo-digital", "_blank");
         }
-        function btnSolicitarSOAT() {
-            window.open("https://soat.pacifico.com.pe/bcp/?utm_source=viabcp&utm_medium=organic&utm_campaign=2024-05_BBSS_SOAT_AON_TRA_VIABCP-LANDING-SEGUROS&utm_content=TRA_TODOS_N-A_GEN_REGULAR_NONE_-_CARD_NULL_SOAT-VIABCP-LANDING-SEGUROS&from=viabcp_-_organic_-_2024-05_BBSS_SOAT_AON_TRA_VIABCP-LANDING-SEGUROS_-_TRA_TODOS_N-A_GEN_REGULAR_NONE_-_CARD_NULL_SOAT-VIABCP-LANDING-SEGUROS","_blank");
-        }
+        
     }
-    // SEGURO SOAT
-    /*function btnSolicitarSOAT() {
-        window.open("https://web.pacifico.com.pe/seguros/soat/compraonline/bcp?from=viabcp_null_10_2022_aon_soat_soat_conversiones_banners_todos_soat-viabcp-marketplace-oct22_null&amp;utm_source=viabcp&amp;utm_medium=null&amp;utm_campaign=PBS_soat_AONPlataformas_aon_soat_2022_10_ECO&amp;pcid=viabcp:home:soat-desde-s42:masivo:que-hacemos-hoy5&amp;_ga=2.115182275.578410647.1683949165-1116877244.1683949164","_blank");
-        taggeoTrackAction(
-            productDataSeguro.SOAT,
-            grupoDataSeguro.SOAT,
-            document.querySelector('.seguro_card[data="SOAT"] .scc_title').innerText,
-            versionDataSeguro
-        )
-    }*/
-    // SEGURO DE VIAJES
-    function btnSolicitarVIAJES(){
-        const parametro = `?pcid=viabcp:seguros:seguro-de-viajes:masivo:cards`
-        window.open("https://seguro-viaje.pacifico.com.pe/bcp"+parametro,"_blank");
-        taggeoTrackAction(
-            productDataSeguro.VIAJES,
-            grupoDataSeguro.VIAJES,
-            document.querySelector('.seguro_card[data="VIAJES"] .scc_title').innerText,
-            versionDataSeguro
-        )
-    }
-    function btnSolicitarSVD(){
-        window.open("https://ventasonline.pacifico.com.pe/seguro-vida-devolucion/bcp/principal?utm_source=own&utm_medium=organic&utm_campaign=2023-10_BBSS_VIDA_AON_CON_TEADS_PILOTO&utm_content=CON_TODOS_N-A_BBDD_MODAL-SEGUROS-BCP_NONE_-_IMG_NULL_MODAL-VDT-SEGUROS-BCP_AON-OCTUBRE&from=own_-_organic_-_2023-10_BBSS_VIDA_AON_CON_TEADS_PILOTO_-_CON_TODOS_N-A_BBDD_MODAL-SEGUROS-BCP_NONE_-_IMG_NULL_MODAL-VDT-SEGUROS-BCP_AON-OCTUBRE","_blank");
-        taggeoTrackAction(
-            productDataSeguro.SVD,
-            grupoDataSeguro.SVD,
-            document.querySelector('.seguro_card[data="SVD"] .scc_title').innerText,
-            versionDataSeguro
-        )
-    }
+
     if(typeof btnSolicitarSVA != 'function') {
         function btnSolicitarSVA(){
             const url = 'https://ventasonline.pacifico.com.pe/seguro-vida-devolucion/promocionesbcp/principal?utm_source=&utm_medium=push&utm_campaign=2023-11_BBSS_SVA_AON_CON_TEST-SVA&utm_content=CON_TODOS_N-A_BBDD_FICHAPRODUCTO_-'
             window.open(url,'_blank')
         }
     }
-    function btnSolicitarVEHICULAR(){
-        const urlVehicular = 'https://ventasonline.pacifico.com.pe/seguro-vehicular/bcp/principal?utm_source=viabcp&utm_medium=organic&utm_campaign=2024-07_BBSS_AUTOS_AON_TRA_VIABCP-LANDING-SEGUROS&utm_content=TRA_TODOS_N-A_GEN_REGULAR_NONE_-MOD_NULL_AUTOS-VIABCP-LANDING-SEGUROS-CARD&from=viabcp-organic-2024-07_BBSS_AUTOS_AON_TRA_VIABCP-LANDING-SEGUROS-TRA_TODOS_N-A_GEN_REGULAR_NONE-_MOD_NULL_AUTOS-VIABCP-LANDING-SEGUROS-CARD'
-        window.open(urlVehicular,"_blank");
-        taggeoTrackAction(
-            productDataSeguro.SV,
-            grupoDataSeguro.SV,
-            document.querySelector('.seguro_card[data="VEHICULAR"] .scc_title').innerText,
-            versionDataSeguro
-        )
+    function btnSolicitarSOAT() {
+        window.open("https://soat.pacifico.com.pe/bcp/?utm_source=viabcp&utm_medium=organic&utm_campaign=2024-05_BBSS_SOAT_AON_TRA_VIABCP-LANDING-SEGUROS&utm_content=TRA_TODOS_N-A_GEN_REGULAR_NONE_-_CARD_NULL_SOAT-VIABCP-LANDING-SEGUROS&from=viabcp_-_organic_-_2024-05_BBSS_SOAT_AON_TRA_VIABCP-LANDING-SEGUROS_-_TRA_TODOS_N-A_GEN_REGULAR_NONE_-_CARD_NULL_SOAT-VIABCP-LANDING-SEGUROS","_blank");
     }
-    function btnSolicitarSOSSALUD(){
-        const url = 'https://www.viabcp.com/seguros/salud/sos-salud'
-        window.open(url,"_blank");
+    function btnSolicitar(activo){
+        console.log(activo)
+        const containerCard = activo.parentNode.parentNode
+        const nameInsuarance = containerCard.getAttribute('DATA')
+        const dataFind = dataCards.find(c => c.seguro == nameInsuarance)
         taggeoTrackAction(
-            productDataSeguro.SOSSALUD,
-            grupoDataSeguro.SOSSALUD,
-            document.querySelector('.seguro_card[data="SOSSALUD"] .scc_title').innerText,
+            dataTaggeoInsurance[nameInsuarance].product,
+            dataTaggeoInsurance[nameInsuarance].group,
+            containerCard.querySelector('.scc_title').innerText,
             versionDataSeguro
         )
+        window.open(dataFind.url,"_blank");
     }
     document.addEventListener("DOMContentLoaded",()=>{
         //insertTextBanner()
@@ -689,182 +576,45 @@
                 window.open(dataFind.more,'_blank')
             }
         })
+        //MODIFICA COLORES DEL BANNER
+        /* document.querySelectorAll('.bcp_banner_carousel_vertical .banner_carrusel_title')[1].style.color="#012d74" */
+        document.querySelectorAll('.bcp_banner_carousel_vertical .banner_carrusel_title')[2].style.color="#012d74"
+        /* document.querySelectorAll('.bcp_banner_carousel_vertical .banner_carrusel_subtitle')[1].style.color="#012d74"  */
+        document.querySelectorAll('.bcp_banner_carousel_vertical .banner_carrusel_subtitle')[2].style.color="#012d74"
     })
-  </script>
-  <!-- BEGIN - WHATSSAP-->
-  <style>
-    .whatsapp_btn{
-      position:fixed;
-      width:60px;
-      height:60px;
-      bottom:40px;
-      right:40px;
-      background-color:#25d366;
-      color:#FFF !important;
-      border-radius:50px;
-      text-align:center;
-        font-size:30px;
-      box-shadow: 2px 2px 3px #999;
-        z-index:100;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-  }
-  .whatsapp_btn > img {
-        width: 40px;
-        height: 40px;
-    }
-  
-  .my_whatsapp_btn{
-      margin-top:16px;
-  }
-    
-    
-      .exp-barra {
-          width: 100%;
-          display: flex;
-          justify-content: end;
-      }
-  
-      .exp-boton {
-          display: block;
-          background-color: transparent;
-          border: none;
-          padding: 0;
-          position: relative;
-      }
-  
-      .exp-cartel {
-          position: absolute;
-          top: 50%;
-          right: 90%;
-          transform: translateY(-50%);
-          width: max-content;
-          max-width: 300px;
-          padding: 8px 16px;
-          font-size: 14px;
-          font-weight: normal;
-          text-align: left;
-          pointer-events: none;
-          opacity: 0;
-          transition: all .3s ease-out;
-          background: #ECFCF2;
-          border-radius: 24px;
-          font-family: 'Flexo';
-          font-style: normal;
-          font-weight: 500;
-          font-size: 14px;
-          line-height: 17px;
-          color: #202E44;
-          filter: drop-shadow(0px 3px 4px rgba(82, 112, 148, 0.14)) drop-shadow(0px 3px 3px rgba(82, 112, 148, 0.12)) drop-shadow(0px 1px 8px rgba(82, 112, 148, 0.2));
-      }
-      .exp-cartel b {
-        font-weight: bold;
-        font-weight: 600;
-      }
-  
-      .exp-cartel::after {
-          content: "";
-          border: 7px solid transparent;
-          border-left: 12px solid #ECFCF2;
-          width: 0;
-          height: 0;
-          padding: 0;
-          position: absolute;
-          left: 100%;
-          top: 50%;
-          transform: translateY(-50%);
-          margin-left: -1px;
-      }
-  
-      .whatsapp_btn:hover .exp-cartel {
-          display: block;
-          opacity: 1;
-          right: 110%;
-      }
-  
-      @media screen and (max-width: 992px) {
-  
-          .whatsapp_btn .exp-cartel {
-              display: block;
-              /* opacity: 1;
-              right: 110%; */
-              /* transition-delay: 1s; */
-              animation: aparece .3s linear 1s;
-              animation-fill-mode: forwards;
-          }
-      }
-  
-      @keyframes aparece {
-          from {
-              opacity: 0;
-              right: 90%;
-          }
-  
-          to {
-              opacity: 1;
-              right: 110%;
-          }
-      }
-    
-  </style>
-  
-  
-  <a class="whatsapp_btn" target="_blank" style="display: none;">
-    <div class="exp-cartel">
-       <b>¿Deseas adquirir un seguro?</b> Escríbenos &#128153;</span>
-    </div>
-    <img src="/wcm/myconnect/c07ca1f4-3677-4ef5-bdfa-893221ce5121/MicrosoftTeams-image+%286%29.png?MOD=AJPERES&amp;CACHEID=ROOTWORKSPACE-c07ca1f4-3677-4ef5-bdfa-893221ce5121-p2i-Ege" alt="" />
-  </a>
-  
-  <script>
-    const dataWhatsapp = {
-        telefono: "+51945879874",
-        mensaje: "Hola,%20quiero%20m%C3%A1s%20informaci%C3%B3n%20sobre%20los%20seguros"
-    }
-    const expWspBtn = document.querySelector(".whatsapp_btn")
-    const expWspPopUp = document.getElementById("box-dialog")
-    const expInitUrl = location.href
-  
-    const obtenerDiaHoraActual=()=> {
-        let d = new Date()
-        let data = {day:d.getDay(), hour:d.getHours()};
-        return data
-    }
-    const verificarRangoHoras = (horaInicio, horaFin)=> {
-        let result = false
-        const current = obtenerDiaHoraActual();
-        const {day,hour} = current
-        const hourBoolean = hour >= horaInicio && hour <= horaFin
-        const dayboolean = day >= 1 && day <= 5
-        if(hourBoolean&&dayboolean){result = true}
-        return result
-    }
-
-    const rangoHorario = {
-        inicio: 14,
-        fin: 16
-    }
-    const ocultarChatFlotante = ()=>{
-        const chatFlotante = document.querySelector('.bcp_footer_ayuda_flotante');
-        if(chatFlotante){chatFlotante.style.display = 'none'};
-        console.log('ocultar chat');
-    }
-    
-    function activeWhattssap(estado) {
-        if(estado){
-            const link = `https://wa.me/${dataWhatsapp.telefono}?text=${dataWhatsapp.mensaje}`
-            expWspBtn.setAttribute("href", link);
-            expWspBtn.removeAttribute("style");
-        } else {
-            document.getElementById("box-dialog").innerHTML = "&#128151 Escríbenos de 10:00 a.m. a 5:00 p.m. para ayudarte";
-            expWspBtn.removeAttribute("style");
+    function searchUTM(dataSearch) {
+        try {
+            const {utm,actionTrue,actionFalse} = dataSearch
+            const urlParams = new URLSearchParams(window.location.search);
+            if(urlParams.has(utm)){
+                actionTrue(urlParams.get(utm))
+            } else {
+                actionFalse()
+            } 
+        } catch (error) {
+            console.error(error)
         }
     }
-    document.addEventListener("DOMContentLoaded",()=>{
-        /*if (verificarRangoHoras(rangoHorario.inicio, rangoHorario.fin)) {
-            ocultarChatFlotante()
-            activeWhattssap(true)
-        }*/
+    const redirectUrl = (data)=>{
+        const dataMatch = [
+            {
+                utm:'salud',
+                url:'https://www.viabcp.com/seguros/salud/sos-salud?utm_medium=ow&utm_source=sms&utm_campaign=bcpperf:sos:2025:tact:test:nn:cpl:conv&utm_content=sos:cta'
+            },
+            {
+                utm:'vida',
+                url:'https://www.viabcp.com/seguros/complementarios/seguro-devolucion-total?utm_medium=ow&utm_source=sms&utm_campaign=bcpperf:svd:2025:tact:test:nn:cpl:conv&utm_content=svd:cta'
+            },
+        ]
+        dataMatch.forEach((value)=>{
+            value.utm == data && window.open(value.url,'_self')
+        })
+    }
+    const redirectError = ()=>{console.log('no detecto url sms')}
+
+    searchUTM({
+        utm:'sms',
+        actionTrue:redirectUrl,
+        actionFalse:redirectError
     })
   </script>

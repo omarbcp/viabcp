@@ -1,0 +1,7 @@
+https://mcas-proxyweb.mcas.ms/certificate-checker?login=false&originalUrl=https%3A%2F%2Fwww.viabcp.com.mcas.ms%2Fseguros%2Fsalud%2Fsos-salud%3F
+
+utm_medium=pm
+utm_source=rappi
+utm_campaign=bcpperf%3Asos%3A2025%3Atact%3Aall%3Ann%3Acpl%3Aconv&
+utm_content=sos%3Aim%26McasTsid=20893&
+McasCSRF=ab3c7ca544cd1149f7e15ab433643ad720354e0ba961f70d0307141b639b9094

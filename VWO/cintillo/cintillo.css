@@ -1,0 +1,92 @@
+.bbss_content_cintillo_soat{
+    background-color: #0030B3;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    color: #FFFFFF;
+    height: 44px;
+    position: relative;
+    z-index: 2;
+}
+.bbss_content_cintillo_soat a{
+    color: #FF7800;
+    text-decoration: none;
+    outline: none;
+    font-weight: 600;
+}
+.bbss_content_cintillo_soat_text p{
+    margin: 0px;
+    font-size: 20px;
+    line-height: 32px;
+    font-family: 'Flexo';
+}
+.bbss_content_cintillo_soat_text span{
+    font-weight: 600;
+}
+.bbss_content_cintillo_soat_text .desktop{
+    display: block;
+}
+.bbss_content_cintillo_soat_text .mobile{
+    display: none;
+}
+.bbss_content_cintillo_soat_img{
+    margin-right: 32px;
+    display: flex;
+}
+.bbss_content_cintillo_soat_img .svg-img{
+    width: 32px;
+}
+@media(max-width:769px){
+    .bbss_content_cintillo_soat_img{
+        margin-right: 16px;
+    }
+    .bbss_content_cintillo_soat_text p{
+        margin: 0px;
+        font-size: 16px;
+        line-height: 20px;
+        font-family: 'Flexo';
+    }
+    .bbss_content_cintillo_soat_text .desktop{
+        display: none;
+    }
+    .bbss_content_cintillo_soat_text .mobile{
+        display: block;
+        text-align: left;
+    }
+    .bbss_content_cintillo_soat_text .mobile span{
+        display: block;
+    }
+    .bbss_content_cintillo_soat{
+        height: 60px;
+    }
+    .bbss_content_cintillo_soat_img .svg-img{
+        width: 50px;
+    }
+    .bbss_content_cintillo_container{
+        padding-top: 60px;
+    }
+}
+@media(max-width:900px){
+    .wrapper-banner{
+        height: 370px;
+    }
+    .main-section__main-container__form-wrapper__text,.main-section__main-container__form-wrapper__title__first,.main-section__main-container__form-wrapper__title__second{
+        color: #444444;
+    }
+    .container-image-banner picture img{
+        position: relative;
+        bottom: 36px;
+    }
+}
+@media(max-width:450px){
+    .wrapper-banner{
+        height: 143px;
+    }
+    .container-image-banner picture img{
+        width: 302px;
+        height: 271px;
+        position: relative;
+        bottom: 75px;
+    }
+}
+.contact-button{ display:none !important}

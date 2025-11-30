@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrusel CSS</title>
+    <style>
+        .carrusel {
+            width: 390px;
+            overflow: hidden;
+            position: absolute;
+            bottom: 50px;
+            right: 50px;
+        }
+
+        .carrusel-contenido {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+
+        .carrusel-item {
+            min-width: 100%;
+            box-sizing: border-box;
+        }
+
+        .carrusel img {
+            width: 100%;
+            display: block;
+        }
+
+        .carrusel-controles {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-50%);
+        }
+
+        .carrusel-controles button {
+            background-color: rgba(0, 0, 0, 0.5);
+            border: none;
+            color: white;
+            padding: 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="carrusel">
+        <div class="carrusel-contenido">
+            <div class="carrusel-item"><img src="https://www.interseguro.pe/soat-digital/images/banners/2024/july/slider-2-desktop.avif" alt="Imagen 1"></div>
+            <div class="carrusel-item"><img src="https://www.interseguro.pe/soat-digital/images/banners/2024/july/slider-3-desktop.avif" alt="Imagen 2"></div>
+        </div>
+        <div class="carrusel-controles">
+            <button id="prev">Anterior</button>
+            <button id="next">Siguiente</button>
+        </div>
+    </div>
+
+    <script>
+        const crearTag = (tagName, attributes = {}, content = '')=> {
+            const element = document.createElement(tagName);
+            // Asignar atributos
+            for (const [key, value] of Object.entries(attributes)) {
+                element.setAttribute(key, value);
+            }
+            // Asignar contenido
+            if (typeof content === 'string') {
+                element.innerHTML = content;
+            } else if (content instanceof Node) {
+                element.appendChild(content);
+            } else if (Array.isArray(content)) {
+                content.forEach(child => {
+                    if (typeof child === 'string') {
+                        element.innerHTML += child;
+                    } else if (child instanceof Node) {
+                        element.appendChild(child);
+                    }
+                });
+            }
+            return element;
+        }
+        const containerExperiment = document.querySelector('main section > div:nth-child(2) > div');
+        containerExperiment.innerHTML = '';
+        
+        const carruselContenido = crearTag('div', {class:'carrusel-contenido'},[
+            crearTag('div', {class:'carrusel-item'}, crearTag('img', {src:'https://www.viabcp.com/wcm/connect/3ce6badb-a616-4e1e-95b4-67ea960fb973/amore.svg?MOD=AJPERES&CACHEID=ROOTWORKSPACE-3ce6badb-a616-4e1e-95b4-67ea960fb973-oFS2Q1q', alt:'Imagen 1'})),
+            crearTag('div', {class:'carrusel-item'}, crearTag('img', {src:'https://www.viabcp.com/wcm/connect/dcb71b5a-9ee0-49d7-bc1c-d53d4511c60a/rosso+%281%29.svg?MOD=AJPERES&CACHEID=ROOTWORKSPACE-dcb71b5a-9ee0-49d7-bc1c-d53d4511c60a-oFS3ELV', alt:'Imagen 2'}))
+        ]);
+        const buttons = [
+            crearTag('button', {id:'prev'}, 'Anterior'),
+            crearTag('button', {id:'next'}, 'Siguiente')
+        ]
+        const carruselButtons = crearTag('div', {class:'carrusel-controles'},buttons);
+        const carrusel = crearTag('div', {class:'carrusel'},[carruselContenido, carruselButtons]);
+
+        
+        containerExperiment.appendChild(carrusel);
+
+        //const items = document.querySelectorAll('.carrusel-item');
+        const totalItems = 2;
+        let index = 0;
+
+        buttons[1].addEventListener('click', () => {
+            index = (index + 1) % totalItems;
+            carruselContenido.style.transform = `translateX(-${index * 100}%)`;
+        });
+        buttons[0].addEventListener('click', () => {
+            index = (index - 1 + totalItems) % totalItems;
+            carruselContenido.style.transform = `translateX(-${index * 100}%)`;
+        });
+    </script>
+</body>
+</html>

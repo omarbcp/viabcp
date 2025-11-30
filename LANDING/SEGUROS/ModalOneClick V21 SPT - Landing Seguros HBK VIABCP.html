@@ -1,0 +1,881 @@
+<!-- MODAL SPT - FLUJO HBK-->
+<script>
+
+    // let docScript = document.createElement('script');
+    // docScript.src = 'https://www.viabcp.com/wcm/connect/resources/templates/formulario/formulario.min.js?subtype=javascript&v=20240406'
+    // document.head.append(docScript);
+
+    let scriptCaptcha = document.createElement('script');
+    scriptCaptcha.src = 'https://www.google.com/recaptcha/api.js?onload=onloadCallbackrecaptcha&render=explicit';
+    scriptCaptcha.async = true;
+    document.body.append(scriptCaptcha);
+</script>
+<style>
+    #frmMocSegurosHome22 .item_vacio {
+        width: 30px;
+    }
+
+    #frmMocSegurosHome22 .hidden-captcha {
+        display: none;
+    }
+
+    #frmMocSegurosHome22.contenedor_moc_home_principal22 {
+        z-index: 9999;
+    }
+
+    #frmMocSegurosHome22 .contenedor_moc_home22.abrir {
+        animation: keyframe_moc_abrir22 .5s;
+        top: 104px;
+    }
+
+    #frmMocSegurosHome22 .contenedor_moc_home22.cerrar {
+        animation: keyframe_moc_cerrar22 .5s;
+    }
+
+    #frmMocSegurosHome22 .contenedor_moc_home22 {
+        max-width: 400px;
+        width: 100%;
+        box-shadow: 0px 8px 16px rgba(0, 67, 206, 0.1);
+        border-radius: 10px 10px 8px 8px;
+        background-color: #FFFFFF;
+        position: fixed;
+    }
+
+    #frmMocSegurosHome22 .contenedor_moc_header_home {
+        border-radius: 8px 8px 0px 0px;
+        padding: 16px;
+        height: initial;
+    }
+
+    #frmMocSegurosHome22 .contenedor_moc_close_header {
+        position: relative;
+        height: 0px;
+        text-align: right;
+        z-index: 1;
+    }
+
+    #frmMocSegurosHome22 .contenedor_moc_close_header img {
+        cursor: pointer;
+        margin: 16px 16px 0px 0px;
+        width: 24px;
+    }
+
+    #frmMocSegurosHome22 .contenedor_moc_close_header img.paso_2 {
+        filter: brightness(0) saturate(100%) invert(45%) sepia(83%) saturate(1215%) hue-rotate(360deg) brightness(101%) contrast(106%);
+    }
+
+    #frmMocSegurosHome22 .contenedor_moc_header_modal {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        height: initial;
+    }
+
+    #frmMocSegurosHome22 .contenedor_moc_header_home h2,
+    #frmMocSegurosHome22 .contenedor_moc_header_home p {
+        margin: 0px;
+        color: #000000;
+    }
+
+    #frmMocSegurosHome22 .contenedor_moc_header_home h2 {
+        font-size: 20px;
+        line-height: 28px;
+        font-family: 'Flexo';
+        margin-bottom: 8px;
+        max-width: 211px;
+    }
+
+    #frmMocSegurosHome22 .contenedor_moc_header_home p {
+        font-size: 14px;
+        line-height: 18px;
+        font-family: 'Flexo';
+        font-weight: bold;
+        width: 208px;
+    }
+
+    #frmMocSegurosHome22 .contenedor_moc_image_header img {
+        position: relative;
+        right: 5px;
+        top: 0px;
+        width: 49px;
+        margin-right: 16px;
+    }
+
+    #frmMocSegurosHome22 .contenedor_moc_body_home {
+        padding: 16px;
+    }
+
+    #frmMocSegurosHome22 .contenedor_moc_coberturas p {
+        margin: 0px;
+    }
+
+    #frmMocSegurosHome22 .contenedor_moc_coberturas ul {
+        list-style: none;
+        padding: 0px;
+        margin: 0px;
+    }
+
+    #frmMocSegurosHome22 .contenedor_moc_coberturas ul li {
+        display: flex;
+        align-items: flex-start;
+
+    }
+
+    #frmMocSegurosHome22 .contenedor_moc_coberturas ul li img {
+        height: 20px;
+        margin-right: 10px;
+    }
+
+    #frmMocSegurosHome22 .contenedor_moc_coberturas ul li p {
+        max-width: 422px;
+        max-height: 40px;
+    }
+
+    #frmMocSegurosHome22 .contenedor_moc_coberturas p:nth-child(1) {
+        color: #002a8d;
+        font-size: 16px;
+        line-height: 24px;
+        font-family: 'Flexo-Demi';
+        margin-bottom: 8px;
+    }
+
+    #frmMocSegurosHome22 .contenedor_moc_coberturas ul p {
+        color: #202e44;
+        font-size: 14px;
+        line-height: 20px;
+        font-family: 'Flexo';
+        margin-bottom: 8px;
+    }
+
+    #frmMocSegurosHome22 .contenedor_moc_coberturas li:last-child p {
+        margin-bottom: 2px;
+    }
+
+    #frmMocSegurosHome22 .contenedor_moc_legales p {
+        margin: 0px;
+        font-size: 12px;
+        line-height: 18px;
+        color: #868f9e;
+        font-family: 'Flexo';
+    }
+
+    #frmMocSegurosHome22 .contenedor_moc_legales p a {
+        color: #ff7800;
+        cursor: pointer;
+        font-family: 'Flexo-Demi';
+        text-decoration: none;
+    }
+
+    #frmMocSegurosHome22 .contenedor_moc_button {
+        margin-top: 16px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 16px;
+        padding-top: 0px;
+        height: initial;
+    }
+
+    #frmMocSegurosHome22 .contenedor_moc_button button {
+        outline: none;
+        border: none;
+        cursor: pointer;
+        font-family: 'Flexo';
+        max-width: 180px;
+        width: 100%;
+    }
+
+    #frmMocSegurosHome22 .contenedor_moc_button .btn_no_gracias {
+        color: #202e44;
+        font-size: 16px;
+        background-color: #FFFFFF;
+        width: 100%;
+        max-width: 180px;
+        height: 40px;
+        border: 1px solid #acb2bd;
+        border-radius: 20px;
+    }
+
+    #frmMocSegurosHome22 .contenedor_moc_button .btn_no_gracias:hover {
+        background-color: transparent !important;
+    }
+
+    #frmMocSegurosHome22 .bcp_boton_naranja {
+        background-color: transparent;
+        border-color: #ff7800;
+        background-color: #ff7800;
+        color: #FFFFFF;
+        font-size: 16px;
+        width: 128px;
+        height: 40px;
+        cursor: pointer;
+        border-radius: 20px;
+        outline: none;
+        border: none;
+        cursor: pointer;
+        font-family: 'Flexo';
+    }
+
+    #frmMocSegurosHome22 .contenedor_moc_input {
+        margin-bottom: 8px;
+    }
+    #frmMocSegurosHome22 .contenedor_moc_input .bcp_input_microcomponent {
+        margin-bottom: 0px !important;
+    }
+    #frmMocSegurosHome22 .contenedor_moc_checkbox form-check.horizontal .bcp_checkbox_microcomponent{
+        align-items: flex-start !important;
+    }
+    #frmMocSegurosHome22 .contenedor_moc_checkbox form-check.horizontal{
+        margin-bottom: 0px;
+    }
+    #frmMocSegurosHome22 .contenedor_moc_checkbox form-check.horizontal .bcp_check_titulo_group{
+        display:none;
+    }
+
+    @keyframes keyframe_moc_cerrar22 {
+        0% {top: 99px}
+        80% {top: 450px;}
+        100% {bottom: -100%;}
+    }
+
+    @keyframes keyframe_moc_abrir22 {
+        0% {top: -100%;}
+        80% {top: 120px;}
+        100% {top: 99px;}
+    }
+    #frmMocSegurosHome22.contenedor_moc_home_principal22 {
+        background-color: rgb(32 46 68 / 85%);
+        position: fixed;
+        top: 0px;
+        left: 0px;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: flex-end;
+        justify-content: center;
+    }
+
+    @media(max-width:990px) {
+        #frmMocSegurosHome22 .contenedor_moc_home22 {
+            margin: auto;
+            right: initial;
+        }
+        #frmMocSegurosHome22 .contenedor_moc_home22.abrir {
+            animation: keyframe_moc_abrir22 1s
+        }
+    }
+
+    @media(max-width:560px) {
+        #frmMocSegurosHome22 .contenedor_moc_button button{
+            max-width: 139px;
+        }
+        #frmMocSegurosHome22 .contenedor_moc_button .btn_no_gracias{
+            max-width: 139px;
+        }
+    }
+
+    #frmMocSegurosHome22 .contenedor_moc_home_card.ocultar {
+        display: none;
+    }
+
+    #frmMocSegurosHome22 .contenedor_moc_confirm_img {
+        padding-top: 24px;
+        padding-bottom: 16px;
+    }
+
+    #frmMocSegurosHome22 .contenedor_moc_confirm_title h3 {
+        margin: auto;
+        font-size: 24px;
+        line-height: 32px;
+        color: #002a8d;
+        font-family: 'Flexo-Demi';
+        max-width: 320px;
+        margin-bottom: 16px;
+    }
+
+    #frmMocSegurosHome22 .contenedor_moc_confirm_title p {
+        margin: auto;
+        font-size: 14px;
+        width: 412px;
+        line-height: 20px;
+        color: #202e44;
+        font-family: 'Flexo';
+        margin-bottom: 16px;
+    }
+
+    #frmMocSegurosHome22 .contenedor_moc_confirm_cancelar {
+        max-width: 424px;
+        height: 86px;
+        margin: auto;
+        padding: 16px;
+        border-radius: 8px;
+        background-color: #ebf4ff;
+        margin-bottom: 35px;
+        text-align: center;
+    }
+
+    #frmMocSegurosHome22 .contenedor_moc_confirm_cancelar h3 {
+        margin: 0px;
+        font-family: 'Flexo-Demi';
+        line-height: 18px;
+        font-size: 12px;
+        color: #002a8d;
+    }
+
+    #frmMocSegurosHome22 .contenedor_moc_confirm_cancelar p {
+        margin: 0px;
+        font-family: 'Flexo';
+        font-size: 12px;
+        line-height: 18px;
+        color: #002a8d;
+    }
+
+    #frmMocSegurosHome22 .contenedor_moc_confirm_cancelar p a {
+        color: #ff7800;
+        font-family: 'Flexo-Demi';
+        cursor: pointer;
+    }
+
+    #frmMocSegurosHome22 .contenedor_moc_confirm_link {
+        margin-bottom: 32px;
+    }
+
+    #frmMocSegurosHome22 .contenedor_moc_confirm_link a {
+        cursor: pointer;
+        color: #ff7800;
+        font-size: 16px;
+        font-family: 'Flexo-Demi';
+    }
+
+    #frmMocSegurosHome22 .contenedor_moc_home_confirmacion {
+        text-align: center;
+    }
+
+    #frmMocSegurosHome22 .btn_entendido {
+        margin: auto;
+        margin-bottom: 24px;
+        width: 140px;
+
+    }
+    #frmMocSegurosHome22 .contenedor_moc_precio p{
+        margin: 0px;
+        text-align: center;
+        font-size: 16px;
+        line-height: 24px;
+        font-family: 'Flexo';
+    }
+    #frmMocSegurosHome22 .hr-style{
+        border: 1px solid #e8e8e8;
+        margin: 0px;
+        margin-bottom: 16px;
+    } 
+
+    /* INPUT */
+    #frmMocSegurosHome22 .contenedor_moc_input{
+        margin-top: 21px;
+        margin-bottom: 12px;
+    }
+    #frmMocSegurosHome22 .contenedor_moc_input input{
+        width: 100%;
+        height: 48px;
+        border-radius: 8px;
+        outline:none;
+        border: 1px solid #868f9e;
+        font-size: 16px;
+        color: #99a1ad;
+        padding: 16px;
+        font-family: 'Flexo-Demi';
+    }
+    #frmMocSegurosHome22 #input_documento_hbk::-webkit-outer-spin-button,
+    #frmMocSegurosHome22 #input_documento_hbk::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+    #frmMocSegurosHome22 #input_documento_hbk {
+        -moz-appearance: textfield;
+    }
+    #frmMocSegurosHome22 .main_title{
+        font-size: 20px;
+        line-height: 28px;
+        color: #002a8d;
+        text-align: center;
+        margin: 0px;
+        margin-bottom: 24px;
+    }
+    #frmMocSegurosHome22 #input_documento_hbk.alerta{
+        border-color: red;
+    } 
+</style>
+<div id="frmMocSegurosHome22" class="contenedor_moc_home_principal22" style="display: none;">
+    <div class="contenedor_moc_home22 abrir">
+        <div class="contenedor_moc_close_header">
+            <img src="https://www.viabcp.com/wcm/connect/bbcbedfb-7861-4d2a-8618-e0fd3a50363e/ic_close%402x.png?MOD=AJPERES&attachment=false"
+                alt="">
+        </div>
+        <div class="contenedor_moc_home_compra contenedor_moc_home_card">
+            <div class="contenedor_moc_header_home">
+                <div class="contenedor_moc_header_modal">
+                    <div class="contenedor_moc_image_header">
+                        <img src="" alt="">
+                    </div>
+                    <div class="contenedor_moc_title_header">
+                        <h2></h2>
+                    </div>
+                </div>
+            </div>
+            <div class="contenedor_moc_body_home">
+                <div class="contenedor_moc_coberturas">
+                    <ul class="contenedor_moc_list_coberturas">
+
+                    </ul>
+                </div>
+                <div class="contenedor_moc_actions">
+                    <div class="contenedor_moc_input">
+                        <input onKeyPress="if(this.value.length==8) return false;"
+                            placeholder="Ingresa tu número de DNI" id="input_documento_hbk" name="frmMocSegurosHome_input_doc" type="number">
+                        <!-- <label for="frmMocSegurosHome_input_doc">Ingresa tu DNI</label> -->
+                        <!-- <span class="bcp_mensaje_error">Ingresa Nº documento válido.</span> -->
+                    </div>
+                    <!-- <div class="contenedor_moc_checkbox">
+                        <label class="container-cb_sva">Declaro NO tener obligaciones tributarias fuera de Perú
+                            <input type="checkbox" id="checkbox_onco_modal_crossell_sva"> 
+                            <span class="checkmark_modal_sva"></span> 
+                        </label>
+                    </div> -->
+                    <div class="contenedor_moc_legales">
+                        <p>
+                            <!-- El click en "Comprar" confirma la solicitud, el envío de la póliza vía electrónica, la aceptación de los <a target="_blank" href="">Términos y condiciones</a> y el débito en la cuenta de ahorros vigente con mayor saldo. Límite de edad: 18 a 65 años. Periodo de carencia de 30 días. -->
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <hr class="hr-style">
+            <div class="contenedor_moc_precio">
+                <p>Por solo <b>S/ 12.99</b> al mes</p>
+            </div>
+            <div class="contenedor_moc_button">
+                <button class="bcp_boton_blanco btn_no_gracias">
+                    No, gracias
+                </button>
+                <button class="bcp_boton_naranja  btn_comprar">
+                    Comprar
+                </button>
+            </div>
+            <div class="hidden-captcha">
+                <form-captcha id="recaptchaModalOneClick" datacallback="enviarDatosModalOneClick"></form-captcha>
+            </div>
+        </div>
+        <div class="contenedor_moc_home_confirmacion contenedor_moc_home_card ocultar">
+            <div class="contenedor_moc_confirm_img">
+                <img src="https://www.viabcp.com/wcm/connect/58f644ae-5f12-4aeb-9ae7-f282959ced60/spot-circle-m-spc-mobile-success-hand-d-l.png?MOD=AJPERES&attachment=false&id=1683211517310"
+                    alt="">
+            </div>
+            <div class="contenedor_moc_confirm_title">
+                <h3>¡Gracias! Estamos procesando tu solicitud</h3>
+                <p></p>
+            </div>
+            <div class="contenedor_moc_confirm_action">
+                <button class="bcp_boton_naranja btn_entendido">
+                    Entendido
+                </button>
+            </div>
+            <div class="contenedor_moc_confirm_cancelar">
+                <h3>¿Quieres cancelar este seguro?</h3>
+                <p>
+                    Ingresa tus datos <a class="cancelar_solicitud">aquí</a> y procederemos con
+                    la baja de tu seguro a la brevedad.
+                </p>
+            </div>
+        </div>
+    </div>
+</div> 
+<script>
+    console.warn('Cargando visor de modal')
+    //BEGIN - VARIABLES TAGGEO
+    const hbk_versionModal = "V21";
+    const hbk_productModal = "Seguros-SPT";
+    const hbk_productModalAlternativo = "Seguros-SVA";
+    const hbk_channelModal = "ViaBCP - Landing Seguros";
+    const hbk_grupoModal = "ViaBCP - Landing Seguros - Widget One Click";
+    const hbk_tituloLandingSPT = "Seguro Protección Tarjetas Plus";
+    const hbk_tituloLandingSVA = "Seguro Vida Ahorro";
+    //EBD - VARIABLES TAGGEO
+    const hbk_icon_close = "https://www.viabcp.com/wcm/connect/bbcbedfb-7861-4d2a-8618-e0fd3a50363e/ic_close%402x.png?MOD=AJPERES&attachment=false";
+    const hbk_icon_check = "https://www.viabcp.com/wcm/connect/6f3fb900-aebc-40bf-8b8d-7ae4c663cf0f/ic_check.png?MOD=AJPERES&attachment=false"
+    const hbk_frmMocSegurosHome = document.querySelector('#frmMocSegurosHome22');
+    const formContentMOCSegurosHome22 = new Formulario(hbk_frmMocSegurosHome);
+    const frmMocSegurosHomeCaptcha22 = hbk_frmMocSegurosHome.querySelector('#recaptchaModalOneClick')
+    const hbk_closeModalOC = hbk_frmMocSegurosHome.querySelector('.contenedor_moc_close_header img')
+    const inputDNI = document.getElementById('input_documento_hbk');
+    const hbk_btnComprar = document.querySelector('.btn_comprar');
+    const hbk_captchaModalOneClickSPT = document.querySelector('#recaptchaModalOneClick');
+    const hbk_dataEnvioRegistro = {
+        productopromocion:'Protección de Tarjeta',
+        abreviaturaproducto:'SPT'
+    }
+
+    const hbk_data_cards_seguros=[
+        {
+            id:'sor',
+            title_modal: 'Obtén tu Seguro Onco Respaldo Digital',
+            header_color:'#ece4fc',
+            border_color:'#b59ce2',
+            spot:'https://www.viabcp.com/wcm/connect/49065ad3-c147-4020-8162-7ff3fc924795/Seguro-Onco-Respaldo%402x.png?MOD=AJPERES&attachment=false',
+            data_card:{
+                title:'Onco Respaldo Digital',subtitle:'Protégete del cáncer',
+                price:'<label>Por solo</label><br><b>S/ 12.99</b> al mes',
+                action_id:'obtener_sor'
+            },
+            data_modal:{
+                title:'Seguro Onco Respaldo Digital',
+                coberturas:[
+                    {icon:hbk_icon_check,title:'S/30 mil por el primer diagnóstico de cáncer.'},
+                    {icon:hbk_icon_check,title:'6 teleconsultas y orientación telefónica con médico general.'},
+                    {icon:hbk_icon_check,title:'Asesorías cuando lo necesites 24/7.'},
+                ],
+                terminos:'El click en "Comprar" confirma la solicitud, el envío de la póliza vía electrónica, la aceptación de los <a href="/wcm/myconnect/944bf580-b46b-457a-a60f-71b23a4a2900/TERMINOS%2BY%2BCONDICIONES%2BSOR_MAR_2023+V20231704.pdf?MOD=AJPERES&amp;CVID=our2tQW&amp;useDefaultText=0&amp;useDefaultDesc=0&amp;attachment=false&amp;id=1681933396896" target="_blank" title="" class="link_terminos">Términos y condiciones</a> y el débito en la cuenta de ahorros vigente con mayor saldo. Límite de edad: 18 años a más. Periodo de carencia de 30 días. <b>Este seguro será válido únicamente para asegurados que no hayan tenido cáncer previamente.</b>',
+                link_terminos:'https://www.viabcp.com/wcm/connect/944bf580-b46b-457a-a60f-71b23a4a2900/TERMINOS%2BY%2BCONDICIONES%2BSOR_MAR_2023+V20231704.pdf?MOD=AJPERES&attachment=false&id=1681933396896',
+                precio:'Por solo <b>S/ 12.99</b> al mes',
+                action_comprar:'comprar_sor',
+                action_no_gracias:'no_gracias_sor'
+            },
+            dataRequest: {
+                productopromocion: 'Seguro Onco Respaldo Digital',
+                abreviaturaproducto: 'SOR'
+            },
+            texto_gracias: 'En los próximos días te confirmaremos la activación de tu <b>Seguro Onco Respaldo Digital</b> a través de tu correo.'
+        },
+        {
+            id:'sva',
+            title_modal: 'Obtén tu Seguro Vida Ahorro aquí',
+            header_color:'#d4faf5',
+            border_color:'#65cfc1',
+            spot:'https://www.viabcp.com/wcm/connect/d67583ab-8450-4bcb-a486-374a15065246/Seguro-Vida-Ahorro%402x.png?MOD=AJPERES&attachment=false',
+            data_card:{
+                title:'Seguro Vida Ahorro',subtitle:'Recupera el 120% de tu aporte y protege a tu familia',
+                price:'<label>Desde</label> <br><b>S/ 50</b> al mes',
+                action_id:'obtener_sva'
+            },
+            data_modal:{
+                title:'Seguro Vida Ahorro',
+                coberturas:[
+                    {icon:hbk_icon_check,title:'S/20 mil en caso de fallecimiento.'},
+                    {icon:hbk_icon_check,title:'S/50 diarios desde el 2do día si eres hospitalizado.'},
+                    {icon:hbk_icon_check,title:'S/8 mil si te diagnostican Cáncer por primera vez.'},
+                    {icon: '', title: '<b class="b-cuota-text">Conoce tu cuota <a class="link_tabla_cuotas">aquí</a></b>' }
+                ],
+                checkbox:'check_sva',
+                text_checkbox:'Declaro no tener obligaciones tributarias fuera del Perú',
+                terminos:'El click en “Comprar” confirma la solicitud, el envío de la póliza vía electrónica, la aceptación de los <a href="/wcm/myconnect/0bbe0076-dbd3-46d6-b2ff-5a8bb524d810/Terminos+y+Condiciones+Seguro+Vida+Ahorro+v2.pdf?MOD=AJPERES&amp;CVID=orwFLGt&amp;useDefaultText=0&amp;useDefaultDesc=0&amp;attachment=false&amp;id=1678806215170" target="_blank" title="">Términos y condiciones</a> y el débito en la cuenta de ahorros vigente con mayor saldo. Límite de edad: 18 años a 63 años. Prima no incluye IGV por inafectación.',
+                link_terminos:'https://www.viabcp.com/wcm/connect/0bbe0076-dbd3-46d6-b2ff-5a8bb524d810/Terminos+y+Condiciones+Seguro+Vida+Ahorro+v2.pdf?MOD=AJPERES&attachment=false&id=1678806215170',
+                precio:'Desde <b>S/ 50</b> al mes',
+                action_comprar:'comprar_sor',
+                action_no_gracias:'no_gracias_sor',
+            },
+            dataRequest: {
+                productopromocion: 'Seguro Vida Ahorro',
+                abreviaturaproducto: 'SVA'
+            },
+            texto_gracias: 'En los próximos días te confirmaremos la activación de tu <b>Seguro Vida Ahorro</b> a través de tu correo.'
+        },
+        {
+            id:'srv',
+            title_modal: 'Obtén tu Seguro Respaldo Vida aquí',
+            header_color:'#d2eefc',
+            border_color:'#6fb7e3',
+            spot:'https://www.viabcp.com/wcm/connect/0a406590-a25d-4d36-82b7-57e6ef1b0c80/Seguro-Respaldo-Vida%402x.png?MOD=AJPERES&attachment=false',
+            data_card:{
+                title:'Seguro Respaldo Vida',subtitle:'Protege a tu familia',
+                price:'<label>Por solo</label><br><b>S/ 12.99</b> al mes',
+                action_id:'obtener_srv'
+            },
+            data_modal:{
+                title:'Seguro Respaldo Vida',
+                coberturas:[
+                    {icon:hbk_icon_check,title:'S/30 mil por el primer diagnóstico de cáncer.'},
+                    {icon:hbk_icon_check,title:'6 teleconsultas y orientación telefónica con médico general.'},
+                    {icon:hbk_icon_check,title:'Asesorías cuando lo necesites 24/7.'}
+                ],
+                terminos:'El click en "Comprar" confirma la solicitud, el envío de la póliza vía electrónica, la aceptación de los <a target="_blank" href="/wcm/myconnect/a46fa07b-e0ec-427a-a64b-a38e48115f0c/TYC_VIABCP_SRV.pdf?MOD=AJPERES&amp;CVID=oa3Ldb1&amp;useDefaultText=0&amp;useDefaultDesc=0&amp;attachment=false&amp;id=1668186570527" title="" class="link_terminos">Términos y condiciones</a> y el débito en la cuenta de ahorros vigente con mayor saldo. Límite de edad: 18 años a 65 años. Prima no incluye IGV por inafectación.',
+                link_terminos:'https://www.viabcp.com/wcm/connect/a46fa07b-e0ec-427a-a64b-a38e48115f0c/TYC_VIABCP_SRV.pdf?MOD=AJPERES&attachment=false&id=1668186570527',
+                precio:'Por solo <b>S/ 12.99</b> al mes',
+                action_comprar:'comprar_srv',
+                action_no_gracias:'no_gracias_srv'
+            },
+            dataRequest: {
+                productopromocion: 'Seguro Respaldo',
+                abreviaturaproducto: 'SRV'
+            },
+            texto_gracias: 'En los próximos días te confirmaremos la activación de tu <b>Seguro Respaldo Vida</b> a través de tu correo.'
+        },
+        {
+            id:'spt',
+            title_modal: 'Obtén tu Seguro de Protección de Tarjetas Plus',
+            header_color:'#d1e6ff',
+            border_color:'#70a9ff',
+            spot:'https://www.viabcp.com/wcm/connect/eb928d63-3452-401c-ae00-884374410475/Seguro-Protecci%C3%B3n-de-Tarjetas-Plus%402x.png?MOD=AJPERES&attachment=false',
+            data_card:{
+                title:'Protección de Tarjetas Plus',subtitle:'Protege tus tarjetas BCP ante fraude y/o robos',
+                price:'<label>Por solo</label><br><b>S/ 12.99</b> al mes (Inc. IGV)',
+                action_id:'obtener_spt'
+            },
+            data_modal:{
+                title:'Seguro Protección de Tarjetas Plus',
+                coberturas:[
+                    {icon:hbk_icon_check,title:'Hasta S/15 mil en fraude por internet y otros.'},
+                    {icon:hbk_icon_check,title:'Robo por retiros de cajeros y agentes.'},
+                    {icon:hbk_icon_check,title:'Transferencias no reconocidas.'},
+                ],
+                terminos:'El click en "Comprar" confirma la solicitud, el envío de la póliza vía electrónica, la aceptación de los <a target="_blank" href="/wcm/myconnect/54bb8ed7-e3c9-43fa-8342-b01b4e38ff19/TYC_VIABCP_SPT.pdf?MOD=AJPERES&amp;CVID=oa3LLIJ&amp;useDefaultText=0&amp;useDefaultDesc=0&amp;attachment=false&amp;id=1668183042294" title="" class="link_terminos">Términos y condiciones</a> y el débito en la cuenta de ahorros vigente con mayor saldo. Límite de edad: 18 años a más',
+                precio:'Por solo <b>S/ 12.99</b> al mes (Inc. IGV)',
+                action_comprar:'comprar_spt',
+                action_no_gracias:'no_gracias_spt'
+            },
+            dataRequest: {
+                productopromocion: 'Protección de Tarjeta',
+                abreviaturaproducto: 'SPT'
+            },
+            texto_gracias: 'En los próximos días te confirmaremos la activación de tu <b>Seguro de Protección de Tarjetas Plus</b> a través de tu correo.'
+        }
+    ]
+    const renderizarCaptchaModalOneClickSPT22 = () => {
+        console.log('captcha', formContentMOCSegurosHome22.Captcha.getAttribute('index'));
+        if (!formContentMOCSegurosHome22.Captcha.getAttribute('index')) {
+            try {
+                formContentMOCSegurosHome22.RenderIndividualCaptcha.SetRederCaptcha(frmMocSegurosHomeCaptcha22);
+            } catch (error) {
+
+            }
+            setTimeout(() => {
+                // btnObtenerModalOneClickSPT.removeAttribute('disabled');
+                console.log('captcha-forcerender', formContentMOCSegurosHome22.Captcha.getAttribute('index'));
+            }, 500);
+        }
+    }
+    function generarModalRechazadosHBK(seguro){
+        try {
+            //inputDNI.value = "";
+            //inputDNI.classList.remove('alerta')
+            const data = hbk_data_cards_seguros.find(function(elem){return elem.id==seguro})
+            const contMocHome = document.querySelector('.contenedor_moc_home22');
+            contMocHome.querySelector('.contenedor_moc_header_home').style.backgroundColor=data.header_color;
+            contMocHome.querySelector('.contenedor_moc_image_header img').src=data.spot;
+            contMocHome.querySelector('.contenedor_moc_title_header h2').innerHTML = data.data_modal.title;
+            let list_cobertura = "";
+            data.data_modal.coberturas.forEach(function(element){
+                if(element.icon==''){
+                    list_cobertura +='<li>'+'<div class="item_vacio"></div>'+'<p>'+ element.title +'</p>'+'</li>';
+                }else{
+                    list_cobertura += '<li>'+'<img  src="'+ element.icon +'">'+'<p>'+ element.title +'</p>'+'</li>';
+                }
+            })
+            contMocHome.querySelector('.contenedor_moc_list_coberturas').innerHTML=list_cobertura;
+            contMocHome.querySelector('.contenedor_moc_legales p').innerHTML=data.data_modal.terminos;
+            contMocHome.querySelector('.contenedor_moc_precio p').innerHTML = data.data_modal.precio;
+            contMocHome.querySelector('.contenedor_moc_confirm_title p').innerHTML = data.texto_gracias;
+            //contMocHome.querySelector('.contenedor_moc_checkbox').innerHTML = "";
+            if(seguro=='sva'){
+                const tablaCuotas = document.querySelector('.modal_container_cuotas');
+                document.querySelector('.link_tabla_cuotas').addEventListener('click', function() {
+                    tablaCuotas.removeAttribute('style');
+                })
+
+                document.querySelector('.container_cuotas_cerrar img').addEventListener('click', function() {
+                    tablaCuotas.style.display = "none";
+                })
+
+                const checkbox_sva = '<label class="container-cb_sva">Declaro NO tener obligaciones tributarias fuera de Perú'+
+                '    <input type="checkbox" id="checkbox_onco_modal_crossell_sva"> '+
+                '    <span class="checkmark_modal_sva"></span> '+
+                '</label>';
+                contMocHome.querySelector('.contenedor_moc_checkbox').innerHTML=checkbox_sva;
+
+                const inputCheckbox = document.getElementById('checkbox_onco_modal_crossell_sva');
+            }
+            hbk_frmMocSegurosHome.removeAttribute('style');
+            renderizarCaptchaModalOneClickSPT22();
+        } catch (error) {
+            console.log(error)
+        }
+        
+    }
+    function frmMocSegurosHomeCerrarhbk() {
+        hbk_frmMocSegurosHome.querySelector('.contenedor_moc_home22').classList.remove('abrir');
+        hbk_frmMocSegurosHome.querySelector('.contenedor_moc_home22').classList.add('cerrar');
+        setTimeout(function() {
+            hbk_frmMocSegurosHome.style.display = "none";
+        }, 200);
+        digitalData.push({
+            "action":{"group":hbk_grupoModal,"category":"Obten tu Seguro Proteccion de Tarjetas Plus-V21","name":"Click","label":"Cerrar"},
+            "metadata":{"key":"Producto","value":"Seguros-SPT"},
+            "event":"trackAction"
+        })
+    }
+    function enviarDatosModalOneClick(strTokenCaptcha) {
+        try {
+            let url_sendmail = 'https://www.viabcp.com/apis/form/send/message'
+            let indexCaptcha = document.querySelector('#recaptchaModalOneClick').getAttribute('index');
+            let inputDNI = document.getElementById('input_documento_hbk');
+            if(inputDNI.value.length <8){inputDNI.classList.add('alerta');  return;}else{inputDNI.classList.remove('alerta'); }
+            
+            let nroDocumento = inputDNI.value.trim();
+            let dniHash = fnsha256(inputDNI.value.trim());
+        
+            //if (!boolDNI) {grecaptcha.reset(indexCaptcha); return};
+            
+            const jsonRequest = {
+                "leadId": getLeadID(),
+                "producto": 'MODAL ONE CLICK - HOME',
+                "tipoFormulario": "MODALONECLICK",
+                "tipoProducto": 'MODAL ONE CLICK - HOME',
+                "captchaToken": strTokenCaptcha,
+                "data": {
+                    tipodocumento: "DNI",
+                    documento: nroDocumento,
+                    tdocumento: 'DNI',
+                    ndocumento: nroDocumento,
+                    fechaNEO: '-',
+                    ndocumentohash: dniHash,
+                    aceptopromocion: 'si',
+                    productopromocion: "BANNER SPT",
+                    abreviaturaproducto: hbk_dataEnvioRegistro.abreviaturaproducto,
+                    descripcionpromocion: "MODAL ONE CLICK",
+                    email: 'sinemail@sinmail.com',
+                    flujoventa: 'VIABCP',
+                    promocioncancelada: "-",
+                    canal:"HBK",
+                    tipoplan:"MENSUAL"
+                },
+                metadata: {
+                    "origen": document.location.href,
+                    "agente": navigator.userAgent
+                }
+            };
+
+            const requestOptions = {
+                method: 'POST',
+                headers: {
+                    "Content-Type": "application/json",
+                    "g-recaptcha-response": strTokenCaptcha
+                },
+                body: JSON.stringify(jsonRequest),
+                redirect: 'follow'
+            };
+            const taggeoSPT = [hbk_tituloLandingSPT,hbk_productModal]
+            //registro.classList.add('hidden');
+            //bannerFixedSeguro.classList.add('hidden');
+            //if(validarSeguro.alterno){loadingSPT.classList.remove('hidden')};
+            fetch(url_sendmail, requestOptions)
+                .then((response) => {
+                    console.log('*****API STATUS: ' + response.status);
+                    if (response.status == 200) {
+                        cambioPantallaModalHBK(1)
+                        hbkregistrarVenta(taggeoSPT)
+                        indigitall.topicsUnsubscribe(["nav_spt_hbk"]); 
+                    } else {
+                        console.warn('No se registro', response.status);
+                        hbkErrorSubmitTGAB(taggeoSPT)
+                    }
+                    grecaptcha.reset(indexCaptcha);
+                })
+                .catch((error) => {
+                    console.error('error', error);
+                    hbkErrorSubmitTGAB(taggeoSPT)
+                    grecaptcha.reset(indexCaptcha);
+
+                });
+        } catch (error) {
+            console.log(error)
+        }
+    }
+    function cambioPantallaModalHBK(pantalla){
+        if (pantalla == 1) {
+            hbk_frmMocSegurosHome.querySelector('.contenedor_moc_home_compra').classList.add('ocultar');
+            hbk_frmMocSegurosHome.querySelector('.contenedor_moc_home_confirmacion').classList.remove('ocultar');
+            hbk_frmMocSegurosHome.querySelector('.contenedor_moc_close_header img').classList.add('paso_2');
+        } else {
+            hbk_frmMocSegurosHome.querySelector('.contenedor_moc_home_compra').classList.remove('ocultar');
+            hbk_frmMocSegurosHome.querySelector('.contenedor_moc_home_confirmacion').classList.add('ocultar');
+            hbk_frmMocSegurosHome.querySelector('.contenedor_moc_close_header img').classList.remove('paso_2');
+        }
+    }
+    //TAGGEO ADOBE
+    function hbkErrorSubmitTGAB(data){
+        digitalData.push({
+            "form":{"channel":"ViaBCP","version":hbk_versionModal,"name":cleanLabel(data[0]),"product":data[1]},
+            "event":"trackFormError"
+        });
+    }
+    function hbkTrackaction(data){
+        digitalData.push({
+            "action":{"group":hbk_grupoModal,"category":data[0] + "-" + hbk_versionModal,"name":"Click","label":"Comprar"},
+            "metadata":{"key":"Producto","value":data[1]},
+            "event":"trackAction"
+        })
+    }
+    function hbkregistrarVenta(data){
+        digitalData.push({
+            "form":{"channel":hbk_channelModal,"version":hbk_versionModal,"name":data[0],"product":data[1]},
+            "event":"trackFormSubmit"
+        })
+    }
+    //BOTONES
+    hbk_btnComprar.addEventListener('click',function(){
+        if(inputDNI.value.length <8){inputDNI.classList.add('alerta');  return;}else{inputDNI.classList.remove('alerta'); }
+        /*if(dataJsonRequest.abreviaturaproducto == 'SVA' && !validateCheckboxSVA()){
+            return;
+        }*/
+        let indexCaptcha = document.querySelector('#recaptchaModalOneClick').getAttribute('index')//captchaModalOneClickSPT.getAttribute('index');
+        console.log('IndexCaptcha',indexCaptcha)
+        grecaptcha.execute(indexCaptcha);
+    })
+    hbk_closeModalOC.addEventListener('click',function(){
+        frmMocSegurosHomeCerrarhbk();
+    })
+    hbk_frmMocSegurosHome.querySelector('.btn_no_gracias').addEventListener('click', function() {
+        frmMocSegurosHomeCerrarhbk();
+    });
+    /* const urlParams = new URLSearchParams(window.location.search)
+    if(urlParams.get('utm_source')&&urlParams.get('utm_source') == 'hbk'){
+        
+    } */
+    function retargeting_subscribeTopic() {
+        var event_code = "nav_spt_hbk";
+        indigitall.deviceEnable()
+        console.log(indigitall.deviceEnable())
+
+        var frecuency = 5 * (24 * 3600 * 1000); // time between retargeting events (in milliseconds) the value 1 means one day
+        if (indigitall && Notification && Notification.permission === "granted") {
+            var prevEventSentAt = parseInt(localStorage.getItem("indigitall.custom." + event_code) || "0", 10);
+            var now = (new Date()).getTime();
+            if (now > prevEventSentAt + frecuency) {
+
+            localStorage.setItem("indigitall.custom." + event_code, now);
+            console.log("Event Code - " + event_code);
+            try {
+                indigitall.topicsSubscribe(["nav_spt_hbk"]);
+                console.log('suscrito nav_spt_hbk')
+                indigitall.sendCustomEvent({
+                eventType: "nav_spt_hbk",
+                customData: {},
+                async: false,
+                });
+            } catch (error) {
+                console.log(error)
+            }
+            }
+        }
+        else {
+            console.log("No hay permiso subs");
+        }
+    } 
+    generarModalRechazadosHBK('spt')
+    digitalData.push({
+        "form":{"channel":hbk_channelModal,"version":hbk_versionModal,"name":hbk_tituloLandingSPT,"product":hbk_productModal},
+        "event":"trackFormView"
+    });
+    console.warn('visualizar modal spt')
+    setTimeout(() => {
+        retargeting_subscribeTopic();
+    }, 4000);
+</script>

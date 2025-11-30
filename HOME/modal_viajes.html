@@ -1,11 +1,18 @@
-<!-- MODAL DERIVATE E-COMMERCE -->
+<!-- MODAL VIAJE DICIEMBRE -->
+<script>
+
+    let scriptCaptcha = document.createElement('script');
+    scriptCaptcha.src = 'https://www.google.com/recaptcha/api.js?onload=onloadCallbackrecaptcha&render=explicit';
+    scriptCaptcha.async = true;
+    document.body.append(scriptCaptcha);
+</script>
 <style>
     .item_vacio{width:30px}
     .hidden-captcha{display:none}
     .contenedor_moc_home{height: auto;}
     .contenedor_moc_home.abrir{animation:keyframe_moc_abrir .5s;bottom:24px}
     .contenedor_moc_home.cerrar{animation:keyframe_moc_cerrar .5s}
-    .contenedor_moc_home{width:343px;box-shadow:0 8px 16px rgba(0,67,206,0.1);background-color:#FFF;border-radius:8px}
+    .contenedor_moc_home{width:326px;box-shadow:0 8px 16px rgba(0,67,206,0.1);background-color:#FFF;border-radius:8px}
     .contenedor_moc_header_home{height:auto;border-radius:8px 8px 0 0;padding:16px;position:relative;}
     .contenedor_moc_close_header{position:relative;height:0;text-align:right;z-index:1}
     .contenedor_moc_close_header img{cursor:pointer;margin:8px 8px 0 0}
@@ -14,7 +21,7 @@
     .contenedor_moc_header_home h2,.contenedor_moc_header_home p{margin:0;}
     .contenedor_moc_header_home h2{font-size:20px;line-height:24px;font-family:'Flexo';margin-bottom:8px;max-width:158px;color:#002a8d;}
     .contenedor_moc_header_home p{font-size:16px;line-height:24px;font-family:'Flexo'; color:#202e44}
-    .contenedor_moc_image_header img{position:absolute}
+    .contenedor_moc_image_header img{position:relative;right:5px;top:0}
     .contenedor_moc_body_home{padding:16px; border-radius:0 0 8px 8px;overflow-y: auto;max-height: 511px;}
     .contenedor_moc_coberturas p{margin:0}
     .contenedor_moc_coberturas ul{list-style:none;padding:0;margin-bottom:19px}
@@ -42,9 +49,7 @@
         .contenedor_moc_home.abrir{right:5px; bottom:5px;animation:keyframe_moc_abrir 1s;position: fixed; z-index: 99;}
     }
     @media(max-width:764px){
-        .contenedor_moc_home_principal{background-color: rgb(0 0 0 / 50%);position: fixed;top: 0px;left: 0px;width: 100%;height: 100%;display: flex;align-items: center;justify-content: center;z-index: 9999;}
-        .contenedor_moc_home{width:327px;}
-        .viajes_modal .contenedor_moc_image_header img{right: 0 !important;}
+        .contenedor_moc_home_principal{background-color: rgb(0 0 0 / 50%);position: fixed;top: 0px;left: 0px;width: 100%;height: 100%;display: flex;align-items: center;justify-content: center;z-index: 9999;}        
     }
     @keyframes keyframe_moc_cerrar {0%{bottom:16px}100%{bottom:-100%}}
     @keyframes keyframe_moc_abrir {0%{bottom:-100%}80%{bottom:48px}100%{bottom:24px}}
@@ -141,16 +146,15 @@
         100% {box-shadow: 0 0 0 20px rgba(0, 0, 0, 0);}
     }
     .mdl-cintillo{
-        display: none;
         position: relative;
         height: 0px;
         z-index: 1;
     }
     .mdl-cintillo img{
-        width: 92px !important;
+        width: 78px !important;
         position: relative;
         top: -7px !important;
-        right: 6px !important;
+        right: 4px !important;
     }
     .cont_text_precio{
         font-size: 16px;
@@ -162,6 +166,7 @@
         width: 232px;
     }
     .banner_promo{
+        text-align: center;
         border-radius: 8px;
         padding: 8px 15px;
         background-color: #ebf4ff;
@@ -183,9 +188,9 @@
 </style>
 <style id="styles-viajes-modal">
     .viajes_modal .contenedor_moc_header_home.bg-viaje{background-image: linear-gradient(108deg, #627BFA -2%, #4A5BCF 98%);}
-    .viajes_modal .contenedor_moc_header_home{padding:24px 16px 16px 16px;height: 116px;}
+    .viajes_modal .contenedor_moc_header_home{padding:26px 16px 16px 16px;height: 116px;}
     .viajes_modal .contenedor_moc_header_home h2{margin-bottom:8px;max-width:205px;color:#fff}
-    .viajes_modal .contenedor_moc_image_header img{top:auto;bottom:0;right: 0;width: 110px;}
+    .viajes_modal .contenedor_moc_image_header img{top:-7px;right:-8px;width: 118px;}
     .viajes_modal .contenedor_moc_coberturas li:last-child p{height:initial}
     .viajes_modal .contenedor_moc_legales p{font-size:12px;line-height:16px}
     .viajes_modal .contenedor_moc_button{margin-top:16px}
@@ -200,7 +205,24 @@
     .wrap-cuota {display: flex;align-items: center;justify-content: space-between; margin-top: 10px;position: relative;}
     .viajes_modal .contenedor_moc_button {justify-content: space-between;}
     .viajes_modal .contenedor_moc_title_header > div:nth-child(1) {font-size: 12px; line-height: 1.5;text-align: left;color: #fff;margin:12px 0 4px 0;display: none;}
-    .viajes_modal .contenedor_moc_title_header > div:nth-child(2) {font-size: 20px; line-height: 1.2;text-align: left;color: #fff;width: 190px;}
+    .viajes_modal .contenedor_moc_title_header > div:nth-child(2) {font-size: 20px; line-height: 24px;text-align: left;color: #fff;width: 184px;}
+    .respaldo-pacifico-wo{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 24px;
+    }
+    .respaldo-pacifico-wo p{
+        font-family: 'Flexo';
+        font-size: 12px;
+        font-weight: 400;
+        line-height: 16px;
+        color: #606C7F;
+        margin-right: 8px;
+    }
+    .respaldo-pacifico-wo img{
+        width: 73px;
+    }
 </style>
 <div id="frmMocSegurosHome" class="contenedor_moc_home_principal">
     <div class="contenedor_moc_home">
@@ -208,9 +230,9 @@
             <img src="/wcm/connect/feb67ad9-4bcd-4708-9b53-43c34af920af/close_blanco.svg?MOD=AJPERES&attachment=true&id=1707863427303" alt="">
         </div>
         <div class="contenedor_moc_home_compra contenedor_moc_home_card">
-            <div class="mdl-cintillo">
-                <img src="" alt="cintillo">
-            </div>
+            <!-- <div class="mdl-cintillo">
+                <img src="/wcm/connect/c9c6efba-602b-48da-865f-fd87fe000375/Cintillo.svg?MOD=AJPERES&attachment=true&id=1710340444880" alt="cintillo">
+            </div> -->
             <div class="contenedor_moc_header_home">
                 <div class="contenedor_moc_header_modal">
                     <div class="contenedor_moc_title_header"><div></div><div></div><div></div></div>
@@ -218,21 +240,22 @@
                 </div>
             </div>
             <div class="contenedor_moc_body_home" id="step1">
-                <p class="cont_text_precio">Viaja sin preocupaciones desde <b>$2.93 por día</b></p>
+                <p class="cont_text_precio">Desde <b>$2.93 por día</b></p>
                 <div class="contenedor_moc_coberturas" id="containerCobertura">
                     <p>Te cubrimos:</p>
                     <ul class="contenedor_moc_list_coberturas">
                     </ul>
                 </div>
-                <!--<div class="banner_promo">
-                    Al adquirir este seguro participas del <strong>sorteo de 1 vale de S/ 500</strong>. Revisa las bases del sorteo <a id="btn-tyc">aquí</a>
-                </div>-->
+                <!-- <div class="banner_promo">
+                    Al comprar el seguro participas del sorteo, revisa las bases <a id="btn-tyc">aquí</a>.
+                </div> -->
                 <div class="contenedor_moc_actions">
                     <div class="contenedor_moc_button">
                         <button class="bcp_boton_blanco btn_no_gracias">No, gracias</button>
                         <button class="bcp_boton_naranja  btn_loquiero" style="width: 138px;">Lo quiero</button>
                     </div>
                 </div>
+                
             </div>
             <div class="contenedor_moc_body_home ocultar" id="step2">
                 <div class="title_step2">Déjanos tus datos y un asesor se comunicará contigo</div>
@@ -281,28 +304,33 @@
         <div class="hidden-captcha">
             <form-captcha id="frmMocSegurosHomeCaptcha" datacallback="frmMocSegurosHomeCaptchaSendData"></form-captcha>
         </div>
+        <div class="respaldo-pacifico-wo">
+            <p>Con el respaldo de </p><img src="https://www.viabcp.com/wcm/connect/83e348ec-a740-454e-b572-a764882bb060/pacifico.png?MOD=AJPERES&attachment=false&id=1730905701547" alt="">
+        </div>
     </div>
 </div>
 <script>
         let icon_check = '/wcm/connect/0016321b-2394-4c18-adc7-5851814915da/ic_check.png?MOD=AJPERES&attachment=false&id=1692803728523';
         let dataModalTravel = {step:'1'} 
         let count = 0;
-        //const frmMocSegurosHome = document.querySelector('#frmMocSegurosHome');
-        //const formContentMOCSegurosHome = new Formulario(frmMocSegurosHome);
-        //const frmMocSegurosHomeCaptcha = frmMocSegurosHome.querySelector('#frmMocSegurosHomeCaptcha')
-        //const tycPromoLaptop = document.querySelector('#btn-tyc');
-    /*tycPromoLaptop.onclick = () =>{
-        window.open('https://www.viabcp.com/wcm/connect/a2d2ec7f-6035-4428-9933-7bef4bc9951b/T%26C+Promoci%C3%B3n+Vales+500+soles+-+Seguros+-+Campa%C3%B1a+Cross+Julio+Rev.21.06.pdf?MOD=AJPERES&attachment=false&id=1719509128937','_blank')
-        taggeoAdobeSeguros('Click','TyC PromoLaptop')
-    }*/
+        const frmMocSegurosHome = document.querySelector('#frmMocSegurosHome');
+        const formContentMOCSegurosHome = new Formulario(frmMocSegurosHome);
+        const frmMocSegurosHomeCaptcha = frmMocSegurosHome.querySelector('#frmMocSegurosHomeCaptcha')
+    //     const tycPromoLaptop = document.querySelector('#btn-tyc');
+    // tycPromoLaptop.onclick = () =>{
+    //     window.open('/wcm/connect/ec847359-1738-4d13-89a7-54b1e0cc64ac/legales_viajes_noviembre.pdf?MOD=AJPERES&attachment=false&id=1730928536685','_blank')
+    //     taggeoAdobeSeguros('Click','TyC PromoLaptop')
+    // }
         //VARIABLES NUEVO TAGGEO
         const variables_taggeo = {
             tituloModal: 'Obten tu Seguro Viajes',
             grupoModal: 'ViaBCP',
-            productModal: 'Seguros-Viajes',
+            productModal: 'Viajes',
             channelModal: 'ViaBCP',
-            versionModal: 'V25',
-            producto: ''
+            versionModal: 'Seguros',
+            name:'Modal',
+            producto: '',
+            category_modal:'Modal-Viajes'
         }
         //REQUEST API SOLICITUDES
         const dataJsonRequest = {
@@ -320,16 +348,16 @@
         //PLAN MENSUAL
         const dataModalVIAJES = {
             seguro:'VIAJES',
-            category_modal:'Obten tu Seguro Viajes-V25',
+            category_modal:'Modal-Viajes',
             name_modal:'Obtén tu Seguro Viajes',
             title_seguro:'Seguro de Viajes',
-            title_modal: 'Viaja sin preocupaciones con el <b>Seguro de Viajes</b>',
+            title_modal: 'Viaja sin<br>preocupaciones con el <b>Seguro de Viajes</b>',
             subtitle_modal: '',
-            spot_hero: '/wcm/connect/faa42ddf-8cf7-4f41-8438-0b81caacf5b6/spot_viajes.svg?MOD=AJPERES&attachment=true&id=1722618955184',
+            spot_hero: 'https://www.viabcp.com/wcm/connect/1199534d-2ca0-451f-a447-31a365e43b85/viajes_hand.png?MOD=AJPERES&attachment=false&id=1739378219339',
             coberturas: [
-                { icon: icon_check, texto: 'Gastos médicos hasta por <b>$20,000.</b>' },
-                { icon: icon_check, texto: 'Imprevistos del viaje como la pérdida del equipaje hasta por <b>$800.</b>' },
-                { icon: icon_check, texto: 'Gastos por vuelo demorado o cancelado hasta por <b>$500.</b>' }
+                { icon: icon_check, texto: '<b>Hasta $50,000</b> en gastos médicos.' },
+                { icon: icon_check, texto: '<b>Hasta $1,500</b> por imprevistos del viaje como la pérdida del equipaje.' },
+                { icon: icon_check, texto: '<b>Hasta $500</b> por cancelación o retraso de viaje. ' }
             ],
             texto_terminos: 'El click en "Comprar" confirma la solicitud, el envío de la póliza vía electrónica, la aceptación de los <a class="tyc_link">Términos y condiciones</a> y el cargo en la cuenta de ahorros vigente con mayor saldo. Límite de edad: 18 años a más.',
             bg_header: 'bg-viaje',
@@ -338,20 +366,20 @@
                 abreviaturaproducto: 'VIAJES',
                 descripcionpromocion: ''
             },
-            url_terminos: '/wcm/connect/cdfd4f34-c2e1-4ddf-a85c-0ba885be85c4/Protecci%C3%B3n+de+Datos+Personales.pdf?MOD=AJPERES&attachment=true&id=1708018928084',
+            url_terminos: '/wcm/connect/ec847359-1738-4d13-89a7-54b1e0cc64ac/legales_viajes_noviembre.pdf?MOD=AJPERES&attachment=false&id=1730928536685',
             texto_gracias: 'Nos comunicaremos contigo para brindarte más información acerca de este seguro.',
             tipoplan:'',
             extra:{}
         }
         
         //Función Taggeo Seguros
-        const taggeoAdobeMOCSeguros = (eventName, labelName, category = variables_taggeo.tituloModal + "-" + variables_taggeo.versionModal) => {
+        const taggeoAdobeMOCSeguros = (eventName, labelName, category) => {
             if (eventName == 'Impresión') {
                 digitalData.push({
                     "form": {
                         "channel": variables_taggeo.channelModal,
                         "version": variables_taggeo.versionModal,
-                        "name": variables_taggeo.tituloModal,
+                        "name": variables_taggeo.name,
                         "product": variables_taggeo.productModal
                     },
                     "event": "trackFormView"
@@ -361,7 +389,7 @@
                 digitalData.push({
                     "action": {
                         "group": variables_taggeo.grupoModal,
-                        "category": category,
+                        "category": variables_taggeo.category_modal,
                         "name": eventName,
                         "label": labelName
                     },
@@ -427,9 +455,9 @@
         const cargarDataTaggeoModal = (data) => {
             variables_taggeo.tituloModal = 'Obten tu Seguro Viajes',
             variables_taggeo.grupoModal = 'ViaBCP',
-            variables_taggeo.productModal = 'Seguros-Viajes',
+            variables_taggeo.productModal = 'Viajes',
             variables_taggeo.channelModal = 'ViaBCP',
-            variables_taggeo.versionModal = 'V25';
+            variables_taggeo.versionModal = 'Seguros';
             variables_taggeo.producto = data.dataRequest.abreviaturaproducto
             dataJsonRequest.abreviaturaproducto = data.dataRequest.abreviaturaproducto;
             dataJsonRequest.productopromocion = data.dataRequest.productopromocion;
@@ -449,7 +477,8 @@
             });
             //Función para cerrar Modal - Botón Cerrar(X)
             divContentModal.querySelector('.contenedor_moc_close_header img').addEventListener('click', () => {
-                const step = 'Cerrar Modal Paso' +dataModalTravel.step
+                // const step = 'Cerrar Modal Paso' +dataModalTravel.step
+                const step = 'Cerrar X'
                 if(dataModalTravel.step == '2'){taggeoInput('.contenedor_moc_input input')}
                 taggeoAdobeMOCSeguros('Click', step);
                 frmMocSegurosHomeCerrar();
@@ -473,10 +502,11 @@
                 //document.getElementById('step2').classList.remove(classHidden)
                 //document.getElementById('step1').classList.add(classHidden)
                 //dataModalTravel.step = '2'
-                let pagetitle = urlUTMTGAB()
-                pagetitle = pagetitle.length === 0 ? 'home': pagetitle
-                const parametros = '?pcid=viabcp:'+pagetitle+':seguro-de-viajes:masivo:modal'
-                const url = 'https://seguro-viaje.pacifico.com.pe/bcp'+parametros
+                // let pagetitle = urlUTMTGAB()
+                // pagetitle = pagetitle.length === 0 ? 'home': pagetitle
+                // const parametros = '?pcid=viabcp:'+pagetitle+':seguro-de-viajes:masivo:modal'
+                // const url = 'https://seguro-viaje.pacifico.com.pe/bcp'+parametros
+                let url = urlUTMByAction('modal');
                 window.open(url,'_blank')
             });
             //Boton Volver
@@ -561,7 +591,7 @@
                 console.log(error)
             }
         }
-        /*const renderizarCaptchaModalOneClickSPT = () => {
+        const renderizarCaptchaModalOneClickSPT = () => {
             console.log('captcha', formContentMOCSegurosHome.Captcha.getAttribute('index'));
             if (!formContentMOCSegurosHome.Captcha.getAttribute('index')) {
                 try {
@@ -574,14 +604,14 @@
                     console.log('captcha-forcerender', formContentMOCSegurosHome.Captcha.getAttribute('index'));
                 }, 500);
             }
-        }*/
+        }
     
         const seguros = {'viajes':dataModalVIAJES}
     
         const cargarDataModalSegunTipoSeguro = (seguro) => {
             const value = seguro.toLowerCase();
             frmMocSegurosHomeConstruirModal(seguros[value],seguro+'_modal');
-            //renderizarCaptchaModalOneClickSPT();
+            renderizarCaptchaModalOneClickSPT();
         }
         function frmMocSegurosHomeCaptchaSendData(strTokenCaptcha) {
             try {
@@ -668,4 +698,43 @@
             }
         }
         frmMocSegurosHomeAbrir('viajes')
+
+
+        let utms_viajes=[
+            {
+              url_utm:'',
+              url_viajes_header:'https://seguro-viaje.pacifico.com.pe/bcp?pcid=viabcp:seguros-complementarios-seguro-viajes:tu-seguridad-en-un-clic:masivo:banner-principal&utm_source=own&utm_medium=push&utm_campaign=2024-09_BBSS__TAC_CON_EMAIL_VIAJES&utm_content=CON_DESKTOP_N-A_BBDD_REGULAR_NONE_-_HTML_NULL_SEGURO-VIAJES-TEST-PAX_VIAJES-GENERICO-BOTON-PAX-MALETA-PERDIDA-OCT24&from=own_-_push_-_2024-09_BBSS__TAC_CON_EMAIL_VIAJES_-_CON_DESKTOP_N-A_BBDD_REGULAR_NONE_-_HTML_NULL_SEGURO-VIAJES-TEST-PAX_VIAJES-GENERICO-BOTON-PAX-MALETA-PERDIDA-OCT24',
+              url_viajes_modal:'https://seguro-viaje.pacifico.com.pe/bcp?pcid=viabcp:seguros-complementarios-seguro-viajes:seguro-de-viajes:masivo:modal&utm_source=own&utm_medium=push&utm_campaign=2024-09_BBSS__TAC_CON_EMAIL_VIAJES&utm_content=CON_DESKTOP_N-A_BBDD_REGULAR_NONE_-_HTML_NULL_SEGURO-VIAJES-TEST-PAX_VIAJES-GENERICO-MODAL-PAX-MALETA-PERDIDA-OCT24&from=own_-_push_-_2024-09_BBSS__TAC_CON_EMAIL_VIAJES_-_CON_DESKTOP_N-A_BBDD_REGULAR_NONE_-_HTML_NULL_SEGURO-VIAJES-TEST-PAX_VIAJES-GENERICO-MODAL-PAX-MALETA-PERDIDA-OCT24'
+            },
+            { 
+              url_utm:'?utm_source=own&utm_medium=push&utm_campaign=2024-09_BBSS__TAC_CON_EMAIL_VIAJES&utm_content=CON_DESKTOP_N-A_BBDD_REGULAR_NONE_-_HTML_NULL_SEGURO-VIAJES-TEST-BCP_VIAJES-GENERICO-BCP-MALETA-PERDIDA-OCT24&from=own_-_push_-_2024-09_BBSS__TAC_CON_EMAIL_VIAJES_-_CON_DESKTOP_N-A_BBDD_REGULAR_NONE_-_HTML_NULL_SEGURO-VIAJES-TEST-BCP_VIAJES-GENERICO-BCP-MALETA-PERDIDA-OCT24',
+              url_viajes_header:'https://seguro-viaje.pacifico.com.pe/bcp?pcid=viabcp:seguros-complementarios-seguro-viajes:tu-seguridad-en-un-clic:masivo:banner-principal&utm_source=own&utm_medium=push&utm_campaign=2024-09_BBSS__TAC_CON_EMAIL_VIAJES&utm_content=CON_DESKTOP_N-A_BBDD_REGULAR_NONE_-_HTML_NULL_SEGURO-VIAJES-TEST-PAX_VIAJES-GENERICO-BOTON-PAX-MALETA-PERDIDA-OCT24&from=own_-_push_-_2024-09_BBSS__TAC_CON_EMAIL_VIAJES_-_CON_DESKTOP_N-A_BBDD_REGULAR_NONE_-_HTML_NULL_SEGURO-VIAJES-TEST-PAX_VIAJES-GENERICO-BOTON-PAX-MALETA-PERDIDA-OCT24',
+              url_viajes_modal:'https://seguro-viaje.pacifico.com.pe/bcp?pcid=viabcp:seguros-complementarios-seguro-viajes:seguro-de-viajes:masivo:modal&utm_source=own&utm_medium=push&utm_campaign=2024-09_BBSS__TAC_CON_EMAIL_VIAJES&utm_content=CON_DESKTOP_N-A_BBDD_REGULAR_NONE_-_HTML_NULL_SEGURO-VIAJES-TEST-PAX_VIAJES-GENERICO-MODAL-PAX-MALETA-PERDIDA-OCT24&from=own_-_push_-_2024-09_BBSS__TAC_CON_EMAIL_VIAJES_-_CON_DESKTOP_N-A_BBDD_REGULAR_NONE_-_HTML_NULL_SEGURO-VIAJES-TEST-PAX_VIAJES-GENERICO-MODAL-PAX-MALETA-PERDIDA-OCT24'
+            },
+            {
+              url_utm:'?utm_source=own&utm_medium=push&utm_campaign=2024-09_BBSS__TAC_CON_EMAIL_VIAJES&utm_content=CON_DESKTOP_N-A_BBDD_REGULAR_NONE_-_HTML_NULL_SEGURO-VIAJES-TEST-BCP_VIAJES-GENERICO-BCP-VUELO-CANCELADO-OCT24&from=own_-_push_-_2024-09_BBSS__TAC_CON_EMAIL_VIAJES_-_CON_DESKTOP_N-A_BBDD_REGULAR_NONE_-_HTML_NULL_SEGURO-VIAJES-TEST-BCP_VIAJES-GENERICO-BCP-VUELO-CANCELADO-OCT24',
+              url_viajes_header:'https://seguro-viaje.pacifico.com.pe/bcp?pcid=viabcp:seguros-complementarios-seguro-viajes:tu-seguridad-en-un-clic:masivo:banner-principal&utm_source=own&utm_medium=push&utm_campaign=2024-09_BBSS__TAC_CON_EMAIL_VIAJES&utm_content=CON_DESKTOP_N-A_BBDD_REGULAR_NONE_-_HTML_NULL_SEGURO-VIAJES-TEST-PAX_VIAJES-GENERICO-BOTON-PAX-VUELO-CANCELADO-OCT24&from=own_-_push_-_2024-09_BBSS__TAC_CON_EMAIL_VIAJES_-_CON_DESKTOP_N-A_BBDD_REGULAR_NONE_-_HTML_NULL_SEGURO-VIAJES-TEST-PAX_VIAJES-GENERICO-BOTON-PAX-VUELO-CANCELADO-OCT24',
+              url_viajes_modal:'https://seguro-viaje.pacifico.com.pe/bcp?pcid=viabcp:seguros-complementarios-seguro-viajes:seguro-de-viajes:masivo:modal&utm_source=own&utm_medium=push&utm_campaign=2024-09_BBSS__TAC_CON_EMAIL_VIAJES&utm_content=CON_DESKTOP_N-A_BBDD_REGULAR_NONE_-_HTML_NULL_SEGURO-VIAJES-TEST-PAX_VIAJES-GENERICO-MODAL-PAX-VUELO-CANCELADO-OCT24&from=own_-_push_-_2024-09_BBSS__TAC_CON_EMAIL_VIAJES_-_CON_DESKTOP_N-A_BBDD_REGULAR_NONE_-_HTML_NULL_SEGURO-VIAJES-TEST-PAX_VIAJES-GENERICO-MODAL-PAX-VUELO-CANCELADO-OCT24'
+            }
+        ]
+
+        function urlUTMByAction(type){
+            let url_utm = window.location.search;
+            let url = ''
+            let utms_list = utms_viajes.map((item)=>{  return item.url_utm})
+            if(utms_list.includes(url_utm)){
+                let index = utms_list.indexOf(url_utm)
+                type=='header' ? url = utms_viajes[index].url_viajes_header : url = utms_viajes[index].url_viajes_modal
+            }else{
+                type=='header' ? url = utms_viajes[0].url_viajes_header : url = utms_viajes[0].url_viajes_modal
+            }
+            return url;
+        }
+
+        function changeActionBtnHero(){
+            let btnHero = document.querySelector(" .bcp_banner-sin-carousel.producto > div > div > div > div > div > div > a");
+            btnHero.removeAttribute('a');
+            let url_banner = urlUTMByAction('header')
+            btnHero.setAttribute('href',url_banner);
+        }
     </script>

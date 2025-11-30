@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Ubicación del Usuario</title>
+</head>
+<body>
+  <div id="mensaje">Detectando tu ubicación...</div>
+
+  <script>
+    const mensaje = document.getElementById('mensaje');
+
+    if ("geolocation" in navigator) {
+      navigator.geolocation.getCurrentPosition(
+        async (position) => {
+          const lat = position.coords.latitude;
+          const lon = position.coords.longitude;
+
+          // Consultar una API para obtener la ciudad/país (ejemplo con OpenStreetMap)
+          const response = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}`);
+          const data = await response.json();
+          console.log(data);
+          const ciudad = data.address.suburb;
+          const pais = data.address.country;
+
+          mensaje.innerText = `¡Hola! Parece que estás en ${ciudad}, ${pais}. Tenemos ofertas personalizadas para ti.`;
+        },
+        (error) => {
+          mensaje.innerText = "No pudimos obtener tu ubicación.";
+          console.error(error);
+        }
+      );
+    } else {
+      mensaje.innerText = "La geolocalización no está disponible en tu navegador.";
+    }
+  </script>
+</body>
+</html>

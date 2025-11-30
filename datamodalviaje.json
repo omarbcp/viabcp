@@ -1,0 +1,150 @@
+{
+    "generic": {
+        "tyc": [
+            {
+                "node": "tycODV",
+                "link": "https://www.viabcp.com/wcm/connect/13ae3b82-f2e2-4f5d-a50a-c30226dc0b63/tyc_viajes_marzo.pdf?MOD=AJPERES&attachment=false&id=1741186444893"
+            }
+        ]
+    },
+    "control": {
+        "header": [
+            {
+                "content": "<b>Gana un kit viajero</b><br>con tu próximo vuelo,<br><b>Asegúrate hoy</b>",
+                "type": "builHTML"
+            },
+            {
+                "content": "<img src=\"/wcm/connect/76355a61-6380-49dd-87b8-60ffe34576e5/kit_viajero.png?MOD=AJPERES&attachment=true&id=1746728967354\">",
+                "type": "builHTML"
+            }
+        ],
+        "body": {
+            "step1": [
+                {
+                    "clase": "cont_text_precio",
+                    "content": "Compra tu Seguro de Viaje desde<br> <b>$2.93 por día</b>",
+                    "type": "builHTML"
+                },
+                {
+                    "clase": "title_list",
+                    "content": "Te cubrimos:",
+                    "type": "builHTML"
+                },
+                {
+                    "clase": "contenedor_moc_coberturas",
+                    "content": [
+                        { "item": "<b>Hasta $50,000</b> en gastos médicos." },
+                        { "item": "<b>Hasta $1,500</b> por imprevistos del viaje como la pérdida del equipaje." },
+                        { "item": "<b>Hasta $500</b> por cancelación o retraso de viaje." }
+                    ],
+                    "type": "buildlist"
+                },
+                {
+                    "clase": "txt_small_gris_primary",
+                    "content": "Comprando el seguro participas del sorteo, revisa las bases <a id=\"tycODV\">aquí</a>.",
+                    "type": "builHTML"
+                },
+                {
+                    "clase": ["contenedor_moc_button"],
+                    "content": [
+                        {
+                            "clases": ["bcp_boton_blanco", "btn_no_gracias"],
+                            "label": "No, gracias",
+                            "functions": "cerrarModal"
+                        },
+                        {
+                            "clases": "bcp_boton_naranja",
+                            "label": "Lo quiero",
+                            "functions": "openURL"
+                        }
+                    ],
+                    "type": "builButtons"
+                },
+                {
+                    "clase": "respaldo-pacifico-wo",
+                    "content": "<p class=\"\">Con el respaldo de</p><img src=\"/wcm/connect/2db31610-d5e9-4a05-9f64-83bc1fa4490f/Group+%281%29.png?MOD=AJPERES&attachment=false&id=1729805654191\" alt=\"\">",
+                    "type": "builHTML"
+                }
+            ]
+        },
+        "taggeo": {
+            "version": "Seguros-0805Control"
+        },
+        "tyc": [
+            {
+                "node": "tycODV",
+                "link": "https://www.viabcp.com/wcm/connect/7392052d-0dc8-4829-8ca9-f5f62e7b8ced/tyc-pack-viajero.pdf?MOD=AJPERES&attachment=true"
+            }
+        ]
+    },
+    "piloto": {
+        "header": [
+            {
+                "content": "<b>Gana 2,000 millas</b> para tu viaje <b>Asegúrate hoy</b>",
+                "type": "builHTML"
+            },
+            {
+                "content": "<img src=\"/wcm/connect/1199534d-2ca0-451f-a447-31a365e43b85/viajes_hand.png?MOD=AJPERES&attachment=false&id=1739378219339\">",
+                "type": "builHTML"
+            }
+        ],
+        "body": {
+            "step1": [
+                {
+                    "clase": "cont_text_precio",
+                    "content": "Compra tu Seguro de Viaje desde<br> <b>$2.93 por día</b>",
+                    "type": "builHTML"
+                },
+                {
+                    "clase": "title_list",
+                    "content": "Te cubrimos:",
+                    "type": "builHTML"
+                },
+                {
+                    "clase": "contenedor_moc_coberturas",
+                    "content": [
+                        { "item": "<b>Hasta $50,000</b> en gastos médicos." },
+                        { "item": "<b>Hasta $1,500</b> por imprevistos del viaje como la pérdida del equipaje." },
+                        { "item": "<b>Hasta $500</b> por cancelación o retraso de viaje." }
+                    ],
+                    "type": "buildlist"
+                },
+                {
+                    "clase": "txt_small_gris_primary",
+                    "content": "Comprando el seguro participas del sorteo, revisa las bases <a id=\"tycODV\">aquí</a>.",
+                    "type": "builHTML"
+                },
+                {
+                    "clase": ["contenedor_moc_button"],
+                    "content": [
+                        {
+                            "clases": ["bcp_boton_blanco", "btn_no_gracias"],
+                            "label": "No, gracias",
+                            "functions": "cerrarModal"
+                        },
+                        {
+                            "clases": "bcp_boton_naranja",
+                            "label": "Lo quiero",
+                            "functions": "openURL"
+                        }
+                    ],
+                    "type": "builButtons"
+                },
+                {
+                    "clase": "respaldo-pacifico-wo",
+                    "content": "<p class=\"\">Con el respaldo de</p><img src=\"/wcm/connect/2db31610-d5e9-4a05-9f64-83bc1fa4490f/Group+%281%29.png?MOD=AJPERES&attachment=false&id=1729805654191\" alt=\"\">",
+                    "type": "builHTML"
+                }
+            ]
+        },
+        "taggeo": {
+            "version": "Seguros-0805Test"
+        },
+        "tyc": [
+            {
+                "node": "tycODV",
+                "link": "https://www.viabcp.com/wcm/connect/9d02cebe-8ea2-4e60-a2d7-2da16929d046/200millas.pdf?MOD=AJPERES&attachment=true&id=1747057904149"
+            }
+        ]
+    }
+}
